@@ -1,3 +1,3 @@
 #!/bin/bash
 
-javac Main.java -d out && java out/Main
+javac Main.java -d out && java -classpath out Main
