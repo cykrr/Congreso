@@ -46,21 +46,36 @@ public class Menu {
         System.out.println("---");
     }
 
-    public void buscarPorNombre() {
-
+    public void buscarPorNombre() throws IOException {
+        String in = "";
+        while (in.equals("")) {
+            System.out.println("Ingrese el nombre a buscar:");
+            in = getLine();
+        }
+        System.out.println("---");
     }
 
-    public void buscarPorId() {
-
+    public void buscarPorId() throws IOException {
+        String in = "";
+        while (in.equals("")) {
+            System.out.println("Ingrese el ID a buscar:");
+            in = getLine();
+        }
+        System.out.println("---");
     }
 
-    public void buscarPorFecha () {
-
+    public void buscarPorFecha () throws IOException {
+        String in = "";
+        while (in.equals("")) {
+            System.out.println("Ingrese la fecha a buscar:");
+            in = getLine();
+        }
+        System.out.println("---");
     }
 
     public void buscarPresentacion() throws IOException {
         char n = '\0';
-        while (n != 'n' || n != 'i' || n != 'f') {
+        while (n != 'n' && n != 'i' && n != 'f') {
             System.out.println("n: Buscar por nombre");
             System.out.println("i: Buscar por ID");
             System.out.println("f: Buscar por fecha");
