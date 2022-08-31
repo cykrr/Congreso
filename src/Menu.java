@@ -17,6 +17,7 @@ public class Menu {
     /* Presentación debería almacenar la hora y la fecha por separado */
 
     // static private HashMap<LocalTime,Presentacion> fecha_presentaciones;
+
     Menu() {
         br = new BufferedReader(new InputStreamReader(System.in));
         nombre_presentaciones = new HashMap<String, Presentacion>();
@@ -53,7 +54,7 @@ public class Menu {
         	nombre = getLine();
         
         Presentacion p  = new Presentacion(nombre);
-        presentaciones.add(p);
+        nombre_presentaciones.put(p.getNombre(), p);
         System.out.println("---");
     }
     
