@@ -15,8 +15,8 @@ public class Main {
                 case 'l':
                     m.mostrarPresentaciones();
                     break;
-                case 'b':
-                    m.buscarPresentacion();
+                case 'i':
+                    m.importarPresentaciones();
                     break;
             }
         }

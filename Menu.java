@@ -27,10 +27,15 @@ public class Menu {
     public void mostrar() {
         System.out.println("Presentaciones del congreso internacional:");
         System.out.println("a: crear presentación");
-        System.out.println("x: eliminar presentación");
+        // System.out.println("x: eliminar presentación");
         System.out.println("l: listar presentaciones");
-        System.out.println("b: buscar presentación");
+        // System.out.println("b: buscar presentación");
+        System.out.println("i: importar presentaciones");
         System.out.println("---");
+    }
+
+    public void importarPresentaciones() throws IOException {
+
     }
 
     public void crearPresentacion() throws IOException {
