@@ -1,6 +1,7 @@
 import java.io.InputStreamReader;
 
 import java.util.LinkedList;
+import java.util.Map;
 import java.util.HashMap;
 
 import java.time.LocalTime;
@@ -11,7 +12,7 @@ import java.io.IOException;
 public class Menu {
     static private BufferedReader br;
 
-    static private HashMap<String,Presentacion> nombre_presentaciones;
+    static private Map<String,Presentacion> nombre_presentaciones;
     // static private HashMap<Integer, Presentacion> id_presentaciones;
 
     /* Presentación debería almacenar la hora y la fecha por separado */
@@ -115,11 +116,11 @@ public class Menu {
     }
 
     public void mostrarPresentaciones() throws IOException {
-        for (Presentacion p: presentaciones)
-            p.mostrar();
-        if (presentaciones.size() == 0)
+        for (Map.Entry<String, Presentacion> p: nombre_presentaciones.entrySet())
+            p.getValue().mostrar();
+        if (nombre_presentaciones.size() == 0)
 
-          System.out.println("No se encontraron" +
+          System.out.println("No se encontraron " +
               "presentaciones");
         else 
           System.out.println("Mostrando presentaciones:\n---");
@@ -128,10 +129,8 @@ public class Menu {
     }
     
     private Presentacion buscarPorNombre(String nombre) {
-        for(Presentacion p: presentaciones)
-        	if(p.getNombre().equals(nombre))
-        		return p;
-        return null;
+        Presentacion busqueda = nombre_presentaciones.get(nombre);
+        return busqueda;
     }
 
     public void buscarPorNombre() throws IOException {
