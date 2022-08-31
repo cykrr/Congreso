@@ -17,8 +17,9 @@ public class MenuEditar {
         System.out.println("1: Establecer expositor");
         System.out.println("2: Establecer descripcion");
         System.out.println("3: Establecer fecha");
-        System.out.println("4: Establecer duración");
-        System.out.println("5: Volver al menú principal");
+        System.out.println("4: Establecer hora de inicio");
+        System.out.println("5: Establecer duración");
+        System.out.println("6: Volver al menú principal");
         System.out.println("---");
     }
 
@@ -46,6 +47,12 @@ public class MenuEditar {
     	System.out.println("Ingrese fecha de la presentación:");
     	String fecha = br.readLine();
     	p.setFecha(fecha);
+    }
+    
+    public void editarHora() throws IOException {
+    	System.out.println("Ingrese hora de la presentación:");
+    	String hora = br.readLine();
+    	p.setHora(hora);
     }
     
     public void editarDuracion() throws IOException {

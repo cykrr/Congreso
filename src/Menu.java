@@ -38,13 +38,14 @@ public class Menu {
 
     public void mostrar() {
         System.out.println("Presentaciones del congreso internacional:");
-        System.out.println("a: crear presentación");
-        System.out.println("e: editar presentación");
+        System.out.println("a: Crear presentación");
+        System.out.println("e: Editar presentación");
         // System.out.println("x: eliminar presentación");
-        System.out.println("l: listar presentaciones");
+        System.out.println("l: Listar presentaciones");
         // System.out.println("b: buscar presentación");
-        System.out.println("i: importar presentaciones");
-        System.out.println("---");
+        System.out.println("i: Importar presentaciones");
+        System.out.println("s: Salir");
+        System.out.print("--- ");
     }
 
     public void crearPresentacion() throws IOException {
@@ -94,7 +95,7 @@ public class Menu {
         
         char c = '\0';
         
-        while (c != '5') {
+        while (c != '6') {
         	submenu.mostrar();
             c = getChar();
             
@@ -109,6 +110,9 @@ public class Menu {
                 submenu.editarFecha();
                 break;
             case '4':
+            	submenu.editarHora();
+            	break;
+            case '5':
                 submenu.editarDuracion();
                 break;
             }
