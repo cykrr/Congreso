@@ -1,33 +1,32 @@
 import java.time.LocalTime;
 
 public class Presentacion {
-    private int id = 0;
-    private String nombre = "";
-    private String descripcion = "";
-    private LocalTime hora = null;
-
-    public Presentacion() {
-        hora = LocalTime.now();
+	private String fecha;
+	private int duracion;
+	private Persona expositor;
+    private int asistentesCantidad;
+    private Persona [] asistentes;
+    private String tema;
+    private String descripcion;
+    
+    public Presentacion (Persona exhibitor, int duration, int cantAssistant, 
+    					 String theme, String description, String date, Persona [] asistants){
+    	this.expositor = exhibitor;
+    	this.duracion = duration;
+    	this.asistentesCantidad = cantAssistant;
+    	this.asistentes = asistants;
+    	this.tema = theme;
+    	this.descripcion = description;
+    	this.fecha = date;
     }
-
-    public Presentacion(String nombre) {
-        if (nombre.equals("")) 
-            System.out.println("ADVERTENCIA: Creando presentación sin nombre");
-
-        this.nombre = nombre;
-    }
-
-    public Presentacion(String nombre, int id) {
-        if (nombre.equals("")) 
-            System.out.println("ADVERTENCIA: Creando presentación sin nombre");
-
-        this.nombre = nombre;
-        this.id = id;
-    }
-
-    public void mostrar() {
-        System.out.println("Nombre: " + nombre);
-        System.out.println("ID: " + id);
-        System.out.println("Descripción: " +((descripcion.length() > 0) ?  descripcion : "No hay descripcion"));
-    }
+    
+    public String getFecha() {return this.fecha;}
+    public String getTema() {return this.tema;}
+    public String getDescripcion() {return this.descripcion;}
+    
+    public Persona getExpositor() {return this.expositor;}
+    public Persona[] getAsistentes() {return this.asistentes;}
+    
+    public int getDuracion() {return this.duracion;}
+    public int getAsistentesCantidad() {return this.asistentesCantidad;}
 }
