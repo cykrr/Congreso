@@ -61,10 +61,14 @@ public class Menu {
         	System.out.println("Error: Presentación no encontrada");
           char c;
           do 
-          {
             System.out.println("Desea ver las presentaciones disponibles? (S/n)");
-          }
-          while ( !((c = getChar()) != 0 || c != '\n' || c != 's' || c != 'S' || c != 'n' || c != 'N'));
+          while ( !((c = getChar()) != 0 ||
+                     c != '\n' ||
+                     c != 's'  ||
+                     c != 'S'  ||
+                     c != 'n'  ||
+                     c != 'N')
+              );
 
           switch(c) { 
             case 'S':
