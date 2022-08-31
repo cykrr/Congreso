@@ -9,6 +9,7 @@ public class Menu {
     static private BufferedReader br;
     static private LinkedList<Presentacion> presentaciones;
 
+
     Menu() {
         br = new BufferedReader(new InputStreamReader(System.in));
         presentaciones = new LinkedList<Presentacion>();
@@ -108,6 +109,11 @@ public class Menu {
     public void mostrarPresentaciones() throws IOException {
         for (Presentacion p: presentaciones)
             p.mostrar();
+        if (presentaciones.size() == 0)
+
+          System.out.println("No se encontraron" +
+              "presentaciones");
+        
         System.out.println("---");
     }
     
