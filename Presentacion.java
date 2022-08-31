@@ -1,32 +1,39 @@
-import java.time.LocalTime;
-
 public class Presentacion {
+	private String nombre;
 	private String fecha;
 	private int duracion;
+	private String descripcion;
 	private Persona expositor;
-    private int asistentesCantidad;
-    private Persona [] asistentes;
-    private String tema;
-    private String descripcion;
     
-    public Presentacion (Persona exhibitor, int duration, int cantAssistant, 
-    					 String theme, String description, String date, Persona [] asistants){
-    	this.expositor = exhibitor;
-    	this.duracion = duration;
-    	this.asistentesCantidad = cantAssistant;
-    	this.asistentes = asistants;
-    	this.tema = theme;
-    	this.descripcion = description;
-    	this.fecha = date;
+    public Presentacion(String nombre) {
+    	this.nombre = nombre;
     }
     
-    public String getFecha() {return this.fecha;}
-    public String getTema() {return this.tema;}
-    public String getDescripcion() {return this.descripcion;}
+    public void setDescripcion(String descripcion) {
+    	this.descripcion = descripcion;
+    }
     
-    public Persona getExpositor() {return this.expositor;}
-    public Persona[] getAsistentes() {return this.asistentes;}
+    public void setFecha(String fecha) {
+    	this.fecha = fecha;
+    }
     
-    public int getDuracion() {return this.duracion;}
-    public int getAsistentesCantidad() {return this.asistentesCantidad;}
+    public void setDuracion(int duracion) {
+    	this.duracion = duracion;
+    }
+    
+    public void setExpositor(Persona expositor) {
+    	this.expositor = expositor;
+    }
+    
+    public String getNombre() {
+    	return nombre;
+    }
+    
+    public void mostrar() {
+    	System.out.println("Nombre: " + nombre);
+    	System.out.println("Expositor: " + (expositor != null ? expositor.getNombre() : "No asignado"));
+    	System.out.println("Descripción: " + (descripcion != null ? descripcion : "No asignada"));
+    	System.out.println("Fecha: " + (fecha != null ? fecha : "No asignada"));
+    	System.out.println("Duración: " + (duracion != 0 ? duracion : "No asignada"));
+    }
 }

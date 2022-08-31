@@ -12,6 +12,9 @@ public class Main {
                 case 'a':
                     m.crearPresentacion();
                     break;
+                case 'e':
+                    m.editarPresentacion();
+                    break;
                 case 'l':
                     m.mostrarPresentaciones();
                     break;

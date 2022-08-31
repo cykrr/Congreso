@@ -27,6 +27,7 @@ public class Menu {
     public void mostrar() {
         System.out.println("Presentaciones del congreso internacional:");
         System.out.println("a: crear presentación");
+        System.out.println("e: editar presentación");
         // System.out.println("x: eliminar presentación");
         System.out.println("l: listar presentaciones");
         // System.out.println("b: buscar presentación");
@@ -34,23 +35,67 @@ public class Menu {
         System.out.println("---");
     }
 
-    public void importarPresentaciones() throws IOException {
-
-    }
-
     public void crearPresentacion() throws IOException {
+    	String nombre = "";
         System.out.println("Ingrese el nombre de la presentación:");
-        String nombre = "";
-        while (nombre.equals("")) nombre = getLine();
-        Presentacion p  = new Presentacion(nombre, presentaciones.size());
+        
+        while(nombre.equals("")) 
+        	nombre = getLine();
+        
+        Presentacion p  = new Presentacion(nombre);
         presentaciones.add(p);
         System.out.println("---");
+    }
+    
+    public void editarPresentacion() throws IOException {
+    	String nombre = "";
+        System.out.println("Ingrese el nombre de la presentación a editar:");
+        
+        while(nombre.equals("")) 
+        	nombre = getLine();
+        
+        Presentacion p = buscarPorNombre(nombre);
+        if(p == null) {
+        	System.out.println("Error: Presentación no encontrada");
+        	return;
+        }
+        
+        MenuEditar submenu = new MenuEditar(p);
+        
+        char c = '\0';
+        
+        while (c != '5') {
+        	submenu.mostrar();
+            c = getChar();
+            
+            switch(c) {
+            case '1':
+                submenu.editarExpositor();
+                break;
+            case '2':
+                submenu.editarDescripcion();
+                break;
+            case '3':
+                submenu.editarFecha();
+                break;
+            case '4':
+                submenu.editarDuracion();
+                break;
+            }
+        }
     }
 
     public void mostrarPresentaciones() throws IOException {
         for (Presentacion p: presentaciones)
             p.mostrar();
         System.out.println("---");
+    }
+    
+    private Presentacion buscarPorNombre(String nombre) {
+        for(Presentacion p: presentaciones)
+        	if(p.getNombre().equals(nombre))
+        		return p;
+        return null;
     }
 
     public void buscarPorNombre() throws IOException {
@@ -102,4 +147,8 @@ public class Menu {
         }
         
     }
+
+	public void importarPresentaciones() {
+		
+	}
 }
