@@ -1,3 +1,3 @@
 #!/bin/bash
 
-javac Main.java -d out && java -classpath out Main
+javac src/Main.java -classpath src/ -d bin && java -classpath bin Main
