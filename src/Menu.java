@@ -10,9 +10,13 @@ import java.io.IOException;
 
 public class Menu {
     static private BufferedReader br;
-    static private LinkedList<Presentacion> presentaciones;
 
+    static private HashMap<String,Presentacion> nombre_presentaciones;
+    // static private HashMap<Integer, Presentacion> id_presentaciones;
 
+    /* Presentación debería almacenar la hora y la fecha por separado */
+
+    // static private HashMap<LocalTime,Presentacion> fecha_presentaciones;
     Menu() {
         br = new BufferedReader(new InputStreamReader(System.in));
         presentaciones = new LinkedList<Presentacion>();
