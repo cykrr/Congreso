@@ -19,7 +19,7 @@ public class Menu {
     // static private HashMap<LocalTime,Presentacion> fecha_presentaciones;
     Menu() {
         br = new BufferedReader(new InputStreamReader(System.in));
-        presentaciones = new LinkedList<Presentacion>();
+        nombre_presentaciones = new HashMap<String, Presentacion>();
     }
 
     public String getLine() throws IOException {
