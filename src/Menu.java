@@ -113,6 +113,8 @@ public class Menu {
 
           System.out.println("No se encontraron" +
               "presentaciones");
+        else 
+          System.out.println("Mostrando presentaciones:\n---");
         
         System.out.println("---");
     }
