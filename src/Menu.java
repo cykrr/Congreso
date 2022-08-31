@@ -21,7 +21,9 @@ public class Menu {
         return Integer.parseInt(getLine());
     }
     public char getChar() throws IOException {
-        return getLine().charAt(0);
+        char ret = (char)br.read();
+        br.read();
+        return ret;
     }
 
     public void mostrar() {
