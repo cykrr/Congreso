@@ -2,3 +2,4 @@
 .metadata
 jdt.ls-java-project
 bin/*.class
+/bin/

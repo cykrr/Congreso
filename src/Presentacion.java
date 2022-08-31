@@ -1,6 +1,7 @@
 public class Presentacion {
 	private String nombre;
 	private String fecha;
+	private String hora;
 	private int duracion;
 	private String descripcion;
 	private Persona expositor;
@@ -15,6 +16,10 @@ public class Presentacion {
     
     public void setFecha(String fecha) {
     	this.fecha = fecha;
+    }
+    
+    public void setHora(String hora) {
+    	this.hora = hora;
     }
     
     public void setDuracion(int duracion) {
@@ -34,6 +39,7 @@ public class Presentacion {
     	System.out.println("Expositor: " + (expositor != null ? expositor.getNombre() : "No asignado"));
     	System.out.println("Descripción: " + (descripcion != null ? descripcion : "No asignada"));
     	System.out.println("Fecha: " + (fecha != null ? fecha : "No asignada"));
+    	System.out.println("Hora: " + (hora != null ? hora : "No asignada"));
     	System.out.println("Duración: " + (duracion != 0 ? duracion : "No asignada"));
     }
 }
