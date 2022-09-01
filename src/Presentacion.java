@@ -1,4 +1,5 @@
 public class Presentacion {
+  private int ID;
 	private String nombre;
 	private String fecha;
 	private String hora;
