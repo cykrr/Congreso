@@ -23,7 +23,7 @@ public class Main {
                     m.importarPresentaciones();
                     break;
                 default:
-                    m.flush();
+                    //m.flush(); Lo comente porque me fallaba
                      // Limpiar entrada estándar
                     continue;
             }

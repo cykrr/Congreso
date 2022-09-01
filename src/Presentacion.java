@@ -1,5 +1,6 @@
 import java.time.LocalTime;
 import java.time.LocalDate;
+
 import java.util.LinkedList;
 
 public class Presentacion {
@@ -9,12 +10,18 @@ public class Presentacion {
 	private int duracion;
 	private String descripcion;
 	private Persona expositor;
+
     private LocalDate localDate = LocalDate.of(1993,01, 01);
     private LocalTime localTime = LocalTime.of(0, 0);
     private LinkedList<Persona> asistentes;
-    
+
     public Presentacion(String nombre) {
     	this.nombre = nombre;
+    	this.asistentes = new LinkedList<Persona>();
+    }
+    
+    public void setAsistencia(Persona asistira){
+    	this.asistentes.add(asistira);
     }
     
     public void setDescripcion(String descripcion) {
@@ -75,7 +82,7 @@ public class Presentacion {
                     "que inicia con '\"'.");
             System.exit(1);
             asistentes = asistentes.substring(1, asistentes.length() - 1);
-            this.asistentes = CSVTokener.csvArray(new CSVTokener(asistentes));
+            // this.asistentes = CSVTokener.csvArray(new CSVTokener(asistentes));
         }
 
     }
@@ -87,6 +94,15 @@ public class Presentacion {
     	System.out.println("Fecha: " + (fecha != null ? fecha : "No asignada"));
     	System.out.println("Hora: " + (hora != null ? hora : "No asignada"));
     	System.out.println("Duración: " + (duracion != 0 ? duracion : "No asignada"));
+    	if(asistentes.size() < 1) {
+    		System.out.println("Asistencia: Nadie ha confirmado su asistencia");
+    	}
+    	else {
+    		System.out.println("Asistencia: ");
+    		for(int i = 0; i < asistentes.size(); i++) {
+    			System.out.println("	"+ asistentes.get(i).getNombre());
+    		}
+    	}
     }
 
 }

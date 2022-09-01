@@ -99,7 +99,7 @@ public class Menu {
         
         char c = '\0';
         
-        while (c != '6') {
+        while (c != '7') {
         	submenu.mostrar();
             c = getChar();
             
@@ -119,6 +119,9 @@ public class Menu {
             case '5':
                 submenu.editarDuracion();
                 break;
+            case '6':
+                submenu.editarAsistencias();
+                break;
             }
         }
     }
@@ -131,8 +134,7 @@ public class Menu {
           System.out.println("No se encontraron " +
               "presentaciones");
         else 
-          System.out.println("Mostrando presentaciones:\n---");
-        
+
         System.out.println("---");
     }
     
