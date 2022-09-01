@@ -14,6 +14,10 @@ public class Menu {
         presentaciones = new LinkedList<Presentacion>();
     }
 
+    public void flush() throws IOException  {
+      char c; while ((c = getChar()) != 0);
+    }
+
     public String getLine() throws IOException {
         return br.readLine();
     }
