@@ -44,6 +44,6 @@ public class MenuAsistentes {
 	}
 
 	public void mostrarAsistentes() {
-
+		p.mostrarAsistentes();
 	}
 }
