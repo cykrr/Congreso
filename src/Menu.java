@@ -24,6 +24,10 @@ public class Menu {
         nombre_presentaciones = new HashMap<String, Presentacion>();
     }
 
+    public void flush() throws IOException  {
+      char c; while ((c = getChar()) != 0);
+    }
+
     public String getLine() throws IOException {
         return br.readLine();
     }

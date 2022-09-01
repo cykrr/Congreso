@@ -22,6 +22,10 @@ public class Main {
                 case 'i':
                     m.importarPresentaciones();
                     break;
+                default:
+                    m.flush();
+                     // Limpiar entrada estándar
+                    continue;
             }
         }
     }
