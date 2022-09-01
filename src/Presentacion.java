@@ -106,4 +106,19 @@ public class Presentacion {
     	}
     }
 
+    public void mostrarAsistentes() {
+    	int cantidadAsistentes = asistentes.size();
+    	if(cantidadAsistentes < 1) {
+    		System.out.println("No hay asistentes para mostrar");
+    		return;
+    	}
+    	
+    	System.out.println(String.format("%-20s %-20s %-20s", "Nombre", "Edad", "Teléfono"));
+    	for(int i = 0; i < cantidadAsistentes; i++) {
+    		Persona p = asistentes.get(i);
+    		System.out.println(String.format("%-20s %-20s %-20s", p.getNombre(), p.getEdad(), p.getFono()));
+    	}    	
+    	
+    	System.out.println("Total de asistentes: " + cantidadAsistentes);
+    }
 }
