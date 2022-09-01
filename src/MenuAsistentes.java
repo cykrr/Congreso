@@ -1,4 +1,5 @@
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class MenuAsistentes {
@@ -16,12 +17,22 @@ public class MenuAsistentes {
         System.out.println("2: Eliminar asistente");
         System.out.println("3: Buscar asistente");
         System.out.println("4: Mostrar asistentes");
-        System.out.println("5: Salir");
+        System.out.println("5: Volver al menú principal");
         System.out.println("---");
 	}
 
-	public void agregarAsistente() {
-
+	public void agregarAsistente() throws IOException {
+    	System.out.println("Ingrese nombre del asistente:");
+    	String nombre = br.readLine();
+    	
+    	System.out.println("Ingrese edad del asistente:");
+    	int edad = Integer.parseInt(br.readLine());
+    	
+    	System.out.println("Ingrese teléfono del asistente:");
+    	int fono = Integer.parseInt(br.readLine());
+    	
+    	Persona persona = new Persona(nombre, edad, fono);
+    	p.agregarAsistente(persona);
 	}
 
 	public void eliminarAsistente() {

@@ -19,8 +19,7 @@ public class MenuEditar {
         System.out.println("3: Establecer fecha");
         System.out.println("4: Establecer hora de inicio");
         System.out.println("5: Establecer duración");
-        System.out.println("6: Establecer asistencia");
-        System.out.println("7: Volver al menú principal");
+        System.out.println("6: Volver al menú principal");
         System.out.println("---");
     }
 
@@ -68,19 +67,5 @@ public class MenuEditar {
     	System.out.println("Ingrese duración en minutos de la presentación:");
     	int duracion = Integer.parseInt(br.readLine());
     	p.setDuracion(duracion);
-    }
-    
-    public void editarAsistencias() throws IOException {
-    	System.out.println("Ingrese nombre del asistente:");
-    	String nombre = br.readLine();
-    	
-    	System.out.println("Ingrese edad del asistente:");
-    	int edad = Integer.parseInt(br.readLine());
-    	
-    	System.out.println("Ingrese teléfono del asistente:");
-    	int fono = Integer.parseInt(br.readLine());
-    	
-    	Persona persona = new Persona(nombre, edad, fono);
-    	p.setAsistencia(persona);
     }
 }

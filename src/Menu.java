@@ -90,7 +90,7 @@ public class Menu {
         
         char c = '\0';
         
-        while (c != '7') {
+        while (c != '6') {
         	submenu.mostrar();
             c = getChar();
             
@@ -109,9 +109,6 @@ public class Menu {
                 break;
             case '5':
                 submenu.editarDuracion();
-                break;
-            case '6':
-                submenu.editarAsistencias();
                 break;
             }
         }
