@@ -1,12 +1,16 @@
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.time.format.ResolverStyle;
 
 public class Util {
 	public Util() {
 	
 	}
 	
-	public boolean validateDate(String strDate) {
+	public static boolean validateDate(String strDate) {
 		SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
 		format.setLenient(false);
 
@@ -20,7 +24,17 @@ public class Util {
 	    return true;
 	}
 
-	public boolean validateHour() {
-		return false;
+	public static boolean validateTime(String strTime) {
+		DateTimeFormatter format = DateTimeFormatter.ofPattern("HH:mm")
+	            .withResolverStyle(ResolverStyle.STRICT);
+		
+		try {
+			LocalTime.parse(strTime, format);
+		}
+		catch (DateTimeParseException | NullPointerException e) {
+	        return false;
+	    }
+	    
+		return true;
 	}
 }
