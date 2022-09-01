@@ -40,7 +40,6 @@ public class Registro {
     public void insertarPersona(Persona p) {
         Persona busqueda_id = id_personas.get(p.getId());
     }
-    }
 
     /* Dado un nombre de archivo abre e infla los contenidos del
      * registro. Se asegura de no importar información
