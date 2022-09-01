@@ -33,6 +33,10 @@ public class Presentacion {
     public String getNombre() {
     	return nombre;
     }
+
+	public int getId() {
+		return this.ID;
+	}
     
     public void mostrar() {
     	System.out.println("Nombre: " + nombre);
@@ -42,4 +46,5 @@ public class Presentacion {
     	System.out.println("Hora: " + (hora != null ? hora : "No asignada"));
     	System.out.println("Duración: " + (duracion != 0 ? duracion : "No asignada"));
     }
+
 }
