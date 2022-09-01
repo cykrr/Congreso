@@ -6,9 +6,11 @@ import java.io.IOException;
 public class MenuEditar {
     private BufferedReader br;
     private Presentacion p;
+    private Util util;
 
     public MenuEditar(Presentacion p) {
     	br = new BufferedReader(new InputStreamReader(System.in));
+    	util = new Util();
     	this.p = p;
     }
 
@@ -44,15 +46,23 @@ public class MenuEditar {
     }
     
     public void editarFecha() throws IOException {
-    	System.out.println("Ingrese fecha de la presentación:");
+    	System.out.println("Ingrese fecha de la presentación en formato dd/MM/yyyy:");
     	String fecha = br.readLine();
-    	p.setFecha(fecha);
+    	
+    	if(util.validateDate(fecha))
+    		p.setFecha(fecha);
+    	else
+    		System.out.println("La fecha ingresada no es válida");
     }
     
     public void editarHora() throws IOException {
-    	System.out.println("Ingrese hora de la presentación:");
+    	System.out.println("Ingrese hora de la presentación en formato hh:mm");
     	String hora = br.readLine();
-    	p.setHora(hora);
+    	
+    	if(util.validateHour())
+    		p.setHora(hora);
+    	else
+    		System.out.println("La hora ingresada no es válida");
     }
     
     public void editarDuracion() throws IOException {
