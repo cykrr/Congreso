@@ -15,13 +15,14 @@ public class Presentacion {
     private LocalTime localTime = LocalTime.of(0, 0);
     private LinkedList<Persona> asistentes;
 
+    
     public Presentacion(String nombre) {
     	this.nombre = nombre;
     	this.asistentes = new LinkedList<Persona>();
     }
     
-    public void setAsistencia(Persona asistira){
-    	this.asistentes.add(asistira);
+    public void agregarAsistente(Persona asistente){
+    	this.asistentes.add(asistente);
     }
     
     public void setDescripcion(String descripcion) {
