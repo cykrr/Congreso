@@ -38,6 +38,7 @@ public class Menu {
         System.out.println("l: Listar presentaciones");
         // System.out.println("b: buscar presentación");
         System.out.println("i: Importar presentaciones");
+        System.out.println("m: Administrar asistentes");
         System.out.println("s: Salir");
         System.out.print("--- ");
     }
@@ -115,6 +116,63 @@ public class Menu {
             }
         }
     }
+    
+    public void administrarAsistentes() throws IOException {
+    	String nombre = "";
+        System.out.println("Ingrese el nombre de la presentación:");
+
+        while(nombre.equals("")) 
+        	nombre = getLine();
+
+        Presentacion p = buscarPorNombre(nombre);
+        if(p == null) {
+        	System.out.println("Error: Presentación no encontrada");
+          char c;
+          do 
+            System.out.println("Desea ver las presentaciones disponibles? (S/n)");
+          while ( !((c = getChar()) != 0 ||
+                     c != '\n' ||
+                     c != 's'  ||
+                     c != 'S'  ||
+                     c != 'n'  ||
+                     c != 'N')
+              );
+
+          switch(c) { 
+            case 'S':
+            case 's':
+            case '\n':
+              mostrarPresentaciones();
+              administrarAsistentes();
+          }
+        	return;
+        }
+
+        MenuAsistentes submenu = new MenuAsistentes(p);
+
+        char c = '\0';
+
+        while (c != '5') {
+        	submenu.mostrar();
+            c = getChar();
+
+            switch(c) {
+            case '1':
+                submenu.agregarAsistente();
+                break;
+            case '2':
+                submenu.eliminarAsistente();
+                break;
+            case '3':
+                submenu.buscarAsistente();
+                break;
+            case '4':
+                submenu.mostrarAsistentes();
+                break;
+            }
+        }
+    }
+
 
     public void mostrarPresentaciones() throws IOException {
         if (presentaciones.size() == 0) {

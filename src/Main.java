@@ -22,6 +22,9 @@ public class Main {
                 case 'i':
                     m.importarPresentaciones();
                     break;
+                case 'm':
+                    m.administrarAsistentes();
+                    break;
                 default:
                     //m.flush(); Lo comente porque me fallaba
                      // Limpiar entrada estándar
