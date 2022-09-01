@@ -3,12 +3,11 @@ import java.text.SimpleDateFormat;
 
 public class Util {
 	public Util() {
-		
 	}
 	
 	public boolean validateDate(String strDate) {
 		SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-
+		format.setLenient(false);
 	    try {
 	        format.parse(strDate); 
 	    } 
@@ -17,5 +16,9 @@ public class Util {
 	    }
 	    
 	    return true;
+	}
+
+	public boolean validateHour() {
+		return false;
 	}
 }
