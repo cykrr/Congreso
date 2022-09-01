@@ -44,9 +44,14 @@ public class MenuEditar {
     }
     
     public void editarFecha() throws IOException {
-    	System.out.println("Ingrese fecha de la presentación:");
+    	System.out.println("Ingrese fecha de la presentación en formato dd/MM/yyyy:");
     	String fecha = br.readLine();
-    	p.setFecha(fecha);
+    	
+    	Util util = new Util();
+    	if(util.validateDate(fecha))
+    		p.setFecha(fecha);
+    	else
+    		System.out.println("La fecha ingresada no es válida");
     }
     
     public void editarHora() throws IOException {
