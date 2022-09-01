@@ -110,8 +110,8 @@ public class Menu {
                 submenu.editarFecha();
                 break;
             case '4':
-            	submenu.editarHora();
-            	break;
+                submenu.editarHora();
+                break;
             case '5':
                 submenu.editarDuracion();
                 break;
