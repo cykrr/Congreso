@@ -6,10 +6,6 @@ import java.time.format.DateTimeParseException;
 import java.time.format.ResolverStyle;
 
 public class Util {
-	public Util() {
-
-	}
-	
 	public static boolean validateDate(String strDate) {
 		SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
 		format.setLenient(false);
