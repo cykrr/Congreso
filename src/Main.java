@@ -31,10 +31,6 @@ public class Main {
                 case 'm':
                     m.administrarAsistentes();
                     break;
-                default:
-                    m.flush();
-                     // Limpiar entrada estándar
-                    continue;
             }
         }
     }

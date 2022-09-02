@@ -12,23 +12,16 @@ public class Menu {
         this.br = br;
     }
 
-    public void flush() throws IOException  {
-      while (getChar() != 0);
-    }
-
     public String getLine() throws IOException {
         return br.readLine();
     }
-    public int getInt() throws IOException {
-        return Integer.parseInt(getLine());
-    }
+
     public char getChar() throws IOException {
         String in = br.readLine();
         if (in.length() != 1) {
             return '\0';
         }
         return in.charAt(0);
-
     }
 
     public void mostrar() {
