@@ -12,7 +12,7 @@ public class Registro {
 
     private HashMap<String, Presentacion> nombre_presentaciones;
     private HashMap<Integer, Presentacion> id_presentaciones;
-    private HashMap<Integer, Persona> id_personas;
+    private HashMap<String, Persona> personas;
 
     /* Cuenta de las presentaciones importadas */
     private int count = 0; 
@@ -29,16 +29,23 @@ public class Registro {
      * @param p presentación a ser añadida
      * */
     public void insertarPresentacion(Presentacion p) {
-        Presentacion busqueda_nombre, busqueda_id;
+        Presentacion busqueda_nombre;
         busqueda_nombre = nombre_presentaciones.get(p.getNombre());
         if (busqueda_nombre != null) {
             System.err.println("ADVERTENCIA: La presentación ya existe");    
             p.mostrar();
+        } else {
+            this.nombre_presentaciones.put(p.getNombre(),p);
         }
+
     }
 
     public void insertarPersona(Persona p) {
-        Persona busqueda_id = id_personas.get(p.getId());
+        // Persona busqueda_id = id_personas.get(p.getId());
+        Persona busqueda_nombre = personas.get(p.getNombre());
+        if (busqueda_nombre == null) {
+            this.personas.put(p.getNombre(), p);
+        }
     }
 
     /* Dado un nombre de archivo abre e infla los contenidos del
@@ -47,58 +54,66 @@ public class Registro {
      * elementos faltantes. 
      * @param p nombre del archivo a abrir */
     public void importar(String nombre_archivo) throws FileNotFoundException, IOException {
-        BufferedReader file = new BufferedReader (
+        BufferedReader file = null;
+        try {
+        file = new BufferedReader (
                 new FileReader(nombre_archivo)
                 );
+        }catch(FileNotFoundException f) {
+                System.err.println("Error: el archivo no existe");
+                return;
+        }
+
         String line;
         while ( (line = file.readLine()) != null) {
             LinkedList<String> lineArray = CSVTokener.csvArray(new CSVTokener(line));
-        if (lineArray.size() != 9) {
-            System.err.println("Error: Se esperaba una linea con" +
-                    "9 campos. Recibidos: " +lineArray.size());
-            System.exit(1);
-        }
-
-// TO-DO constructor ()
-        Presentacion p;
-        Persona presentador;
-        int i = 0;
-        for (String s: lineArray)  {
-            switch (i) {
-                case 0:
-                    p = new Presentacion(s);
-                    break;
-                case 1:
-                    presentador = new Persona(s, 0, 0);
-                    break;
-                case 2:
-                    presentador.setEdad(Integer.parseInt(s));
-                    break;
-                case 3:
-                    p.setDia(Integer.parseInt(s));
-                    break;
-                case 4:
-                    p.setMes(Integer.parseInt(s));
-                    break;
-                case 5:
-                    p.setAno(Integer.parseInt(s));
-                    break;
-                case 6:
-                    p.setDuracion(Integer.parseInt(s));
-                    break;
-                case 7:
-                    p.setDescripcion(s);
-                    break;
-                case 8:
-                    p.setAsistentes(s, id_personas);
-
+            if (lineArray.size() != 9) {
+                System.err.println("Error: Se esperaba una linea con" +
+                        "9 campos. Recibidos: " +lineArray.size());
+                System.out.println(lineArray.getFirst());
+                System.exit(1);
             }
 
+// TO-DO constructor ()
+            Presentacion p = null;
+            Persona presentador = null;
+            int i = 0;
+            for (String s: lineArray)  {
+                switch (i) {
+                    case 0:
+                        p = new Presentacion(s);
+                        break;
+                    case 1:
+                        presentador = new Persona(s, 0, 0);
+                        break;
+                    case 2:
+                        presentador.setEdad(Integer.parseInt(s));
+                        break;
+                    case 3:
+                        p.setDia(Integer.parseInt(s));
+                        break;
+                    case 4:
+                        p.setMes(Integer.parseInt(s));
+                        break;
+                    case 5:
+                        p.setAno(Integer.parseInt(s));
+                        break;
+                    case 6:
+                        p.setDuracion(Integer.parseInt(s));
+                        break;
+                    case 7:
+                        p.setDescripcion(s);
+                        break;
+                    case 8:
+                        p.setAsistentes(s, personas);
+                }
+                i++;
+            }
+                p.setExpositor(presentador);
+                this.insertarPresentacion(p);
         }
         file.close();
-
     }
-
 
     /* Dado un nombre de archivo abre y guarda los contenidos del
      * registro. 
@@ -107,4 +122,12 @@ public class Registro {
 
     }
 
+    public Presentacion buscarPresentacion(String nombre) {
+        return nombre_presentaciones.get(nombre);
+    }
+
+    public HashMap<String, Presentacion> getMapaNombrePresentaciones() {
+        return this.nombre_presentaciones;
+    }
 }
+
