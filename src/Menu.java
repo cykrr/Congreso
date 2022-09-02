@@ -33,9 +33,12 @@ public class Menu {
         return Integer.parseInt(getLine());
     }
     public char getChar() throws IOException {
-        char ret = (char)br.read();
-        br.read();
-        return ret;
+        String in = br.readLine();
+        if (in.length() != 1) {
+            return '\0';
+        }
+        return in.charAt(0);
+
     }
 
     public void mostrar() {
