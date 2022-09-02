@@ -37,7 +37,14 @@ public class MenuAsistentes {
 	}
 
 	public void eliminarAsistente() throws IOException {
+    	System.out.println("Ingrese nombre del asistente:");
+    	String nombre = br.readLine();
     	
+    	Persona persona = buscarAsistente(nombre);
+    	if(persona == null)
+    		System.out.println("Error: no se encontraron asistentes con ese nombre");
+    	else
+    		p.eliminarAsistente(persona);
 	}
 
 	public void buscarAsistente() throws IOException {

@@ -25,6 +25,10 @@ public class Presentacion {
     	this.asistentes.add(asistente);
     }
     
+	public void eliminarAsistente(Persona asistente) {
+		this.asistentes.remove(asistente);
+	}
+    
     public void setDescripcion(String descripcion) {
     	this.descripcion = descripcion;
     }
