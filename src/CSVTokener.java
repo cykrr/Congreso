@@ -10,7 +10,7 @@ public class CSVTokener {
     CSVTokener(String csv) {
         this.csv = csv;
         this.posicion = -1;
-        this.sep = ',';
+        this.sep = ';';
     }
 
     CSVTokener(String csv, char sep) {
