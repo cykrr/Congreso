@@ -1,4 +1,5 @@
 import java.time.LocalTime;
+import java.time.format.*;
 import java.time.LocalDate;
 
 import java.util.LinkedList;
@@ -12,6 +13,7 @@ public class Presentacion {
 	private String descripcion;
 	private Persona expositor;
 	private LocalDate localDate = LocalDate.of(1993,01, 01);
+	private DateTimeFormatter formater = DateTimeFormatter.ofPattern("dd-MM-YYYY");
 	private LocalTime localTime = LocalTime.of(0, 0);
 	private LinkedList<Persona> asistentes;
 
@@ -36,21 +38,21 @@ public class Presentacion {
     public void setFecha(String fecha) {
     	this.fecha = fecha;
     	String[] parts = fecha.split("-");
-    	this.localDate = LocalDate.of(Integer.parseInt(parts[3]), 
-    								  Integer.parseInt(parts[2]),
-    								  Integer.parseInt(parts[1]));
+    	this.localDate = LocalDate.of(Integer.parseInt(parts[2]), 
+    								  Integer.parseInt(parts[1]),
+    								  Integer.parseInt(parts[0]));
     }
 
     public void setFecha(int dia, int mes, int ano) {
         this.localDate = LocalDate.of(ano, mes, dia);
-        this.fecha = (localDate.toString());
+        this.fecha = formater.format(localDate);
     }
     
     public void setHora(String hora) {
     	this.hora = hora;
     	String[] parts = fecha.split(":");
-    	this.localTime = LocalTime.of(Integer.parseInt(parts[1]),
-    								  Integer.parseInt(parts[2]));
+    	this.localTime = LocalTime.of(Integer.parseInt(parts[0]),
+    								  Integer.parseInt(parts[1]));
     }
 
     public void setHora(int hora) {
@@ -69,17 +71,17 @@ public class Presentacion {
 
     public void setDia(int dia) {
         this.localDate = LocalDate.of(localDate.getYear(), localDate.getMonth(), dia);
-        this.fecha = (localDate.toString());
+        this.fecha = formater.format(localDate);
     }
 
     public void setMes(int mes) {
         this.localDate = LocalDate.of(localDate.getYear(), mes, localDate.getDayOfMonth());
-        this.fecha = (localDate.toString());
+        this.fecha = formater.format(localDate);
     }
 
     public void setAno(int ano) {
         this.localDate = LocalDate.of(ano, localDate.getMonth(), localDate.getDayOfMonth());
-        this.fecha = (localDate.toString());
+        this.fecha = formater.format(localDate);
     }
     
     public void setExpositor(Persona expositor) {
