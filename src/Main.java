@@ -2,6 +2,7 @@ import java.io.IOException;
 
 public class Main {
     public static void main(String[] args) throws IOException {
+        Registro r = new Registro();
         Menu m = new Menu();
         char c = '\0';
         while (c != 's')
@@ -11,16 +12,16 @@ public class Main {
             if(c == 's'){break;}
             switch(c) {
                 case 'a':
-                    m.crearPresentacion();
+                    m.crearPresentacion(r);
                     break;
                 case 'e':
-                    m.editarPresentacion();
+                    m.editarPresentacion(r);
                     break;
                 case 'l':
-                    m.mostrarPresentaciones();
+                    m.mostrarPresentaciones(r);
                     break;
                 case 'i':
-                    m.importarPresentaciones();
+                    m.importarPresentaciones(r);
                     break;
                 default:
                     //m.flush(); Lo comente porque me fallaba
