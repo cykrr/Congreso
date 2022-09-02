@@ -1,14 +1,15 @@
-import java.io.InputStreamReader;
 import java.util.Map;
 import java.util.HashMap;
 import java.io.BufferedReader;
 import java.io.IOException;
 
 public class Menu {
-    static private BufferedReader br;
+	private Registro r;
+    private BufferedReader br;
 
-    Menu() {
-        br = new BufferedReader(new InputStreamReader(System.in));
+    public Menu(Registro r, BufferedReader br) {
+        this.r = r;
+        this.br = br;
     }
 
     public void flush() throws IOException  {
@@ -43,7 +44,7 @@ public class Menu {
         System.out.print("--- ");
     }
 
-    public void crearPresentacion(Registro r) throws IOException {
+    public void crearPresentacion() throws IOException {
     	String nombre = "";
         System.out.println("Ingrese el nombre de la presentación:");
         
@@ -55,7 +56,7 @@ public class Menu {
         System.out.println("---");
     }
     
-    public void editarPresentacion(Registro r) throws IOException {
+    public void editarPresentacion() throws IOException {
     	String nombre = "";
         System.out.println("Ingrese el nombre de la presentación a editar:");
         
@@ -80,8 +81,8 @@ public class Menu {
             case 'S':
             case 's':
             case '\n':
-              mostrarPresentaciones(r);
-              editarPresentacion(r);
+              mostrarPresentaciones();
+              editarPresentacion();
           }
         	return;
         }
@@ -114,7 +115,7 @@ public class Menu {
         }
     }
 
-    public void administrarAsistentes(Registro r) throws IOException {
+    public void administrarAsistentes() throws IOException {
     	String nombre = "";
         System.out.println("Ingrese el nombre de la presentación:");
 
@@ -140,8 +141,8 @@ public class Menu {
             case 'S':
             case 's':
             case '\n':
-              mostrarPresentaciones(r);
-              administrarAsistentes(r);
+              mostrarPresentaciones();
+              administrarAsistentes();
           }
         	return;
         }
@@ -171,7 +172,7 @@ public class Menu {
         }
     }
 
-    public void mostrarPresentaciones(Registro r) throws IOException {
+    public void mostrarPresentaciones() throws IOException {
         HashMap<String, Presentacion> nombre_presentaciones = r.getMapaNombrePresentaciones();
 
         if (nombre_presentaciones.size() == 0)
@@ -240,7 +241,7 @@ public class Menu {
         
     }
 
-	public void importarPresentaciones(Registro r) throws IOException{
+	public void importarPresentaciones() throws IOException{
         System.out.println("Ingrese el nombre del archivo a cargar:");	
         String nombrePresentacion = "";
         while ((nombrePresentacion = getLine()).equals(""));

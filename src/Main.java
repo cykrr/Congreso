@@ -1,9 +1,13 @@
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 
 public class Main {
     public static void main(String[] args) throws IOException {
         Registro r = new Registro();
-        Menu m = new Menu();
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        Menu m = new Menu(r,br);
+        
         char c = '\0';
         m.importarPresentaciones(r, "Presentaciones.csv");
         while (c != 's')
@@ -13,19 +17,19 @@ public class Main {
             if(c == 's'){break;}
             switch(c) {
                 case 'a':
-                    m.crearPresentacion(r);
+                    m.crearPresentacion();
                     break;
                 case 'e':
-                    m.editarPresentacion(r);
+                    m.editarPresentacion();
                     break;
                 case 'l':
-                    m.mostrarPresentaciones(r);
+                    m.mostrarPresentaciones();
                     break;
                 case 'i':
-                    m.importarPresentaciones(r);
+                    m.importarPresentaciones();
                     break;
                 case 'm':
-                    m.administrarAsistentes(r);
+                    m.administrarAsistentes();
                     break;
                 default:
                     m.flush();
