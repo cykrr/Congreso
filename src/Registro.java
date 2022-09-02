@@ -1,5 +1,6 @@
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.Map;
 import java.io.FileReader;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -128,8 +129,17 @@ public class Registro {
         return nombre_presentaciones.get(nombre);
     }
 
-    public HashMap<String, Presentacion> getMapaNombrePresentaciones() {
-        return this.nombre_presentaciones;
+    public void mostrarPresentaciones() throws IOException {
+        if (nombre_presentaciones.size() == 0)
+        	System.out.println("No se encontraron " + "presentaciones");
+        else {
+            System.out.println("Mostrando presentaciones:\n---");
+            for (Map.Entry<String, Presentacion> p: nombre_presentaciones.entrySet()) {
+                p.getValue().mostrar();
+            	System.out.print("\n");
+            }
+        }
+        System.out.println("---");
     }
 }
 

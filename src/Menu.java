@@ -166,20 +166,7 @@ public class Menu {
     }
 
     public void mostrarPresentaciones() throws IOException {
-        HashMap<String, Presentacion> nombre_presentaciones = r.getMapaNombrePresentaciones();
-
-        if (nombre_presentaciones.size() == 0)
-
-          System.out.println("No se encontraron " +
-              "presentaciones");
-        else {
-            System.out.println("Mostrando presentaciones:\n---");
-            for (Map.Entry<String, Presentacion> p: nombre_presentaciones.entrySet()) {
-                p.getValue().mostrar();
-            	System.out.print("\n");
-            }
-        }
-        System.out.println("---");
+        r.mostrarPresentaciones();
     }
     
 
