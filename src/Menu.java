@@ -12,7 +12,6 @@ import java.io.IOException;
 public class Menu {
     static private BufferedReader br;
 
-    static private Map<String,Presentacion> nombre_presentaciones;
     // static private HashMap<Integer, Presentacion> id_presentaciones;
 
     /* Presentación debería almacenar la hora y la fecha por separado */
@@ -21,7 +20,6 @@ public class Menu {
 
     Menu() {
         br = new BufferedReader(new InputStreamReader(System.in));
-        nombre_presentaciones = new HashMap<String, Presentacion>();
     }
 
     public void flush() throws IOException  {
@@ -52,7 +50,7 @@ public class Menu {
         System.out.print("--- ");
     }
 
-    public void crearPresentacion() throws IOException {
+    public void crearPresentacion(Registro r) throws IOException {
     	String nombre = "";
         System.out.println("Ingrese el nombre de la presentación:");
         
@@ -60,18 +58,18 @@ public class Menu {
         	nombre = getLine();
         
         Presentacion p  = new Presentacion(nombre);
-        nombre_presentaciones.put(p.getNombre(), p);
+        r.insertarPresentacion(p);
         System.out.println("---");
     }
     
-    public void editarPresentacion() throws IOException {
+    public void editarPresentacion(Registro r) throws IOException {
     	String nombre = "";
         System.out.println("Ingrese el nombre de la presentación a editar:");
         
         while(nombre.equals("")) 
         	nombre = getLine();
         
-        Presentacion p = buscarPorNombre(nombre);
+        Presentacion p = r.buscarPresentacion(nombre);
         if(p == null) {
         	System.out.println("Error: Presentación no encontrada");
           char c;
@@ -89,8 +87,8 @@ public class Menu {
             case 'S':
             case 's':
             case '\n':
-              mostrarPresentaciones();
-              editarPresentacion();
+              mostrarPresentaciones(r);
+              editarPresentacion(r);
           }
         	return;
         }
@@ -123,7 +121,8 @@ public class Menu {
         }
     }
 
-    public void mostrarPresentaciones() throws IOException {
+    public void mostrarPresentaciones(Registro r) throws IOException {
+        HashMap<String, Presentacion> nombre_presentaciones = r.getMapaNombrePresentaciones();
         for (Map.Entry<String, Presentacion> p: nombre_presentaciones.entrySet())
             p.getValue().mostrar();
         if (nombre_presentaciones.size() == 0)
@@ -135,21 +134,18 @@ public class Menu {
         System.out.println("---");
     }
     
-    private Presentacion buscarPorNombre(String nombre) {
-        Presentacion busqueda = nombre_presentaciones.get(nombre);
-        return busqueda;
-    }
 
-    public void buscarPorNombre() throws IOException {
+    public void buscarPorNombre(Registro r) throws IOException {
         String in = "";
         while (in.equals("")) {
             System.out.println("Ingrese el nombre a buscar:");
             in = getLine();
         }
+        // Presentacion busqueda_presentacion = r.buscarPresentacion(in);
         System.out.println("---");
     }
 
-    public void buscarPorId() throws IOException {
+    public void buscarPorId(Registro r) throws IOException {
         String in = "";
         while (in.equals("")) {
             System.out.println("Ingrese el ID a buscar:");
@@ -158,7 +154,7 @@ public class Menu {
         System.out.println("---");
     }
 
-    public void buscarPorFecha () throws IOException {
+    public void buscarPorFecha (Registro r) throws IOException {
         String in = "";
         while (in.equals("")) {
             System.out.println("Ingrese la fecha a buscar:");
@@ -167,7 +163,7 @@ public class Menu {
         System.out.println("---");
     }
 
-    public void buscarPresentacion() throws IOException {
+    public void buscarPresentacion(Registro r) throws IOException {
         char n = '\0';
         while (n != 'n' && n != 'i' && n != 'f') {
             System.out.println("n: Buscar por nombre");
@@ -178,19 +174,22 @@ public class Menu {
         }
         switch (n) {
             case 'n':
-                buscarPorNombre();
+                buscarPorNombre(r);
                 break;
             case 'i':
-                buscarPorId();
+                buscarPorId(r);
                 break;
             case 'f':
-                buscarPorFecha();
+                buscarPorFecha(r);
                 break;
         }
         
     }
 
-	public void importarPresentaciones() {
-		
+	public void importarPresentaciones(Registro r) throws IOException{
+        System.out.println("Ingrese el nombre del archivo a cargar:");	
+        String nombrePresentacion = "";
+        while ((nombrePresentacion = getLine()).equals(""));
+        r.importar(nombrePresentacion);
 	}
 }
