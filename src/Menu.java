@@ -20,10 +20,6 @@ public class Menu {
       char c; while ((c = getChar()) != 0);
     }
 
-    public void flush() throws IOException  {
-      char c; while ((c = getChar()) != 0);
-    }
-
     public String getLine() throws IOException {
         return br.readLine();
     }
@@ -182,17 +178,15 @@ public class Menu {
 
     public void mostrarPresentaciones(Registro r) throws IOException {
         HashMap<String, Presentacion> nombre_presentaciones = r.getMapaNombrePresentaciones();
-        for (Map.Entry<String, Presentacion> p: nombre_presentaciones.entrySet())
-            p.getValue().mostrar();
+
         if (nombre_presentaciones.size() == 0)
 
           System.out.println("No se encontraron " +
               "presentaciones");
         else {
-          System.out.println("Mostrando presentaciones:\n---");
-        }
-        for (Presentacion p: presentaciones) {
-            p.mostrar();
+            System.out.println("Mostrando presentaciones:\n---");
+            for (Map.Entry<String, Presentacion> p: nombre_presentaciones.entrySet())
+                p.getValue().mostrar();
         }
         System.out.println("---");
     }

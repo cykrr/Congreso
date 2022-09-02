@@ -56,10 +56,6 @@ public class Presentacion {
         localTime = LocalTime.of(localTime.getHour(), min);
     }
     
-    public void setHora(String hora) {
-    	this.hora = hora;
-    }
-    
     public void setDuracion(int duracion) {
     	this.duracion = duracion;
     }
@@ -114,10 +110,6 @@ public class Presentacion {
 
     }
 
-    public LinkedList<Persona> getAsistentes() {
-    	return asistentes;
-    }
-    
     public LinkedList<Persona> getAsistentes() {
     	return asistentes;
     }
