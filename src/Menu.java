@@ -180,9 +180,10 @@ public class Menu {
               "presentaciones");
         else {
             System.out.println("Mostrando presentaciones:\n---");
-            for (Map.Entry<String, Presentacion> p: nombre_presentaciones.entrySet())
+            for (Map.Entry<String, Presentacion> p: nombre_presentaciones.entrySet()) {
                 p.getValue().mostrar();
             	System.out.print("\n");
+            }
         }
         System.out.println("---");
     }

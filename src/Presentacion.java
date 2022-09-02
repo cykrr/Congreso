@@ -1,4 +1,3 @@
-
 import java.time.LocalTime;
 import java.time.LocalDate;
 
@@ -36,22 +35,32 @@ public class Presentacion {
     
     public void setFecha(String fecha) {
     	this.fecha = fecha;
+    	String[] parts = fecha.split("-");
+    	this.localDate = LocalDate.of(Integer.parseInt(parts[3]), 
+    								  Integer.parseInt(parts[2]),
+    								  Integer.parseInt(parts[1]));
     }
 
     public void setFecha(int dia, int mes, int ano) {
         this.localDate = LocalDate.of(ano, mes, dia);
+        this.fecha = (localDate.toString());
     }
     
     public void setHora(String hora) {
     	this.hora = hora;
+    	String[] parts = fecha.split(":");
+    	this.localTime = LocalTime.of(Integer.parseInt(parts[1]),
+    								  Integer.parseInt(parts[2]));
     }
 
     public void setHora(int hora) {
-        localTime = LocalTime.of(hora, 0);
+        this.localTime = LocalTime.of(hora, 0);
+        this.hora = (localTime.toString());
     }
 
     public void setMinuto(int min) {
-        localTime = LocalTime.of(localTime.getHour(), min);
+        this.localTime = LocalTime.of(localTime.getHour(), min);
+        this.hora = (localTime.toString());
     }
     
     public void setDuracion(int duracion) {
@@ -60,14 +69,17 @@ public class Presentacion {
 
     public void setDia(int dia) {
         this.localDate = LocalDate.of(localDate.getYear(), localDate.getMonth(), dia);
+        this.fecha = (localDate.toString());
     }
 
     public void setMes(int mes) {
         this.localDate = LocalDate.of(localDate.getYear(), mes, localDate.getDayOfMonth());
+        this.fecha = (localDate.toString());
     }
 
     public void setAno(int ano) {
         this.localDate = LocalDate.of(ano, localDate.getMonth(), localDate.getDayOfMonth());
+        this.fecha = (localDate.toString());
     }
     
     public void setExpositor(Persona expositor) {
@@ -115,8 +127,8 @@ public class Presentacion {
     	System.out.println("Expositor: " + (expositor != null ? expositor.getNombre() : "No asignado"));
     	System.out.println("Descripción: " + (descripcion != null ? descripcion : "No asignada"));
     	
-    	System.out.println("Fecha: " + (fecha != null ? fecha : (localDate.toString())));
-    	System.out.println("Hora: " + (hora != null ? hora : (localTime.toString())));
+    	System.out.println("Fecha: " + (fecha != null ? fecha : "No asignada"));
+    	System.out.println("Hora: " + (hora != null ? hora : "No asignada"));
 
     	System.out.println("Duración: " + (duracion != 0 ? duracion : "No asignada"));
     	if(asistentes.size() < 1) {

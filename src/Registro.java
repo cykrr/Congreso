@@ -15,7 +15,7 @@ public class Registro {
     private HashMap<String, Persona> personas;
 
     /* Cuenta de las presentaciones importadas */
-    private int count = 0; 
+    private int count = 0;
 
     Registro() {
         nombre_presentaciones = new HashMap<String, Presentacion>();
