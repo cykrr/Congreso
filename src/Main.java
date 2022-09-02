@@ -24,6 +24,7 @@ public class Main {
                     m.importarPresentaciones(r);
                     break;
                 case 'm':
+
                     m.administrarAsistentes(r);
                     break;
                 default:

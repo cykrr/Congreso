@@ -1,3 +1,4 @@
+
 import java.time.LocalTime;
 import java.time.LocalDate;
 
@@ -12,9 +13,10 @@ public class Presentacion {
 	private String descripcion;
 	private Persona expositor;
 
-    private LocalDate localDate = LocalDate.of(1993,01, 01);
-    private LocalTime localTime = LocalTime.of(0, 0);
-    private LinkedList<Persona> asistentes;
+
+  private LocalDate localDate = LocalDate.of(1993,01, 01);
+  private LocalTime localTime = LocalTime.of(0, 0);
+  private LinkedList<Persona> asistentes;
 
     
     public Presentacion(String nombre) {
@@ -26,9 +28,9 @@ public class Presentacion {
     	this.asistentes.add(asistente);
     }
     
-	public void eliminarAsistente(Persona asistente) {
-		this.asistentes.remove(asistente);
-	}
+    public void eliminarAsistente(Persona asistente) {
+      this.asistentes.remove(asistente);
+	  }
     
     public void setDescripcion(String descripcion) {
     	this.descripcion = descripcion;
@@ -52,6 +54,10 @@ public class Presentacion {
 
     public void setMinuto(int min) {
         localTime = LocalTime.of(localTime.getHour(), min);
+    }
+    
+    public void setHora(String hora) {
+    	this.hora = hora;
     }
     
     public void setDuracion(int duracion) {
@@ -112,12 +118,21 @@ public class Presentacion {
     	return asistentes;
     }
     
+    public LinkedList<Persona> getAsistentes() {
+    	return asistentes;
+    }
+    
     public void mostrar() {
     	System.out.println("Nombre: " + nombre);
     	System.out.println("Expositor: " + (expositor != null ? expositor.getNombre() : "No asignado"));
     	System.out.println("Descripción: " + (descripcion != null ? descripcion : "No asignada"));
+
     	System.out.println("Fecha: " + (localDate.toString()));
     	System.out.println("Hora: " + (localTime.toString()));
+
+    	System.out.println("Fecha: " + (fecha != null ? fecha : "No asignada"));
+    	System.out.println("Hora: " + (hora != null ? hora : "No asignada"));
+
     	System.out.println("Duración: " + (duracion != 0 ? duracion : "No asignada"));
     	if(asistentes.size() < 1) {
     		System.out.println("Asistencia: Nadie ha confirmado su asistencia");

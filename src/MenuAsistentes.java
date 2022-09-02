@@ -2,6 +2,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.LinkedList;
+
 import java.io.InputStreamReader;
 
 public class MenuAsistentes {
@@ -71,8 +72,6 @@ public class MenuAsistentes {
 
 	public void mostrarAsistentes() {
 		p.mostrarAsistentes();
-        System.out.println("5: Salir");
-        System.out.println("---");
 	}
-
 }
+

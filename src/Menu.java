@@ -12,14 +12,12 @@ import java.io.IOException;
 public class Menu {
     static private BufferedReader br;
 
-    // static private HashMap<Integer, Presentacion> id_presentaciones;
-
-    /* Presentación debería almacenar la hora y la fecha por separado */
-
-    // static private HashMap<LocalTime,Presentacion> fecha_presentaciones;
-
     Menu() {
         br = new BufferedReader(new InputStreamReader(System.in));
+    }
+
+    public void flush() throws IOException  {
+      char c; while ((c = getChar()) != 0);
     }
 
     public void flush() throws IOException  {
@@ -124,7 +122,7 @@ public class Menu {
             }
         }
     }
-    
+
     public void administrarAsistentes(Registro r) throws IOException {
     	String nombre = "";
         System.out.println("Ingrese el nombre de la presentación:");
@@ -133,6 +131,7 @@ public class Menu {
         	nombre = getLine();
 
         Presentacion p = r.buscarPresentacion(nombre);
+        
         if(p == null) {
         	System.out.println("Error: Presentación no encontrada");
           char c;
@@ -159,7 +158,7 @@ public class Menu {
         MenuAsistentes submenu = new MenuAsistentes(p);
 
         char c = '\0';
-
+        
         while (c != '5') {
         	submenu.mostrar();
             c = getChar();
@@ -181,7 +180,6 @@ public class Menu {
         }
     }
 
-
     public void mostrarPresentaciones(Registro r) throws IOException {
         HashMap<String, Presentacion> nombre_presentaciones = r.getMapaNombrePresentaciones();
         for (Map.Entry<String, Presentacion> p: nombre_presentaciones.entrySet())
@@ -190,8 +188,12 @@ public class Menu {
 
           System.out.println("No se encontraron " +
               "presentaciones");
-        else 
-
+        else {
+          System.out.println("Mostrando presentaciones:\n---");
+        }
+        for (Presentacion p: presentaciones) {
+            p.mostrar();
+        }
         System.out.println("---");
     }
     
