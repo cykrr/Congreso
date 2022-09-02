@@ -52,6 +52,9 @@ public class CSVTokener {
                 sepCount++;
                 if (!openSub && sepCount != 0)
                     return out;
+                else {
+                    out += sep;
+                }
             }
             else if (c == '\"') {
 					out += c;
