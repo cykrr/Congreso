@@ -1,4 +1,9 @@
+
+import java.time.LocalTime;
+import java.time.LocalDate;
+
 import java.util.LinkedList;
+import java.util.HashMap;
 
 public class Presentacion {
 	private String nombre;
@@ -7,7 +12,12 @@ public class Presentacion {
 	private int duracion;
 	private String descripcion;
 	private Persona expositor;
-	private LinkedList<Persona> asistentes;
+
+
+  private LocalDate localDate = LocalDate.of(1993,01, 01);
+  private LocalTime localTime = LocalTime.of(0, 0);
+  private LinkedList<Persona> asistentes;
+
     
     public Presentacion(String nombre) {
     	this.nombre = nombre;
@@ -18,9 +28,9 @@ public class Presentacion {
     	this.asistentes.add(asistente);
     }
     
-	public void eliminarAsistente(Persona asistente) {
-		this.asistentes.remove(asistente);
-	}
+    public void eliminarAsistente(Persona asistente) {
+      this.asistentes.remove(asistente);
+	  }
     
     public void setDescripcion(String descripcion) {
     	this.descripcion = descripcion;
@@ -28,6 +38,22 @@ public class Presentacion {
     
     public void setFecha(String fecha) {
     	this.fecha = fecha;
+    }
+
+    public void setFecha(int dia, int mes, int ano) {
+        this.localDate = LocalDate.of(ano, mes, dia);
+    }
+    
+    public void setHora(String hora) {
+    	this.hora = hora;
+    }
+
+    public void setHora(int hora) {
+        localTime = LocalTime.of(hora, 0);
+    }
+
+    public void setMinuto(int min) {
+        localTime = LocalTime.of(localTime.getHour(), min);
     }
     
     public void setHora(String hora) {
@@ -37,6 +63,18 @@ public class Presentacion {
     public void setDuracion(int duracion) {
     	this.duracion = duracion;
     }
+
+    public void setDia(int dia) {
+        this.localDate = LocalDate.of(localDate.getYear(), localDate.getMonth(), dia);
+    }
+
+    public void setMes(int mes) {
+        this.localDate = LocalDate.of(localDate.getYear(), mes, localDate.getDayOfMonth());
+    }
+
+    public void setAno(int ano) {
+        this.localDate = LocalDate.of(ano, localDate.getMonth(), localDate.getDayOfMonth());
+    }
     
     public void setExpositor(Persona expositor) {
     	this.expositor = expositor;
@@ -44,6 +82,40 @@ public class Presentacion {
     
     public String getNombre() {
     	return nombre;
+    }
+
+	// public int getId() {
+		// return this.ID;
+	// }
+    
+    public void setAsistentes(String asistentes, HashMap<String, Persona>personas) {
+        if (asistentes.charAt(0) != '\"') {
+            System.err.println("Error: setAsistentes() Esperado string" +
+                    "que inicia con '\"'.");
+            System.exit(1);
+        }
+
+        asistentes = asistentes.substring(1, asistentes.length() - 1);
+
+        LinkedList<String> listaAsistentes = CSVTokener.csvArray(
+                new CSVTokener(asistentes)
+            );
+
+        for (String nombreAsistente : listaAsistentes) {
+            Persona busqueda_nombre = personas.get(nombreAsistente);
+            if (busqueda_nombre == null) {
+                System.err.println("Error: el asistente \"" + nombreAsistente + "\" no figura" +
+                        "en la base de datos");
+                System.err.println("No se añadirá a la base de datos");
+            } else {
+                this.agregarAsistente(busqueda_nombre);
+            }
+        }
+
+    }
+
+    public LinkedList<Persona> getAsistentes() {
+    	return asistentes;
     }
     
     public LinkedList<Persona> getAsistentes() {
@@ -54,8 +126,13 @@ public class Presentacion {
     	System.out.println("Nombre: " + nombre);
     	System.out.println("Expositor: " + (expositor != null ? expositor.getNombre() : "No asignado"));
     	System.out.println("Descripción: " + (descripcion != null ? descripcion : "No asignada"));
+
+    	System.out.println("Fecha: " + (localDate.toString()));
+    	System.out.println("Hora: " + (localTime.toString()));
+
     	System.out.println("Fecha: " + (fecha != null ? fecha : "No asignada"));
     	System.out.println("Hora: " + (hora != null ? hora : "No asignada"));
+
     	System.out.println("Duración: " + (duracion != 0 ? duracion : "No asignada"));
     	if(asistentes.size() < 1) {
     		System.out.println("Asistencia: Nadie ha confirmado su asistencia");
@@ -67,7 +144,7 @@ public class Presentacion {
     		}
     	}
     }
-    
+
     public void mostrarAsistentes() {
     	int cantidadAsistentes = asistentes.size();
     	if(cantidadAsistentes < 1) {

@@ -3,6 +3,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.LinkedList;
 
+import java.io.InputStreamReader;
+
 public class MenuAsistentes {
     private BufferedReader br;
     private Presentacion p;
@@ -72,3 +74,4 @@ public class MenuAsistentes {
 		p.mostrarAsistentes();
 	}
 }
+

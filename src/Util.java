@@ -7,7 +7,7 @@ import java.time.format.ResolverStyle;
 
 public class Util {
 	public Util() {
-	
+
 	}
 	
 	public static boolean validateDate(String strDate) {
