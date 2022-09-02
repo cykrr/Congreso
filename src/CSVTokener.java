@@ -41,7 +41,7 @@ public class CSVTokener {
         boolean openSub = false;
         do {
         	c = getNext();
-            System.out.print(c);
+//            System.out.print(c);
 
             if (c == '\0' || c == '\n'){
 						return out;
