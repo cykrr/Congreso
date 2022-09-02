@@ -106,6 +106,7 @@ public class Registro {
                         break;
                     case 8:
                         p.setAsistentes(s, personas);
+                        break;
                 }
                 i++;
             }
