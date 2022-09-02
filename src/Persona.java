@@ -20,4 +20,10 @@ public class Persona {
     public long getFono() {
     	return this.fono;
     }
+
+	public void mostrarDatos() {
+		System.out.println("Nombre: " + nombre);
+		System.out.println("Teléfono: " + fono);
+		System.out.println("Edad: " + edad);
+	}
 }
