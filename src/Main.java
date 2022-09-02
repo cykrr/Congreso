@@ -24,7 +24,7 @@ public class Main {
                     m.importarPresentaciones(r);
                     break;
                 case 'm':
-                    m.administrarAsistentes();
+                    m.administrarAsistentes(r);
                     break;
                 default:
                     //m.flush(); Lo comente porque me fallaba

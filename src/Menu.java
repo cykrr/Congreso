@@ -125,14 +125,14 @@ public class Menu {
         }
     }
     
-    public void administrarAsistentes() throws IOException {
+    public void administrarAsistentes(Registro r) throws IOException {
     	String nombre = "";
         System.out.println("Ingrese el nombre de la presentación:");
 
         while(nombre.equals("")) 
         	nombre = getLine();
 
-        Presentacion p = buscarPorNombre(nombre);
+        Presentacion p = r.buscarPresentacion(nombre);
         if(p == null) {
         	System.out.println("Error: Presentación no encontrada");
           char c;
@@ -150,8 +150,8 @@ public class Menu {
             case 'S':
             case 's':
             case '\n':
-              mostrarPresentaciones();
-              administrarAsistentes();
+              mostrarPresentaciones(r);
+              administrarAsistentes(r);
           }
         	return;
         }
