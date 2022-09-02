@@ -20,6 +20,7 @@ public class Registro {
     Registro() {
         nombre_presentaciones = new HashMap<String, Presentacion>();
         id_presentaciones = new HashMap<Integer, Presentacion>();
+        personas = new HashMap<String, Persona>();
     }
 
     /** Añade una presentación al registro, se encarga de revisar
