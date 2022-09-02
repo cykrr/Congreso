@@ -41,7 +41,7 @@ public class MenuAsistentes {
     	System.out.println("Ingrese nombre del asistente:");
     	String nombre = br.readLine();
     	
-    	Persona persona = buscarAsistente(nombre);
+    	Persona persona = p.buscarAsistente(nombre);
     	if(persona == null)
     		System.out.println("Error: no se encontraron asistentes con ese nombre");
     	else
@@ -52,7 +52,7 @@ public class MenuAsistentes {
     	System.out.println("Ingrese nombre del asistente:");
     	String nombre = br.readLine();
     	
-    	Persona persona = buscarAsistente(nombre);
+    	Persona persona = p.buscarAsistente(nombre);
     	if(persona == null) {
     		System.out.println("Error: no se encontraron asistentes con ese nombre");
     	}
@@ -60,16 +60,6 @@ public class MenuAsistentes {
     		persona.mostrarDatos();
     		System.out.println("---");
     	}
-	}
-	
-	private Persona buscarAsistente(String nombre) {
-		LinkedList<Persona> asistentes = p.getAsistentes();
-		for(int i = 0; i < asistentes.size(); i++) {
-			Persona persona = asistentes.get(i);
-			if(nombre.equals(persona.getNombre()))
-				return persona;
-		}
-		return null;
 	}
 
 	public void mostrarAsistentes() {

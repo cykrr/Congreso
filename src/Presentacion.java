@@ -118,8 +118,13 @@ public class Presentacion {
 
     }
 
-    public LinkedList<Persona> getAsistentes() {
-    	return asistentes;
+    public Persona buscarAsistente(String nombre) {
+		for(int i = 0; i < asistentes.size(); i++) {
+			Persona persona = asistentes.get(i);
+			if(nombre.equals(persona.getNombre()))
+				return persona;
+		}
+		return null;
     }
     
     public void mostrar() {
