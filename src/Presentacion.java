@@ -88,6 +88,10 @@ public class Presentacion {
 
     }
 
+    public LinkedList<Persona> getAsistentes() {
+    	return asistentes;
+    }
+    
     public void mostrar() {
     	System.out.println("Nombre: " + nombre);
     	System.out.println("Expositor: " + (expositor != null ? expositor.getNombre() : "No asignado"));

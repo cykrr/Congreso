@@ -1,6 +1,7 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.LinkedList;
 
 public class MenuAsistentes {
     private BufferedReader br;
@@ -35,12 +36,29 @@ public class MenuAsistentes {
     	p.agregarAsistente(persona);
 	}
 
-	public void eliminarAsistente() {
-
+	public void eliminarAsistente() throws IOException {
+    	
 	}
 
-	public void buscarAsistente() {
-
+	public void buscarAsistente() throws IOException {
+    	System.out.println("Ingrese nombre del asistente:");
+    	String nombre = br.readLine();
+    	
+    	Persona persona = buscarAsistente(nombre);
+    	if(persona == null)
+    		System.out.println("Error: no se encontraron asistentes con ese nombre");
+    	else
+    		persona.mostrarDatos();
+	}
+	
+	private Persona buscarAsistente(String nombre) {
+		LinkedList<Persona> asistentes = p.getAsistentes();
+		for(int i = 0; i < asistentes.size(); i++) {
+			Persona persona = asistentes.get(i);
+			if(nombre.equals(persona.getNombre()))
+				return persona;
+		}
+		return null;
 	}
 
 	public void mostrarAsistentes() {
