@@ -1,5 +1,3 @@
-import java.util.Map;
-import java.util.HashMap;
 import java.io.BufferedReader;
 import java.io.IOException;
 
@@ -169,7 +167,6 @@ public class Menu {
         r.mostrarPresentaciones();
     }
     
-
     public void buscarPorNombre(Registro r) throws IOException {
         String in = "";
         while (in.equals("")) {

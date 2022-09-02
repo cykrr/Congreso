@@ -7,7 +7,7 @@ import java.time.format.ResolverStyle;
 
 public class Util {
 	public static boolean validateDate(String strDate) {
-		SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+		SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
 		format.setLenient(false);
 
 	    try {
