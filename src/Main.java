@@ -5,6 +5,7 @@ public class Main {
         Registro r = new Registro();
         Menu m = new Menu();
         char c = '\0';
+        m.importarPresentaciones(r, "Presentaciones.csv");
         while (c != 's')
         {
             m.mostrar();
@@ -27,7 +28,7 @@ public class Main {
                     m.administrarAsistentes(r);
                     break;
                 default:
-                    //m.flush(); Lo comente porque me fallaba
+                    m.flush();
                      // Limpiar entrada estándar
                     continue;
             }

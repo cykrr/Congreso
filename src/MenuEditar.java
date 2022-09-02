@@ -1,6 +1,5 @@
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-
 import java.io.IOException;
 
 public class MenuEditar {
@@ -44,7 +43,7 @@ public class MenuEditar {
     }
     
     public void editarFecha() throws IOException {
-    	System.out.println("Ingrese fecha de la presentación en formato dd/MM/yyyy:");
+    	System.out.println("Ingrese fecha de la presentación en formato dd-MM-yyyy:");
     	String fecha = br.readLine();
     	
     	if(Util.validateDate(fecha))

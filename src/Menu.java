@@ -1,11 +1,6 @@
 import java.io.InputStreamReader;
-
-import java.util.LinkedList;
 import java.util.Map;
 import java.util.HashMap;
-
-import java.time.LocalTime;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 
@@ -17,7 +12,7 @@ public class Menu {
     }
 
     public void flush() throws IOException  {
-      char c; while ((c = getChar()) != 0);
+      while (getChar() != 0);
     }
 
     public String getLine() throws IOException {
@@ -187,6 +182,7 @@ public class Menu {
             System.out.println("Mostrando presentaciones:\n---");
             for (Map.Entry<String, Presentacion> p: nombre_presentaciones.entrySet())
                 p.getValue().mostrar();
+            	System.out.print("\n");
         }
         System.out.println("---");
     }
@@ -247,6 +243,10 @@ public class Menu {
         System.out.println("Ingrese el nombre del archivo a cargar:");	
         String nombrePresentacion = "";
         while ((nombrePresentacion = getLine()).equals(""));
+        r.importar(nombrePresentacion);
+	}
+	
+	public void importarPresentaciones(Registro r, String nombrePresentacion) throws IOException{
         r.importar(nombrePresentacion);
 	}
 }

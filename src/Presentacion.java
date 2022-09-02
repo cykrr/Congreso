@@ -12,11 +12,9 @@ public class Presentacion {
 	private int duracion;
 	private String descripcion;
 	private Persona expositor;
-
-
-  private LocalDate localDate = LocalDate.of(1993,01, 01);
-  private LocalTime localTime = LocalTime.of(0, 0);
-  private LinkedList<Persona> asistentes;
+	private LocalDate localDate = LocalDate.of(1993,01, 01);
+	private LocalTime localTime = LocalTime.of(0, 0);
+	private LinkedList<Persona> asistentes;
 
     
     public Presentacion(String nombre) {
@@ -92,16 +90,14 @@ public class Presentacion {
         }
 
         asistentes = asistentes.substring(1, asistentes.length() - 1);
-
-        LinkedList<String> listaAsistentes = CSVTokener.csvArray(
-                new CSVTokener(asistentes)
-            );
+        
+        LinkedList<String> listaAsistentes = CSVTokener.csvArray(new CSVTokener(asistentes));
 
         for (String nombreAsistente : listaAsistentes) {
             Persona busqueda_nombre = personas.get(nombreAsistente);
             if (busqueda_nombre == null) {
                 System.err.println("Error: el asistente \"" + nombreAsistente + "\" no figura" +
-                        "en la base de datos");
+                        " en la base de datos");
                 System.err.println("No se añadirá a la base de datos");
             } else {
                 this.agregarAsistente(busqueda_nombre);
@@ -118,12 +114,9 @@ public class Presentacion {
     	System.out.println("Nombre: " + nombre);
     	System.out.println("Expositor: " + (expositor != null ? expositor.getNombre() : "No asignado"));
     	System.out.println("Descripción: " + (descripcion != null ? descripcion : "No asignada"));
-
-    	System.out.println("Fecha: " + (localDate.toString()));
-    	System.out.println("Hora: " + (localTime.toString()));
-
-    	System.out.println("Fecha: " + (fecha != null ? fecha : "No asignada"));
-    	System.out.println("Hora: " + (hora != null ? hora : "No asignada"));
+    	
+    	System.out.println("Fecha: " + (fecha != null ? fecha : (localDate.toString())));
+    	System.out.println("Hora: " + (hora != null ? hora : (localTime.toString())));
 
     	System.out.println("Duración: " + (duracion != 0 ? duracion : "No asignada"));
     	if(asistentes.size() < 1) {

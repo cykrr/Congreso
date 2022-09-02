@@ -57,7 +57,7 @@ public class Registro {
     public void importar(String nombre_archivo) throws FileNotFoundException, IOException {
         BufferedReader file = null;
         try {
-        file = new BufferedReader (
+        		file = new BufferedReader (
                 new FileReader(nombre_archivo)
                 );
         }catch(FileNotFoundException f) {
@@ -69,7 +69,7 @@ public class Registro {
         while ( (line = file.readLine()) != null) {
             LinkedList<String> lineArray = CSVTokener.csvArray(new CSVTokener(line));
             if (lineArray.size() != 9) {
-                System.err.println("Error: Se esperaba una linea con" +
+                System.err.println("Error: Se esperaba una linea con " +
                         "9 campos. Recibidos: " +lineArray.size());
                 System.out.println(lineArray.getFirst());
                 System.exit(1);
