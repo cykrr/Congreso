@@ -13,7 +13,7 @@ public class Presentacion {
 	private String descripcion;
 	private Persona expositor;
 	private LocalDate localDate = LocalDate.of(1993,01, 01);
-	private DateTimeFormatter formater = DateTimeFormatter.ofPattern("dd-MM-YYYY");
+	private static DateTimeFormatter formater = DateTimeFormatter.ofPattern("dd-MM-YYYY");
 	private LocalTime localTime = LocalTime.of(0, 0);
 	private LinkedList<Persona> asistentes;
 
