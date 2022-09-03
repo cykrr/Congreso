@@ -42,9 +42,13 @@ public class Menu {
         while(nombre.equals("")) 
         	nombre = getLine();
         
+        crearPresentacion(nombre);
+        System.out.println("---");
+    }
+    
+    public void crearPresentacion(String nombre) {
         Presentacion p  = new Presentacion(nombre);
         r.insertarPresentacion(p);
-        System.out.println("---");
     }
     
     public void editarPresentacion() throws IOException {
