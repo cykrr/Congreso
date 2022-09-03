@@ -110,9 +110,9 @@ public class Presentacion {
         for (String nombreAsistente : listaAsistentes) {
             Persona busqueda_nombre = personas.get(nombreAsistente);
             if (busqueda_nombre == null) {
-                System.err.println("Error: el asistente \"" + nombreAsistente + "\" no figura" +
+                /*System.err.println("Error: el asistente \"" + nombreAsistente + "\" no figura" +
                         " en la base de datos");
-                System.err.println("No se añadirá a la base de datos");
+                System.err.println("No se añadirá a la base de datos");*/
             } else {
                 this.agregarAsistente(busqueda_nombre);
             }
