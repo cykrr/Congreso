@@ -10,6 +10,7 @@
 
     <modules>
         <module>GUI</module>
+        <module>CLI</module>
         <module>Congreso</module>
     </modules>
 
