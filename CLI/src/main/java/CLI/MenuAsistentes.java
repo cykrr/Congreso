@@ -1,8 +1,11 @@
-package Congreso;
+package CLI;
 import java.io.BufferedReader;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
+
+import Congreso.Persona;
+import Congreso.Presentacion;
 
 public class MenuAsistentes {
     private BufferedReader br;

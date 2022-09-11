@@ -1,7 +1,9 @@
-package Congreso;
+package CLI;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+
+import Congreso.Registro;
 
 public class Main {
     public static void main(String[] args) throws IOException {
