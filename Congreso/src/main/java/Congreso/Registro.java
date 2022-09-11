@@ -22,7 +22,7 @@ public class Registro {
     /* Cuenta de las presentaciones importadas */
     private int count = 0;
 
-    Registro() {
+    public Registro() {
         nombre_presentaciones = new HashMap<String, Presentacion>();
         id_presentaciones = new HashMap<Integer, Presentacion>();
         personas = new HashMap<String, Persona>();
