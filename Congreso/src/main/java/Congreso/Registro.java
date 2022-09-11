@@ -1,3 +1,5 @@
+package Congreso;
+
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
@@ -5,6 +7,8 @@ import java.io.FileReader;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+
+
 
 /* Almacena toda la información correspondiente al
  * runtime: Mapas para rápido acceso a las presentaciones

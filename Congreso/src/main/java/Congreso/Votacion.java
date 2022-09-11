@@ -1,6 +1,11 @@
+package Congreso;
 public class Votacion extends Presentacion {
 	private int cantidadOpciones;
     private String[] opciones;
+
+    public Votacion() {
+
+    }
     
     /*public Votacion(Persona expositor, int duracion, int asistentesCantidad, 
 					String tema, String descripcion, String fecha, 

@@ -1,3 +1,4 @@
+package Congreso;
 import java.time.LocalTime;
 import java.time.format.*;
 import java.time.LocalDate;
@@ -17,10 +18,13 @@ public class Presentacion {
 	private LocalTime localTime = LocalTime.of(0, 0);
 	private LinkedList<Persona> asistentes;
 
+    public Presentacion() {
+    	this.asistentes = new LinkedList<Persona>();
+    }
     
     public Presentacion(String nombre) {
+        this();
     	this.nombre = nombre;
-    	this.asistentes = new LinkedList<Persona>();
     }
     
     public void agregarAsistente(Persona asistente){
