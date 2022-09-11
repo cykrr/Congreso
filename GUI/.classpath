@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+  <classpathentry kind="src" path="src/main/java" including="**/*.java"/>
+  <classpathentry kind="output" path="target/classes"/>
+  <classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+  <classpathentry kind="src" path="/Congreso"/>
+  <classpathentry kind="var" path="M2_REPO/org/openjfx/javafx-controls/17.0.1/javafx-controls-17.0.1.jar" sourcepath="M2_REPO/org/openjfx/javafx-controls/17.0.1/javafx-controls-17.0.1-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/openjfx/javafx-controls/17.0.1/javafx-controls-17.0.1-linux.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/openjfx/javafx-graphics/17.0.1/javafx-graphics-17.0.1.jar" sourcepath="M2_REPO/org/openjfx/javafx-graphics/17.0.1/javafx-graphics-17.0.1-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/openjfx/javafx-graphics/17.0.1/javafx-graphics-17.0.1-linux.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/openjfx/javafx-base/17.0.1/javafx-base-17.0.1.jar" sourcepath="M2_REPO/org/openjfx/javafx-base/17.0.1/javafx-base-17.0.1-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/openjfx/javafx-base/17.0.1/javafx-base-17.0.1-linux.jar"/>
+</classpath>
