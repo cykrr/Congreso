@@ -7,3 +7,4 @@ bin/*.class
 target/maven-status/maven-compiler-plugin/compile/default-compile
 Congreso/target
 GUI/target
+CLI/target
