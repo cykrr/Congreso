@@ -23,8 +23,19 @@
         </dependencies>
     </dependencyManagement>
 
+
     <properties>
         <spring-core.version>5.3.16</spring-core.version>
     </properties>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <version>3.1.1</version>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>
