@@ -1,3 +1,3 @@
 #!/bin/bash
 
-java -classpath bin Main
+mvn -pl GUI clean javafx:run
