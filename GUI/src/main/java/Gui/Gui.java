@@ -1,8 +1,7 @@
-package main.java;
-
+package Gui;
+import Congreso.Registro;
 import javafx.application.Application;
 import javafx.stage.Stage;
-import Congreso.java.Registro;
 
 public class Gui extends Application {
 
