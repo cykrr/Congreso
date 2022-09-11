@@ -1,38 +1,30 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>cl.pucv</groupId>
-  <artifactId>CongresoGUI</artifactId>
-  <packaging>jar</packaging>
-  <version>1.0-SNAPSHOT</version>
-  <name>CongresoGUI</name>
-  <url>http://maven.apache.org</url>
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
-  <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <javafx.version>17.0.1</javafx.version>
-    <javafx.maven.plugin.version>0.0.8</javafx.maven.plugin.version>
-  </properties>
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>cl.pucv</groupId>
+    <artifactId>CongresoGUI</artifactId>
+    <packaging>pom</packaging>
+    <version>1.0-SNAPSHOT</version>
+    <name>CongresoGUI</name>
 
-  <dependencies>
-    <dependency>
-      <groupId>org.openjfx</groupId>
-      <artifactId>javafx-controls</artifactId>
-      <version>${javafx.version}</version>
-    </dependency>
-  </dependencies>
-  
-  <build>
-    <plugins>
-      <plugin>
-        <groupId>org.openjfx</groupId>
-        <artifactId>javafx-maven-plugin</artifactId>
-        <version>${javafx.maven.plugin.version}</version>
-        <configuration>
-          <mainClass>Gui</mainClass>
-        </configuration>
-      </plugin>
-    </plugins>
-  </build>
-  
+    <modules>
+        <module>GUI</module>
+        <module>Congreso</module>
+    </modules>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-core</artifactId>
+                <version>${spring-core.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <properties>
+        <spring-core.version>5.3.16</spring-core.version>
+    </properties>
+
 </project>
