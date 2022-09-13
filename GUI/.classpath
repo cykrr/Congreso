@@ -10,4 +10,6 @@
   <classpathentry kind="var" path="M2_REPO/org/openjfx/javafx-graphics/17.0.1/javafx-graphics-17.0.1-linux.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/openjfx/javafx-base/17.0.1/javafx-base-17.0.1.jar" sourcepath="M2_REPO/org/openjfx/javafx-base/17.0.1/javafx-base-17.0.1-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/openjfx/javafx-base/17.0.1/javafx-base-17.0.1-linux.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/openjfx/javafx-fxml/17.0.1/javafx-fxml-17.0.1.jar" sourcepath="M2_REPO/org/openjfx/javafx-fxml/17.0.1/javafx-fxml-17.0.1-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/openjfx/javafx-fxml/17.0.1/javafx-fxml-17.0.1-linux.jar"/>
 </classpath>
