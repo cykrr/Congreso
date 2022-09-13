@@ -28,7 +28,7 @@ public class Gui extends Application {
     private void inflar() {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(Gui.class.getResource("/vistas/root.fxml"));
-        System.out.println((Gui.class.getResource("/vistas/root.fxml")));
+        // System.out.println((Gui.class.getResource("/vistas/root.fxml")));
         try {
             root = (VBox)loader.load();
             Scene s = new Scene(root);

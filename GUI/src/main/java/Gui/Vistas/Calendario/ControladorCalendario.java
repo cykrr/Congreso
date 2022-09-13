@@ -1,4 +1,4 @@
-package Gui;
+package Gui.Vistas.Calendario;
 
 import java.net.URL;
 import java.util.ResourceBundle;

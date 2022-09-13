@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import Gui.Vistas.Presentacion.*?>
+
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
@@ -11,12 +13,13 @@
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.skin.DatePickerSkin?>
 <?import javafx.scene.Node?>
-<?import Gui.Calendario?>
+<!-- <?import Gui.Vistas.Calendario?> -->
 <!-- <?import calendario.Calendario?> -->
 
 <VBox
     xmlns="http://javafx.com/javafx" 
-    xmlns:fx="http://javafx.com/fxml">
+    xmlns:fx="http://javafx.com/fxml"
+    >
     <MenuBar>
         <Menu text = "Archivo">
             <MenuItem text="Abrir archivo [Ctrl + O]"/>
@@ -36,8 +39,6 @@
             <MenuItem text="Buscar persona" />
         </Menu>
     </MenuBar>
-    <GridPane id = "grid" fx:id="grid">
-        <Calendario/>
-    </GridPane>
+    <Presentacion/>
 </VBox>
 
