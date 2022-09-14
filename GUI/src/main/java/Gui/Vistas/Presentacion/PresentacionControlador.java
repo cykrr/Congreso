@@ -19,7 +19,7 @@ import Congreso.Util;
 
 public class PresentacionControlador implements Initializable {
 
-    @FXML private ComboBox<String> expositorEntrada;
+    @FXML private ComboBox<Persona> expositorEntrada;
     @FXML private TextField nombreEntrada;
     @FXML private DatePicker fechaEntrada;
     @FXML private Button submit;
@@ -35,9 +35,10 @@ public class PresentacionControlador implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resources) {
         p = new Presentacion();
-        ObservableList<String> items = expositorEntrada.getItems();
-            items.add(e.getNombre());
+        ObservableList<Persona> items = expositorEntrada.getItems();
         for (Persona e : registro.getExpositores()) {
+
+            items.add(e);
         }
     }
 
