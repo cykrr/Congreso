@@ -14,7 +14,6 @@ public class Presentacion {
 	private String descripcion;
 	private Persona expositor;
 	private LocalDate localDate = LocalDate.of(1993,01, 01);
-	private static DateTimeFormatter formater = DateTimeFormatter.ofPattern("dd-MM-YYYY");
 	private LocalTime localTime = LocalTime.of(0, 0);
 	private LinkedList<Persona> asistentes;
 
@@ -49,7 +48,12 @@ public class Presentacion {
 
     public void setFecha(int dia, int mes, int ano) {
         this.localDate = LocalDate.of(ano, mes, dia);
-        this.fecha = formater.format(localDate);
+        this.fecha = Util.dateFormatter.format(localDate);
+    }
+
+    public void setFecha(LocalDate fecha) {
+        this.localDate = fecha;
+        this.fecha = Util.dateFormatter.format(fecha);
     }
     
     public void setHora(String hora) {
@@ -90,6 +94,10 @@ public class Presentacion {
     
     public void setExpositor(Persona expositor) {
     	this.expositor = expositor;
+    }
+
+    public void setNombre(String n)  {
+        this.nombre = n;
     }
     
     public String getNombre() {
