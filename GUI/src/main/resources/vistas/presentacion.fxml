@@ -34,7 +34,6 @@
         <TextField
             fx:id = "nombreEntrada"
             promptText = "Nombre presentación"
-            onAction = "#setName"
             GridPane.columnIndex="1"
             GridPane.rowIndex="1"
             />
@@ -50,7 +49,6 @@
             promptText = "dd-mm-aaaa"
             GridPane.columnIndex="1"
             GridPane.rowIndex="2"
-            onAction = "#setFecha"
             />
 
 
@@ -63,14 +61,8 @@
         <ComboBox
             fx:id = "expositorEntrada"
             promptText = "Expositores"
-            onAction = "#setExpositor"
             GridPane.columnIndex="1"
             GridPane.rowIndex="3"
             />
-
-        <Button fx:id = "submit"
-            text = "Guardar"
-            GridPane.rowIndex = "4">
-        </Button>
     </children>
 </GridPane>
