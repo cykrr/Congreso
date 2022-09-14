@@ -35,6 +35,10 @@
         <Menu text = "Editar">
             <MenuItem text="Crear presentación [Ctrl + p]" />
             <MenuItem text="Crear persona [Ctrl + P]"/>
+            <SeparatorMenuItem/>
+            <MenuItem
+                text="Preferencias"
+                onAction = "#editarPreferencias"/>
         </Menu>
         <Menu text = "Buscar">
             <MenuItem text="Buscar presentación" />
