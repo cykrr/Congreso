@@ -16,17 +16,20 @@ import Congreso.Util;
 
 public class PresentacionControlador implements Initializable {
 
-    @FXML ComboBox<String> expositores;
-    @FXML TextField nombreEntrada;
-    @FXML DatePicker fechaEntrada;
-    @FXML Button submit;
-    Presentacion p;
+    @FXML private ComboBox<String> expositorEntrada;
+    @FXML private TextField nombreEntrada;
+    @FXML private DatePicker fechaEntrada;
+    @FXML private Button submit;
+
+    private List<Persona> expositores;
+    private List<Persona> asistentes;
+    private Presentacion p;
     
     // Persona a crear
     @Override
     public void initialize(URL url, ResourceBundle resources) {
         p = new Presentacion();
-        expositores.getItems().addAll("Hola", "123");
+        expositoresEntrada.getItems().addAll("Hola", "123");
     }
 
     public void setName() {
