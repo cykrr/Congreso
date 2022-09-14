@@ -72,6 +72,7 @@ public class Registro {
 
         String line;
         while ( (line = file.readLine()) != null) {
+            // TODO No debería ser  una lista enlazada
             LinkedList<String> lineArray = CSVTokener.csvArray(new CSVTokener(line));
             if (lineArray.size() != 9) {
                 System.err.println("Error: Se esperaba una linea con " +
@@ -80,7 +81,7 @@ public class Registro {
                 System.exit(1);
             }
 
-// TO-DO constructor ()
+// TODO constructor ()
             Presentacion p = null;
             Persona presentador = null;
             int i = 0;
@@ -126,7 +127,7 @@ public class Registro {
      * registro. 
      * @param p nombre del archivo a guardar */
     public void exportar(String nombre_archivo) {
-
+        //TODO interfaz toCSV()
     }
 
     public Presentacion buscarPresentacion(String nombre) {
