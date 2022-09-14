@@ -6,6 +6,7 @@ import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
@@ -18,6 +19,7 @@ public class PresentacionControlador implements Initializable {
     @FXML ComboBox<String> expositores;
     @FXML TextField nombreEntrada;
     @FXML DatePicker fechaEntrada;
+    @FXML Button submit;
     Presentacion p;
     
     // Persona a crear
