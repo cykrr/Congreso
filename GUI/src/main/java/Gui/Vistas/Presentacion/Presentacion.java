@@ -2,18 +2,29 @@ package Gui.Vistas.Presentacion;
 
 import java.io.IOException;
 
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.layout.GridPane;
 
 public class Presentacion extends GridPane {
+
+    PresentacionControlador controlador;
+
+
     public Presentacion()  {
-        FXMLLoader fxmlLoader = new FXMLLoader();
-        fxmlLoader.setLocation(getClass().getResource(
+        super();
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(
             "/vistas/presentacion.fxml"));
+        controlador = new PresentacionControlador();
+        fxmlLoader.setController(controlador);
+        Node n = null;
+
         try {
-            fxmlLoader.load();
+            n = fxmlLoader.load();
         } catch (IOException exception) {
             throw new RuntimeException(exception);
         }
+        this.getChildren().add(n);
     }
 }
