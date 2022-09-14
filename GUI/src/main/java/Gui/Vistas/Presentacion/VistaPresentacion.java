@@ -7,12 +7,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.layout.GridPane;
 
-public class Presentacion extends GridPane {
+public class VistaPresentacion extends GridPane {
 
     PresentacionControlador controlador;
 
 
-    public Presentacion()  {
+    public VistaPresentacion()  {
         super();
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(
             "/vistas/presentacion.fxml"));
