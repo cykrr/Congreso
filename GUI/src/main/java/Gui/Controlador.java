@@ -1,5 +1,6 @@
 package Gui;
 import java.io.File;
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URL;
@@ -18,6 +19,7 @@ import Gui.Vistas.Presentacion.VistaPresentacion;
 
 import Congreso.Persona;
 import Congreso.Registro;
+import Congreso.Util;
 
 
 public class Controlador implements Initializable {
@@ -67,16 +69,27 @@ public class Controlador implements Initializable {
         System.out.println("Importando");
         FileChooser fc = new FileChooser();
         fc.setTitle("Seleccione el archivo a importar");
-        File file = fc.showOpenDialog(stage);
+        File file;
+        
+        while(true) {
+        	file = fc.showOpenDialog(stage);
 
-        // si el archivo no es CSV.
-        if (!(file.getName().contains("csv"))) {
-            Alert alert = new Alert(AlertType.WARNING);
-            alert.setTitle("Error");
-            alert.setWidth(200);
-            alert.setHeaderText("El archivo debe ser del tipo CSV");
-            alert.showAndWait();
+        	// si no se elige ningún archivo
+        	if(file == null)
+        		return;
+
+            // si el archivo no es CSV.
+            if (!Util.getFileExtension(file).equals("csv")) {
+                Alert alert = new Alert(AlertType.WARNING);
+                alert.setTitle("Error");
+                alert.setWidth(200);
+                alert.setHeaderText("El archivo debe ser del tipo CSV");
+                alert.showAndWait();
+            } else {
+            	break;
+            }
         }
+
         try {
             registro.importar(file.getPath());
         } catch (IOException e) {

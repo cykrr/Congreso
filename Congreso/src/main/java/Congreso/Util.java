@@ -1,4 +1,5 @@
 package Congreso;
+import java.io.File;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalTime;
@@ -36,5 +37,14 @@ public class Util {
 	    }
 	    
 		return true;
+	}
+	
+	public static String getFileExtension(File file) {
+	    String name = file.getName();
+	    int lastIndexOf = name.lastIndexOf(".");
+	    if (lastIndexOf == -1) {
+	        return "";
+	    }
+	    return name.substring(lastIndexOf+1);
 	}
 }
