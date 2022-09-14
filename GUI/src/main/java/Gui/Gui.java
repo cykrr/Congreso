@@ -19,6 +19,13 @@ public class Gui extends Application {
     private     Ajustes     ajustes;
     private     Controlador controlador;
     
+    /* Punto de inicio del GUI
+     * @see javafx.application.Application#start(javafx.stage.Stage)
+     * Carga los ajustes del usuario usando la clase Ajustes.
+     * Crea un controlador que se encargará de configurar la ventana
+     * con la información correspondiente. Guarda el Stage en el
+     * controlador y carga el archivo raíz (res/vistas/root.xml)
+     */
     @Override
     public void start(Stage s) {
         System.out.println("Congreso GUI");
@@ -36,6 +43,9 @@ public class Gui extends Application {
         inflar();
     }
 
+    /** 
+     *
+     */
     private void inflar() {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(Gui.class.getResource("/vistas/root.fxml"));
