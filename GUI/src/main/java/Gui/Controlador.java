@@ -40,7 +40,7 @@ public class Controlador implements Initializable {
         Stage dialog = new Stage();
         dialog.initModality(Modality.APPLICATION_MODAL);
         dialog.initOwner(this.stage);
-        Scene dialogScene = new Scene(vp, 300, 200);
+        Scene dialogScene = new Scene(vp);
         dialog.setScene(dialogScene);
         dialog.show();
     }
@@ -55,7 +55,6 @@ public class Controlador implements Initializable {
         if (!(file.getName().contains("csv"))) {
             Alert alert = new Alert(AlertType.WARNING);
             alert.setTitle("Error");
-            alert.setHeight(200);
             alert.setWidth(200);
             alert.setHeaderText("El archivo debe ser del tipo CSV");
             alert.showAndWait();
