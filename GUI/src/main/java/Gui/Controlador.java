@@ -6,12 +6,19 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.FileChooser;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+
+import Gui.Vistas.Presentacion.VistaPresentacion;
+
+import Congreso.Persona;
 import Congreso.Registro;
+
 
 public class Controlador implements Initializable {
 
@@ -28,8 +35,14 @@ public class Controlador implements Initializable {
     }
 
     public void crearPresentacion() {
-        // Presentacion p = cp.obtener();
-
+        Persona retorno = null;
+        VistaPresentacion vp = new VistaPresentacion();
+        Stage dialog = new Stage();
+        dialog.initModality(Modality.APPLICATION_MODAL);
+        dialog.initOwner(this.stage);
+        Scene dialogScene = new Scene(vp, 300, 200);
+        dialog.setScene(dialogScene);
+        dialog.show();
     }
 
     public void importar() {
