@@ -26,6 +26,8 @@ public class Gui extends Application {
         System.out.println("Cargando ajustes");
         this.ajustes = new Ajustes(); 
 
+        System.out.println("Ajustes guardados: "+ ajustes.carpeta);
+
 
         this.stage = s;
         inflar();
