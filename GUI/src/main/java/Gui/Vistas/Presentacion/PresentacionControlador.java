@@ -8,12 +8,12 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 
 public class PresentacionControlador implements Initializable {
+
     @FXML ComboBox<String> expositores;
 
-    
     @Override
     public void initialize(URL url, ResourceBundle resources) {
-
+        expositores.getItems().addAll("Hola", "123");
     }
      
 }
