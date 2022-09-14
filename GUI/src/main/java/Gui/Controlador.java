@@ -36,7 +36,7 @@ public class Controlador implements Initializable {
 
     public void crearPresentacion() {
         Persona retorno = null;
-        VistaPresentacion vp = new VistaPresentacion();
+        VistaPresentacion vp = new VistaPresentacion(registro.getExpositores(), registro.getAsistentes());
         Stage dialog = new Stage();
         dialog.initModality(Modality.APPLICATION_MODAL);
         dialog.initOwner(this.stage);
