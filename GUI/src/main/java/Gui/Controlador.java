@@ -59,6 +59,7 @@ public class Controlador implements Initializable {
     public void crearPresentacion() {
         Presentacion retorno = null;
         // TODO : Proteger expositores y asistentes de modificación
+        // TODO : Añadir hora y duración de la presentación
         VBox root = new VBox();
         Scene dialogScene = new Scene(root);
         Stage stage = new Stage();
