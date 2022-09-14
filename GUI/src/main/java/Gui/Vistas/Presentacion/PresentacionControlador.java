@@ -52,5 +52,10 @@ public class PresentacionControlador implements Initializable {
         p.setFecha(fecha);
         System.out.println("Estableciendo fecha de la presentación: " + Util.dateFormatter.format(fecha));
     }
+
+    public void setExpositor() {
+        System.out.println("Estableciendo expositor: " + expositorEntrada.getValue());
+        p.setExpositor(expositorEntrada.getValue());
+    }
      
 }

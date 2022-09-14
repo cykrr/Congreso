@@ -63,6 +63,7 @@
         <ComboBox
             fx:id = "expositorEntrada"
             promptText = "Expositores"
+            onAction = "#setExpositor"
             GridPane.columnIndex="1"
             GridPane.rowIndex="3"
             />
