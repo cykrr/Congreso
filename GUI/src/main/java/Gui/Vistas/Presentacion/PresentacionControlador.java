@@ -14,6 +14,7 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import Congreso.Persona;
 import Congreso.Presentacion;
+import Congreso.Registro;
 import Congreso.Util;
 
 public class PresentacionControlador implements Initializable {
@@ -22,14 +23,12 @@ public class PresentacionControlador implements Initializable {
     @FXML private TextField nombreEntrada;
     @FXML private DatePicker fechaEntrada;
     @FXML private Button submit;
+    private Registro registro;
 
-    private List<Persona> expositores;
-    private List<Persona> asistentes;
     private Presentacion p;
 
-    public PresentacionControlador(List<Persona> expositores, List<Persona> asistentes) {
-        this.expositores = expositores;
-        this.asistentes = asistentes;
+    public PresentacionControlador(Registro r) {
+        this.registro = r;
     }
     
     // Persona a crear
@@ -37,8 +36,8 @@ public class PresentacionControlador implements Initializable {
     public void initialize(URL url, ResourceBundle resources) {
         p = new Presentacion();
         ObservableList<String> items = expositorEntrada.getItems();
-        for (Persona e : expositores) {
             items.add(e.getNombre());
+        for (Persona e : registro.getExpositores()) {
         }
     }
 
