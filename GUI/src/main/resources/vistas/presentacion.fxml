@@ -2,45 +2,44 @@
 <?import javafx.geometry.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.control.*?>
-<GridPane 
-    hgap="10"
-    vgap="10"
 
+<GridPane 
     xmlns="http://javafx.com/javafx" 
     xmlns:fx="http://javafx.com/fxml"
 
+    hgap="10"
+    vgap="10"
     >
+    <children>
 
-    <Text text = "hola"/>
+        <Text text = "Nueva presentación"
+            GridPane.columnIndex="0"
+            GridPane.rowIndex="0"
+            />
 
-    <Text text = "Nueva presentación"
-        GridPane.columnIndex="0"
-        GridPane.rowIndex="0"
-        />
+        <Label
+            text = "Nombre (*): "
+            GridPane.columnIndex="0"
+            GridPane.rowIndex="1"
+            />
 
-    <Label
-        text = "Nombre (*): "
-        GridPane.columnIndex="0"
-        GridPane.rowIndex="1"
-        />
+        <TextField
+            text = "Nombre presentación"
+            GridPane.columnIndex="1"
+            GridPane.rowIndex="1"
+            />
 
-    <TextField
-        text = "Nombre presentación"
-        GridPane.columnIndex="1"
-        GridPane.rowIndex="1"
-        />
+        <Label
+            text = "Expositor: "
+            GridPane.columnIndex="0"
+            GridPane.rowIndex="2"
+            />
 
-    <Label
-        text = "Expositor: "
-        GridPane.columnIndex="0"
-        GridPane.rowIndex="2"
-        />
-
-    <ComboBox
-        promptText = "Expositores"
-        GridPane.columnIndex="1"
-        GridPane.rowIndex="2"
-        />
-
-
+        <ComboBox
+            fx:id = "expositores"
+            promptText = "Expositores"
+            GridPane.columnIndex="1"
+            GridPane.rowIndex="2"
+            />
+    </children>
 </GridPane>
