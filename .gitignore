@@ -1,10 +1,6 @@
-
-.metadata
-jdt.ls-java-project
-bin/*.class
-/bin/
-
-target/maven-status/maven-compiler-plugin/compile/default-compile
-Congreso/target
-GUI/target
-CLI/target
+**/.classpath
+**/.project
+**/.settings
+**/.metadata
+**/bin
+**/target
