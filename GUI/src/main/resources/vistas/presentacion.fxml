@@ -10,6 +10,13 @@
     hgap="10"
     vgap="10"
     >
+     <GridPane.margin>
+         <Insets 
+             left = "10"
+             right="10"
+             top = "10"
+             bottom = "10"/>
+    </GridPane.margin>
     <children>
 
         <Text text = "Nueva presentación"
@@ -24,22 +31,35 @@
             />
 
         <TextField
-            text = "Nombre presentación"
+            promptText = "Nombre presentación"
             GridPane.columnIndex="1"
             GridPane.rowIndex="1"
             />
 
         <Label
-            text = "Expositor: "
+            text = "Fecha: "
             GridPane.columnIndex="0"
             GridPane.rowIndex="2"
+            />
+
+        <DatePicker
+            promptText = "dd-mm-aaaa"
+            GridPane.columnIndex="1"
+            GridPane.rowIndex="2"
+            />
+
+
+        <Label
+            text = "Expositor: "
+            GridPane.columnIndex="0"
+            GridPane.rowIndex="3"
             />
 
         <ComboBox
             fx:id = "expositores"
             promptText = "Expositores"
             GridPane.columnIndex="1"
-            GridPane.rowIndex="2"
+            GridPane.rowIndex="3"
             />
     </children>
 </GridPane>
