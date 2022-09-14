@@ -79,17 +79,17 @@ public class Presentacion {
 
     public void setDia(int dia) {
         this.localDate = LocalDate.of(localDate.getYear(), localDate.getMonth(), dia);
-        this.fecha = formater.format(localDate);
+        this.fecha = Util.dateFormatter.format(localDate);
     }
 
     public void setMes(int mes) {
         this.localDate = LocalDate.of(localDate.getYear(), mes, localDate.getDayOfMonth());
-        this.fecha = formater.format(localDate);
+        this.fecha = Util.dateFormatter.format(localDate);
     }
 
     public void setAno(int ano) {
         this.localDate = LocalDate.of(ano, localDate.getMonth(), localDate.getDayOfMonth());
-        this.fecha = formater.format(localDate);
+        this.fecha = Util.dateFormatter.format(localDate);
     }
     
     public void setExpositor(Persona expositor) {
