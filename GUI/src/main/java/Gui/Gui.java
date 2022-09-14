@@ -16,8 +16,8 @@ public class Gui extends Application {
 
     private     Stage       stage;
     private     VBox        root;
-    private     Registro    r;
     private     Ajustes     ajustes;
+    private     Controlador controlador;
     
     @Override
     public void start(Stage s) {
@@ -25,6 +25,9 @@ public class Gui extends Application {
 
         System.out.println("Cargando ajustes");
         this.ajustes = new Ajustes(); 
+
+        System.out.println("Inicializando controlador");
+        this.controlador = new Controlador(s);
 
         System.out.println("Ajustes guardados: "+ ajustes.carpeta);
 
@@ -36,6 +39,7 @@ public class Gui extends Application {
     private void inflar() {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(Gui.class.getResource("/vistas/root.fxml"));
+        loader.setController(controlador);
         // System.out.println((Gui.class.getResource("/vistas/root.fxml")));
         try {
             root = (VBox)loader.load();

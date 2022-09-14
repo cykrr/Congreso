@@ -25,7 +25,9 @@
             <MenuItem text="Abrir archivo [Ctrl + O]"/>
             <MenuItem text="Guardar Archivo [Ctrl + S]"/>
             <SeparatorMenuItem/>
-            <MenuItem text="Importar Archivo [Ctrl + I]"/>
+            <MenuItem 
+                text="Importar Archivo [Ctrl + I]"
+                onAction="#importar"/>
             <MenuItem text="Exportar [Ctrl + E ]"/>
             <SeparatorMenuItem/>
             <MenuItem text="Salir [Ctrl + W]"/>
