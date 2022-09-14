@@ -9,18 +9,24 @@ import javafx.scene.Scene;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+
 
 public class Gui extends Application {
 
     private     Stage       stage;
     private     VBox        root;
     private     Registro    r;
+    private     Ajustes     ajustes;
     
     @Override
     public void start(Stage s) {
         System.out.println("Congreso GUI");
+
+        System.out.println("Cargando ajustes");
+        this.ajustes = new Ajustes(); 
+
+
         this.stage = s;
         inflar();
     }
