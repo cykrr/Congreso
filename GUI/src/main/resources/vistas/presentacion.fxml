@@ -61,7 +61,7 @@
             />
 
         <ComboBox
-            fx:id = "expositoresEntrada"
+            fx:id = "expositorEntrada"
             promptText = "Expositores"
             GridPane.columnIndex="1"
             GridPane.rowIndex="3"

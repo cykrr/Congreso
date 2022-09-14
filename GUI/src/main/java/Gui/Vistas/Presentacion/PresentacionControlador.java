@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -35,7 +36,10 @@ public class PresentacionControlador implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resources) {
         p = new Presentacion();
-        expositoresEntrada.getItems().addAll("Hola", "123");
+        ObservableList<String> items = expositorEntrada.getItems();
+        for (Persona e : expositores) {
+            items.add(e.getNombre());
+        }
     }
 
     public void setName() {

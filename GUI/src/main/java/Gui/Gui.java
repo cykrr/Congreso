@@ -16,7 +16,6 @@ public class Gui extends Application {
 
     private     Stage       stage;
     private     VBox        root;
-    private     Ajustes     ajustes;
     private     Controlador controlador;
     
     /* Punto de inicio del GUI
@@ -30,14 +29,8 @@ public class Gui extends Application {
     public void start(Stage s) {
         System.out.println("Congreso GUI");
 
-        System.out.println("Cargando ajustes");
-        this.ajustes = new Ajustes(); 
-
         System.out.println("Inicializando controlador");
         this.controlador = new Controlador(s);
-
-        System.out.println("Ajustes guardados: "+ ajustes.carpeta);
-
 
         this.stage = s;
         inflar();

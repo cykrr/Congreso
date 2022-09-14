@@ -22,20 +22,38 @@ import Congreso.Registro;
 
 public class Controlador implements Initializable {
 
-    Registro    registro;
-    Stage       stage;
+    private     Registro    registro;
+    private     Stage       stage;
+    private     Ajustes     ajustes;
 
     public Controlador(Stage s) {
-        this.stage = s; 
+        System.out.println("Cargando ajustes");
+        this.ajustes = new Ajustes(); 
+
+        System.out.println("Ajustes guardados: "+ ajustes.carpeta);
+
+
+        System.out.println("Inicializando registro");
         this.registro = new Registro();
+
+        System.out.println("Cargando datos: ");
+        try {
+            registro.importar(ajustes.carpeta + "/Presentaciones.csv");
+        } catch(IOException e) {
+            e.printStackTrace();
+            System.err.println("Error: revise su configuración");
+        }
+
+
+        this.stage = s; 
     }
 
     public void initialize(URL url, ResourceBundle resources) {
-
     }
 
     public void crearPresentacion() {
         Persona retorno = null;
+        // TODO : Proteger expositores y asistentes de modificación
         VistaPresentacion vp = new VistaPresentacion(registro.getExpositores(), registro.getAsistentes());
         Stage dialog = new Stage();
         dialog.initModality(Modality.APPLICATION_MODAL);

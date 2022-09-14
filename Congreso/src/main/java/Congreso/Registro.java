@@ -1,7 +1,9 @@
 package Congreso;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 import java.io.FileReader;
 import java.io.BufferedReader;
@@ -15,9 +17,12 @@ import java.io.IOException;
  * por distintos atributos. */
 public class Registro {
 
-    private HashMap<String, Presentacion> nombre_presentaciones;
-    private HashMap<Integer, Presentacion> id_presentaciones;
-    private HashMap<String, Persona> personas;
+    private Map<String, Presentacion> nombre_presentaciones;
+    private Map<Integer, Presentacion> id_presentaciones;
+    private Map<String, Persona> nombre_personas;
+
+    private List<Persona> lista_personas;
+    private List<Presentacion> lista_presentaciones;
 
     /* Cuenta de las presentaciones importadas */
     private int count = 0;
@@ -25,7 +30,9 @@ public class Registro {
     public Registro() {
         nombre_presentaciones = new HashMap<String, Presentacion>();
         id_presentaciones = new HashMap<Integer, Presentacion>();
-        personas = new HashMap<String, Persona>();
+        nombre_personas = new HashMap<String, Persona>();
+        lista_personas = new LinkedList<Persona>();
+        lista_presentaciones = new LinkedList<Presentacion>();
     }
 
     /** Añade una presentación al registro, se encarga de revisar
@@ -42,15 +49,17 @@ public class Registro {
             p.mostrar();
         } else {
             this.nombre_presentaciones.put(p.getNombre(),p);
+            this.lista_presentaciones.add(p);
         }
 
     }
 
     public void insertarPersona(Persona p) {
         // Persona busqueda_id = id_personas.get(p.getId());
-        Persona busqueda_nombre = personas.get(p.getNombre());
+        Persona busqueda_nombre = nombre_personas.get(p.getNombre());
         if (busqueda_nombre == null) {
-            this.personas.put(p.getNombre(), p);
+            this.nombre_personas.put(p.getNombre(), p);
+            this.lista_personas.add(p);
         }
     }
 
@@ -112,12 +121,16 @@ public class Registro {
                         p.setDescripcion(s);
                         break;
                     case 8:
-                        p.setAsistentes(s, personas);
+                        // TODO : Pasar mapa inmodificable
+                        p.setAsistentes(s, Collections.unmodifiableMap(nombre_personas));
                         break;
                 }
                 i++;
             }
                 p.setExpositor(presentador);
+                if (!presentador.getNombre().equals("")) {
+                    this.insertarPersona(presentador);
+                }
                 this.insertarPresentacion(p);
         }
         file.close();
@@ -145,6 +158,16 @@ public class Registro {
             }
         }
         System.out.println("---");
+    }
+
+    // TODO : Diferenciar asistentes y expositores
+    public List<Persona> getExpositores() {
+        return Collections.unmodifiableList(this.lista_personas);
+    }
+
+    // TODO : STUB
+    public List<Persona> getAsistentes() {
+        return getExpositores();
     }
 }
 

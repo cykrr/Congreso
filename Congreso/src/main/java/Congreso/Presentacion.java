@@ -4,6 +4,7 @@ import java.time.format.*;
 import java.time.LocalDate;
 
 import java.util.LinkedList;
+import java.util.Map;
 import java.util.HashMap;
 
 public class Presentacion {
@@ -108,7 +109,7 @@ public class Presentacion {
 		// return this.ID;
 	// }
     
-    public void setAsistentes(String asistentes, HashMap<String, Persona>personas) {
+    public void setAsistentes(String asistentes, Map<String,Persona>personas) {
         if (asistentes.charAt(0) != '\"') {
             System.err.println("Error: setAsistentes() Esperado string" +
                     "que inicia con '\"'.");
