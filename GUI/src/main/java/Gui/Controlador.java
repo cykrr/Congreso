@@ -9,8 +9,10 @@ import java.util.ResourceBundle;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -18,6 +20,7 @@ import javafx.stage.Stage;
 import Gui.Vistas.Presentacion.VistaPresentacion;
 
 import Congreso.Persona;
+import Congreso.Presentacion;
 import Congreso.Registro;
 import Congreso.Util;
 
@@ -54,15 +57,31 @@ public class Controlador implements Initializable {
     }
 
     public void crearPresentacion() {
-        Persona retorno = null;
+        Presentacion retorno = null;
         // TODO : Proteger expositores y asistentes de modificación
+        VBox root = new VBox();
+        Scene dialogScene = new Scene(root);
+        Stage stage = new Stage();
+
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.initOwner(this.stage);
+        stage.setScene(dialogScene);
+
         VistaPresentacion vp = new VistaPresentacion(registro);
-        Stage dialog = new Stage();
-        dialog.initModality(Modality.APPLICATION_MODAL);
-        dialog.initOwner(this.stage);
-        Scene dialogScene = new Scene(vp);
-        dialog.setScene(dialogScene);
-        dialog.show();
+
+        Button b = new Button("Guardar");
+        b.setOnAction(e-> {
+            vp.guardar();
+            stage.close();
+        });
+
+        root.getChildren().add(vp);
+        root.getChildren().add(b);
+
+        stage.showAndWait();
+        retorno = vp.getValue();
+        if (retorno != null)
+            registro.insertarPresentacion(retorno);
     }
 
     public void importar() {
