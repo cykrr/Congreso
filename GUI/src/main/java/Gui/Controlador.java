@@ -27,6 +27,11 @@ public class Controlador implements Initializable {
 
     }
 
+    public void crearPresentacion() {
+        // Presentacion p = cp.obtener();
+
+    }
+
     public void importar() {
         System.out.println("Importando");
         FileChooser fc = new FileChooser();
