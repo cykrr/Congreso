@@ -53,4 +53,10 @@ public class Controlador implements Initializable {
             System.err.println("Error abriendo archivo");
         }
     }
+
+    public void editarPreferencias() {
+        TextInputDialog dialog = new TextInputDialog("Preferencias");
+        dialog.setTitle("Preferencias");
+        dialog.setContentText("Please enter your name:");
+    }
 }

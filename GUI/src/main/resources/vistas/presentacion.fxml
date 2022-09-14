@@ -31,7 +31,9 @@
             />
 
         <TextField
+            fx:id = "nombreEntrada"
             promptText = "Nombre presentación"
+            onAction = "#setName"
             GridPane.columnIndex="1"
             GridPane.rowIndex="1"
             />
@@ -43,9 +45,11 @@
             />
 
         <DatePicker
+            fx:id = "fechaEntrada"
             promptText = "dd-mm-aaaa"
             GridPane.columnIndex="1"
             GridPane.rowIndex="2"
+            onAction = "#setFecha"
             />
 
 
