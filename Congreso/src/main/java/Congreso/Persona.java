@@ -31,4 +31,8 @@ public class Persona {
 		System.out.println("Teléfono: " + fono);
 		System.out.println("Edad: " + edad);
 	}
+
+    @Override public String toString() {
+        return this.nombre;
+    }
 }
