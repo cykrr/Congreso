@@ -47,7 +47,7 @@ public class PopUp {
             if (child instanceof PopAble)
                 ((PopAble)child).guardar();
             else 
-                throw new RuntimeException("child no implementa la interfaz: Guardar");
+                throw new RuntimeException("child no implementa la interfaz: PopAble");
             stage.close();
         });
 
@@ -64,6 +64,6 @@ public class PopUp {
             retorno = ((PopAble)child).getValue();
         return retorno;
         } else 
-            throw new RuntimeException("child no implementa la interfaz: Guardar");
+            throw new RuntimeException("child no implementa la interfaz: PopAble");
     }
 }
