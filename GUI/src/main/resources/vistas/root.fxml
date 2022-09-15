@@ -30,17 +30,17 @@
             <MenuItem 
                 text="Importar Archivo [Ctrl + I]"
                 onAction="#importar"/>
-            <MenuItem text="Exportar [Ctrl + E ]"/>
+            <MenuItem text="Exportar [Ctrl + E]"/>
             <SeparatorMenuItem/>
             <MenuItem text="Salir [Ctrl + W]"/>
         </Menu>
         <Menu text = "Editar">
-
             <MenuItem 
                 text="Crear presentación [Ctrl + p]"
                 onAction = "#crearPresentacion"/>
-
-            <MenuItem text="Crear persona [Ctrl + P]"/>
+            <MenuItem 
+                text="Crear expositor [Ctrl + A]"
+                onAction = "#crearExpositor"/>
             <SeparatorMenuItem/>
             <MenuItem
                 text="Preferencias"

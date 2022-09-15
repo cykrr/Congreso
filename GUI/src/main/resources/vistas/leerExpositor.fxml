@@ -1,0 +1,119 @@
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+
+<GridPane 
+    xmlns="http://javafx.com/javafx" 
+    xmlns:fx="http://javafx.com/fxml"
+
+    hgap="2"
+    vgap="5"
+    >
+     <GridPane.margin>
+         <Insets 
+             top = "10"
+             left = "10"
+             right="10"
+             bottom="15"
+             />
+    </GridPane.margin>
+    <children>
+
+        <Text text = "Nuevo expositor"
+            GridPane.columnIndex="0"
+            GridPane.rowIndex="0"
+            />
+
+        <Label
+            text = "Nombre (*): "
+            GridPane.columnIndex="0"
+            GridPane.rowIndex="1"
+            />
+
+        <TextField
+            fx:id = "tfNombre"
+            promptText = "Nombre expositor"
+            GridPane.columnIndex="0"
+            GridPane.rowIndex="2"
+            />
+
+        <Label
+            text = "Descripción: "
+            GridPane.columnIndex="0"
+            GridPane.rowIndex="3"
+            />
+
+        <TextField
+            fx:id = "tfDescripcion"
+            promptText = "Descripción"
+            GridPane.columnIndex="0"
+            GridPane.rowIndex="4"
+            />
+
+        <Label
+            text = "Edad: "
+            GridPane.columnIndex="0"
+            GridPane.rowIndex="5"
+            />
+
+        <TextField
+            fx:id = "tfEdad"
+            promptText = "Descripción"
+            GridPane.columnIndex="0"
+            GridPane.rowIndex="6"
+            />
+            
+        <Label
+            text = "Nacionalidad: "
+            GridPane.columnIndex="0"
+            GridPane.rowIndex="7"
+            />
+
+        <TextField
+            fx:id = "tfNacionalidad"
+            promptText = "Nacionalidad"
+            GridPane.columnIndex="0"
+            GridPane.rowIndex="8"
+            />
+            
+        <Label
+            text = "Teléfono: "
+            GridPane.columnIndex="0"
+            GridPane.rowIndex="9"
+            />
+
+        <TextField
+            fx:id = "tfFono"
+            promptText = "Teléfono"
+            GridPane.columnIndex="0"
+            GridPane.rowIndex="10"
+            />
+            
+        <Label
+            text = "Correo electrónico: "
+            GridPane.columnIndex="0"
+            GridPane.rowIndex="11"
+            />
+
+        <TextField
+            fx:id = "tfCorreo"
+            promptText = "Correo electrónico"
+            GridPane.columnIndex="0"
+            GridPane.rowIndex="12"
+            />
+            
+        <Label
+            text = "Ocupación: "
+            GridPane.columnIndex="0"
+            GridPane.rowIndex="13"
+            />
+
+        <TextField
+            fx:id = "tfOcupacion"
+            promptText = "Ocupación"
+            GridPane.columnIndex="0"
+            GridPane.rowIndex="14"
+            />
+    </children>
+</GridPane>

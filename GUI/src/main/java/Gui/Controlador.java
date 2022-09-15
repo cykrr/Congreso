@@ -17,6 +17,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import Gui.Vistas.PopUp;
+import Gui.Vistas.LeerExpositor.LeerExpositor;
 import Gui.Vistas.LeerPresentacion.LeerPresentacion;
 
 import Congreso.Persona;
@@ -75,6 +76,19 @@ public class Controlador implements Initializable {
         if (retorno != null)
             registro.insertarPresentacion(retorno);
         System.out.println(retorno);
+    }
+    
+    /* Crea un nuevo expositor por medio
+     * de un PopUp y lo añade al registro
+     */
+    public void crearExpositor() {
+        Persona expositor = null;
+        
+        LeerExpositor le = new LeerExpositor();
+        PopUp popup = new PopUp(stage, le);
+        expositor = (Persona) popup.showDialog();
+        if(expositor != null)
+        	registro.insertarPersona(expositor);
     }
 
     /* Importa un archivo por medio de un
