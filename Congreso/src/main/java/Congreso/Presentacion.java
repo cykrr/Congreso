@@ -177,4 +177,9 @@ public class Presentacion {
     	
     	System.out.println("Total de asistentes: " + cantidadAsistentes);
     }
+
+    @Override
+    public String toString() {
+        return this.nombre;
+    }
 }
