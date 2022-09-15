@@ -49,6 +49,6 @@
             <MenuItem text="Buscar persona" />
         </Menu>
     </MenuBar>
-    <!-- <Presentacion/> -->
+    <ListaPresentaciones/>
 </VBox>
 
