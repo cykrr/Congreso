@@ -16,7 +16,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-
+import Gui.Vistas.PopUp;
 import Gui.Vistas.Presentacion.VistaPresentacion;
 
 import Congreso.Persona;
@@ -60,29 +60,13 @@ public class Controlador implements Initializable {
         Presentacion retorno = null;
         // TODO : Proteger expositores y asistentes de modificación
         // TODO : Añadir hora y duración de la presentación
-        VBox root = new VBox();
-        Scene dialogScene = new Scene(root);
-        Stage stage = new Stage();
-
-        stage.initModality(Modality.APPLICATION_MODAL);
-        stage.initOwner(this.stage);
-        stage.setScene(dialogScene);
 
         VistaPresentacion vp = new VistaPresentacion(registro);
-
-        Button b = new Button("Guardar");
-        b.setOnAction(e-> {
-            vp.guardar();
-            stage.close();
-        });
-
-        root.getChildren().add(vp);
-        root.getChildren().add(b);
-
-        stage.showAndWait();
-        retorno = vp.getValue();
+        PopUp popup = new PopUp(stage, vp);
+        retorno = (Presentacion)popup.showDialog();
         if (retorno != null)
             registro.insertarPresentacion(retorno);
+        System.out.println(retorno);
     }
 
     public void importar() {
@@ -90,7 +74,6 @@ public class Controlador implements Initializable {
         FileChooser fc = new FileChooser();
         fc.setTitle("Seleccione el archivo a importar");
         File file;
-        
         while(true) {
         	file = fc.showOpenDialog(stage);
 

@@ -22,10 +22,12 @@ import Congreso.Presentacion;
 import Congreso.Registro;
 import Congreso.Util;
 
+import Gui.Vistas.PopUp;
+
 /* (no-Javadoc) La vista presentación depende de la lista de expositores y la lista de asistentes 
  * valores que debería recibir como parámetros. */
 
-public class VistaPresentacion extends GridPane implements Initializable {
+public class VistaPresentacion extends GridPane implements Initializable, PopUp.PopAble {
 
 
     @FXML private ComboBox<Persona> expositorEntrada;
@@ -70,10 +72,12 @@ public class VistaPresentacion extends GridPane implements Initializable {
 
 
 
-    public Presentacion getValue() {
+    @Override
+    public Object getValue() {
         return this.p;
     }
 
+    @Override
     public void guardar() {
         p = null;
         String nombre = nombreEntrada.getText();
