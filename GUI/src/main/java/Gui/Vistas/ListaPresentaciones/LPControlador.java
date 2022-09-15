@@ -24,7 +24,7 @@ public class LPControlador implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         for (Presentacion p : registro.getPresentaciones()) {
-            VBox n = new VistaPresentacion(p);
+            // VBox n = new Presentacion(p);
 
         }
     }

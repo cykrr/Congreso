@@ -1,4 +1,4 @@
-package Gui.Vistas.Presentacion;
+package Gui.Vistas.LeerPresentacion;
 
 import java.io.IOException;
 import java.net.URL;
@@ -27,7 +27,7 @@ import Gui.Vistas.PopUp;
 /* (no-Javadoc) La vista presentación depende de la lista de expositores y la lista de asistentes 
  * valores que debería recibir como parámetros. */
 
-public class VistaPresentacion extends GridPane implements Initializable, PopUp.PopAble {
+public class LeerPresentacion extends GridPane implements Initializable, PopUp.PopAble {
 
 
     @FXML private ComboBox<Persona> expositorEntrada;
@@ -43,10 +43,10 @@ public class VistaPresentacion extends GridPane implements Initializable, PopUp.
      * @param asistentes InmutableList 
      */
 
-    public VistaPresentacion(Registro r)  {
+    public LeerPresentacion(Registro r)  {
         super();
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(
-            "/vistas/presentacion.fxml"));
+            "/vistas/leerPresentacion.fxml"));
         fxmlLoader.setController(this);
         this.registro = r;
         Node n = null;

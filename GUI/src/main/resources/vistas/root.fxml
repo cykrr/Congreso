@@ -14,6 +14,7 @@
 <?import javafx.scene.control.skin.DatePickerSkin?>
 <?import javafx.scene.Node?>
 <!-- <?import Gui.Vistas.Calendario?> -->
+<?import Gui.Vistas.ListaPresentaciones.*?>
 <!-- <?import calendario.Calendario?> -->
 
 <VBox

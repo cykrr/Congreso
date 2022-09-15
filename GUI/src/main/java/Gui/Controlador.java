@@ -17,7 +17,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import Gui.Vistas.PopUp;
-import Gui.Vistas.Presentacion.VistaPresentacion;
+import Gui.Vistas.LeerPresentacion.LeerPresentacion;
 
 import Congreso.Persona;
 import Congreso.Presentacion;
@@ -61,8 +61,8 @@ public class Controlador implements Initializable {
         // TODO : Proteger expositores y asistentes de modificación
         // TODO : Añadir hora y duración de la presentación
 
-        VistaPresentacion vp = new VistaPresentacion(registro);
-        PopUp popup = new PopUp(stage, vp);
+        LeerPresentacion lp = new LeerPresentacion(registro);
+        PopUp popup = new PopUp(stage, lp);
         retorno = (Presentacion)popup.showDialog();
         if (retorno != null)
             registro.insertarPresentacion(retorno);
