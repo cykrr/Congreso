@@ -98,7 +98,7 @@ public class Controlador implements Initializable {
         	if(file == null)
         		return;
 
-            // si el archivo no es CSV.
+            // TODO : Mejor protección ante archivos no csv
             if (!Util.getFileExtension(file).equals("csv")) {
                 Alert alert = new Alert(AlertType.WARNING);
                 alert.setTitle("Error");
