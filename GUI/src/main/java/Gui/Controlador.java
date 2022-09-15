@@ -102,7 +102,6 @@ public class Controlador implements Initializable {
             if (!Util.getFileExtension(file).equals("csv")) {
                 Alert alert = new Alert(AlertType.WARNING);
                 alert.setTitle("Error");
-                alert.setWidth(200);
                 alert.setHeaderText("El archivo debe ser del tipo CSV");
                 alert.showAndWait();
             } else {
