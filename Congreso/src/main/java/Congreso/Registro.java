@@ -169,5 +169,9 @@ public class Registro {
     public List<Persona> getAsistentes() {
         return getExpositores();
     }
+
+    public List<Presentacion> getPresentaciones() {
+        return Collections.unmodifiableList(this.lista_presentaciones);
+    }
 }
 
