@@ -17,10 +17,14 @@ public class LPControlador implements Initializable {
     private Scene scene;
     private VBox root;
 
+    /* Controlador de la vista ListaPresentaciones
+     * @param r Registro del programa */
     public LPControlador(Registro r) {
         this.registro = r;
     }
 
+    /* Añadir Vistas Presentaciones a
+     * ListaPresentaciones */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         for (Presentacion p : registro.getPresentaciones()) {

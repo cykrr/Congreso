@@ -22,6 +22,7 @@
     xmlns:fx="http://javafx.com/fxml"
     >
     <MenuBar>
+        <!-- TODO : Configurar teclas  -->
         <Menu text = "Archivo">
             <MenuItem text="Abrir archivo [Ctrl + O]"/>
             <MenuItem text="Guardar Archivo [Ctrl + S]"/>

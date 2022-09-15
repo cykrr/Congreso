@@ -9,13 +9,22 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-/* @param <T> Tipo de retorno
+/* Clase para mostrar una vista como PopUp
+ * Limitada a la entrada de datos.
  */
 public class PopUp {
 
+    /* Funciones que deben implementas
+     * las vistas para leer datos */
     public interface PopAble {
+        /* Guarda los campos en 
+         * la variable de retorno */
         void guardar();
+        /* Devuelve el retorno */
         Object getValue();
+
+        /* El usuario deberá Castear Object 
+         * a su Tipo de dato esperado*/
     }
 
     private VBox root;
@@ -24,9 +33,15 @@ public class PopUp {
     private Node child;
 
 
-    /* @param s Stage padre
+    /* Constructor de la Clase PopUp
+     *
+     * @param s Stage padre
      * @param c Hijo raíz del popup
      *
+     * Prepara el stage (ventana) y
+     * la escena con un botón 
+     * para guardar la información
+     * y cerrar la ventana
      */
     public PopUp(Stage s, GridPane c) {
         this.child = c;
@@ -56,6 +71,11 @@ public class PopUp {
     }
 
 
+    /* Muestra el díalogo hasta que se 
+     * presione el boton de guardar
+     * En dicho momento se retornará
+     * la referencia al objeto creado
+     */
     public Object showDialog()  {
         stage.setScene(dialog);
         stage.showAndWait();

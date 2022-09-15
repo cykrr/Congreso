@@ -25,12 +25,15 @@ import Congreso.Registro;
 import Congreso.Util;
 
 
+/* Inicializa la clase raíz de la ventana */
 public class Controlador implements Initializable {
 
-    private     Registro    registro;
-    private     Stage       stage;
-    private     Ajustes     ajustes;
+    
+    private     Registro    registro; // Referencia a la base de datos del programa
+    private     Stage       stage;    // Ventana principal
+    private     Ajustes     ajustes;  // Ajustes del programa
 
+    // Constructor se ejecuta antes de inflar
     public Controlador(Stage s) {
         System.out.println("Cargando ajustes");
         this.ajustes = new Ajustes(); 
@@ -53,9 +56,14 @@ public class Controlador implements Initializable {
         this.stage = s; 
     }
 
+    
+    // initialize se ejecuta luego de inflar.
     public void initialize(URL url, ResourceBundle resources) {
     }
 
+    /* Crea una nueva presentación por medio
+     * de un PopUp y la añade al registro
+     */
     public void crearPresentacion() {
         Presentacion retorno = null;
         // TODO : Proteger expositores y asistentes de modificación
@@ -69,6 +77,8 @@ public class Controlador implements Initializable {
         System.out.println(retorno);
     }
 
+    /* Importa un archivo por medio de un
+     * file picker */
     public void importar() {
         System.out.println("Importando");
         FileChooser fc = new FileChooser();
@@ -99,6 +109,9 @@ public class Controlador implements Initializable {
         }
     }
 
+    // TODO : Añadir más ajustes
+    // TODO : Guardar de manera persistente la carpeta
+    // TODO : Revisar si la carpeta existe antes de guardar
     public void editarPreferencias() {
         TextInputDialog dialog = new TextInputDialog("Preferencias");
         dialog.setTitle("Preferencias");

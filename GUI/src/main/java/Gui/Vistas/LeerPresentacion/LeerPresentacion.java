@@ -30,19 +30,22 @@ import Gui.Vistas.PopUp;
 public class LeerPresentacion extends GridPane implements Initializable, PopUp.PopAble {
 
 
+    // Elementos XML
     @FXML private ComboBox<Persona> expositorEntrada;
     @FXML private TextField nombreEntrada;
     @FXML private DatePicker fechaEntrada;
     @FXML private Button submit;
+
+    // Referencia al registro principal
     private Registro registro;
 
+    // Valor de retorno
     private Presentacion p = null;
 
 
-    /* @param expositores InmutableList 
-     * @param asistentes InmutableList 
-     */
-
+    /* Constructor de la vista
+     * Requiere el registro para utilizarlo
+     * en la inicialización */
     public LeerPresentacion(Registro r)  {
         super();
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(
