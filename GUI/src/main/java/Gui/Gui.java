@@ -56,6 +56,8 @@ public class Gui extends Application {
             root = (VBox)loader.load();
             Scene s = new Scene(root);
             stage.setScene(s);
+            stage.setWidth(1280);
+            stage.setHeight(720);
             stage.show();
         } catch(IOException e) {
             e.printStackTrace();
