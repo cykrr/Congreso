@@ -100,10 +100,6 @@ public class Presentacion {
     public void setNombre(String n)  {
         this.nombre = n;
     }
-    
-    public String getNombre() {
-    	return nombre;
-    }
 
 	// public int getId() {
 		// return this.ID;
@@ -181,5 +177,37 @@ public class Presentacion {
     @Override
     public String toString() {
         return this.nombre;
+    }
+    
+    public String getNombre() {
+    	return nombre;
+    }
+    
+    public Persona getExpositor() {
+    	return expositor;
+    }
+    
+    public int getDia() {
+    	return localDate.getDayOfMonth();
+    }
+    
+    public int getMes() {
+    	return localDate.getMonthValue();
+    }
+    
+    public int getAño() {
+    	return localDate.getYear();
+    }
+    
+    public int getDuracion() {
+    	return duracion;
+    }
+    
+    public String getDescripcion() {
+    	return descripcion;
+    }
+    
+    public LinkedList<Persona> getAsistentes() {
+    	return asistentes;
     }
 }
