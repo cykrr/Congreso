@@ -15,7 +15,7 @@ public class Ajustes {
 
     Preferences prefs;
 
-    final static String carpetaStringDefault = "./cache/";
+    final static String carpetaStringDefault = "../data";
     String carpeta = null;
 
     public Ajustes() {
