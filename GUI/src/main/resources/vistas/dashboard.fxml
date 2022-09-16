@@ -39,23 +39,47 @@
             <Font size="20.0" />
         </font>
     </Text>
-    <HBox prefHeight="100.0" prefWidth="200.0">
+    <HBox prefHeight="150.0" prefWidth="250.0">
         <children>
-            <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #f3f3f3; -fx-border-radius: 20; -fx-border-width: 1; -fx-border-color: #000000;">
+            <VBox prefHeight="200.0" prefWidth="200.0" styleClass = "box">
                 <HBox.margin>
                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                 </HBox.margin>
-            </Pane>
-            <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #f3f3f3; -fx-border-radius: 20; -fx-border-width: 1; -fx-border-color: #000000;">
+                <Text text = "Presentaciones" >
+                    <font>
+                        <Font size = "20"/>
+                    </font>
+                    <VBox.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                    </VBox.margin>
+                </Text>
+            </VBox>
+            <VBox prefHeight="200.0" prefWidth="200.0" styleClass = "box">
                 <HBox.margin>
                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                 </HBox.margin>
-            </Pane>
-            <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #f3f3f3; -fx-border-radius: 20; -fx-border-width: 1; -fx-border-color: #000000;">
+                <Text text = "Expositores" >
+                    <font>
+                        <Font size = "20"/>
+                    </font>
+                    <VBox.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                    </VBox.margin>
+                </Text>
+            </VBox>
+            <VBox prefHeight="200.0" prefWidth="200.0" styleClass = "box">
                 <HBox.margin>
                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                 </HBox.margin>
-            </Pane>
+                <Text text = "Asistentes" >
+                    <font>
+                        <Font size = "20"/>
+                    </font>
+                    <VBox.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                    </VBox.margin>
+                </Text>
+            </VBox>
         </children>
     </HBox>
     <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Presentaciones añadidas">
@@ -67,9 +91,9 @@
         </VBox.margin>
     </Text>
 
-    <VBox style="-fx-border-radius: 30; -fx-border-width: 1; -fx-border-color: #202020;" VBox.vgrow="ALWAYS">
+    <VBox styleClass = "box" VBox.vgrow="ALWAYS">
         <children>
-            <ScrollPane opacity="0.55" style="-fx-border-radius: 30; -fx-border-width: 1;" styleClass="noborder-scroll-pane" VBox.vgrow="ALWAYS" />
+            <ScrollPane opacity="0.55" style="-fx-background-color: transparent;" styleClass="edge-to-edge noborder-scroll-pane" VBox.vgrow="ALWAYS" />
         </children>
         <VBox.margin>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
