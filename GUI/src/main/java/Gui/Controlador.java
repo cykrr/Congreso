@@ -27,7 +27,7 @@ import Congreso.Registro;
 import Congreso.Util;
 
 
-/* Inicializa la clase raíz de la ventana */
+/** @brief Inicializa la clase raíz de la ventana */
 public class Controlador implements Initializable {
 
     
@@ -35,7 +35,7 @@ public class Controlador implements Initializable {
     private     Stage       stage;    // Ventana principal
     private     Ajustes     ajustes;  // Ajustes del programa
 
-    // Constructor se ejecuta antes de inflar
+    /** @brief Constructor se ejecuta antes de leer xml*/
     public Controlador(Stage s, Registro r) {
         System.out.println("Cargando ajustes");
         this.ajustes = new Ajustes(); 
@@ -53,12 +53,17 @@ public class Controlador implements Initializable {
     }
 
     
-    // initialize se ejecuta luego de inflar.
+    /** @brief Método que se ejecuta luego de leer xml */
     public void initialize(URL url, ResourceBundle resources) {
     }
 
-    /* Crea una nueva presentación por medio
-     * de un PopUp y la añade al registro
+    /** @brief genera un Popup para crear presentación
+     *
+     * Crea una nueva presentación por medio
+     * de un PopUp y la añade al registro.
+     *
+     * Es posible invocar esta función desde la barra menú de la
+     * aplicación
      */
     public void crearPresentacion() {
         Presentacion retorno = null;
@@ -75,8 +80,9 @@ public class Controlador implements Initializable {
         System.out.println(retorno);
     }
     
-    /* Crea un nuevo expositor por medio
-     * de un PopUp y lo añade al registro
+    /** @brief Crea un nuevo expositor
+     *
+     * por medio de un PopUp y lo añade al registro
      */
     public void crearExpositor() {
         Expositor expositor = null;
