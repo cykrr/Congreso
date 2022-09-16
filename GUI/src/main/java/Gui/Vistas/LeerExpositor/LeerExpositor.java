@@ -11,7 +11,7 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
-
+import Congreso.Expositor;
 import Congreso.Persona;
 
 import Gui.Vistas.PopUp;
@@ -19,11 +19,11 @@ import Gui.Vistas.PopUp;
 public class LeerExpositor extends GridPane implements Initializable, PopUp.PopAble {
 
     // Elementos XML
-    @FXML private TextField tfNombre, tfEdad, tfFono;
+    @FXML private TextField tfNombre, tfEdad, tfFono, tfDescripcion, tfNacionalidad, tfOcupacion;
     @FXML private Button submit;
 
     // Valor de retorno
-    private Persona expositor = null;
+    private Expositor expositor = null;
 
     public LeerExpositor()  {
         super();
@@ -52,9 +52,12 @@ public class LeerExpositor extends GridPane implements Initializable, PopUp.PopA
     @Override
     public void guardar() {
         String nombre = tfNombre.getText();
+        String descripcion = tfDescripcion.getText();
+        String nacionalidad = tfNacionalidad.getText();
+        String ocupacion = tfOcupacion.getText();
         int edad = Integer.parseInt(tfEdad.getText());
         int fono = Integer.parseInt(tfFono.getText());
 
-        expositor = new Persona(nombre, edad, fono);
+        expositor = new Expositor(nombre, edad, fono, descripcion, nacionalidad, ocupacion);
     }
 }

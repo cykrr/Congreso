@@ -4,8 +4,11 @@ public class Expositor extends Persona {
 	private String nacionalidad;
 	private String ocupacion;
 	
-    public Expositor(String nombre, int edad, int fono){
+    public Expositor(String nombre, int edad, int fono, String descripcion, String nacionalidad, String ocupacion){
     	super(nombre, edad, fono);
+    	this.descripcion = descripcion;
+    	this.nacionalidad = nacionalidad;
+    	this.ocupacion = ocupacion;
     }
 
 	public String getDescripcion() {
