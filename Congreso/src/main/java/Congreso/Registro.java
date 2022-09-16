@@ -102,7 +102,7 @@ public class Registro {
                         p = new Presentacion(s);
                         break;
                     case 1:
-                        presentador = new Persona(s, 0, 0);
+                        presentador = new Persona(s, 0, 0, "");
                         break;
                     case 2:
                         p.setDia(Integer.parseInt(s));

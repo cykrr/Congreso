@@ -1,23 +1,13 @@
 package Congreso;
 public class Expositor extends Persona {
-	private String descripcion;
 	private String nacionalidad;
 	private String ocupacion;
 	
-    public Expositor(String nombre, int edad, int fono, String descripcion, String nacionalidad, String ocupacion){
-    	super(nombre, edad, fono);
-    	this.descripcion = descripcion;
+    public Expositor(String nombre, int edad, int fono, String correo, String nacionalidad, String ocupacion) {
+    	super(nombre, edad, fono, correo);
     	this.nacionalidad = nacionalidad;
     	this.ocupacion = ocupacion;
     }
-
-	public String getDescripcion() {
-		return descripcion;
-	}
-
-	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
-	}
 
 	public String getNacionalidad() {
 		return nacionalidad;
