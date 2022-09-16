@@ -50,6 +50,7 @@ public class PopUp {
 
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.initOwner(s);
+        stage.setResizable(false);
 
         Button b = new Button("Guardar");
 
@@ -85,5 +86,9 @@ public class PopUp {
         return retorno;
         } else 
             throw new RuntimeException("child no implementa la interfaz: PopAble");
+    }
+    
+    public void setTitle(String title) {
+    	stage.setTitle(title);
     }
 }

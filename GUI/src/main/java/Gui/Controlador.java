@@ -72,6 +72,8 @@ public class Controlador implements Initializable {
 
         LeerPresentacion lp = new LeerPresentacion(registro);
         PopUp popup = new PopUp(stage, lp);
+        popup.setTitle("Crear presentación");
+        
         retorno = (Presentacion)popup.showDialog();
         if (retorno != null)
             registro.insertarPresentacion(retorno);
@@ -86,6 +88,8 @@ public class Controlador implements Initializable {
         
         LeerExpositor le = new LeerExpositor();
         PopUp popup = new PopUp(stage, le);
+        popup.setTitle("Crear expositor");
+        
         expositor = (Persona) popup.showDialog();
         if(expositor != null)
         	registro.insertarPersona(expositor);
