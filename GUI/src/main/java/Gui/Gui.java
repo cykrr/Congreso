@@ -3,9 +3,10 @@ package Gui;
 import java.io.IOException;
 
 import Congreso.Registro;
-
+import Gui.Vistas.Dashboard.Dashboard;
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -17,6 +18,7 @@ public class Gui extends Application {
     private     Stage       stage;
     private     VBox        root;
     private     Controlador controlador;
+    private     Registro    registro;
     
     /* Punto de inicio del GUI
      * @see javafx.application.Application#start(javafx.stage.Stage)
@@ -29,11 +31,16 @@ public class Gui extends Application {
     public void start(Stage s) {
         System.out.println("Congreso GUI");
 
+        this.registro = new Registro();
+
         System.out.println("Inicializando controlador");
-        this.controlador = new Controlador(s);
+        this.controlador = new Controlador(s, registro);
 
         this.stage = s;
         inflar();
+        Dashboard d = new Dashboard(registro);
+        this.root.getChildren().add(d);
+        VBox.setVgrow(d, Priority.ALWAYS);
     }
 
     /** 

@@ -17,6 +17,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import Gui.Vistas.PopUp;
+import Gui.Vistas.Dashboard.Dashboard;
 import Gui.Vistas.LeerExpositor.LeerExpositor;
 import Gui.Vistas.LeerPresentacion.LeerPresentacion;
 
@@ -35,7 +36,7 @@ public class Controlador implements Initializable {
     private     Ajustes     ajustes;  // Ajustes del programa
 
     // Constructor se ejecuta antes de inflar
-    public Controlador(Stage s) {
+    public Controlador(Stage s, Registro r) {
         System.out.println("Cargando ajustes");
         this.ajustes = new Ajustes(); 
 
@@ -43,7 +44,7 @@ public class Controlador implements Initializable {
 
 
         System.out.println("Inicializando registro");
-        this.registro = new Registro();
+        this.registro = r;
 
         System.out.println("Cargando datos: ");
         try {
