@@ -19,7 +19,7 @@ import Gui.Vistas.PopUp;
 public class LeerExpositor extends GridPane implements Initializable, PopUp.PopAble {
 
     // Elementos XML
-    @FXML private TextField tfNombre, tfEdad, tfFono, tfDescripcion, tfNacionalidad, tfOcupacion;
+    @FXML private TextField tfNombre, tfEdad, tfFono, tfCorreo, tfNacionalidad, tfOcupacion;
     @FXML private Button submit;
 
     // Valor de retorno
@@ -52,7 +52,7 @@ public class LeerExpositor extends GridPane implements Initializable, PopUp.PopA
     @Override
     public void guardar() {
         String nombre = tfNombre.getText();
-        String descripcion = tfDescripcion.getText();
+        String correo = tfCorreo.getText();
         String nacionalidad = tfNacionalidad.getText();
         String ocupacion = tfOcupacion.getText();
         Integer edad = null;
@@ -70,6 +70,6 @@ public class LeerExpositor extends GridPane implements Initializable, PopUp.PopA
         }
 
 
-        expositor = new Expositor(nombre, edad, fono, descripcion, nacionalidad, ocupacion);
+        expositor = new Expositor(nombre, edad, fono, correo, nacionalidad, ocupacion);
     }
 }
