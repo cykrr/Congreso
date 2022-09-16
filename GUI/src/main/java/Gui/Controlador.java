@@ -47,15 +47,9 @@ public class Controlador implements Initializable {
         this.registro = r;
 
         System.out.println("Cargando datos: ");
-        try {
-            registro.importar(ajustes.carpeta + "/Presentaciones.csv");
-        } catch(IOException e) {
-            e.printStackTrace();
-            System.err.println("Error: revise su configuración");
-        }
-
-
-        this.stage = s; 
+        registro.importar(ajustes.carpeta + "/Presentaciones.csv",
+        				  ajustes.carpeta + "/Expositores.csv",
+        				  ajustes.carpeta + "/Asistentes.csv");
     }
 
     
@@ -121,11 +115,14 @@ public class Controlador implements Initializable {
             }
         }
 
+        
+        /*
         try {
             registro.importar(file.getPath());
         } catch (IOException e) {
             System.err.println("Error abriendo archivo");
         }
+        */
     }
     
     public void exportar() {

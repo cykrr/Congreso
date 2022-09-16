@@ -23,8 +23,9 @@ public class Registro {
     private Map<Integer, Presentacion> id_presentaciones;
     private Map<String, Persona> nombre_personas;
 
-    private List<Persona> lista_personas;
     private List<Presentacion> lista_presentaciones;
+    private List<Expositor> lista_expositores;
+    private List<Persona> lista_asistentes;
 
     /* Cuenta de las presentaciones importadas */
     private int count = 0;
@@ -33,8 +34,10 @@ public class Registro {
         nombre_presentaciones = new HashMap<String, Presentacion>();
         id_presentaciones = new HashMap<Integer, Presentacion>();
         nombre_personas = new HashMap<String, Persona>();
-        lista_personas = new LinkedList<Persona>();
+        
         lista_presentaciones = new LinkedList<Presentacion>();
+        lista_expositores = new LinkedList<Expositor>();
+        lista_asistentes = new LinkedList<Persona>();
     }
 
     /** Añade una presentación al registro, se encarga de revisar
@@ -61,78 +64,134 @@ public class Registro {
         Persona busqueda_nombre = nombre_personas.get(p.getNombre());
         if (busqueda_nombre == null) {
             this.nombre_personas.put(p.getNombre(), p);
-            this.lista_personas.add(p);
+            this.lista_asistentes.add(p);
         }
     }
-
-    /* Dado un nombre de archivo abre e infla los contenidos del
-     * registro. Se asegura de no importar información
-     * inconsistente, como por ejemplo errores de síntax o
-     * elementos faltantes. 
-     * @param p nombre del archivo a abrir */
-    public void importar(String nombre_archivo) throws FileNotFoundException, IOException {
-        BufferedReader file = null;
-        try {
-        		file = new BufferedReader (
-                new FileReader(nombre_archivo)
-                );
-        }catch(FileNotFoundException f) {
-                System.err.println("Error: el archivo no existe");
-                return;
-        }
-
-        String line;
-        while ( (line = file.readLine()) != null) {
-            // TODO No debería ser  una lista enlazada
-            LinkedList<String> lineArray = CSVTokener.csvArray(new CSVTokener(line));
-            if (lineArray.size() != 8) {
-                System.err.println("Error: Se esperaba una linea con " +
-                        "8 campos. Recibidos: " +lineArray.size());
-                System.out.println(lineArray.getFirst());
-                System.exit(1);
-            }
-
-// TODO constructor ()
-            Presentacion p = null;
-            Persona presentador = null;
-            int i = 0;
-            for (String s: lineArray)  {
-                switch (i) {
-                    case 0:
-                        p = new Presentacion(s);
-                        break;
-                    case 1:
-                        presentador = new Persona(s, 0, 0, "");
-                        break;
-                    case 2:
-                        p.setDia(Integer.parseInt(s));
-                        break;
-                    case 3:
-                        p.setMes(Integer.parseInt(s));
-                        break;
-                    case 4:
-                        p.setAno(Integer.parseInt(s));
-                        break;
-                    case 5:
-                        p.setDuracion(Integer.parseInt(s));
-                        break;
-                    case 6:
-                        p.setDescripcion(s);
-                        break;
-                    case 7:
-                        // TODO : Pasar mapa inmodificable
-                        p.setAsistentes(s, Collections.unmodifiableMap(nombre_personas));
-                        break;
-                }
-                i++;
-            }
-                p.setExpositor(presentador);
-                if (!presentador.getNombre().equals("")) {
-                    this.insertarPersona(presentador);
-                }
-                this.insertarPresentacion(p);
-        }
-        file.close();
+    
+    public Expositor buscarExpositor(String nombre) {
+    	for(int i = 0; i < lista_expositores.size(); i++) {
+    		Expositor expositor = lista_expositores.get(i);
+    		if(expositor.getNombre().equals(nombre))
+    			return expositor;
+    	}
+    	return null;
+    }
+    
+    public Persona buscarAsistente(String nombre) {
+    	for(int i = 0; i < lista_asistentes.size(); i++) {
+    		Persona persona = lista_asistentes.get(i);
+    		if(persona.getNombre().equals(nombre))
+    			return persona;
+    	}
+    	return null;
+    }
+    
+	public void importar(String csvPresentaciones, String csvExpositores, String csvAsistentes) {
+		importarExpositores(csvExpositores);
+		importarAsistentes(csvAsistentes);
+		importarPresentaciones(csvPresentaciones);
+	}
+    
+    private void importarPresentaciones(String nombreArchivo) {
+    	BufferedReader br;
+    	
+    	try {
+			br = new BufferedReader(new FileReader(nombreArchivo));
+	    	
+	        String line;
+			while((line = br.readLine()) != null) {
+			    LinkedList<String> lineArray = CSVTokener.csvArray(new CSVTokener(line));
+			    if (lineArray.size() != 8)
+			    	continue; // Cantidad de campos por linea no coincide
+			            
+			    Presentacion p = new Presentacion();
+			    p.setNombre(lineArray.get(0));
+			    
+			    Expositor expositor = buscarExpositor(lineArray.get(1));
+			    if(expositor == null)
+			    	continue; // Expositor no existe
+			    p.setExpositor(expositor);
+			    
+			    p.setDia(Integer.parseInt(lineArray.get(2)));
+			    p.setMes(Integer.parseInt(lineArray.get(3)));
+			    p.setAno(Integer.parseInt(lineArray.get(4)));
+			    p.setDuracion(Integer.parseInt(lineArray.get(5)));
+			    p.setDescripcion(lineArray.get(6));
+			    
+			    String asistentes = lineArray.get(7);
+			    asistentes = asistentes.substring(1, asistentes.length() - 1);
+			    LinkedList<String> listaAsistentes = CSVTokener.csvArray(new CSVTokener(asistentes));
+			    
+			    for(int i = 0; i < listaAsistentes.size(); i++) {
+				    Persona asistente = buscarAsistente(listaAsistentes.get(i));
+				    if(asistente == null)
+				    	continue; // Asistente no existe
+			    	p.agregarAsistente(asistente);
+			    }
+			    
+			    lista_presentaciones.add(p);
+			}
+		        
+		    br.close();
+    	} catch(IOException e) {
+    		e.printStackTrace();
+    	}
+    }
+    
+    private void importarExpositores(String nombreArchivo) {
+    	BufferedReader br;
+    	
+    	try {
+			br = new BufferedReader(new FileReader(nombreArchivo));
+	    	
+	        String line;
+			while((line = br.readLine()) != null) {
+			    LinkedList<String> lineArray = CSVTokener.csvArray(new CSVTokener(line));
+			    if (lineArray.size() != 6)
+			    	break; // Cantidad de campos por linea no coincide
+			            
+			    String nombre = lineArray.get(0);
+			    int edad = Integer.parseInt(lineArray.get(1));
+			    int fono = Integer.parseInt(lineArray.get(2));
+			    String correo = lineArray.get(3);
+			    String pais = lineArray.get(4);
+			    String ocupacion = lineArray.get(5);
+			    
+			    Expositor expositor = new Expositor(nombre, edad, fono, correo, pais, ocupacion);
+			    lista_expositores.add(expositor);
+			}
+		        
+		    br.close();
+    	} catch(IOException e) {
+    		e.printStackTrace();
+    	}
+    }
+    
+    private void importarAsistentes(String nombreArchivo) {
+    	BufferedReader br;
+    	
+    	try {
+			br = new BufferedReader(new FileReader(nombreArchivo));
+	    	
+	        String line;
+			while((line = br.readLine()) != null) {
+			    LinkedList<String> lineArray = CSVTokener.csvArray(new CSVTokener(line));
+			    if (lineArray.size() != 4)
+			    	break; // Cantidad de campos por linea no coincide
+			            
+			    String nombre = lineArray.get(0);
+			    int edad = Integer.parseInt(lineArray.get(1));
+			    int fono = Integer.parseInt(lineArray.get(2));
+			    String correo = lineArray.get(3);
+			    
+			    Persona asistente = new Persona(nombre, edad, fono, correo);
+			    lista_asistentes.add(asistente);
+			}
+		        
+		    br.close();
+    	} catch(IOException e) {
+    		e.printStackTrace();
+    	}	
     }
 
     /* Guarda los contenidos del registro */
@@ -180,12 +239,10 @@ public class Registro {
         System.out.println("---");
     }
 
-    // TODO : Diferenciar asistentes y expositores
     public List<Persona> getExpositores() {
-        return Collections.unmodifiableList(this.lista_personas);
+        return Collections.unmodifiableList(this.lista_expositores);
     }
 
-    // TODO : STUB
     public List<Persona> getAsistentes() {
         return getExpositores();
     }
