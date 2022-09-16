@@ -10,25 +10,30 @@
 
 <HBox xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="71.0" prefWidth="573.0" style="-fx-background-color: #f3f3f3; -fx-border-color: #f3f3f3; -fx-border-radius: 20; -fx-background-radius: 20; -fx-border-width: 1;">
+       <HBox nodeOrientation = "LEFT_TO_RIGHT"
+           maxHeight="-Infinity"
+           maxWidth="-Infinity"
+           minHeight="-Infinity"
+           minWidth="-Infinity"
+           style="-fx-background-color: #dfdfdf; -fx-border-color: #dfdfdf; -fx-border-radius: 20; -fx-background-radius: 20; -fx-border-width: 1;">
          <HBox.margin>
-            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+            <Insets bottom="10.0" left="10.0" right="0" top="10.0" />
          </HBox.margin>
          <children>
-            <ImageView fitHeight="43.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="21.5" fitWidth="14.5" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../icons/lupa.png" />
                </image>
                <HBox.margin>
-                  <Insets bottom="5.0" left="20.0" right="5.0" top="20.0" />
+                  <Insets bottom="0.0" left="20.0" right="5.0" top="15.0" />
                </HBox.margin>
             </ImageView>
-            <TextField style="-fx-text-box-border: transparent; -fx-background-color: transparent;" text="XD" HBox.hgrow="ALWAYS">
+            <TextField promptText  = "Buscar" style="-fx-text-box-border: transparent; -fx-background-color: transparent;" HBox.hgrow="ALWAYS">
                <HBox.margin>
-                  <Insets bottom="10.0" left="10.0" right="10.0" top="20.0" />
+                  <Insets bottom="10.0" left="2.5" right="10.0" top="10.0" />
                </HBox.margin>
                <font>
-                  <Font size="24.0" />
+                  <Font size="16.0" />
                </font>
             </TextField>
          </children>
