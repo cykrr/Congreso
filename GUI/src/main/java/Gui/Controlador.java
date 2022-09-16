@@ -20,7 +20,7 @@ import Gui.Vistas.PopUp;
 import Gui.Vistas.Dashboard.Dashboard;
 import Gui.Vistas.LeerExpositor.LeerExpositor;
 import Gui.Vistas.LeerPresentacion.LeerPresentacion;
-
+import Congreso.Expositor;
 import Congreso.Persona;
 import Congreso.Presentacion;
 import Congreso.Registro;
@@ -79,15 +79,15 @@ public class Controlador implements Initializable {
      * de un PopUp y lo añade al registro
      */
     public void crearExpositor() {
-        Persona expositor = null;
+        Expositor expositor = null;
         
         LeerExpositor le = new LeerExpositor();
         PopUp popup = new PopUp(stage, le);
         popup.setTitle("Crear expositor");
         
-        expositor = (Persona) popup.showDialog();
+        expositor = (Expositor) popup.showDialog();
         if(expositor != null)
-        	registro.insertarPersona(expositor);
+        	registro.insertarExpositor(expositor);
     }
 
     /* Importa un archivo por medio de un

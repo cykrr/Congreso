@@ -9,8 +9,6 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 
 
@@ -19,26 +17,22 @@ import java.io.IOException;
  * runtime: Mapas para rápido acceso a las presentaciones
  * por distintos atributos. */
 public class Registro {
+    private Map<String, Presentacion> mapaPresentaciones;
+    private Map<String, Expositor> mapaExpositores;
+    private Map<String, Persona> mapaAsistentes;
 
-    private Map<String, Presentacion> nombre_presentaciones;
-    private Map<Integer, Presentacion> id_presentaciones;
-    private Map<String, Persona> nombre_personas;
-
-    private List<Presentacion> lista_presentaciones;
-    private List<Expositor> lista_expositores;
-    private List<Persona> lista_asistentes;
-
-    /* Cuenta de las presentaciones importadas */
-    private int count = 0;
+    private List<Presentacion> listaPresentaciones;
+    private List<Expositor> listaExpositores;
+    private List<Persona> listaAsistentes;
 
     public Registro() {
-        nombre_presentaciones = new HashMap<String, Presentacion>();
-        id_presentaciones = new HashMap<Integer, Presentacion>();
-        nombre_personas = new HashMap<String, Persona>();
+        mapaPresentaciones = new HashMap<String, Presentacion>();
+        mapaExpositores = new HashMap<String, Expositor>();
+        mapaAsistentes = new HashMap<String, Persona>();
         
-        lista_presentaciones = new LinkedList<Presentacion>();
-        lista_expositores = new LinkedList<Expositor>();
-        lista_asistentes = new LinkedList<Persona>();
+        listaPresentaciones = new LinkedList<Presentacion>();
+        listaExpositores = new LinkedList<Expositor>();
+        listaAsistentes = new LinkedList<Persona>();
     }
 
     /** Añade una presentación al registro, se encarga de revisar
@@ -48,43 +42,39 @@ public class Registro {
      * @param p presentación a ser añadida
      * */
     public void insertarPresentacion(Presentacion p) {
-        Presentacion busqueda_nombre;
-        busqueda_nombre = nombre_presentaciones.get(p.getNombre());
-        if (busqueda_nombre != null) {
-            System.err.println("ADVERTENCIA: La presentación ya existe");    
-            p.mostrar();
-        } else {
-            this.nombre_presentaciones.put(p.getNombre(),p);
-            this.lista_presentaciones.add(p);
+        Presentacion busqueda = buscarPresentacion(p.getNombre());
+        if (busqueda == null) {
+            mapaPresentaciones.put(p.getNombre(), p);
+            listaPresentaciones.add(p);
         }
-
     }
 
-    public void insertarPersona(Persona p) {
-        // Persona busqueda_id = id_personas.get(p.getId());
-        Persona busqueda_nombre = nombre_personas.get(p.getNombre());
-        if (busqueda_nombre == null) {
-            this.nombre_personas.put(p.getNombre(), p);
-            this.lista_asistentes.add(p);
+    public void insertarExpositor(Expositor e) {
+        Expositor busqueda = buscarExpositor(e.getNombre());
+        if (busqueda == null) {
+            mapaExpositores.put(e.getNombre(), e);
+            listaExpositores.add(e);
         }
+    }
+    
+    public void insertarAsistente(Persona a) {
+        Persona busqueda = buscarAsistente(a.getNombre());
+        if (busqueda == null) {
+            mapaAsistentes.put(a.getNombre(), a);
+            listaAsistentes.add(a);
+        }
+    }
+   
+	public Presentacion buscarPresentacion(String nombre) {
+        return mapaPresentaciones.get(nombre);
     }
     
     public Expositor buscarExpositor(String nombre) {
-    	for(int i = 0; i < lista_expositores.size(); i++) {
-    		Expositor expositor = lista_expositores.get(i);
-    		if(expositor.getNombre().equals(nombre))
-    			return expositor;
-    	}
-    	return null;
+    	return mapaExpositores.get(nombre);
     }
     
     public Persona buscarAsistente(String nombre) {
-    	for(int i = 0; i < lista_asistentes.size(); i++) {
-    		Persona persona = lista_asistentes.get(i);
-    		if(persona.getNombre().equals(nombre))
-    			return persona;
-    	}
-    	return null;
+    	return mapaAsistentes.get(nombre);
     }
     
 	public void importar(String csvPresentaciones, String csvExpositores, String csvAsistentes) {
@@ -128,7 +118,7 @@ public class Registro {
 			    	p.agregarAsistente(asistente);
 			    }
 			    
-			    lista_presentaciones.add(p);
+			    insertarPresentacion(p);
 			}
 		        
 		    br.close();
@@ -155,7 +145,7 @@ public class Registro {
 			    String ocupacion = lineArray.get(5);
 			    
 			    Expositor expositor = new Expositor(nombre, edad, fono, correo, pais, ocupacion);
-			    lista_expositores.add(expositor);
+			    insertarExpositor(expositor);
 			}
 		        
 		    br.close();
@@ -180,7 +170,7 @@ public class Registro {
 			    String correo = lineArray.get(3);
 			    
 			    Persona asistente = new Persona(nombre, edad, fono, correo);
-			    lista_asistentes.add(asistente);
+			    insertarAsistente(asistente);
 			}
 		        
 		    br.close();
@@ -199,8 +189,8 @@ public class Registro {
     private void exportarPresentaciones(String nombreArchivo) {
     	try {
 	        BufferedWriter bw = new BufferedWriter(new FileWriter(nombreArchivo));
-	        for(int i = 0; i < lista_presentaciones.size(); i++) {
-	        	Presentacion p = lista_presentaciones.get(i);
+	        for(int i = 0; i < listaPresentaciones.size(); i++) {
+	        	Presentacion p = listaPresentaciones.get(i);
 	        	bw.write(p.getNombre() + ";");
 	        	bw.write(p.getExpositor().getNombre() + ";");
 	        	bw.write(p.getDia() + ";");
@@ -230,8 +220,8 @@ public class Registro {
 	private void exportarExpositores(String nombreArchivo) {
     	try {
     		BufferedWriter bw = new BufferedWriter(new FileWriter(nombreArchivo));
-	        for(int i = 0; i < lista_expositores.size(); i++) {
-	        	Expositor expositor = lista_expositores.get(i);
+	        for(int i = 0; i < listaExpositores.size(); i++) {
+	        	Expositor expositor = listaExpositores.get(i);
 	        	bw.write(expositor.getNombre() + ";");
 	        	bw.write(expositor.getEdad() + ";");
 	        	bw.write(expositor.getFono() + ";");
@@ -250,8 +240,8 @@ public class Registro {
 	private void exportarAsistentes(String nombreArchivo) {
     	try {
     		BufferedWriter bw = new BufferedWriter(new FileWriter(nombreArchivo));
-	        for(int i = 0; i < lista_asistentes.size(); i++) {
-	        	Persona asistente = lista_asistentes.get(i);
+	        for(int i = 0; i < listaAsistentes.size(); i++) {
+	        	Persona asistente = listaAsistentes.get(i);
 	        	bw.write(asistente.getNombre() + ";");
 	        	bw.write(asistente.getEdad() + ";");
 	        	bw.write(asistente.getFono() + ";");
@@ -265,16 +255,12 @@ public class Registro {
 		}
 	}
 
-	public Presentacion buscarPresentacion(String nombre) {
-        return nombre_presentaciones.get(nombre);
-    }
-
     public void mostrarPresentaciones() throws IOException {
-        if (nombre_presentaciones.size() == 0)
+        if (mapaPresentaciones.size() == 0)
         	System.out.println("No se encontraron " + "presentaciones");
         else {
             System.out.println("Mostrando presentaciones:\n---");
-            for (Map.Entry<String, Presentacion> p: nombre_presentaciones.entrySet()) {
+            for (Map.Entry<String, Presentacion> p: mapaPresentaciones.entrySet()) {
                 p.getValue().mostrar();
             	System.out.print("\n");
             }
@@ -283,7 +269,7 @@ public class Registro {
     }
 
     public List<Persona> getExpositores() {
-        return Collections.unmodifiableList(this.lista_expositores);
+        return Collections.unmodifiableList(this.listaExpositores);
     }
 
     public List<Persona> getAsistentes() {
@@ -291,7 +277,7 @@ public class Registro {
     }
 
     public List<Presentacion> getPresentaciones() {
-        return Collections.unmodifiableList(this.lista_presentaciones);
+        return Collections.unmodifiableList(this.listaPresentaciones);
     }
 }
 
