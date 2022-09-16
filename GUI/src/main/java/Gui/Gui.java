@@ -41,6 +41,7 @@ public class Gui extends Application {
         Dashboard d = new Dashboard(registro);
         this.root.getChildren().add(d);
         VBox.setVgrow(d, Priority.ALWAYS);
+        d.getStylesheets().add("/styles.css");
     }
 
     /** 
