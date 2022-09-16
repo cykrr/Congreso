@@ -85,9 +85,9 @@ public class Registro {
         while ( (line = file.readLine()) != null) {
             // TODO No debería ser  una lista enlazada
             LinkedList<String> lineArray = CSVTokener.csvArray(new CSVTokener(line));
-            if (lineArray.size() != 9) {
+            if (lineArray.size() != 8) {
                 System.err.println("Error: Se esperaba una linea con " +
-                        "9 campos. Recibidos: " +lineArray.size());
+                        "8 campos. Recibidos: " +lineArray.size());
                 System.out.println(lineArray.getFirst());
                 System.exit(1);
             }
@@ -105,24 +105,21 @@ public class Registro {
                         presentador = new Persona(s, 0, 0);
                         break;
                     case 2:
-                        presentador.setEdad(Integer.parseInt(s));
-                        break;
-                    case 3:
                         p.setDia(Integer.parseInt(s));
                         break;
-                    case 4:
+                    case 3:
                         p.setMes(Integer.parseInt(s));
                         break;
-                    case 5:
+                    case 4:
                         p.setAno(Integer.parseInt(s));
                         break;
-                    case 6:
+                    case 5:
                         p.setDuracion(Integer.parseInt(s));
                         break;
-                    case 7:
+                    case 6:
                         p.setDescripcion(s);
                         break;
-                    case 8:
+                    case 7:
                         // TODO : Pasar mapa inmodificable
                         p.setAsistentes(s, Collections.unmodifiableMap(nombre_personas));
                         break;
