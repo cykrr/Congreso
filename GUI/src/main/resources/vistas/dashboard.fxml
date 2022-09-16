@@ -12,8 +12,8 @@
 
 
 <VBox 
-    xmlns="http://javafx.com/javafx/18"
-    xmlns:fx="http://javafx.com/fxml/1"
+    xmlns="http://javafx.com/javafx" 
+    xmlns:fx="http://javafx.com/fxml"
     VBox.vgrow="ALWAYS" 
     >
 
@@ -22,13 +22,12 @@
         >
         <children>
             <!-- <Pane fx:id="dropDown" prefHeight="50.0" prefWidth="50.0" /> -->
-            <Pane fx:id="busqueda">
+            <Pane>
                 <HBox.margin>
                     <Insets top = "0" right = "20" bottom = "0" left = "0"/>
                 </HBox.margin>
 
-                <Busqueda>
-                </Busqueda>
+                <Busqueda fx:id = "cajaBusqueda" onAction = "#buscar" />
             </Pane>
         </children>
     </HBox>

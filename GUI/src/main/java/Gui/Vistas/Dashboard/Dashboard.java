@@ -5,12 +5,18 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import Congreso.Registro;
+
+// TODO : Sacar de paquete
+import Gui.Vistas.Busqueda.Busqueda;
+
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.layout.VBox;
 
 public class Dashboard extends VBox implements Initializable {
+    @FXML Busqueda cajaBusqueda;
     Registro registro;
     public Dashboard(Registro r) {
         super();
@@ -30,5 +36,10 @@ public class Dashboard extends VBox implements Initializable {
     public void initialize(URL url, ResourceBundle rb)
     {
 
+    }
+    
+    public void buscar() {
+        String b = cajaBusqueda.getValue();
+        System.out.println("hola " + b);
     }
 }
