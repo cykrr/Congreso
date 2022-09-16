@@ -30,7 +30,9 @@
             <MenuItem 
                 text="Importar Archivo [Ctrl + I]"
                 onAction="#importar"/>
-            <MenuItem text="Exportar [Ctrl + E]"/>
+            <MenuItem 
+                text="Exportar [Ctrl + E]"
+                onAction="#exportar"/>
             <SeparatorMenuItem/>
             <MenuItem text="Salir [Ctrl + W]"/>
         </Menu>

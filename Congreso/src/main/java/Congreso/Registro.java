@@ -6,7 +6,9 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
@@ -136,11 +138,32 @@ public class Registro {
         file.close();
     }
 
-    /* Dado un nombre de archivo abre y guarda los contenidos del
-     * registro. 
-     * @param p nombre del archivo a guardar */
-    public void exportar(String nombre_archivo) {
-        //TODO interfaz toCSV()
+    /* Guarda los contenidos del registro */
+    public void exportar() throws IOException {
+        FileWriter bw = new FileWriter("..//ArchivoExportar.csv");
+        for(int i = 0; i < lista_presentaciones.size(); i++) {
+        	Presentacion p = lista_presentaciones.get(i);
+        	bw.write(p.getNombre() + ";");
+        	bw.write(p.getExpositor().getNombre() + ";");
+        	bw.write(p.getDia() + ";");
+        	bw.write(p.getMes() + ";");
+        	bw.write(p.getAño() + ";");
+        	bw.write(p.getDuracion() + ";");
+        	bw.write(p.getDescripcion() + ";");
+        	bw.write("\"");
+        	
+        	for(int j = 0; j < p.getAsistentes().size(); j++) {
+        		Persona a = p.getAsistentes().get(j);		
+        		bw.write(a.getNombre());
+        		
+        		if(j < p.getAsistentes().size() - 1)
+        			bw.write(";");
+        	}
+        	
+        	bw.write("\"\n");
+        }
+        
+        bw.close();
     }
 
     public Presentacion buscarPresentacion(String nombre) {

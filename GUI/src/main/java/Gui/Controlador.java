@@ -126,6 +126,14 @@ public class Controlador implements Initializable {
             System.err.println("Error abriendo archivo");
         }
     }
+    
+    public void exportar() {
+    	try {
+			registro.exportar();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+    }
 
     // TODO : Añadir más ajustes
     // TODO : Guardar de manera persistente la carpeta
