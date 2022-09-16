@@ -55,8 +55,20 @@ public class LeerExpositor extends GridPane implements Initializable, PopUp.PopA
         String descripcion = tfDescripcion.getText();
         String nacionalidad = tfNacionalidad.getText();
         String ocupacion = tfOcupacion.getText();
-        int edad = Integer.parseInt(tfEdad.getText());
-        int fono = Integer.parseInt(tfFono.getText());
+        Integer edad = null;
+        Integer fono = null;
+
+        // TODO : Verificar que los campos no estén vacíos
+        try {
+            edad = Integer.parseInt(tfEdad.getText());
+        } catch (NumberFormatException e) {
+            edad = Integer.valueOf(0);
+        } try {
+            fono = Integer.parseInt(tfFono.getText());
+        } catch (NumberFormatException e) {
+            fono = Integer.valueOf(0);
+        }
+
 
         expositor = new Expositor(nombre, edad, fono, descripcion, nacionalidad, ocupacion);
     }

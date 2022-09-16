@@ -84,15 +84,19 @@ public class LeerPresentacion extends GridPane implements Initializable, PopUp.P
     public void guardar() {
         p = null;
         String nombre = nombreEntrada.getText();
-        if (!nombre.equals("")) {
+        if (nombre != null && !nombre.equals("")) {
             p = new Presentacion(nombre);
         } else {
             return;
         }
         LocalDate fecha = fechaEntrada.getValue();
-        p.setFecha(fecha);
+        if (fecha != null) {
+            p.setFecha(fecha);
+        }
 
         Persona e = expositorEntrada.getValue();
-        p.setExpositor(e);
+        if (e != null) {
+            p.setExpositor(e);
+        }
     }
 }
