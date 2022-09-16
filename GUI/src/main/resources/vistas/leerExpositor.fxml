@@ -52,14 +52,14 @@
             />
             
         <Label
-            text = "Nacionalidad: "
+            text = "País: "
             GridPane.columnIndex="0"
             GridPane.rowIndex="3"
             />
 
         <TextField
-            fx:id = "tfNacionalidad"
-            promptText = "Nacionalidad"
+            fx:id = "tfPais"
+            promptText = "Pais"
             GridPane.columnIndex="1"
             GridPane.rowIndex="3"
             />
