@@ -1,3 +1,3 @@
 #!/bin/bash
 
-mvn -pl Congreso install && mvn -pl GUI javafx:run
+mvn -pl GUI javafx:run
