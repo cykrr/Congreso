@@ -1,5 +1,6 @@
-
-.metadata
-jdt.ls-java-project
-bin/*.class
-/bin/
+**/.classpath
+**/.project
+**/.settings
+**/.metadata
+**/bin
+**/target

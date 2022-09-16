@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import Gui.Vistas.Presentacion.*?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.skin.DatePickerSkin?>
+<?import javafx.scene.Node?>
+<!-- <?import Gui.Vistas.Calendario?> -->
+<!-- <?import calendario.Calendario?> -->
+
+<VBox
+    xmlns="http://javafx.com/javafx" 
+    xmlns:fx="http://javafx.com/fxml"
+    >
+    <MenuBar>
+        <Menu text = "Archivo">
+            <MenuItem text="Abrir archivo [Ctrl + O]"/>
+            <MenuItem text="Guardar Archivo [Ctrl + S]"/>
+            <SeparatorMenuItem/>
+            <MenuItem 
+                text="Importar Archivo [Ctrl + I]"
+                onAction="#importar"/>
+            <MenuItem text="Exportar [Ctrl + E ]"/>
+            <SeparatorMenuItem/>
+            <MenuItem text="Salir [Ctrl + W]"/>
+        </Menu>
+        <Menu text = "Editar">
+
+            <MenuItem 
+                text="Crear presentación [Ctrl + p]"
+                onAction = "#crearPresentacion"/>
+
+            <MenuItem text="Crear persona [Ctrl + P]"/>
+            <SeparatorMenuItem/>
+            <MenuItem
+                text="Preferencias"
+                onAction = "#editarPreferencias"/>
+        </Menu>
+        <Menu text = "Buscar">
+            <MenuItem text="Buscar presentación" />
+            <MenuItem text="Buscar persona" />
+        </Menu>
+    </MenuBar>
+    <!-- <Presentacion/> -->
+</VBox>
+

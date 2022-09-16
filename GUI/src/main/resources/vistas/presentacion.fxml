@@ -1,0 +1,75 @@
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+
+<GridPane 
+    xmlns="http://javafx.com/javafx" 
+    xmlns:fx="http://javafx.com/fxml"
+
+    hgap="2"
+    vgap="5"
+    >
+     <GridPane.margin>
+         <Insets 
+             top = "10"
+             left = "10"
+             right="10"
+             bottom="15"
+             />
+    </GridPane.margin>
+    <children>
+
+        <Text text = "Nueva presentación"
+            GridPane.columnIndex="0"
+            GridPane.rowIndex="0"
+            />
+
+        <Label
+            text = "Nombre (*): "
+            GridPane.columnIndex="0"
+            GridPane.rowIndex="1"
+            />
+
+        <TextField
+            fx:id = "nombreEntrada"
+            promptText = "Nombre presentación"
+            onAction = "#setName"
+            GridPane.columnIndex="1"
+            GridPane.rowIndex="1"
+            />
+
+        <Label
+            text = "Fecha: "
+            GridPane.columnIndex="0"
+            GridPane.rowIndex="2"
+            />
+
+        <DatePicker
+            fx:id = "fechaEntrada"
+            promptText = "dd-mm-aaaa"
+            GridPane.columnIndex="1"
+            GridPane.rowIndex="2"
+            onAction = "#setFecha"
+            />
+
+
+        <Label
+            text = "Expositor: "
+            GridPane.columnIndex="0"
+            GridPane.rowIndex="3"
+            />
+
+        <ComboBox
+            fx:id = "expositorEntrada"
+            promptText = "Expositores"
+            GridPane.columnIndex="1"
+            GridPane.rowIndex="3"
+            />
+
+        <Button fx:id = "submit"
+            text = "Guardar"
+            GridPane.rowIndex = "4">
+        </Button>
+    </children>
+</GridPane>

@@ -1,5 +1,11 @@
+package CLI;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+
+import Congreso.Persona;
+import Congreso.Presentacion;
+import Congreso.Util;
+
 import java.io.IOException;
 
 public class MenuEditar {

@@ -1,5 +1,9 @@
+package CLI;
 import java.io.BufferedReader;
 import java.io.IOException;
+
+import Congreso.Presentacion;
+import Congreso.Registro;
 
 public class Menu {
 	private Registro r;

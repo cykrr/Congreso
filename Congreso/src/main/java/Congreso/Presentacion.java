@@ -1,8 +1,10 @@
+package Congreso;
 import java.time.LocalTime;
 import java.time.format.*;
 import java.time.LocalDate;
 
 import java.util.LinkedList;
+import java.util.Map;
 import java.util.HashMap;
 
 public class Presentacion {
@@ -13,14 +15,16 @@ public class Presentacion {
 	private String descripcion;
 	private Persona expositor;
 	private LocalDate localDate = LocalDate.of(1993,01, 01);
-	private static DateTimeFormatter formater = DateTimeFormatter.ofPattern("dd-MM-YYYY");
 	private LocalTime localTime = LocalTime.of(0, 0);
 	private LinkedList<Persona> asistentes;
 
+    public Presentacion() {
+    	this.asistentes = new LinkedList<Persona>();
+    }
     
     public Presentacion(String nombre) {
+        this();
     	this.nombre = nombre;
-    	this.asistentes = new LinkedList<Persona>();
     }
     
     public void agregarAsistente(Persona asistente){
@@ -45,7 +49,12 @@ public class Presentacion {
 
     public void setFecha(int dia, int mes, int ano) {
         this.localDate = LocalDate.of(ano, mes, dia);
-        this.fecha = formater.format(localDate);
+        this.fecha = Util.dateFormatter.format(localDate);
+    }
+
+    public void setFecha(LocalDate fecha) {
+        this.localDate = fecha;
+        this.fecha = Util.dateFormatter.format(fecha);
     }
     
     public void setHora(String hora) {
@@ -71,21 +80,25 @@ public class Presentacion {
 
     public void setDia(int dia) {
         this.localDate = LocalDate.of(localDate.getYear(), localDate.getMonth(), dia);
-        this.fecha = formater.format(localDate);
+        this.fecha = Util.dateFormatter.format(localDate);
     }
 
     public void setMes(int mes) {
         this.localDate = LocalDate.of(localDate.getYear(), mes, localDate.getDayOfMonth());
-        this.fecha = formater.format(localDate);
+        this.fecha = Util.dateFormatter.format(localDate);
     }
 
     public void setAno(int ano) {
         this.localDate = LocalDate.of(ano, localDate.getMonth(), localDate.getDayOfMonth());
-        this.fecha = formater.format(localDate);
+        this.fecha = Util.dateFormatter.format(localDate);
     }
     
     public void setExpositor(Persona expositor) {
     	this.expositor = expositor;
+    }
+
+    public void setNombre(String n)  {
+        this.nombre = n;
     }
     
     public String getNombre() {
@@ -96,7 +109,7 @@ public class Presentacion {
 		// return this.ID;
 	// }
     
-    public void setAsistentes(String asistentes, HashMap<String, Persona>personas) {
+    public void setAsistentes(String asistentes, Map<String,Persona>personas) {
         if (asistentes.charAt(0) != '\"') {
             System.err.println("Error: setAsistentes() Esperado string" +
                     "que inicia con '\"'.");
