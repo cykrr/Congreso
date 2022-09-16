@@ -3,7 +3,7 @@ public class Expositor extends Persona {
 	private String pais;
 	private String ocupacion;
 	
-    public Expositor(String nombre, int edad, int fono, String correo, String nacionalidad, String ocupacion) {
+    public Expositor(String nombre, int edad, int fono, String correo, String pais, String ocupacion) {
     	super(nombre, edad, fono, correo);
     	this.pais = pais;
     	this.ocupacion = ocupacion;
@@ -13,7 +13,7 @@ public class Expositor extends Persona {
 		return pais;
 	}
 
-	public void setNacionalidad(String nacionalidad) {
+	public void setNacionalidad(String pais) {
 		this.pais = pais;
 	}
 
