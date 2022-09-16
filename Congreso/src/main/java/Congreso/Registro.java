@@ -8,6 +8,7 @@ import java.util.Map;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -93,10 +94,8 @@ public class Registro {
 	}
     
     private void importarPresentaciones(String nombreArchivo) {
-    	BufferedReader br;
-    	
     	try {
-			br = new BufferedReader(new FileReader(nombreArchivo));
+			BufferedReader br = new BufferedReader(new FileReader(nombreArchivo));
 	    	
 	        String line;
 			while((line = br.readLine()) != null) {
@@ -139,10 +138,8 @@ public class Registro {
     }
     
     private void importarExpositores(String nombreArchivo) {
-    	BufferedReader br;
-    	
     	try {
-			br = new BufferedReader(new FileReader(nombreArchivo));
+			BufferedReader br = new BufferedReader(new FileReader(nombreArchivo));
 	    	
 	        String line;
 			while((line = br.readLine()) != null) {
@@ -167,11 +164,9 @@ public class Registro {
     	}
     }
     
-    private void importarAsistentes(String nombreArchivo) {
-    	BufferedReader br;
-    	
+    private void importarAsistentes(String nombreArchivo) {	
     	try {
-			br = new BufferedReader(new FileReader(nombreArchivo));
+			BufferedReader br = new BufferedReader(new FileReader(nombreArchivo));
 	    	
 	        String line;
 			while((line = br.readLine()) != null) {
@@ -195,34 +190,82 @@ public class Registro {
     }
 
     /* Guarda los contenidos del registro */
-    public void exportar() throws IOException {
-        FileWriter bw = new FileWriter("..//ArchivoExportar.csv");
-        for(int i = 0; i < lista_presentaciones.size(); i++) {
-        	Presentacion p = lista_presentaciones.get(i);
-        	bw.write(p.getNombre() + ";");
-        	bw.write(p.getExpositor().getNombre() + ";");
-        	bw.write(p.getDia() + ";");
-        	bw.write(p.getMes() + ";");
-        	bw.write(p.getAño() + ";");
-        	bw.write(p.getDuracion() + ";");
-        	bw.write(p.getDescripcion() + ";");
-        	bw.write("\"");
-        	
-        	for(int j = 0; j < p.getAsistentes().size(); j++) {
-        		Persona a = p.getAsistentes().get(j);		
-        		bw.write(a.getNombre());
-        		
-        		if(j < p.getAsistentes().size() - 1)
-        			bw.write(";");
-        	}
-        	
-        	bw.write("\"\n");
-        }
-        
-        bw.close();
+    public void exportar(String csvPresentaciones, String csvExpositores, String csvAsistentes) {
+    	exportarPresentaciones(csvPresentaciones);
+    	exportarExpositores(csvExpositores);
+    	exportarAsistentes(csvAsistentes);
     }
 
-    public Presentacion buscarPresentacion(String nombre) {
+    private void exportarPresentaciones(String nombreArchivo) {
+    	try {
+	        BufferedWriter bw = new BufferedWriter(new FileWriter(nombreArchivo));
+	        for(int i = 0; i < lista_presentaciones.size(); i++) {
+	        	Presentacion p = lista_presentaciones.get(i);
+	        	bw.write(p.getNombre() + ";");
+	        	bw.write(p.getExpositor().getNombre() + ";");
+	        	bw.write(p.getDia() + ";");
+	        	bw.write(p.getMes() + ";");
+	        	bw.write(p.getAño() + ";");
+	        	bw.write(p.getDuracion() + ";");
+	        	bw.write(p.getDescripcion() + ";");
+	        	bw.write("\"");
+	        	
+	        	for(int j = 0; j < p.getAsistentes().size(); j++) {
+	        		Persona asistente = p.getAsistentes().get(j);		
+	        		bw.write(asistente.getNombre());
+	        		
+	        		if(j < p.getAsistentes().size() - 1)
+	        			bw.write(";");
+	        	}
+	        	
+	        	bw.write("\"\n");
+	        }
+	        
+	        bw.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	private void exportarExpositores(String nombreArchivo) {
+    	try {
+    		BufferedWriter bw = new BufferedWriter(new FileWriter(nombreArchivo));
+	        for(int i = 0; i < lista_expositores.size(); i++) {
+	        	Expositor expositor = lista_expositores.get(i);
+	        	bw.write(expositor.getNombre() + ";");
+	        	bw.write(expositor.getEdad() + ";");
+	        	bw.write(expositor.getFono() + ";");
+	        	bw.write(expositor.getCorreo() + ";");
+	        	bw.write(expositor.getPais() + ";");
+	        	bw.write(expositor.getOcupacion());
+	        	bw.write("\n");
+	        }
+	        
+	        bw.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	private void exportarAsistentes(String nombreArchivo) {
+    	try {
+    		BufferedWriter bw = new BufferedWriter(new FileWriter(nombreArchivo));
+	        for(int i = 0; i < lista_asistentes.size(); i++) {
+	        	Persona asistente = lista_asistentes.get(i);
+	        	bw.write(asistente.getNombre() + ";");
+	        	bw.write(asistente.getEdad() + ";");
+	        	bw.write(asistente.getFono() + ";");
+	        	bw.write(asistente.getCorreo());
+	        	bw.write("\n");
+	        }
+	        
+	        bw.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public Presentacion buscarPresentacion(String nombre) {
         return nombre_presentaciones.get(nombre);
     }
 

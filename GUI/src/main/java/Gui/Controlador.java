@@ -126,11 +126,9 @@ public class Controlador implements Initializable {
     }
     
     public void exportar() {
-    	try {
-			registro.exportar();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+        registro.exportar(ajustes.carpeta + "/savedPresentaciones.csv",
+				  		  ajustes.carpeta + "/savedExpositores.csv",
+				  		  ajustes.carpeta + "/savedAsistentes.csv");
     }
 
     // TODO : Añadir más ajustes
