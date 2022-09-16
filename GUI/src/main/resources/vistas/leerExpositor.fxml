@@ -34,86 +34,86 @@
         <TextField
             fx:id = "tfNombre"
             promptText = "Nombre expositor"
-            GridPane.columnIndex="0"
-            GridPane.rowIndex="2"
+            GridPane.columnIndex="1"
+            GridPane.rowIndex="1"
             />
 
         <Label
             text = "Descripción: "
             GridPane.columnIndex="0"
-            GridPane.rowIndex="3"
+            GridPane.rowIndex="2"
             />
 
         <TextField
             fx:id = "tfDescripcion"
             promptText = "Descripción"
-            GridPane.columnIndex="0"
-            GridPane.rowIndex="4"
+            GridPane.columnIndex="1"
+            GridPane.rowIndex="2"
             />
 
         <Label
             text = "Edad: "
             GridPane.columnIndex="0"
-            GridPane.rowIndex="5"
+            GridPane.rowIndex="3"
             />
 
         <TextField
             fx:id = "tfEdad"
-            promptText = "Descripción"
-            GridPane.columnIndex="0"
-            GridPane.rowIndex="6"
+            promptText = "Edad"
+            GridPane.columnIndex="1"
+            GridPane.rowIndex="3"
             />
             
         <Label
             text = "Nacionalidad: "
             GridPane.columnIndex="0"
-            GridPane.rowIndex="7"
+            GridPane.rowIndex="4"
             />
 
         <TextField
             fx:id = "tfNacionalidad"
             promptText = "Nacionalidad"
-            GridPane.columnIndex="0"
-            GridPane.rowIndex="8"
+            GridPane.columnIndex="1"
+            GridPane.rowIndex="4"
             />
             
         <Label
             text = "Teléfono: "
             GridPane.columnIndex="0"
-            GridPane.rowIndex="9"
+            GridPane.rowIndex="5"
             />
 
         <TextField
             fx:id = "tfFono"
             promptText = "Teléfono"
-            GridPane.columnIndex="0"
-            GridPane.rowIndex="10"
+            GridPane.columnIndex="1"
+            GridPane.rowIndex="5"
             />
             
         <Label
             text = "Correo electrónico: "
             GridPane.columnIndex="0"
-            GridPane.rowIndex="11"
+            GridPane.rowIndex="6"
             />
 
         <TextField
             fx:id = "tfCorreo"
             promptText = "Correo electrónico"
-            GridPane.columnIndex="0"
-            GridPane.rowIndex="12"
+            GridPane.columnIndex="1"
+            GridPane.rowIndex="6"
             />
             
         <Label
             text = "Ocupación: "
             GridPane.columnIndex="0"
-            GridPane.rowIndex="13"
+            GridPane.rowIndex="7"
             />
 
         <TextField
             fx:id = "tfOcupacion"
             promptText = "Ocupación"
-            GridPane.columnIndex="0"
-            GridPane.rowIndex="14"
+            GridPane.columnIndex="1"
+            GridPane.rowIndex="7"
             />
     </children>
 </GridPane>
