@@ -82,6 +82,7 @@ public class PopUp {
      */
     public Object showDialog()  {
         stage.setScene(dialog);
+        stage.sizeToScene();
         stage.showAndWait();
         Object retorno;
         if (child instanceof PopAble) {
