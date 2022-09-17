@@ -8,12 +8,15 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.GridPane;
 import Congreso.Expositor;
 import Congreso.Persona;
-
+import Congreso.Util;
+import Gui.Alerta;
 import Gui.Vistas.PopUp;
 
 public class LeerExpositor extends GridPane implements Initializable, PopUp.PopAble {
@@ -51,25 +54,51 @@ public class LeerExpositor extends GridPane implements Initializable, PopUp.PopA
 
     @Override
     public boolean guardar() {
-        String nombre = tfNombre.getText();
-        String correo = tfCorreo.getText();
-        String pais = tfPais.getText();
-        String ocupacion = tfOcupacion.getText();
-        Integer edad = null;
-        Integer fono = null;
-
-        // TODO : Verificar que los campos no estén vacíos
-        try {
-            edad = Integer.parseInt(tfEdad.getText());
-        } catch (NumberFormatException e) {
-            edad = Integer.valueOf(0);
-        } try {
-            fono = Integer.parseInt(tfFono.getText());
-        } catch (NumberFormatException e) {
-            fono = Integer.valueOf(0);
+        String nombre = tfNombre.getText().trim();
+        String correo = tfCorreo.getText().trim();
+        String pais = tfPais.getText().trim();
+        String ocupacion = tfOcupacion.getText().trim();
+        String strEdad = tfEdad.getText().trim();
+        String strFono = tfFono.getText().trim();
+        
+        if(nombre.isEmpty() || correo.isEmpty() || pais.isEmpty() || ocupacion.isEmpty() || strEdad.isEmpty() || strFono.isEmpty()) {
+            Alerta.showAlert("No pueden quedar campos vacíos");
+            return false;
         }
-
-
+        
+        if(!Util.isAlphaOrSpace(nombre)) {
+        	Alerta.showAlert("El nombre ingresado no es válido");
+        	return false;
+        }
+        
+        if(!Util.isNumeric(strEdad)) {
+        	Alerta.showAlert("La edad ingresada no es válida");
+        	return false;
+        }
+        
+        if(!Util.isNumeric(strFono)) {
+        	Alerta.showAlert("El teléfono ingresado no es válido");
+        	return false;
+        }
+        
+        if(!Util.validateEmail(correo)) {
+        	Alerta.showAlert("El email ingresado no es válido");
+        	return false;
+        }
+        
+        if(!Util.isAlphaOrSpace(pais)) {
+        	Alerta.showAlert("El país ingresado no es válido");
+        	return false;
+        }
+        
+        if(!Util.isAlphaOrSpace(ocupacion)) {
+        	Alerta.showAlert("La ocupación ingresada no es válida");
+        	return false;
+        }
+        
+        int edad = Integer.parseInt(strEdad);
+        int fono = Integer.parseInt(strFono);
+        
         expositor = new Expositor(nombre, edad, fono, correo, pais, ocupacion);
         return true;
     }

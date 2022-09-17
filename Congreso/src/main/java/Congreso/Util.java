@@ -47,4 +47,17 @@ public class Util {
 	    }
 	    return name.substring(lastIndexOf+1);
 	}
+	
+	public static boolean isNumeric(String str) {
+		return str.matches("-?\\d+(\\.\\d+)?");
+	}
+	
+	public static boolean isAlphaOrSpace(String str) {
+	    return str.matches("[a-zA-Z ]+");
+	}
+	
+	public static boolean validateEmail(String email) {
+		String pattern = "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$";
+		return email.matches(pattern);
+	}
 }
