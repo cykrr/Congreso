@@ -60,7 +60,7 @@
 
         <TextField
             fx:id = "tfHora"
-            promptText = "Hora"
+            promptText = "hh:mm"
             GridPane.columnIndex="1"
             GridPane.rowIndex="3"
             />

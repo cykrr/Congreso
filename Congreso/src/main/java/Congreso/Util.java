@@ -2,6 +2,7 @@ package Congreso;
 import java.io.File;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -9,8 +10,8 @@ import java.time.format.ResolverStyle;
 
 public class Util {
 
-	public final static DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd-MM-YYYY").withResolverStyle(ResolverStyle.STRICT);
-	public final static DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm").withResolverStyle(ResolverStyle.STRICT);
+	public final static DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("d-M-[uuuu][uu]").withResolverStyle(ResolverStyle.STRICT);
+	public final static DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("H:m").withResolverStyle(ResolverStyle.STRICT);
 
 	public static boolean validateDate(String strDate) {
 		SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
@@ -24,6 +25,18 @@ public class Util {
 	    }
 	    
 	    return true;
+	}
+	
+	public static LocalDate parseDate(String strDate) {
+		LocalDate date;	
+		
+		try {
+			date = LocalDate.parse(strDate, dateFormatter);
+		} catch (DateTimeParseException | NullPointerException e) {
+			return null;
+	    }
+		
+		return date;
 	}
 
 	public static boolean validateTime(String strTime) {
@@ -41,14 +54,11 @@ public class Util {
 	}
 	
 	public static LocalTime parseTime(String strTime) {
-		DateTimeFormatter format = DateTimeFormatter.ofPattern("HH:mm")
-	            .withResolverStyle(ResolverStyle.STRICT);
-		LocalTime time;
+		LocalTime time;	
 		
 		try {
-			time = LocalTime.parse(strTime, format);
+			time = LocalTime.parse(strTime, timeFormatter);
 		} catch (DateTimeParseException | NullPointerException e) {
-			e.printStackTrace();
 			return null;
 	    }
 		

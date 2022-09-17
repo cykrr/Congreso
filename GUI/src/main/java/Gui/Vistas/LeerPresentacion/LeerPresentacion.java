@@ -76,20 +76,30 @@ public class LeerPresentacion extends GridPane implements Initializable, PopUp.P
     @Override
     public boolean guardar() {
         String nombre = tfNombre.getText().trim();
+        String strFecha = dpFecha.getEditor().getText().trim();
+        String strHora = tfHora.getText().trim();
         String strDuracion = tfDuracion.getText().trim();
         String descripcion = tfDescripcion.getText().trim();
-        LocalDate fecha = dpFecha.getValue();
         Expositor expositor = comboExpositor.getValue();
         
-        if(nombre.isEmpty() || strDuracion.isEmpty() || descripcion.isEmpty()) {
+        if(nombre.isEmpty() || strFecha.isEmpty() || strHora.isEmpty() || strDuracion.isEmpty() || descripcion.isEmpty()) {
         	Alerta.showAlert("No pueden quedar campos vacíos");
         	return false;
         }
         
+        LocalDate fecha = Util.parseDate(strFecha);
         if(fecha == null) {
         	Alerta.showAlert("La fecha ingresada no es válida");
         	return false;
         }
+        Alerta.showAlert(fecha.toString());
+        
+        LocalTime hora = Util.parseTime(strHora);
+        if(hora == null) {
+        	Alerta.showAlert("La hora ingresada no es válida");
+        	return false;
+        }
+        Alerta.showAlert(hora.toString());
         
         if(!Util.isNumeric(strDuracion)) {
         	Alerta.showAlert("La duración ingresada no es válida");
@@ -102,7 +112,6 @@ public class LeerPresentacion extends GridPane implements Initializable, PopUp.P
         }
         
         int duracion = Integer.parseInt(strDuracion);
-        LocalTime hora = null;
         		
         p = new Presentacion(nombre, expositor, fecha, hora, duracion, descripcion);
         return true;
