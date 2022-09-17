@@ -10,6 +10,7 @@
     hgap="2"
     vgap="5"
     >
+    
      <GridPane.margin>
          <Insets 
              top = "10"
@@ -26,15 +27,14 @@
             />
 
         <Label
-            text = "Nombre (*): "
+            text = "Nombre: "
             GridPane.columnIndex="0"
             GridPane.rowIndex="1"
             />
 
         <TextField
-            fx:id = "nombreEntrada"
+            fx:id = "tfNombre"
             promptText = "Nombre presentación"
-            onAction = "#setName"
             GridPane.columnIndex="1"
             GridPane.rowIndex="1"
             />
@@ -46,30 +46,63 @@
             />
 
         <DatePicker
-            fx:id = "fechaEntrada"
+            fx:id = "dpFecha"
             promptText = "dd-mm-aaaa"
             GridPane.columnIndex="1"
             GridPane.rowIndex="2"
-            onAction = "#setFecha"
             />
-
-
+            
         <Label
-            text = "Expositor: "
+            text = "Hora de inicio: "
             GridPane.columnIndex="0"
             GridPane.rowIndex="3"
             />
 
-        <ComboBox
-            fx:id = "expositorEntrada"
-            promptText = "Expositores"
+        <TextField
+            fx:id = "tfHora"
+            promptText = "hh:mm"
             GridPane.columnIndex="1"
             GridPane.rowIndex="3"
             />
+            
+        <Label
+            text = "Duración (minutos): "
+            minWidth = "-Infinity"
+            GridPane.columnIndex="0"
+            GridPane.rowIndex="4"
+            />
 
-        <Button fx:id = "submit"
-            text = "Guardar"
-            GridPane.rowIndex = "4">
-        </Button>
+        <TextField
+            fx:id = "tfDuracion"
+            promptText = "Duración"
+            GridPane.columnIndex="1"
+            GridPane.rowIndex="4"
+            />
+            
+        <Label
+            text = "Descripción: "
+            GridPane.columnIndex="0"
+            GridPane.rowIndex="5"
+            />
+
+        <TextField
+            fx:id = "tfDescripcion"
+            promptText = "Descripción"
+            GridPane.columnIndex="1"
+            GridPane.rowIndex="5"
+            />
+
+        <Label
+            text = "Expositor: "
+            GridPane.columnIndex="0"
+            GridPane.rowIndex="6"
+            />
+
+        <ComboBox
+            fx:id = "comboExpositor"
+            promptText = "Expositores"
+            GridPane.columnIndex="1"
+            GridPane.rowIndex="6"
+            />
     </children>
 </GridPane>

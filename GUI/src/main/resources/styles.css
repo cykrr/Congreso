@@ -1,0 +1,16 @@
+.box {
+    -fx-background-color: #dfdfdf;
+    -fx-border-color: #dfdfdf;
+    -fx-border-radius: 20;
+    -fx-background-radius: 20;
+    -fx-border-width: 1;
+}
+
+.box:hover {
+    -fx-background-color: #d0d0d0;
+}
+
+.big {
+    -fx-font-weight: bold;
+    -fx-font-size: 35;
+}

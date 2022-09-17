@@ -14,6 +14,8 @@
 <?import javafx.scene.control.skin.DatePickerSkin?>
 <?import javafx.scene.Node?>
 <!-- <?import Gui.Vistas.Calendario?> -->
+<?import Gui.Vistas.ListaPresentaciones.*?>
+<?import Gui.Vistas.Dashboard.*?>
 <!-- <?import calendario.Calendario?> -->
 
 <VBox
@@ -21,6 +23,7 @@
     xmlns:fx="http://javafx.com/fxml"
     >
     <MenuBar>
+        <!-- TODO : Configurar teclas  -->
         <Menu text = "Archivo">
             <MenuItem text="Abrir archivo [Ctrl + O]"/>
             <MenuItem text="Guardar Archivo [Ctrl + S]"/>
@@ -28,17 +31,19 @@
             <MenuItem 
                 text="Importar Archivo [Ctrl + I]"
                 onAction="#importar"/>
-            <MenuItem text="Exportar [Ctrl + E ]"/>
+            <MenuItem 
+                text="Exportar [Ctrl + E]"
+                onAction="#exportar"/>
             <SeparatorMenuItem/>
             <MenuItem text="Salir [Ctrl + W]"/>
         </Menu>
         <Menu text = "Editar">
-
             <MenuItem 
                 text="Crear presentación [Ctrl + p]"
                 onAction = "#crearPresentacion"/>
-
-            <MenuItem text="Crear persona [Ctrl + P]"/>
+            <MenuItem 
+                text="Crear expositor [Ctrl + A]"
+                onAction = "#crearExpositor"/>
             <SeparatorMenuItem/>
             <MenuItem
                 text="Preferencias"
@@ -49,6 +54,5 @@
             <MenuItem text="Buscar persona" />
         </Menu>
     </MenuBar>
-    <!-- <Presentacion/> -->
 </VBox>
 

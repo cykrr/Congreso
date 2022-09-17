@@ -1,3 +1,3 @@
 #!/bin/bash
 
-mvn -pl GUI clean javafx:run
+mvn -pl GUI javafx:run

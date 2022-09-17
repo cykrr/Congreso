@@ -3,11 +3,13 @@ public class Persona {
     private String nombre;
     private int edad;
     private long fono; // Número telefónico
+    private String correo;
     
-    public Persona(String nombre, int edad, long fono){
+    public Persona(String nombre, int edad, long fono, String correo){
     	this.nombre = nombre;
     	this.edad = edad;
     	this.fono = fono;
+    	this.setCorreo(correo);
     }
     
     public String getNombre() {
@@ -30,5 +32,17 @@ public class Persona {
 		System.out.println("Nombre: " + nombre);
 		System.out.println("Teléfono: " + fono);
 		System.out.println("Edad: " + edad);
+	}
+
+    @Override public String toString() {
+        return this.nombre;
+    }
+
+	public String getCorreo() {
+		return correo;
+	}
+
+	public void setCorreo(String correo) {
+		this.correo = correo;
 	}
 }

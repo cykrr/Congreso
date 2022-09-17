@@ -3,6 +3,11 @@ package Gui;
 import java.io.File;
 import java.util.prefs.Preferences;
 
+/* Clase que carga los ajustes del programa
+ * por medio de la API de Java. Actualmente
+ * se usa para obtener la carpeta donde
+ * se almacenará la base de datos. 
+ */
 public class Ajustes {
     enum AJUSTE {
         CARPETA_CACHE,
@@ -10,7 +15,7 @@ public class Ajustes {
 
     Preferences prefs;
 
-    final static String carpetaStringDefault = "./cache/";
+    final static String carpetaStringDefault = "../data";
     String carpeta = null;
 
     public Ajustes() {
@@ -28,6 +33,9 @@ public class Ajustes {
         } 
     }
 
+    /* Guarda el AJUSTE por medio de la API de Java.
+     * El ajuste persiste en ejecuciones.
+     */
     public void guardarAjuste(AJUSTE ajuste, String valor) {
         switch (ajuste) {
             case CARPETA_CACHE:

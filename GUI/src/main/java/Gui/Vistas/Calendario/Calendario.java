@@ -8,6 +8,8 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.skin.DatePickerSkin;
 import javafx.scene.layout.Pane;
 
+/* DatePicker pero solo la parte de adentro
+ */
 public class Calendario extends Pane {
     ControladorCalendario controlador;
     public Calendario() {
