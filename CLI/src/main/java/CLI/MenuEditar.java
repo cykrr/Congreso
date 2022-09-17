@@ -2,6 +2,7 @@ package CLI;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
+import Congreso.Expositor;
 import Congreso.Persona;
 import Congreso.Presentacion;
 import Congreso.Util;
@@ -37,9 +38,14 @@ public class MenuEditar {
     	
     	System.out.println("Ingrese teléfono del expositor:");
     	int fono = Integer.parseInt(br.readLine());
+
+    	System.out.println("Ingrese correo del expositor:");
+    	String correo = br.readLine();
     	
-    	Persona persona = new Persona(nombre, edad, fono);
-    	p.setExpositor(persona);
+    	Persona persona = new Persona(nombre, edad, fono, correo);
+
+        // TODO : Vamos a seguir usando CLI? Limpiar
+    	p.setExpositor((Expositor)persona);
     }
     
     public void editarDescripcion() throws IOException {
