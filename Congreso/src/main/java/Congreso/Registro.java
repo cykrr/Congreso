@@ -103,7 +103,7 @@ public class Registro {
 			    
 			    p.setDia(Integer.parseInt(lineArray.get(2)));
 			    p.setMes(Integer.parseInt(lineArray.get(3)));
-			    p.setAno(Integer.parseInt(lineArray.get(4)));
+			    p.setAño(Integer.parseInt(lineArray.get(4)));
 			    p.setDuracion(Integer.parseInt(lineArray.get(5)));
 			    p.setDescripcion(lineArray.get(6));
 			    

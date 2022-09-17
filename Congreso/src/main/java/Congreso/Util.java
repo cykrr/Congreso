@@ -9,7 +9,8 @@ import java.time.format.ResolverStyle;
 
 public class Util {
 
-	public final static DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd-MM-YYYY");
+	public final static DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd-MM-YYYY").withResolverStyle(ResolverStyle.STRICT);
+	public final static DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm").withResolverStyle(ResolverStyle.STRICT);
 
 	public static boolean validateDate(String strDate) {
 		SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");

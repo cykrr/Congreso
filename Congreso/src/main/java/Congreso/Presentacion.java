@@ -9,29 +9,22 @@ import java.util.HashMap;
 
 public class Presentacion {
 	private String nombre;
-	private String fecha;
-	private String hora;
-	private int duracion;
 	private String descripcion;
 	private Expositor expositor;
-	private LocalDate localDate = LocalDate.of(1993,01, 01);
-	private LocalTime localTime = LocalTime.of(0, 0);
+	private LocalDate fecha = LocalDate.of(1993,01, 01);;
+	private LocalTime hora = LocalTime.of(0, 0);
+	private int duracion;
 	private LinkedList<Persona> asistentes;
 
     public Presentacion() {
     	this.asistentes = new LinkedList<Persona>();
     }
     
-    public Presentacion(String nombre) {
-        this();
-    	this.nombre = nombre;
-    }
-    
     public Presentacion(String nombre, Expositor expositor, LocalDate fecha, LocalTime hora, int duracion, String descripcion) {
     	this.nombre = nombre;
     	this.expositor = expositor;
-    	this.localDate = fecha;
-    	this.localTime = hora;
+    	this.fecha = fecha;
+    	this.hora = hora;
     	this.duracion = duracion;
     	this.descripcion = descripcion;
     }
@@ -49,42 +42,36 @@ public class Presentacion {
     }
     
     public void setFecha(String fecha) {
-    	this.fecha = fecha;
     	String[] parts = fecha.split("-");
-    	this.localDate = LocalDate.of(Integer.parseInt(parts[2]), 
-    								  Integer.parseInt(parts[1]),
-    								  Integer.parseInt(parts[0]));
+    	this.fecha = LocalDate.of(Integer.parseInt(parts[2]), 
+    						      Integer.parseInt(parts[1]),
+    							  Integer.parseInt(parts[0]));
     }
 
     public void setFecha(int dia, int mes, int ano) {
-        this.localDate = LocalDate.of(ano, mes, dia);
-        this.fecha = Util.dateFormatter.format(localDate);
+        this.fecha = LocalDate.of(ano, mes, dia);
     }
 
     public void setFecha(LocalDate fecha) {
-        this.localDate = fecha;
-        this.fecha = Util.dateFormatter.format(fecha);
+        this.fecha = fecha;
     }
     
     public void setHora(LocalTime hora) {
-        this.localTime = hora;
+        this.hora = hora;
     }
     
     public void setHora(String hora) {
-    	this.hora = hora;
-    	String[] parts = fecha.split(":");
-    	this.localTime = LocalTime.of(Integer.parseInt(parts[0]),
-    								  Integer.parseInt(parts[1]));
+    	String[] parts = hora.split(":");
+    	this.hora = LocalTime.of(Integer.parseInt(parts[0]),
+    							 Integer.parseInt(parts[1]));
     }
 
     public void setHora(int hora) {
-        this.localTime = LocalTime.of(hora, 0);
-        this.hora = (localTime.toString());
+        this.hora = LocalTime.of(hora, 0);
     }
 
     public void setMinuto(int min) {
-        this.localTime = LocalTime.of(localTime.getHour(), min);
-        this.hora = (localTime.toString());
+        this.hora = LocalTime.of(hora.getHour(), min);
     }
     
     public void setDuracion(int duracion) {
@@ -92,18 +79,15 @@ public class Presentacion {
     }
 
     public void setDia(int dia) {
-        this.localDate = LocalDate.of(localDate.getYear(), localDate.getMonth(), dia);
-        this.fecha = Util.dateFormatter.format(localDate);
+        this.fecha = LocalDate.of(fecha.getYear(), fecha.getMonth(), dia);
     }
 
     public void setMes(int mes) {
-        this.localDate = LocalDate.of(localDate.getYear(), mes, localDate.getDayOfMonth());
-        this.fecha = Util.dateFormatter.format(localDate);
+        this.fecha = LocalDate.of(fecha.getYear(), mes, fecha.getDayOfMonth());
     }
 
-    public void setAno(int ano) {
-        this.localDate = LocalDate.of(ano, localDate.getMonth(), localDate.getDayOfMonth());
-        this.fecha = Util.dateFormatter.format(localDate);
+    public void setAño(int año) {
+        this.fecha = LocalDate.of(año, fecha.getMonth(), fecha.getDayOfMonth());
     }
     
     public void setExpositor(Expositor expositor) {
@@ -114,10 +98,6 @@ public class Presentacion {
         this.nombre = n;
     }
 
-	// public int getId() {
-		// return this.ID;
-	// }
-    
     public void setAsistentes(String asistentes, Map<String,Persona>personas) {
         if (asistentes.charAt(0) != '\"') {
             System.err.println("Error: setAsistentes() Esperado string" +
@@ -201,15 +181,31 @@ public class Presentacion {
     }
     
     public int getDia() {
-    	return localDate.getDayOfMonth();
+    	return fecha.getDayOfMonth();
     }
     
     public int getMes() {
-    	return localDate.getMonthValue();
+    	return fecha.getMonthValue();
     }
     
     public int getAño() {
-    	return localDate.getYear();
+    	return fecha.getYear();
+    }
+    
+    public LocalDate getFecha() {
+    	return fecha;
+    }
+    
+    public String getStringFecha() {
+    	return Util.dateFormatter.format(fecha);
+    }
+    
+    public LocalTime getHora() {
+    	return hora;
+    }
+    
+    public String getStringHora() {
+    	return Util.timeFormatter.format(hora);
     }
     
     public int getDuracion() {
