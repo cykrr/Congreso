@@ -57,6 +57,10 @@ public class Presentacion {
         this.fecha = Util.dateFormatter.format(fecha);
     }
     
+    public void setHora(LocalTime hora) {
+        this.localTime = hora;
+    }
+    
     public void setHora(String hora) {
     	this.hora = hora;
     	String[] parts = fecha.split(":");

@@ -3,6 +3,7 @@ package Gui.Vistas.LeerPresentacion;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -31,9 +32,9 @@ public class LeerPresentacion extends GridPane implements Initializable, PopUp.P
 
 
     // Elementos XML
-    @FXML private ComboBox<Persona> expositorEntrada;
-    @FXML private TextField nombreEntrada;
-    @FXML private DatePicker fechaEntrada;
+    @FXML private ComboBox<Persona> comboExpositor;
+    @FXML private TextField tfNombre, tfHora, tfDuracion, tfDescripcion;
+    @FXML private DatePicker dpFecha;
     @FXML private Button submit;
 
     // Referencia al registro principal
@@ -65,15 +66,12 @@ public class LeerPresentacion extends GridPane implements Initializable, PopUp.P
     @Override
     public void initialize(URL url, ResourceBundle resources) {
         p = new Presentacion();
-        ObservableList<Persona> items = expositorEntrada.getItems();
+        ObservableList<Persona> items = comboExpositor.getItems();
         for (Persona e : registro.getExpositores()) {
 
             items.add(e);
         }
     }
-
-
-
 
     @Override
     public Object getValue() {
@@ -83,21 +81,32 @@ public class LeerPresentacion extends GridPane implements Initializable, PopUp.P
     @Override
     public boolean guardar() {
         p = null;
-        String nombre = nombreEntrada.getText();
+        String nombre = tfNombre.getText();
         if (nombre != null && !nombre.equals("")) {
             p = new Presentacion(nombre);
         } else {
             return false;
         }
-        LocalDate fecha = fechaEntrada.getValue();
+        LocalDate fecha = dpFecha.getValue();
         if (fecha != null) {
             p.setFecha(fecha);
         }
 
-        Persona e = expositorEntrada.getValue();
+        Persona e = comboExpositor.getValue();
         if (e != null) {
             p.setExpositor(e);
         }
+        
+        String hora = tfHora.getText();
+        LocalTime time = Util.parseTime(hora);
+        p.setHora(time);
+        
+        String duracion = tfDuracion.getText();
+        if(Util.isNumeric(duracion))
+        	p.setDuracion(Integer.parseInt(duracion));
+        
+        String descripcion = tfDescripcion.getText();
+        p.setDescripcion(descripcion);
         
         return true;
     }

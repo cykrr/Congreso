@@ -39,6 +39,21 @@ public class Util {
 		return true;
 	}
 	
+	public static LocalTime parseTime(String strTime) {
+		DateTimeFormatter format = DateTimeFormatter.ofPattern("HH:mm")
+	            .withResolverStyle(ResolverStyle.STRICT);
+		LocalTime time;
+		
+		try {
+			time = LocalTime.parse(strTime, format);
+		} catch (DateTimeParseException | NullPointerException e) {
+			e.printStackTrace();
+			return null;
+	    }
+		
+		return time;
+	}
+	
 	public static String getFileExtension(File file) {
 	    String name = file.getName();
 	    int lastIndexOf = name.lastIndexOf(".");
