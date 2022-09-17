@@ -13,7 +13,7 @@ public class Presentacion {
 	private String hora;
 	private int duracion;
 	private String descripcion;
-	private Persona expositor;
+	private Expositor expositor;
 	private LocalDate localDate = LocalDate.of(1993,01, 01);
 	private LocalTime localTime = LocalTime.of(0, 0);
 	private LinkedList<Persona> asistentes;
@@ -25,6 +25,15 @@ public class Presentacion {
     public Presentacion(String nombre) {
         this();
     	this.nombre = nombre;
+    }
+    
+    public Presentacion(String nombre, Expositor expositor, LocalDate fecha, LocalTime hora, int duracion, String descripcion) {
+    	this.nombre = nombre;
+    	this.expositor = expositor;
+    	this.localDate = fecha;
+    	this.localTime = hora;
+    	this.duracion = duracion;
+    	this.descripcion = descripcion;
     }
     
     public void agregarAsistente(Persona asistente){
@@ -97,7 +106,7 @@ public class Presentacion {
         this.fecha = Util.dateFormatter.format(localDate);
     }
     
-    public void setExpositor(Persona expositor) {
+    public void setExpositor(Expositor expositor) {
     	this.expositor = expositor;
     }
 

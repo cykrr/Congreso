@@ -268,16 +268,16 @@ public class Registro {
         System.out.println("---");
     }
 
-    public List<Persona> getExpositores() {
-        return Collections.unmodifiableList(this.listaExpositores);
+    public List<Expositor> getExpositores() {
+        return Collections.unmodifiableList(listaExpositores);
     }
 
     public List<Persona> getAsistentes() {
-        return getExpositores();
+        return Collections.unmodifiableList(listaAsistentes);
     }
 
     public List<Presentacion> getPresentaciones() {
-        return Collections.unmodifiableList(this.listaPresentaciones);
+        return Collections.unmodifiableList(listaPresentaciones);
     }
 }
 
