@@ -50,7 +50,7 @@ public class LeerExpositor extends GridPane implements Initializable, PopUp.PopA
     }
 
     @Override
-    public void guardar() {
+    public boolean guardar() {
         String nombre = tfNombre.getText();
         String correo = tfCorreo.getText();
         String pais = tfPais.getText();
@@ -71,5 +71,6 @@ public class LeerExpositor extends GridPane implements Initializable, PopUp.PopA
 
 
         expositor = new Expositor(nombre, edad, fono, correo, pais, ocupacion);
+        return true;
     }
 }

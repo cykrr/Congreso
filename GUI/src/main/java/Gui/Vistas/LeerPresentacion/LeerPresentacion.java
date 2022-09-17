@@ -81,13 +81,13 @@ public class LeerPresentacion extends GridPane implements Initializable, PopUp.P
     }
 
     @Override
-    public void guardar() {
+    public boolean guardar() {
         p = null;
         String nombre = nombreEntrada.getText();
         if (nombre != null && !nombre.equals("")) {
             p = new Presentacion(nombre);
         } else {
-            return;
+            return false;
         }
         LocalDate fecha = fechaEntrada.getValue();
         if (fecha != null) {
@@ -98,5 +98,7 @@ public class LeerPresentacion extends GridPane implements Initializable, PopUp.P
         if (e != null) {
             p.setExpositor(e);
         }
+        
+        return true;
     }
 }

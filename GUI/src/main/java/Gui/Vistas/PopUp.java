@@ -19,7 +19,7 @@ public class PopUp {
     public interface PopAble {
         /* Guarda los campos en 
          * la variable de retorno */
-        void guardar();
+        boolean guardar();
         /* Devuelve el retorno */
         Object getValue();
 
@@ -60,11 +60,14 @@ public class PopUp {
         dialog = new Scene(root);
 
         b.setOnAction(e-> {
-            if (child instanceof PopAble)
-                ((PopAble)child).guardar();
-            else 
+            if (child instanceof PopAble) {
+                boolean valid = ((PopAble)child).guardar();
+                if(valid)
+                	stage.close();
+            } else {
+            	stage.close();
                 throw new RuntimeException("child no implementa la interfaz: PopAble");
-            stage.close();
+            }
         });
 
         VBox.setMargin(b, new Insets(0, 0, 15, 15));
