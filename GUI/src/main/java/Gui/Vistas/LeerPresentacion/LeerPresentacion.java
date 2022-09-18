@@ -92,14 +92,12 @@ public class LeerPresentacion extends GridPane implements Initializable, PopUp.P
         	Alerta.showAlert("La fecha ingresada no es válida");
         	return false;
         }
-        Alerta.showAlert(fecha.toString());
         
         LocalTime hora = Util.parseTime(strHora);
         if(hora == null) {
         	Alerta.showAlert("La hora ingresada no es válida");
         	return false;
         }
-        Alerta.showAlert(hora.toString());
         
         if(!Util.isNumeric(strDuracion)) {
         	Alerta.showAlert("La duración ingresada no es válida");
