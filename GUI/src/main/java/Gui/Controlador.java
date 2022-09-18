@@ -2,6 +2,7 @@ package Gui;
 import java.io.File;
 
 import java.io.FileInputStream;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -18,6 +19,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import Gui.Vistas.PopUp;
 import Gui.Vistas.Asistente.LeerAsistente;
+// import Gui.Vistas.Asistente.LeerAsistente;
 import Gui.Vistas.Dashboard.Dashboard;
 import Gui.Vistas.LeerExpositor.LeerExpositor;
 import Gui.Vistas.LeerPresentacion.LeerPresentacion;
@@ -76,9 +78,13 @@ public class Controlador implements Initializable {
         popup.setTitle("Crear presentación");
         
         retorno = (Presentacion)popup.showDialog();
-        if (retorno != null)
+        if (retorno != null) {
             registro.insertarPresentacion(retorno);
-        System.out.println(retorno);
+            lp.fireEvent(new EventoPresentacion(EventoPresentacion.CREAR_PRESENTACION, retorno));
+            System.out.println(retorno);
+        } else {
+            System.err.println("no hay presentacion");
+        }
     }
     
     /** @brief Crea un nuevo expositor
@@ -109,8 +115,10 @@ public class Controlador implements Initializable {
     	popup.setTitle("Crear asistente");
     	
     	asistente = (Persona) popup.showDialog();
-    	if(asistente != null)
+    	if(asistente != null) {
     		registro.insertarAsistente(asistente);
+
+        }
     }
 
     /* Importa un archivo por medio de un
