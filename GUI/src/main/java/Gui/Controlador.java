@@ -8,6 +8,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -37,6 +38,7 @@ public class Controlador implements Initializable {
     private     Registro    registro; // Referencia a la base de datos del programa
     private     Stage       stage;    // Ventana principal
     private     Ajustes     ajustes;  // Ajustes del programa
+    private     Node        child;                                      
 
     /** @brief Constructor se ejecuta antes de leer xml*/
     public Controlador(Stage s, Registro r) {
@@ -80,7 +82,7 @@ public class Controlador implements Initializable {
         retorno = (Presentacion)popup.showDialog();
         if (retorno != null) {
             registro.insertarPresentacion(retorno);
-            lp.fireEvent(new EventoPresentacion(EventoPresentacion.CREAR_PRESENTACION, retorno));
+            child.fireEvent(new EventoPresentacion(EventoPresentacion.CREAR_PRESENTACION, retorno));
             System.out.println(retorno);
         } else {
             System.err.println("no hay presentacion");
@@ -169,5 +171,9 @@ public class Controlador implements Initializable {
         TextInputDialog dialog = new TextInputDialog("Preferencias");
         dialog.setTitle("Preferencias");
         dialog.setContentText("Please enter your name:");
+    }
+
+    public void setChild(Node child) {
+        this.child = child;
     }
 }
