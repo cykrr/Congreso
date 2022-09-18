@@ -1,27 +1,20 @@
 package Gui;
 import java.io.File;
 
-import java.io.FileInputStream;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 import Gui.Vistas.PopUp;
 import Gui.Vistas.Asistente.LeerAsistente;
 // import Gui.Vistas.Asistente.LeerAsistente;
-import Gui.Vistas.Dashboard.Dashboard;
 import Gui.Vistas.LeerExpositor.LeerExpositor;
 import Gui.Vistas.LeerPresentacion.LeerPresentacion;
 import Congreso.Expositor;
