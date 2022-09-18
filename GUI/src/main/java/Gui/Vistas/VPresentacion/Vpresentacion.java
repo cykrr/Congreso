@@ -18,17 +18,20 @@ public class Vpresentacion extends VBox {
         Text title = new Text(p.getNombre());
         this.getChildren().add(title);
         title.getStyleClass().add("h1");
+
+        Text expositor = new Text(p.getExpositor().getNombre());
+        this.getChildren().add(expositor);
+        title.getStyleClass().add("p");
+
         VBox.setMargin(title, new Insets(10));
-        this.setWidth(Integer.MAX_VALUE);
+        VBox.setMargin(expositor, new Insets(0, 0, 10, 15));
         this.setBorder(new Border (
                     new BorderStroke(
                         Color.TRANSPARENT, // UP
                         Color.TRANSPARENT, // RIGHT
 
                         new Color(         // BOTTOM
-                            0x29/0xff,
-                            0x29/0xff,
-                            0x29/0xff,
+                            .85, .85, .85,
                             0xff/0xff),  
 
                         Color.TRANSPARENT, // LEFT
