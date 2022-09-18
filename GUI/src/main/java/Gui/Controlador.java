@@ -8,6 +8,7 @@ import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ScrollPane;
@@ -41,9 +42,10 @@ public class Controlador implements Initializable {
 
 
     public void enNuevaPresentacion(EventoPresentacion ep) {
+        Vpresentacion vp = new Vpresentacion(ep.getPresentacion());
         child.getScrollBox()
             .getChildren()
-            .add(new Vpresentacion(ep.getPresentacion()));
+            .add(vp);
     }
 
     /** @brief Constructor se ejecuta antes de leer xml*/
