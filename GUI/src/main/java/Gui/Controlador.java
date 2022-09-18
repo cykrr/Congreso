@@ -17,6 +17,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import Gui.Vistas.PopUp;
+import Gui.Vistas.Asistente.LeerAsistente;
 import Gui.Vistas.Dashboard.Dashboard;
 import Gui.Vistas.LeerExpositor.LeerExpositor;
 import Gui.Vistas.LeerPresentacion.LeerPresentacion;
@@ -94,6 +95,22 @@ public class Controlador implements Initializable {
         expositor = (Expositor) popup.showDialog();
         if(expositor != null)
         	registro.insertarExpositor(expositor);
+    }
+    
+    /** @brief Crea un nuevo asistente
+    *
+    * por medio de un PopUp y lo añade al registro
+    */
+    public void crearAsistente() {
+    	Persona asistente = null;
+    	
+    	LeerAsistente la = new LeerAsistente();
+    	PopUp popup = new PopUp(stage, la);
+    	popup.setTitle("Crear asistente");
+    	
+    	asistente = (Persona) popup.showDialog();
+    	if(asistente != null)
+    		registro.insertarAsistente(asistente);
     }
 
     /* Importa un archivo por medio de un
