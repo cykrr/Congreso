@@ -1,7 +1,7 @@
 /* Caja con borde redondo */
 .box {
-    -fx-background-color: #dfdfdf;
-    -fx-border-color: #dfdfdf;
+    -fx-background-color: #f3f3f3;
+    -fx-border-color: #f3f3f3;
     -fx-border-radius: 20;
     -fx-background-radius: 20;
     -fx-border-width: 1;
@@ -30,4 +30,20 @@
 
 .search {
     -fx-cursor: text;
+}
+
+.selected {
+    -fx-background-color: #ff7373;
+    -fx-border-color: #ff7373;
+    -fx-text-fill: white;
+}
+
+.selected:hover {
+    -fx-background-color: #ff9696;
+    -fx-border-color: #ff9696;
+    -fx-text-fill: white;
+}
+
+.p {
+    -fx-text-fill: inherit;
 }
