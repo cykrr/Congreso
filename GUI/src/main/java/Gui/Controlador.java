@@ -5,18 +5,24 @@ import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.layout.VBox;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import Gui.Vistas.PopUp;
 import Gui.Vistas.Asistente.LeerAsistente;
+import Gui.Vistas.Dashboard.Dashboard;
 // import Gui.Vistas.Asistente.LeerAsistente;
 import Gui.Vistas.LeerExpositor.LeerExpositor;
 import Gui.Vistas.LeerPresentacion.LeerPresentacion;
+import Gui.Vistas.VPersona.VPersona;
+import Gui.Vistas.VPresentacion.Vpresentacion;
 import Congreso.Expositor;
 import Congreso.Persona;
 import Congreso.Presentacion;
@@ -31,7 +37,14 @@ public class Controlador implements Initializable {
     private     Registro    registro; // Referencia a la base de datos del programa
     private     Stage       stage;    // Ventana principal
     private     Ajustes     ajustes;  // Ajustes del programa
-    private     Node        child;                                      
+    private     Dashboard   child;                                      
+
+
+    public void enNuevaPresentacion(EventoPresentacion ep) {
+        child.getScrollBox()
+            .getChildren()
+            .add(new Vpresentacion(ep.getPresentacion()));
+    }
 
     /** @brief Constructor se ejecuta antes de leer xml*/
     public Controlador(Stage s, Registro r) {
@@ -53,6 +66,9 @@ public class Controlador implements Initializable {
     
     /** @brief Método que se ejecuta luego de leer xml */
     public void initialize(URL url, ResourceBundle resources) {
+            child.addEventFilter(EventoPresentacion.CREAR_PRESENTACION, e-> {
+                enNuevaPresentacion(e);
+            });
     }
 
     /** @brief genera un Popup para crear presentación
@@ -166,7 +182,7 @@ public class Controlador implements Initializable {
         dialog.setContentText("Please enter your name:");
     }
 
-    public void setChild(Node child) {
+    public void setChild(Dashboard child) {
         this.child = child;
     }
 }

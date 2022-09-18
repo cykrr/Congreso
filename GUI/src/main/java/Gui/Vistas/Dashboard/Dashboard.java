@@ -16,8 +16,14 @@ import javafx.scene.Node;
 import javafx.scene.layout.VBox;
 
 public class Dashboard extends VBox implements Initializable {
-    @FXML Busqueda cajaBusqueda;
-    Registro registro;
+    private     Registro    registro;
+
+    @FXML
+    private     Busqueda    cajaBusqueda;
+
+    @FXML
+    private     VBox        scrollBox;
+
     public Dashboard(Registro r) {
         super();
         this.registro = r; 
@@ -41,5 +47,9 @@ public class Dashboard extends VBox implements Initializable {
     public void buscar() {
         String b = cajaBusqueda.getValue();
         System.out.println("hola " + b);
+    }
+
+    public VBox getScrollBox() {
+        return this.scrollBox;
     }
 }

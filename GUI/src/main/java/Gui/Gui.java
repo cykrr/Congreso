@@ -55,12 +55,12 @@ public class Gui extends Application {
         this.controlador = new Controlador(s, registro);
 
         this.stage = s;
-        inflar();
         Dashboard d = new Dashboard(registro);
+        controlador.setChild(d);
+        inflar();
         this.root.getChildren().add(d);
         VBox.setVgrow(d, Priority.ALWAYS);
         d.getStylesheets().add("/styles.css");
-        controlador.setChild(d);
     }
 
     /** 
@@ -73,9 +73,6 @@ public class Gui extends Application {
         loader.setController(controlador);
         try {
             root = (VBox)loader.load();
-            root.addEventFilter(EventoPresentacion.CREAR_PRESENTACION, e-> {
-                System.out.println("yay");
-            });
             Scene s = new Scene(root);
             stage.setScene(s);
             stage.setWidth(480);
