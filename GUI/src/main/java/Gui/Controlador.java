@@ -8,6 +8,7 @@ import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.scene.control.Alert;
@@ -71,6 +72,10 @@ public class Controlador implements Initializable {
             child.addEventFilter(EventoPresentacion.CREAR_PRESENTACION, e-> {
                 enNuevaPresentacion(e);
             });
+
+            for (Presentacion p : registro.getPresentaciones()) {
+                child.fireEvent(new EventoPresentacion(EventoPresentacion.CREAR_PRESENTACION, p));
+            }
     }
 
     /** @brief genera un Popup para crear presentación
