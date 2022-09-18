@@ -21,11 +21,13 @@
 <VBox
     xmlns="http://javafx.com/javafx" 
     xmlns:fx="http://javafx.com/fxml"
+    style = "-fx-background-color: #ffffff"
     >
     <MenuBar>
         <!-- TODO : Configurar teclas  -->
         <Menu text = "Archivo">
             <MenuItem text="Abrir archivo [Ctrl + O]"/>
+
             <MenuItem text="Guardar Archivo [Ctrl + S]"/>
             <SeparatorMenuItem/>
             <MenuItem 
