@@ -36,7 +36,7 @@ public class MenuAsistentes {
     	System.out.println("Ingrese teléfono del asistente:");
     	int fono = Integer.parseInt(br.readLine());
     	
-    	Persona persona = new Persona(nombre, edad, fono);
+    	Persona persona = new Persona(nombre, edad, fono,"NAN");
     	p.agregarAsistente(persona);
 	}
 

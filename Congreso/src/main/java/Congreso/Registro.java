@@ -279,5 +279,17 @@ public class Registro {
     public List<Presentacion> getPresentaciones() {
         return Collections.unmodifiableList(listaPresentaciones);
     }
+    
+    public Integer getCantidadPresentaciones() {
+    	return listaPresentaciones.size();
+    }
+    
+    public Integer getCantidadExpositores() {
+    	return listaExpositores.size();
+    }
+    
+    public Integer getCantidadAsistentes() {
+    	return listaAsistentes.size();
+    }
 }
 
