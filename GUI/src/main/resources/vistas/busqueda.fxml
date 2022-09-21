@@ -9,7 +9,7 @@
 
 <HBox xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-       <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="200" nodeOrientation="LEFT_TO_RIGHT" styleClass="box">
+       <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="200" nodeOrientation="LEFT_TO_RIGHT" styleClass="box,search">
          <HBox.margin>
             <Insets bottom="5.0" left="10.0" right="0" top="5.0" />
          </HBox.margin>

@@ -21,11 +21,13 @@
 <VBox
     xmlns="http://javafx.com/javafx" 
     xmlns:fx="http://javafx.com/fxml"
+    style = "-fx-background-color: #ffffff"
     >
     <MenuBar>
         <!-- TODO : Configurar teclas  -->
         <Menu text = "Archivo">
             <MenuItem text="Abrir archivo [Ctrl + O]"/>
+
             <MenuItem text="Guardar Archivo [Ctrl + S]"/>
             <SeparatorMenuItem/>
             <MenuItem 
@@ -39,11 +41,14 @@
         </Menu>
         <Menu text = "Editar">
             <MenuItem 
-                text="Crear presentación [Ctrl + p]"
+                text="Crear presentación [Ctrl + P]"
                 onAction = "#crearPresentacion"/>
             <MenuItem 
-                text="Crear expositor [Ctrl + A]"
+                text="Crear expositor [Ctrl + X]"
                 onAction = "#crearExpositor"/>
+            <MenuItem 
+                text="Crear asistente [Ctrl + A]"
+                onAction = "#crearAsistente"/>
             <SeparatorMenuItem/>
             <MenuItem
                 text="Preferencias"

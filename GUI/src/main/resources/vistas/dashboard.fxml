@@ -9,7 +9,12 @@
 <?import javafx.scene.text.Text?>
 <?import Gui.Vistas.Busqueda.*?>
 
-<VBox VBox.vgrow="ALWAYS" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+<VBox 
+    VBox.vgrow="ALWAYS"
+    style = "-fx-background-color: #ffffff"
+    xmlns="http://javafx.com/javafx/18"
+    xmlns:fx="http://javafx.com/fxml/1"
+    >
 
 <children>
     <HBox>
@@ -32,24 +37,28 @@
         <HBox maxHeight="50.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="100.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
             <children>
                 <!-- <Pane fx:id="dropDown" prefHeight="50.0" prefWidth="50.0" /> -->
-                <Pane>
-                    <HBox.margin>
-                        <Insets bottom="0" left="0" right="20" top="10" />
-                    </HBox.margin>
+                <HBox nodeOrientation = "LEFT_TO_RIGHT">
 
-                    <Busqueda fx:id="cajaBusqueda" onAction="#buscar" />
-                </Pane>
+                    <Busqueda fx:id="cajaBusqueda" onAction="#buscar" >
+                        <HBox.margin>
+                            <Insets bottom="0" left="0" right="30" top="10" />
+                        </HBox.margin>
+                    </Busqueda>
+                </HBox>
 
             </children>
         </HBox>
     </HBox>
     <HBox prefHeight="150.0" prefWidth="250.0">
         <children>
-            <VBox prefHeight="200.0" prefWidth="200.0" styleClass="box">
+            <VBox fx:id = "botonPresentaciones"
+                prefHeight="200.0"
+                prefWidth="200.0"
+                styleClass="box">
                 <HBox.margin>
                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                 </HBox.margin>
-                <Text text="Presentaciones">
+                <Text text="Presentaciones" styleClass = "p">
                     <font>
                         <Font size="20" />
                     </font>
@@ -66,7 +75,7 @@
                     </VBox.margin>
                 </Text>
             </VBox>
-            <VBox prefHeight="200.0" prefWidth="200.0" styleClass="box">
+            <VBox fx:id = "botonExpositores" prefHeight="200.0" prefWidth="200.0" styleClass="box">
                 <HBox.margin>
                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                 </HBox.margin>
@@ -84,7 +93,7 @@
                     </VBox.margin>
                 </Text>
             </VBox>
-            <VBox prefHeight="200.0" prefWidth="200.0" styleClass="box">
+            <VBox fx:id = "botonAsistentes" prefHeight="200.0" prefWidth="200.0" styleClass="box">
                 <HBox.margin>
                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                 </HBox.margin>
@@ -114,9 +123,19 @@
         </VBox.margin>
     </Text>
 
-    <VBox styleClass="box" VBox.vgrow="ALWAYS">
+    <VBox  VBox.vgrow="ALWAYS"
+        style="-fx-background-color: transparent; -fx-border-color: transparent"
+        >
         <children>
-            <ScrollPane opacity="0.55" style="-fx-background-color: transparent;" styleClass="edge-to-edge noborder-scroll-pane" VBox.vgrow="ALWAYS" />
+            <ScrollPane fx:id = "scroll"
+                style="-fx-background-color: transparent; -fx-border-color: transparent"
+                VBox.vgrow="ALWAYS"
+                >
+                    <VBox fx:id = "scrollBox"
+                        style="-fx-background-color: transparent; -fx-border-color: transparent"
+                        >
+                    </VBox>
+            </ScrollPane>
         </children>
         <VBox.margin>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />

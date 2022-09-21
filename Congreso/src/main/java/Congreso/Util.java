@@ -10,7 +10,7 @@ import java.time.format.ResolverStyle;
 
 public class Util {
 
-	public final static DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("d-M-[uuuu][uu]").withResolverStyle(ResolverStyle.STRICT);
+	public final static DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd-MM-YYYY").withResolverStyle(ResolverStyle.STRICT);
 	public final static DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("H:m").withResolverStyle(ResolverStyle.STRICT);
 
 	public static boolean validateDate(String strDate) {

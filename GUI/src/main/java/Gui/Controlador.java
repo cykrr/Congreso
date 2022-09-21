@@ -1,25 +1,30 @@
 package Gui;
 import java.io.File;
 
-import java.io.FileInputStream;
-import java.io.IOException;
+
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Scene;
+import javafx.scene.Node;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.VBox;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 import Gui.Vistas.PopUp;
+import Gui.Vistas.Asistente.LeerAsistente;
 import Gui.Vistas.Dashboard.Dashboard;
+// import Gui.Vistas.Asistente.LeerAsistente;
 import Gui.Vistas.LeerExpositor.LeerExpositor;
 import Gui.Vistas.LeerPresentacion.LeerPresentacion;
+import Gui.Vistas.VPersona.VPersona;
+import Gui.Vistas.VPresentacion.Vpresentacion;
 import Congreso.Expositor;
 import Congreso.Persona;
 import Congreso.Presentacion;
@@ -34,6 +39,16 @@ public class Controlador implements Initializable {
     private     Registro    registro; // Referencia a la base de datos del programa
     private     Stage       stage;    // Ventana principal
     private     Ajustes     ajustes;  // Ajustes del programa
+    private     Dashboard   child;                                      
+
+
+    public void enNuevaPresentacion(EventoPresentacion ep) {
+        Vpresentacion vp = new Vpresentacion(ep.getPresentacion());
+        child.getScrollBox()
+            .getChildren()
+            .add(vp);
+        child.actualizarNumeroPresentaciones();
+    }
 
     /** @brief Constructor se ejecuta antes de leer xml*/
     public Controlador(Stage s, Registro r) {
@@ -55,6 +70,13 @@ public class Controlador implements Initializable {
     
     /** @brief Método que se ejecuta luego de leer xml */
     public void initialize(URL url, ResourceBundle resources) {
+            child.addEventFilter(EventoPresentacion.CREAR_PRESENTACION, e-> {
+                enNuevaPresentacion(e);
+            });
+
+            for (Presentacion p : registro.getPresentaciones()) {
+                child.fireEvent(new EventoPresentacion(EventoPresentacion.CREAR_PRESENTACION, p));
+            }
     }
 
     /** @brief genera un Popup para crear presentación
@@ -75,9 +97,13 @@ public class Controlador implements Initializable {
         popup.setTitle("Crear presentación");
         
         retorno = (Presentacion)popup.showDialog();
-        if (retorno != null)
+        if (retorno != null) {
             registro.insertarPresentacion(retorno);
-        System.out.println(retorno);
+            child.fireEvent(new EventoPresentacion(EventoPresentacion.CREAR_PRESENTACION, retorno));
+            System.out.println(retorno);
+        } else {
+            System.err.println("no hay presentacion");
+        }
     }
     
     /** @brief Crea un nuevo expositor
@@ -94,6 +120,24 @@ public class Controlador implements Initializable {
         expositor = (Expositor) popup.showDialog();
         if(expositor != null)
         	registro.insertarExpositor(expositor);
+    }
+    
+    /** @brief Crea un nuevo asistente
+    *
+    * por medio de un PopUp y lo añade al registro
+    */
+    public void crearAsistente() {
+    	Persona asistente = null;
+    	
+    	LeerAsistente la = new LeerAsistente();
+    	PopUp popup = new PopUp(stage, la);
+    	popup.setTitle("Crear asistente");
+    	
+    	asistente = (Persona) popup.showDialog();
+    	if(asistente != null) {
+    		registro.insertarAsistente(asistente);
+
+        }
     }
 
     /* Importa un archivo por medio de un
@@ -144,5 +188,9 @@ public class Controlador implements Initializable {
         TextInputDialog dialog = new TextInputDialog("Preferencias");
         dialog.setTitle("Preferencias");
         dialog.setContentText("Please enter your name:");
+    }
+
+    public void setChild(Dashboard child) {
+        this.child = child;
     }
 }
