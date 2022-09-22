@@ -90,7 +90,7 @@ public class Registro {
 	        String line;
 			while((line = br.readLine()) != null) {
 			    LinkedList<String> lineArray = CSVTokener.csvArray(new CSVTokener(line));
-			    if (lineArray.size() != 8)
+			    if (lineArray.size() != 10)
 			    	continue; // Cantidad de campos por linea no coincide
 			            
 			    Presentacion p = new Presentacion();
@@ -104,10 +104,12 @@ public class Registro {
 			    p.setDia(Integer.parseInt(lineArray.get(2)));
 			    p.setMes(Integer.parseInt(lineArray.get(3)));
 			    p.setAño(Integer.parseInt(lineArray.get(4)));
-			    p.setDuracion(Integer.parseInt(lineArray.get(5)));
-			    p.setDescripcion(lineArray.get(6));
+			    p.setHora(Integer.parseInt(lineArray.get(5)));
+			    p.setMinuto(Integer.parseInt(lineArray.get(6)));
+			    p.setDuracion(Integer.parseInt(lineArray.get(7)));
+			    p.setDescripcion(lineArray.get(8));
 			    
-			    String asistentes = lineArray.get(7);
+			    String asistentes = lineArray.get(9);
 			    asistentes = asistentes.substring(1, asistentes.length() - 1);
 			    LinkedList<String> listaAsistentes = CSVTokener.csvArray(new CSVTokener(asistentes));
 			    
