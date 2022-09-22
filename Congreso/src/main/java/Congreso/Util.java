@@ -10,22 +10,8 @@ import java.time.format.ResolverStyle;
 
 public class Util {
 
-	public final static DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd-MM-YYYY").withResolverStyle(ResolverStyle.STRICT);
+	public final static DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("d-M-[uuuu][uu]").withResolverStyle(ResolverStyle.STRICT);
 	public final static DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("H:m").withResolverStyle(ResolverStyle.STRICT);
-
-	public static boolean validateDate(String strDate) {
-		SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
-		format.setLenient(false);
-
-	    try {
-	        format.parse(strDate); 
-	    } 
-	    catch (ParseException e) {
-	        return false;
-	    }
-	    
-	    return true;
-	}
 	
 	public static LocalDate parseDate(String strDate) {
 		LocalDate date;	
@@ -37,20 +23,6 @@ public class Util {
 	    }
 		
 		return date;
-	}
-
-	public static boolean validateTime(String strTime) {
-		DateTimeFormatter format = DateTimeFormatter.ofPattern("HH:mm")
-	            .withResolverStyle(ResolverStyle.STRICT);
-		
-		try {
-			LocalTime.parse(strTime, format);
-		}
-		catch (DateTimeParseException | NullPointerException e) {
-	        return false;
-	    }
-	    
-		return true;
 	}
 	
 	public static LocalTime parseTime(String strTime) {
