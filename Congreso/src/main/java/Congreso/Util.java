@@ -10,14 +10,16 @@ import java.time.format.ResolverStyle;
 
 public class Util {
 
-	public final static DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("d-M-[uuuu][uu]").withResolverStyle(ResolverStyle.STRICT);
-	public final static DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("H:m").withResolverStyle(ResolverStyle.STRICT);
+	public final static DateTimeFormatter dateFormatterInput = DateTimeFormatter.ofPattern("d-M-[uuuu][uu]").withResolverStyle(ResolverStyle.STRICT);
+	public final static DateTimeFormatter dateFormatterOutput = DateTimeFormatter.ofPattern("dd-MM-uuuu").withResolverStyle(ResolverStyle.STRICT);
+	public final static DateTimeFormatter timeFormatterInput = DateTimeFormatter.ofPattern("H:m").withResolverStyle(ResolverStyle.STRICT);
+	public final static DateTimeFormatter timeFormatterOutput = DateTimeFormatter.ofPattern("HH:mm").withResolverStyle(ResolverStyle.STRICT);
 	
 	public static LocalDate parseDate(String strDate) {
 		LocalDate date;	
 		
 		try {
-			date = LocalDate.parse(strDate, dateFormatter);
+			date = LocalDate.parse(strDate, dateFormatterInput);
 		} catch (DateTimeParseException | NullPointerException e) {
 			return null;
 	    }
@@ -29,7 +31,7 @@ public class Util {
 		LocalTime time;	
 		
 		try {
-			time = LocalTime.parse(strTime, timeFormatter);
+			time = LocalTime.parse(strTime, timeFormatterInput);
 		} catch (DateTimeParseException | NullPointerException e) {
 			return null;
 	    }

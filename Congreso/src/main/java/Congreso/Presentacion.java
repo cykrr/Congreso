@@ -27,6 +27,7 @@ public class Presentacion {
     	this.hora = hora;
     	this.duracion = duracion;
     	this.descripcion = descripcion;
+    	this.asistentes = new LinkedList<Persona>();
     }
     
     public void agregarAsistente(Persona asistente){
@@ -197,7 +198,7 @@ public class Presentacion {
     }
     
     public String getStringFecha() {
-    	return Util.dateFormatter.format(fecha);
+    	return Util.dateFormatterOutput.format(fecha);
     }
     
     public LocalTime getHora() {
@@ -205,7 +206,7 @@ public class Presentacion {
     }
     
     public String getStringHora() {
-    	return Util.timeFormatter.format(hora);
+    	return Util.timeFormatterOutput.format(hora);
     }
     
     public int getDuracion() {

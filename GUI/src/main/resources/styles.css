@@ -47,3 +47,23 @@
 .p {
     -fx-text-fill: inherit;
 }
+
+/* Animación vista extendida */
+
+.boxHidden {
+    visibility: hidden;
+    -fx-padding: -1em;
+    -fx-max-height: -1em;
+    -fx-pref-height: -1em;
+    height: 0;
+    overflow: hidden;
+}
+.boxVisible {
+    display: inherit;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+    max-height: 100px;
+    transition: max-height 0.8s ease, padding-top 0.8s ease, padding-bottom 0.8s ease; 
+}
