@@ -62,37 +62,37 @@ public class LeerExpositor extends GridPane implements Initializable, PopUp.PopA
         String strFono = tfFono.getText().trim();
         
         if(nombre.isEmpty() || correo.isEmpty() || pais.isEmpty() || ocupacion.isEmpty() || strEdad.isEmpty() || strFono.isEmpty()) {
-            Alerta.showAlert("No pueden quedar campos vacíos");
+            Alerta.mostrarAlertaAdvertencia("No pueden quedar campos vacíos");
             return false;
         }
         
         if(!Util.isAlphaOrSpace(nombre)) {
-        	Alerta.showAlert("El nombre ingresado no es válido");
+        	Alerta.mostrarAlertaAdvertencia("El nombre ingresado no es válido");
         	return false;
         }
         
         if(!Util.isNumeric(strEdad)) {
-        	Alerta.showAlert("La edad ingresada no es válida");
+        	Alerta.mostrarAlertaAdvertencia("La edad ingresada no es válida");
         	return false;
         }
         
         if(!Util.isNumeric(strFono)) {
-        	Alerta.showAlert("El teléfono ingresado no es válido");
+        	Alerta.mostrarAlertaAdvertencia("El teléfono ingresado no es válido");
         	return false;
         }
         
         if(!Util.validateEmail(correo)) {
-        	Alerta.showAlert("El email ingresado no es válido");
+        	Alerta.mostrarAlertaAdvertencia("El email ingresado no es válido");
         	return false;
         }
         
         if(!Util.isAlphaOrSpace(pais)) {
-        	Alerta.showAlert("El país ingresado no es válido");
+        	Alerta.mostrarAlertaAdvertencia("El país ingresado no es válido");
         	return false;
         }
         
         if(!Util.isAlphaOrSpace(ocupacion)) {
-        	Alerta.showAlert("La ocupación ingresada no es válida");
+        	Alerta.mostrarAlertaAdvertencia("La ocupación ingresada no es válida");
         	return false;
         }
         

@@ -93,29 +93,29 @@ public class LeerPresentacion extends GridPane implements Initializable, PopUp.P
         Expositor expositor = comboExpositor.getValue();
         
         if(nombre.isEmpty() || strFecha.isEmpty() || strHora.isEmpty() || strDuracion.isEmpty() || descripcion.isEmpty()) {
-        	Alerta.showAlert("No pueden quedar campos vacíos");
+        	Alerta.mostrarAlertaAdvertencia("No pueden quedar campos vacíos");
         	return false;
         }
         
         LocalDate fecha = Util.parseDate(strFecha);
         if(fecha == null) {
-        	Alerta.showAlert("La fecha ingresada no es válida");
+        	Alerta.mostrarAlertaAdvertencia("La fecha ingresada no es válida");
         	return false;
         }
         
         LocalTime hora = Util.parseTime(strHora);
         if(hora == null) {
-        	Alerta.showAlert("La hora ingresada no es válida");
+        	Alerta.mostrarAlertaAdvertencia("La hora ingresada no es válida");
         	return false;
         }
         
         if(!Util.isNumeric(strDuracion)) {
-        	Alerta.showAlert("La duración ingresada no es válida");
+        	Alerta.mostrarAlertaAdvertencia("La duración ingresada no es válida");
         	return false;
         }
  
         if(expositor == null) {
-        	Alerta.showAlert("Seleccione un expositor");
+        	Alerta.mostrarAlertaAdvertencia("Seleccione un expositor");
         	return false;
         }
         
