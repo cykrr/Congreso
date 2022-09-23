@@ -129,7 +129,7 @@ public class Vpresentacion extends VBox {
     }
     
     public void eliminarPresentacion() {
-    	boolean opcion = Alerta.mostrarAlertaConfirmacion("¿Desea eliminar esta presentación?");
+    	boolean opcion = Alerta.mostrarAlertaConfirmacion("¿Desea eliminar la presentación \"" + p.getNombre() + "\"?");
     	if(opcion) {
     		registro.eliminarPresentacion(p);
     		dashboard.fireEvent(new EventoPresentacion(EventoPresentacion.ELIMINAR_PRESENTACION, p));
