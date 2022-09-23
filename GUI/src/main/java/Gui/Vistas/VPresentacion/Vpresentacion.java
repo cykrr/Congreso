@@ -5,6 +5,11 @@ import java.util.LinkedList;
 
 import Congreso.Persona;
 import Congreso.Presentacion;
+import Congreso.Registro;
+import Gui.EventoPresentacion;
+import Gui.Vistas.PopUp;
+import Gui.Vistas.Dashboard.Dashboard;
+import Gui.Vistas.LeerPresentacion.LeerPresentacion;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,14 +18,25 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
 public class Vpresentacion extends VBox {
     @FXML Text txtNombre, txtExpositor, txtDescripcion, txtFecha, txtHora, txtDuracion, txtTotalAsistentes, txtAsistentes;
-    @FXML ImageView imgButton;
+    @FXML ImageView imgButtonMostrar, imgButtonEditar, imgButtonBorrar;
     @FXML VBox boxVistaExtendida;
     
-    public Vpresentacion(Presentacion p) {
+    private Dashboard dashboard;
+    private Registro registro;
+    private Stage stage;
+    private Presentacion p;
+    
+    public Vpresentacion(Presentacion p, Registro registro, Stage stage, Dashboard dashboard) {
         super();
+        this.dashboard = dashboard;
+        this.registro = registro;
+        this.stage = stage;
+        this.p = p;
+        
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/vistas/vPresentacion.fxml"));
         fxmlLoader.setController(this);
         Node n = null;
@@ -44,21 +60,28 @@ public class Vpresentacion extends VBox {
         
         if(asistentes.size() == 0) {
         	txtAsistentes.setText("Ninguno");
-        	return;
+        } else {     
+	        String str = "";
+	        for(int i = 0; i < asistentes.size()-1; i++) {
+	        	str += asistentes.get(i);
+	        	str += ", ";
+	        }
+	        str += asistentes.get(asistentes.size()-1);
+	        txtAsistentes.setText(str);
         }
         
-        String str = "";
-        for(int i = 0; i < asistentes.size()-1; i++) {
-        	str += asistentes.get(i);
-        	str += ", ";
-        }
-        str += asistentes.get(asistentes.size()-1);
-        txtAsistentes.setText(str);
-        
-        imgButton.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+        imgButtonMostrar.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
                 alternarVistaExtendida();
+                event.consume();
+            }
+        });
+        
+        imgButtonEditar.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                editarPresentacion();
                 event.consume();
             }
         });
@@ -75,5 +98,17 @@ public class Vpresentacion extends VBox {
             boxVistaExtendida.setManaged(true);
             boxVistaExtendida.setVisible(true);
     	}
+    }
+    
+    public void editarPresentacion() {
+    	LeerPresentacion lp = new LeerPresentacion(registro, p);
+    	PopUp popup = new PopUp(stage, lp);
+    	popup.setTitle("Editar presentación");
+            
+        Presentacion retorno = (Presentacion)popup.showDialog();
+        if (retorno != null) {
+        	registro.editarPresentacion(p, retorno);
+            dashboard.fireEvent(new EventoPresentacion(EventoPresentacion.EDITAR_PRESENTACION, p, retorno));
+        }
     }
 }

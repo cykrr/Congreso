@@ -13,7 +13,7 @@
       <children>
          <HBox alignment="CENTER">
             <children>
-               <ImageView fx:id="imgButton" fitHeight="10.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand">
+               <ImageView fx:id="imgButtonMostrar" fitHeight="10.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand">
                   <image>
                      <Image url="@../icons/down_arrow.png" />
                   </image>
@@ -32,12 +32,12 @@
          </VBox>
          <HBox alignment="CENTER_RIGHT" nodeOrientation="LEFT_TO_RIGHT" spacing="20.0" HBox.hgrow="ALWAYS">
             <children>
-               <ImageView fitHeight="29.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+               <ImageView fx:id="imgButtonEditar" fitHeight="29.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand">
                   <image>
                      <Image url="@../icons/edit.png" />
                   </image>
                </ImageView>
-               <ImageView fitHeight="29.0" fitWidth="22.0" layoutX="97.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
+               <ImageView fx:id="imgButtonBorrar" fitHeight="29.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand">
                   <image>
                      <Image url="@../icons/delete.png" />
                   </image>

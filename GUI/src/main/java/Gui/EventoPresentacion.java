@@ -16,15 +16,29 @@ public class EventoPresentacion extends Event {
     public static final EventType<EventoPresentacion> ELIMINAR_PRESENTACION =
         new EventType<>(EventoPresentacion.ANY, "ELIMINAR_PRESENTACION");
 
-    Presentacion presentacion;
+    private Presentacion p1;
+    private Presentacion p2;
 
     public EventoPresentacion(EventType<? extends Event> et, Presentacion p) {
         super(et);
-        this.presentacion = p;
-
+        this.p1 = p;
+    }
+    
+    public EventoPresentacion(EventType<? extends Event> et, Presentacion p1, Presentacion p2) {
+    	super(et);
+    	this.p1 = p1;
+    	this.p2 = p2;
     }
 
     public Presentacion getPresentacion() {
-        return presentacion;
+        return p1;
+    }
+    
+    public Presentacion getPresentacionAntigua() {
+    	return p1;
+    }
+    
+    public Presentacion getPresentacionNueva() {
+    	return p2;
     }
 }

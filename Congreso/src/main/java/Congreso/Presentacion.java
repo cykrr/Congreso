@@ -99,28 +99,8 @@ public class Presentacion {
         this.nombre = n;
     }
 
-    public void setAsistentes(String asistentes, Map<String,Persona>personas) {
-        if (asistentes.charAt(0) != '\"') {
-            System.err.println("Error: setAsistentes() Esperado string" +
-                    "que inicia con '\"'.");
-            System.exit(1);
-        }
-
-        asistentes = asistentes.substring(1, asistentes.length() - 1);
-        
-        LinkedList<String> listaAsistentes = CSVTokener.csvArray(new CSVTokener(asistentes));
-
-        for (String nombreAsistente : listaAsistentes) {
-            Persona busqueda_nombre = personas.get(nombreAsistente);
-            if (busqueda_nombre == null) {
-                /*System.err.println("Error: el asistente \"" + nombreAsistente + "\" no figura" +
-                        " en la base de datos");
-                System.err.println("No se añadirá a la base de datos");*/
-            } else {
-                this.agregarAsistente(busqueda_nombre);
-            }
-        }
-
+    public void setAsistentes(LinkedList<Persona> asistentes) {
+        this.asistentes = asistentes;
     }
 
     public Persona buscarAsistente(String nombre) {
@@ -177,7 +157,7 @@ public class Presentacion {
     	return nombre;
     }
     
-    public Persona getExpositor() {
+    public Expositor getExpositor() {
     	return expositor;
     }
     

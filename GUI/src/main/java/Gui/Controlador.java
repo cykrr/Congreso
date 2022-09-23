@@ -3,6 +3,8 @@ import java.io.File;
 
 
 import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
@@ -34,20 +36,29 @@ import Congreso.Util;
 
 /** @brief Inicializa la clase raíz de la ventana */
 public class Controlador implements Initializable {
-
-    
+	
     private     Registro    registro; // Referencia a la base de datos del programa
     private     Stage       stage;    // Ventana principal
     private     Ajustes     ajustes;  // Ajustes del programa
-    private     Dashboard   child;                                      
+    private     Dashboard   child;
+    
+    private Map<Presentacion, Vpresentacion> mapaVpresentaciones;
 
-
-    public void enNuevaPresentacion(EventoPresentacion ep) {
-        Vpresentacion vp = new Vpresentacion(ep.getPresentacion());
-        child.getScrollBox()
-            .getChildren()
-            .add(vp);
+    public void enCrearPresentacion(EventoPresentacion ep) {
+        Vpresentacion vp = new Vpresentacion(ep.getPresentacion(), registro, stage, child);
+        mapaVpresentaciones.put(ep.getPresentacion(), vp);
+        child.getScrollBox().getChildren().add(vp);
         child.actualizarNumeroPresentaciones();
+    }
+    
+    public void enEditarPresentacion(EventoPresentacion ep) {	
+    	Vpresentacion vpAntigua = mapaVpresentaciones.remove(ep.getPresentacionAntigua());
+    	int index = child.getScrollBox().getChildren().indexOf(vpAntigua);
+    	child.getScrollBox().getChildren().remove(index);
+    	
+        Vpresentacion vpNueva = new Vpresentacion(ep.getPresentacionNueva(), registro, stage, child);
+        mapaVpresentaciones.put(ep.getPresentacionNueva(), vpNueva);
+    	child.getScrollBox().getChildren().add(index, vpNueva);
     }
 
     /** @brief Constructor se ejecuta antes de leer xml*/
@@ -65,18 +76,23 @@ public class Controlador implements Initializable {
         registro.importar(ajustes.carpeta + "/Presentaciones.csv",
         				  ajustes.carpeta + "/Expositores.csv",
         				  ajustes.carpeta + "/Asistentes.csv");
+        
+        mapaVpresentaciones = new HashMap<Presentacion, Vpresentacion>();
     }
 
-    
     /** @brief Método que se ejecuta luego de leer xml */
     public void initialize(URL url, ResourceBundle resources) {
-            child.addEventFilter(EventoPresentacion.CREAR_PRESENTACION, e-> {
-                enNuevaPresentacion(e);
-            });
+        child.addEventFilter(EventoPresentacion.CREAR_PRESENTACION, e-> {
+            enCrearPresentacion(e);
+        });
+        
+        child.addEventFilter(EventoPresentacion.EDITAR_PRESENTACION, e-> {
+            enEditarPresentacion(e);
+        });
 
-            for (Presentacion p : registro.getPresentaciones()) {
-                child.fireEvent(new EventoPresentacion(EventoPresentacion.CREAR_PRESENTACION, p));
-            }
+        for (Presentacion p : registro.getPresentaciones()) {
+            child.fireEvent(new EventoPresentacion(EventoPresentacion.CREAR_PRESENTACION, p));
+        }
     }
 
     /** @brief genera un Popup para crear presentación

@@ -60,7 +60,17 @@ public class LeerPresentacion extends GridPane implements Initializable, PopUp.P
         this.getChildren().add(n);
     }
 
-    @Override
+    public LeerPresentacion(Registro r, Presentacion p) {
+		this(r);
+		tfNombre.setText(p.getNombre());
+		dpFecha.setValue(p.getFecha());
+		tfHora.setText(p.getStringHora());
+		tfDuracion.setText(Integer.toString(p.getDuracion()));
+		tfDescripcion.setText(p.getDescripcion());
+		comboExpositor.setValue(p.getExpositor());
+	}
+
+	@Override
     public void initialize(URL url, ResourceBundle resources) {
         ObservableList<Expositor> items = comboExpositor.getItems();
         for (Expositor e : registro.getExpositores()) {

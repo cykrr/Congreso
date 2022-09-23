@@ -64,6 +64,19 @@ public class Registro {
             listaAsistentes.add(a);
         }
     }
+    
+	public void editarPresentacion(Presentacion p1, Presentacion p2) {
+		LinkedList<Persona> asistentes = p1.getAsistentes();
+		p2.setAsistentes(asistentes);
+		
+		eliminarPresentacion(p1);
+		insertarPresentacion(p2);
+	}
+	
+	public void eliminarPresentacion(Presentacion p) {
+		mapaPresentaciones.remove(p.getNombre());
+		listaPresentaciones.remove(p);
+	}
    
 	public Presentacion buscarPresentacion(String nombre) {
         return mapaPresentaciones.get(nombre);
