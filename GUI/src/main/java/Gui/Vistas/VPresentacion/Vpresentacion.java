@@ -100,6 +100,10 @@ public class Vpresentacion extends VBox {
     	}
     }
     
+    public boolean estaExtendida() {
+    	return boxVistaExtendida.isVisible();
+    }
+    
     public void editarPresentacion() {
     	LeerPresentacion lp = new LeerPresentacion(registro, p);
     	PopUp popup = new PopUp(stage, lp);

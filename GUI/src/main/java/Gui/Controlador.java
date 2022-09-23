@@ -57,6 +57,9 @@ public class Controlador implements Initializable {
     	child.getScrollBox().getChildren().remove(index);
     	
         Vpresentacion vpNueva = new Vpresentacion(ep.getPresentacionNueva(), registro, stage, child);
+        if(vpAntigua.estaExtendida())
+        	vpNueva.alternarVistaExtendida();
+        
         mapaVpresentaciones.put(ep.getPresentacionNueva(), vpNueva);
     	child.getScrollBox().getChildren().add(index, vpNueva);
     }
