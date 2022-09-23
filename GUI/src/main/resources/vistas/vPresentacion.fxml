@@ -37,7 +37,7 @@
                      <Image url="@../icons/edit.png" />
                   </image>
                </ImageView>
-               <ImageView fx:id="imgButtonBorrar" fitHeight="29.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand">
+               <ImageView fx:id="imgButtonEliminar" fitHeight="29.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand">
                   <image>
                      <Image url="@../icons/delete.png" />
                   </image>

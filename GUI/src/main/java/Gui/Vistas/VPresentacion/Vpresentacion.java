@@ -6,6 +6,7 @@ import java.util.LinkedList;
 import Congreso.Persona;
 import Congreso.Presentacion;
 import Congreso.Registro;
+import Gui.Alerta;
 import Gui.EventoPresentacion;
 import Gui.Vistas.PopUp;
 import Gui.Vistas.Dashboard.Dashboard;
@@ -14,6 +15,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
@@ -22,7 +24,7 @@ import javafx.stage.Stage;
 
 public class Vpresentacion extends VBox {
     @FXML Text txtNombre, txtExpositor, txtDescripcion, txtFecha, txtHora, txtDuracion, txtTotalAsistentes, txtAsistentes;
-    @FXML ImageView imgButtonMostrar, imgButtonEditar, imgButtonBorrar;
+    @FXML ImageView imgButtonMostrar, imgButtonEditar, imgButtonEliminar;
     @FXML VBox boxVistaExtendida;
     
     private Dashboard dashboard;
@@ -86,6 +88,14 @@ public class Vpresentacion extends VBox {
             }
         });
         
+        imgButtonEliminar.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                eliminarPresentacion();
+                event.consume();
+            }
+        });        
+        
         boxVistaExtendida.setManaged(false);
         boxVistaExtendida.setVisible(false);
     }
@@ -114,5 +124,13 @@ public class Vpresentacion extends VBox {
         	registro.editarPresentacion(p, retorno);
             dashboard.fireEvent(new EventoPresentacion(EventoPresentacion.EDITAR_PRESENTACION, p, retorno));
         }
+    }
+    
+    public void eliminarPresentacion() {
+    	boolean opcion = Alerta.mostrarAlertaConfirmacion("¿Desea eliminar esta presentación?");
+    	if(opcion) {
+    		registro.eliminarPresentacion(p);
+    		dashboard.fireEvent(new EventoPresentacion(EventoPresentacion.ELIMINAR_PRESENTACION, p));
+    	}
     }
 }

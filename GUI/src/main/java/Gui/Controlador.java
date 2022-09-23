@@ -63,6 +63,12 @@ public class Controlador implements Initializable {
         mapaVpresentaciones.put(ep.getPresentacionNueva(), vpNueva);
     	child.getScrollBox().getChildren().add(index, vpNueva);
     }
+    
+    public void enEliminarPresentacion(EventoPresentacion ep) {
+    	Vpresentacion vp = mapaVpresentaciones.remove(ep.getPresentacion());
+    	child.getScrollBox().getChildren().remove(vp);
+    	child.actualizarNumeroPresentaciones();
+    }
 
     /** @brief Constructor se ejecuta antes de leer xml*/
     public Controlador(Stage s, Registro r) {
@@ -91,6 +97,10 @@ public class Controlador implements Initializable {
         
         child.addEventFilter(EventoPresentacion.EDITAR_PRESENTACION, e-> {
             enEditarPresentacion(e);
+        });
+        
+        child.addEventFilter(EventoPresentacion.ELIMINAR_PRESENTACION, e-> {
+            enEliminarPresentacion(e);
         });
 
         for (Presentacion p : registro.getPresentaciones()) {
