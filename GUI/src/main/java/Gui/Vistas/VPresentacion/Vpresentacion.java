@@ -116,6 +116,8 @@ public class Vpresentacion extends VBox {
     
     public void editarPresentacion() {
     	LeerPresentacion lp = new LeerPresentacion(registro, p);
+    	lp.setHeader("Editando presentacion");
+    	
     	PopUp popup = new PopUp(stage, lp);
     	popup.setTitle("Editar presentación");
             

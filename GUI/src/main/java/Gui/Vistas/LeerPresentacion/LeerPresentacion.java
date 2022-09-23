@@ -17,6 +17,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
+import javafx.scene.text.Text;
 import Congreso.Expositor;
 import Congreso.Persona;
 import Congreso.Presentacion;
@@ -35,6 +36,7 @@ public class LeerPresentacion extends GridPane implements Initializable, PopUp.P
     @FXML private TextField tfNombre, tfHora, tfDuracion, tfDescripcion;
     @FXML private DatePicker dpFecha;
     @FXML private Button submit;
+    @FXML private Text txtHeader;
 
     // Referencia al registro principal
     private Registro registro;
@@ -123,5 +125,9 @@ public class LeerPresentacion extends GridPane implements Initializable, PopUp.P
         		
         p = new Presentacion(nombre, expositor, fecha, hora, duracion, descripcion);
         return true;
+    }
+    
+    public void setHeader(String text) {
+    	txtHeader.setText(text);
     }
 }

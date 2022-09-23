@@ -21,7 +21,9 @@
     </GridPane.margin>
     <children>
 
-        <Text text = "Nueva presentación"
+        <Text
+            fx:id = "txtHeader"
+            text = "Nueva presentación"
             GridPane.columnIndex="0"
             GridPane.rowIndex="0"
             />
