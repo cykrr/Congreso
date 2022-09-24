@@ -102,6 +102,7 @@ public class Registro {
 	    	
 	        String line;
 			while((line = br.readLine()) != null) {
+				line = new String(line.getBytes("ISO-8859-1"), "UTF-8");
 			    LinkedList<String> lineArray = CSVTokener.csvArray(new CSVTokener(line));
 			    if (lineArray.size() != 10)
 			    	continue; // Cantidad de campos por linea no coincide
