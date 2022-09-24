@@ -35,7 +35,13 @@ public class Dashboard extends VBox implements Initializable {
     private     ScrollPane        scroll;
 
     @FXML
-    private     VBox        scrollBox;
+    private     VBox        boxPresentaciones;
+    
+    @FXML
+    private     VBox        boxAsistentes;
+    
+    @FXML
+    private     VBox        boxExpositores;
 
     @FXML 
     private     VBox        botonPresentaciones;
@@ -44,7 +50,8 @@ public class Dashboard extends VBox implements Initializable {
     @FXML
     private     VBox        botonAsistentes;
 
-    VBox seleccion;
+    private VBox seleccionBoton;
+    private VBox seleccionBox;
 
     @FXML void click(MouseEvent me) {
         System.out.println("beep");
@@ -66,43 +73,54 @@ public class Dashboard extends VBox implements Initializable {
         this.getChildren().add(n);
         
     }
-    public void initialize(URL url, ResourceBundle rb)
-    {
-
+    public void initialize(URL url, ResourceBundle rb) {
     	contadorPresentaciones.setText(this.registro.getCantidadPresentaciones().toString());
     	contadorExpositores.setText(this.registro.getCantidadExpositores().toString());
     	contadorAsistentes.setText(this.registro.getCantidadAsistentes().toString());
-        seleccion = botonPresentaciones;
-        seleccion.getStyleClass().add("selected");
+    	
+        seleccionBoton = botonPresentaciones;
+        seleccionBoton.getStyleClass().add("selected");
+        
+        seleccionBox = boxPresentaciones;
+        boxAsistentes.setVisible(false);
+        boxAsistentes.setManaged(false);
+        boxExpositores.setVisible(false);
+        boxExpositores.setManaged(false);
         scroll.setFitToWidth(true);
         scroll.setFitToHeight(true);
+        
         botonPresentaciones.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override public void handle(MouseEvent event) {
-                if (seleccion != botonPresentaciones) {
-                    seleccion.getStyleClass().remove("selected");
-                    seleccion = botonPresentaciones;
-                    seleccion.getStyleClass().add("selected");
-                }
+            	alternarVista(botonPresentaciones, boxPresentaciones);
             }
         });
-        botonExpositores.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override public void handle(MouseEvent event) {
-                if (seleccion != botonExpositores) {
-                    seleccion.getStyleClass().remove("selected");
-                    seleccion = botonExpositores;
-                    seleccion.getStyleClass().add("selected");
-                }
-            }
-        });
+        
         botonAsistentes.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override public void handle(MouseEvent event) {
-                if (seleccion != botonAsistentes) {
-                    seleccion.getStyleClass().remove("selected");
-                    seleccion = botonAsistentes;
-                    seleccion.getStyleClass().add("selected");
-                }
+            	alternarVista(botonAsistentes, boxAsistentes);
             }
         });
+        
+        botonExpositores.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override public void handle(MouseEvent event) {
+            	alternarVista(botonExpositores, boxExpositores);
+            }
+        });
+    }
+    
+    public void alternarVista(VBox boton, VBox scrollBox) {
+    	if(seleccionBoton == boton)
+    		return;
+    	
+    	seleccionBoton.getStyleClass().remove("selected");
+    	seleccionBoton = boton;
+    	seleccionBoton.getStyleClass().add("selected");
+    	
+        seleccionBox.setVisible(false);
+        seleccionBox.setManaged(false);
+        seleccionBox = scrollBox;
+        seleccionBox.setVisible(true);
+        seleccionBox.setManaged(true);
     }
     
     public void buscar() {
@@ -110,8 +128,16 @@ public class Dashboard extends VBox implements Initializable {
         System.out.println("hola " + b);
     }
 
-    public VBox getScrollBox() {
-        return this.scrollBox;
+    public VBox getScrollBoxPresentaciones() {
+        return this.boxPresentaciones;
+    }
+    
+    public VBox getScrollBoxAsistentes() {
+        return this.boxAsistentes;
+    }
+    
+    public VBox getScrollBoxExpositores() {
+        return this.boxExpositores;
     }
     
     public void actualizarNumeroPresentaciones() {

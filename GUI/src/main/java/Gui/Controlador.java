@@ -47,26 +47,26 @@ public class Controlador implements Initializable {
     public void enCrearPresentacion(EventoPresentacion ep) {
         Vpresentacion vp = new Vpresentacion(ep.getPresentacion(), registro, stage, child);
         mapaVpresentaciones.put(ep.getPresentacion(), vp);
-        child.getScrollBox().getChildren().add(vp);
+        child.getScrollBoxPresentaciones().getChildren().add(vp);
         child.actualizarNumeroPresentaciones();
     }
     
     public void enEditarPresentacion(EventoPresentacion ep) {	
     	Vpresentacion vpAntigua = mapaVpresentaciones.remove(ep.getPresentacionAntigua());
-    	int index = child.getScrollBox().getChildren().indexOf(vpAntigua);
-    	child.getScrollBox().getChildren().remove(index);
+    	int index = child.getScrollBoxPresentaciones().getChildren().indexOf(vpAntigua);
+    	child.getScrollBoxPresentaciones().getChildren().remove(index);
     	
         Vpresentacion vpNueva = new Vpresentacion(ep.getPresentacionNueva(), registro, stage, child);
         if(vpAntigua.estaExtendida())
         	vpNueva.alternarVistaExtendida();
         
         mapaVpresentaciones.put(ep.getPresentacionNueva(), vpNueva);
-    	child.getScrollBox().getChildren().add(index, vpNueva);
+    	child.getScrollBoxPresentaciones().getChildren().add(index, vpNueva);
     }
     
     public void enEliminarPresentacion(EventoPresentacion ep) {
     	Vpresentacion vp = mapaVpresentaciones.remove(ep.getPresentacion());
-    	child.getScrollBox().getChildren().remove(vp);
+    	child.getScrollBoxPresentaciones().getChildren().remove(vp);
     	child.actualizarNumeroPresentaciones();
     }
 

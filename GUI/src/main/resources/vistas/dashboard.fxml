@@ -3,26 +3,20 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 <?import Gui.Vistas.Busqueda.*?>
 
-<VBox 
-    VBox.vgrow="ALWAYS"
-    style = "-fx-background-color: #ffffff"
-    xmlns="http://javafx.com/javafx/18"
-    xmlns:fx="http://javafx.com/fxml/1"
-    >
+<VBox style="-fx-background-color: #ffffff" VBox.vgrow="ALWAYS" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
 
 <children>
     <HBox>
        <VBox.margin>
-          <Insets bottom="20.0"/>
+          <Insets bottom="20.0" />
        </VBox.margin>
         <HBox maxHeight="50.0" prefHeight="100.0" prefWidth="200.0">
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Dashboard" styleClass = "h1">
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="h1" text="Dashboard">
                 <VBox.margin>
                     <Insets left="15.0" top="10.0" />
                 </VBox.margin>
@@ -37,8 +31,7 @@
         <HBox maxHeight="50.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="100.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
             <children>
                 <!-- <Pane fx:id="dropDown" prefHeight="50.0" prefWidth="50.0" /> -->
-                <HBox nodeOrientation = "LEFT_TO_RIGHT">
-
+                <HBox nodeOrientation="LEFT_TO_RIGHT">
                     <Busqueda fx:id="cajaBusqueda" onAction="#buscar" >
                         <HBox.margin>
                             <Insets bottom="0" left="0" right="30" top="10" />
@@ -51,14 +44,11 @@
     </HBox>
     <HBox prefHeight="150.0" prefWidth="250.0">
         <children>
-            <VBox fx:id = "botonPresentaciones"
-                prefHeight="200.0"
-                prefWidth="200.0"
-                styleClass="box">
+            <VBox fx:id="botonPresentaciones" prefHeight="200.0" prefWidth="200.0" styleClass="box">
                 <HBox.margin>
                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                 </HBox.margin>
-                <Text text="Presentaciones" styleClass = "p">
+                <Text styleClass="p" text="Presentaciones">
                     <font>
                         <Font size="20" />
                     </font>
@@ -75,7 +65,7 @@
                     </VBox.margin>
                 </Text>
             </VBox>
-            <VBox fx:id = "botonExpositores" prefHeight="200.0" prefWidth="200.0" styleClass="box">
+            <VBox fx:id="botonExpositores" prefHeight="200.0" prefWidth="200.0" styleClass="box">
                 <HBox.margin>
                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                 </HBox.margin>
@@ -93,7 +83,7 @@
                     </VBox.margin>
                 </Text>
             </VBox>
-            <VBox fx:id = "botonAsistentes" prefHeight="200.0" prefWidth="200.0" styleClass="box">
+            <VBox fx:id="botonAsistentes" prefHeight="200.0" prefWidth="200.0" styleClass="box">
                 <HBox.margin>
                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                 </HBox.margin>
@@ -123,18 +113,15 @@
         </VBox.margin>
     </Text>
 
-    <VBox  VBox.vgrow="ALWAYS"
-        style="-fx-background-color: transparent; -fx-border-color: transparent"
-        >
+    <VBox style="-fx-background-color: transparent; -fx-border-color: transparent" VBox.vgrow="ALWAYS">
         <children>
-            <ScrollPane fx:id = "scroll"
-                style="-fx-background-color: transparent; -fx-border-color: transparent"
-                VBox.vgrow="ALWAYS"
-                >
-                    <VBox fx:id = "scrollBox"
-                        style="-fx-background-color: transparent; -fx-border-color: transparent"
-                        >
-                    </VBox>
+            <ScrollPane fx:id="scroll" style="-fx-background-color: transparent; -fx-border-color: transparent" VBox.vgrow="ALWAYS">
+                <VBox fx:id="scrollBoxPresentaciones" style="-fx-background-color: transparent; -fx-border-color: transparent;">
+                  <children>
+                     <VBox fx:id="boxPresentaciones" />
+                     <VBox fx:id="boxAsistentes" />
+                     <VBox fx:id="boxExpositores" />
+                  </children></VBox>
             </ScrollPane>
         </children>
         <VBox.margin>
