@@ -43,6 +43,7 @@ public class Controlador implements Initializable {
     private     Dashboard   child;
     
     private Map<Presentacion, Vpresentacion> mapaVpresentaciones;
+    private Map<Persona, VPersona> mapaVpersonas;
 
     public void enCrearPresentacion(EventoPresentacion ep) {
         Vpresentacion vp = new Vpresentacion(ep.getPresentacion(), registro, stage, child);
@@ -69,6 +70,13 @@ public class Controlador implements Initializable {
     	child.getScrollBoxPresentaciones().getChildren().remove(vp);
     	child.actualizarNumeroPresentaciones();
     }
+    
+    public void enCrearPersona(EventoPersona ep) {
+        VPersona vp = new VPersona(ep.getPersona(), registro, stage, child);
+        mapaVpersonas.put(ep.getPersona(), vp);
+        child.getScrollBoxAsistentes().getChildren().add(vp);
+        child.actualizarNumeroAsistentes();
+    }
 
     /** @brief Constructor se ejecuta antes de leer xml*/
     public Controlador(Stage s, Registro r) {
@@ -87,6 +95,7 @@ public class Controlador implements Initializable {
         				  ajustes.carpeta + "/Asistentes.csv");
         
         mapaVpresentaciones = new HashMap<Presentacion, Vpresentacion>();
+        mapaVpersonas = new HashMap<Persona, VPersona>();
     }
 
     /** @brief Método que se ejecuta luego de leer xml */
@@ -102,9 +111,17 @@ public class Controlador implements Initializable {
         child.addEventFilter(EventoPresentacion.ELIMINAR_PRESENTACION, e-> {
             enEliminarPresentacion(e);
         });
+        
+        child.addEventFilter(EventoPersona.CREAR_PERSONA, e-> {
+            enCrearPersona(e);
+        });
 
         for (Presentacion p : registro.getPresentaciones()) {
             child.fireEvent(new EventoPresentacion(EventoPresentacion.CREAR_PRESENTACION, p));
+        }
+        
+        for (Persona p : registro.getAsistentes()) {
+            child.fireEvent(new EventoPersona(EventoPersona.CREAR_PERSONA, p));
         }
     }
 

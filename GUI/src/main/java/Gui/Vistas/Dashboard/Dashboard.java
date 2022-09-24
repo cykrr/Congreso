@@ -143,4 +143,12 @@ public class Dashboard extends VBox implements Initializable {
     public void actualizarNumeroPresentaciones() {
     	contadorPresentaciones.setText(this.registro.getCantidadPresentaciones().toString());
     }
+    
+    public void actualizarNumeroAsistentes() {
+    	contadorPresentaciones.setText(this.registro.getCantidadAsistentes().toString());
+    }
+    
+    public void actualizarNumeroExpositores() {
+    	contadorPresentaciones.setText(this.registro.getCantidadExpositores().toString());
+    }
 }
