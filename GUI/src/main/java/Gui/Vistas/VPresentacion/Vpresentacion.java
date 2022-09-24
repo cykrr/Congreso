@@ -18,6 +18,7 @@ import javafx.scene.Node;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -25,7 +26,7 @@ import javafx.stage.Stage;
 public class Vpresentacion extends VBox {
     @FXML Text txtNombre, txtExpositor, txtDescripcion, txtFecha, txtHora, txtDuracion, txtTotalAsistentes, txtAsistentes;
     @FXML ImageView imgButtonMostrar, imgButtonEditar, imgButtonEliminar;
-    @FXML VBox boxVistaExtendida;
+    @FXML GridPane paneVistaExtendida;
     
     private Dashboard dashboard;
     private Registro registro;
@@ -96,22 +97,22 @@ public class Vpresentacion extends VBox {
             }
         });        
         
-        boxVistaExtendida.setManaged(false);
-        boxVistaExtendida.setVisible(false);
+        paneVistaExtendida.setManaged(false);
+        paneVistaExtendida.setVisible(false);
     }
     
     public void alternarVistaExtendida() {
-    	if(boxVistaExtendida.isVisible()) {
-            boxVistaExtendida.setManaged(false);
-            boxVistaExtendida.setVisible(false);
+    	if(paneVistaExtendida.isVisible()) {
+            paneVistaExtendida.setManaged(false);
+            paneVistaExtendida.setVisible(false);
     	} else {
-            boxVistaExtendida.setManaged(true);
-            boxVistaExtendida.setVisible(true);
+            paneVistaExtendida.setManaged(true);
+            paneVistaExtendida.setVisible(true);
     	}
     }
     
     public boolean estaExtendida() {
-    	return boxVistaExtendida.isVisible();
+    	return paneVistaExtendida.isVisible();
     }
     
     public void editarPresentacion() {
