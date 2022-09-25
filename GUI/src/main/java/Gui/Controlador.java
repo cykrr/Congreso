@@ -45,6 +45,18 @@ public class Controlador implements Initializable {
 
     @FXML private VBox dashHolder;
 
+    public void homeAction() {
+
+    }
+
+    public void addAction() {
+
+    }
+
+    public void detailAction() {
+
+    }
+
     public void enCrearPresentacion(EventoPresentacion ep) {
         VistaPresentacion vp = new VistaPresentacion(ep.getPresentacion(), registro, stage, dashboard);
         mapaVistaPresentaciones.put(ep.getPresentacion(), vp);

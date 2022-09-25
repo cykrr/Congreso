@@ -44,7 +44,7 @@
             <VBox minWidth="37.5" prefWidth="37.5">
                 <children>
                     <!-- Home icon -->
-                    <HBox fx:id = "homeIcon" styleClass = "btn" onAction = "#homeAction">
+                    <HBox fx:id = "homeIcon" styleClass = "btn">
                         <VBox.margin>
                             <Insets bottom="5.0" left="5.0" right="5.0" top="10.0" />
                         </VBox.margin>
@@ -58,7 +58,7 @@
                         </ImageView>
                     </HBox>
                     <!-- detail icon -->
-                    <HBox fx:id = "detailIcon" styleClass = "btn" onAction = "#detailAction">
+                    <HBox fx:id = "detailIcon" styleClass = "btn">
                         <VBox.margin>
                             <Insets bottom="5.0" left="5.0" right="5.0" top="10.0" />
                         </VBox.margin>
@@ -72,7 +72,7 @@
                         </ImageView>
                     </HBox>
                     <!-- Add icon -->
-                    <HBox fx:id = "addIcon" styleClass = "btn" onAction = "#addAction">
+                    <HBox fx:id = "addIcon" styleClass = "btn">
                         <VBox.margin>
                             <Insets bottom="5.0" left="5.0" right="5.0" top="10.0" />
                         </VBox.margin>
