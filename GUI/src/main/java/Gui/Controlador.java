@@ -51,8 +51,8 @@ public class Controlador implements Initializable {
     	VistaPresentacion vpAntigua = mapaVistaPresentaciones.remove(ep.getPresentacionAntigua());
     	int index = child.getScrollBoxPresentaciones().getChildren().indexOf(vpAntigua);
     	child.getScrollBoxPresentaciones().getChildren().remove(index);
-    	
-        VistaPresentacion vpNueva = new VistaPresentacion(ep.getPresentacionNueva(), registro, stage, child);
+        
+    	VistaPresentacion vpNueva = new VistaPresentacion(ep.getPresentacionNueva(), registro, stage, child);
         if(vpAntigua.estaExtendida())
         	vpNueva.alternarVistaExtendida();
         
@@ -149,6 +149,7 @@ public class Controlador implements Initializable {
         child.addEventFilter(EventoExpositor.CREAR_EXPOSITOR, e-> {
             enCrearExpositor(e);
         });
+        
 
         for (Presentacion p : registro.getPresentaciones()) {
             child.fireEvent(new EventoPresentacion(EventoPresentacion.CREAR_PRESENTACION, p));

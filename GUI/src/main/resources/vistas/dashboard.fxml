@@ -104,7 +104,7 @@
             </VBox>
         </children>
     </HBox>
-    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Presentaciones añadidas">
+    <Text fx:id="txtTitulo" strokeType="OUTSIDE" strokeWidth="0.0" text="Presentaciones añadidas">
         <font>
             <Font size="20.0" />
         </font>

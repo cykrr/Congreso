@@ -23,7 +23,7 @@ public class Dashboard extends VBox implements Initializable {
     @FXML Text contadorPresentaciones;
     @FXML Text contadorExpositores;
     @FXML Text contadorAsistentes;
-
+    @FXML Text txtTitulo;
 
 
     private     Registro    registro;
@@ -77,6 +77,7 @@ public class Dashboard extends VBox implements Initializable {
     	contadorPresentaciones.setText(this.registro.getCantidadPresentaciones().toString());
     	contadorExpositores.setText(this.registro.getCantidadExpositores().toString());
     	contadorAsistentes.setText(this.registro.getCantidadAsistentes().toString());
+    	actualizarTitulo();
     	
         seleccionBoton = botonPresentaciones;
         seleccionBoton.getStyleClass().add("selected");
@@ -92,18 +93,21 @@ public class Dashboard extends VBox implements Initializable {
         botonPresentaciones.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override public void handle(MouseEvent event) {
             	alternarVista(botonPresentaciones, boxPresentaciones);
+            	actualizarTitulo("Presentaciones");
             }
         });
         
         botonAsistentes.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override public void handle(MouseEvent event) {
             	alternarVista(botonAsistentes, boxAsistentes);
+            	actualizarTitulo("Asistentes");
             }
         });
         
         botonExpositores.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override public void handle(MouseEvent event) {
             	alternarVista(botonExpositores, boxExpositores);
+            	actualizarTitulo("Expositores");
             }
         });
     }
@@ -138,6 +142,14 @@ public class Dashboard extends VBox implements Initializable {
     
     public VBox getScrollBoxExpositores() {
         return this.boxExpositores;
+    }
+
+    public void actualizarTitulo(){
+    	txtTitulo.setText("Presentaciones");
+    }
+    
+    public void actualizarTitulo(String title){
+    	txtTitulo.setText(title);
     }
     
     public void actualizarNumeroPresentaciones() {
