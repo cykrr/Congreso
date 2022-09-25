@@ -115,6 +115,25 @@ public class Controlador implements Initializable {
         dashboard.getScrollBoxExpositores().getChildren().add(ve);
         dashboard.actualizarNumeroExpositores();
     }
+    
+    public void enEditarExpositor(EventoExpositor ee) {	
+    	VistaExpositor veAntigua = mapaVistaExpositores.remove(ee.getExpositorAntiguo());
+    	int index = dashboard.getScrollBoxExpositores().getChildren().indexOf(veAntigua);
+    	dashboard.getScrollBoxExpositores().getChildren().remove(index);
+    	
+        VistaExpositor veNueva = new VistaExpositor(ee.getExpositorNuevo(), registro, stage, dashboard);
+        if(veAntigua.estaExtendida())
+        	veNueva.alternarVistaExtendida();
+        
+        mapaVistaExpositores.put(ee.getExpositorNuevo(), veNueva);
+    	dashboard.getScrollBoxExpositores().getChildren().add(index, veNueva);
+    }
+    
+    public void enEliminarExpositor(EventoExpositor ee) {
+    	VistaExpositor ve = mapaVistaExpositores.remove(ee.getExpositor());
+    	dashboard.getScrollBoxExpositores().getChildren().remove(ve);
+    	dashboard.actualizarNumeroExpositores();
+    }
 
     /** @brief Constructor se ejecuta antes de leer xml*/
     public Controlador(Stage s, Registro r) {
@@ -169,6 +188,14 @@ public class Controlador implements Initializable {
         dashboard.addEventFilter(EventoExpositor.CREAR_EXPOSITOR, e-> {
             enCrearExpositor(e);
         });
+        
+        dashboard.addEventFilter(EventoExpositor.EDITAR_EXPOSITOR, e-> {
+            enEditarExpositor(e);
+        });
+        
+        dashboard.addEventFilter(EventoExpositor.ELIMINAR_EXPOSITOR, e-> {
+            enEliminarExpositor(e);
+        });
 
         for (Presentacion p : registro.getPresentaciones()) {
             dashboard.fireEvent(new EventoPresentacion(EventoPresentacion.CREAR_PRESENTACION, p));
@@ -217,7 +244,7 @@ public class Controlador implements Initializable {
     public void crearExpositor() {
         Expositor expositor = null;
         
-        LeerExpositor le = new LeerExpositor();
+        LeerExpositor le = new LeerExpositor(registro);
         PopUp popup = new PopUp(stage, le);
         popup.setTitle("Crear expositor");
         

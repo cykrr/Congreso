@@ -11,7 +11,9 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
+import javafx.scene.text.Text;
 import Congreso.Expositor;
+import Congreso.Registro;
 import Congreso.Util;
 import Gui.Alerta;
 import Gui.Vistas.PopUp;
@@ -21,12 +23,16 @@ public class LeerExpositor extends GridPane implements Initializable, PopUp.PopA
     // Elementos XML
     @FXML private TextField tfNombre, tfEdad, tfFono, tfCorreo, tfPais, tfOcupacion;
     @FXML private Button submit;
+    @FXML private Text txtHeader;
 
     // Valor de retorno
     private Expositor expositor = null;
+    private Registro registro;
 
-    public LeerExpositor()  {
+    public LeerExpositor(Registro registro)  {
         super();
+        this.registro = registro;
+        
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/vistas/leerExpositor.fxml"));
         fxmlLoader.setController(this);
         Node n = null;
@@ -37,6 +43,16 @@ public class LeerExpositor extends GridPane implements Initializable, PopUp.PopA
             throw new RuntimeException(exception);
         }
         this.getChildren().add(n);
+    }
+    
+    public LeerExpositor(Registro registro, Expositor e) {
+    	this(registro);
+    	tfNombre.setText(e.getNombre());
+    	tfEdad.setText(Integer.toString(e.getEdad()));
+    	tfFono.setText(Long.toString(e.getFono()));
+    	tfCorreo.setText(e.getCorreo());
+    	tfPais.setText(e.getPais());
+    	tfOcupacion.setText(e.getOcupacion());
     }
 
     @Override
@@ -98,5 +114,9 @@ public class LeerExpositor extends GridPane implements Initializable, PopUp.PopA
         
         expositor = new Expositor(nombre, edad, fono, correo, pais, ocupacion);
         return true;
+    }
+    
+    public void setHeader(String text) {
+    	txtHeader.setText(text);
     }
 }

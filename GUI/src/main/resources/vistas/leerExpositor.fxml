@@ -20,7 +20,9 @@
     </GridPane.margin>
     <children>
 
-        <Text text = "Nuevo expositor"
+        <Text 
+            fx:id = "txtHeader"
+            text = "Nuevo expositor"
             GridPane.columnIndex="0"
             GridPane.rowIndex="0"
             />
