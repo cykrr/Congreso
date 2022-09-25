@@ -51,7 +51,7 @@ public class Util {
 	}
 	
 	public static boolean isAlphaOrSpace(String str) {
-	    return str.matches("[a-zA-ZñÑ ]+");
+	    return str.matches("[a-zA-ZÀ-ÿñÑ ]+");
 	}
 	
 	public static boolean validateEmail(String email) {
