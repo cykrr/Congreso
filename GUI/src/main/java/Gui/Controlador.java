@@ -40,16 +40,16 @@ public class Controlador implements Initializable {
     private     Stage       stage;    // Ventana principal
     private     Ajustes     ajustes;  // Ajustes del programa
     private     Dashboard   dashboard;
-    private     VBox        vistaPrincipal;
     
     private Map<Presentacion, VistaPresentacion> mapaVistaPresentaciones;
     private Map<Persona, VistaPersona> mapaVistaPersonas;
     private Map<Expositor, VistaExpositor> mapaVistaExpositores;
 
-    @FXML private VBox dashHolder;
     @FXML private HBox homeIcon;
     @FXML private HBox addIcon;
     @FXML private HBox detailIcon;
+
+    @FXML private     VBox        vistaPrincipal;
 
     public void homeAction() {
 
@@ -165,7 +165,7 @@ public class Controlador implements Initializable {
 
     /** @brief Método que se ejecuta luego de leer xml */
     public void initialize(URL url, ResourceBundle resources) {
-        this.dashHolder.getChildren().add(dashboard);
+        this.vistaPrincipal.getChildren().add(dashboard);
         VBox.setVgrow(dashboard, Priority.ALWAYS);
 
         Tooltip.install(this.homeIcon, new Tooltip("Inicio"));
