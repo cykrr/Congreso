@@ -9,6 +9,7 @@ import Congreso.Registro;
 import Gui.Alerta;
 import Gui.EventoPresentacion;
 import Gui.Vistas.PopUp;
+import Gui.Vistas.Vista;
 import Gui.Vistas.Dashboard.Dashboard;
 import Gui.Vistas.LeerPresentacion.LeerPresentacion;
 import javafx.event.EventHandler;
@@ -23,33 +24,14 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-public class Vpresentacion extends VBox {
+public class Vpresentacion extends Vista implements Vista.Manipulable {
     @FXML Text txtNombre, txtExpositor, txtDescripcion, txtFecha, txtHora, txtDuracion, txtTotalAsistentes, txtAsistentes;
-    @FXML ImageView imgButtonMostrar, imgButtonEditar, imgButtonEliminar;
-    @FXML GridPane paneVistaExtendida;
     
-    private Dashboard dashboard;
-    private Registro registro;
-    private Stage stage;
     private Presentacion p;
     
     public Vpresentacion(Presentacion p, Registro registro, Stage stage, Dashboard dashboard) {
-        super();
-        this.dashboard = dashboard;
-        this.registro = registro;
-        this.stage = stage;
+        super(registro, stage, dashboard, "/vistas/vPresentacion.fxml");      
         this.p = p;
-        
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/vistas/vPresentacion.fxml"));
-        fxmlLoader.setController(this);
-        Node n = null;
-
-        try {
-            n = fxmlLoader.load();
-        } catch (IOException exception) {
-            throw new RuntimeException(exception);
-        }
-        this.getChildren().add(n);
     	
         txtNombre.setText(p.getNombre());
         txtExpositor.setText(p.getExpositor().getNombre());
@@ -72,68 +54,29 @@ public class Vpresentacion extends VBox {
 	        str += asistentes.get(asistentes.size()-1);
 	        txtAsistentes.setText(str);
         }
-        
-        imgButtonMostrar.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                alternarVistaExtendida();
-                event.consume();
-            }
-        });
-        
-        imgButtonEditar.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                editarPresentacion();
-                event.consume();
-            }
-        });
-        
-        imgButtonEliminar.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                eliminarPresentacion();
-                event.consume();
-            }
-        });        
-        
-        paneVistaExtendida.setManaged(false);
-        paneVistaExtendida.setVisible(false);
     }
     
-    public void alternarVistaExtendida() {
-    	if(paneVistaExtendida.isVisible()) {
-            paneVistaExtendida.setManaged(false);
-            paneVistaExtendida.setVisible(false);
-    	} else {
-            paneVistaExtendida.setManaged(true);
-            paneVistaExtendida.setVisible(true);
-    	}
-    }
-    
-    public boolean estaExtendida() {
-    	return paneVistaExtendida.isVisible();
-    }
-    
-    public void editarPresentacion() {
-    	LeerPresentacion lp = new LeerPresentacion(registro, p);
+    @Override
+    public void editar() {
+    	LeerPresentacion lp = new LeerPresentacion(getRegistro(), p);
     	lp.setHeader("Editando presentacion");
     	
-    	PopUp popup = new PopUp(stage, lp);
+    	PopUp popup = new PopUp(getStage(), lp);
     	popup.setTitle("Editar presentación");
             
         Presentacion retorno = (Presentacion)popup.showDialog();
         if (retorno != null) {
-        	registro.editarPresentacion(p, retorno);
-            dashboard.fireEvent(new EventoPresentacion(EventoPresentacion.EDITAR_PRESENTACION, p, retorno));
+        	getRegistro().editarPresentacion(p, retorno);
+            getDashboard().fireEvent(new EventoPresentacion(EventoPresentacion.EDITAR_PRESENTACION, p, retorno));
         }
     }
     
-    public void eliminarPresentacion() {
+    @Override
+    public void eliminar() {
     	boolean opcion = Alerta.mostrarAlertaConfirmacion("¿Desea eliminar la presentación \"" + p.getNombre() + "\"?");
     	if(opcion) {
-    		registro.eliminarPresentacion(p);
-    		dashboard.fireEvent(new EventoPresentacion(EventoPresentacion.ELIMINAR_PRESENTACION, p));
+    		getRegistro().eliminarPresentacion(p);
+    		getDashboard().fireEvent(new EventoPresentacion(EventoPresentacion.ELIMINAR_PRESENTACION, p));
     	}
     }
 }
