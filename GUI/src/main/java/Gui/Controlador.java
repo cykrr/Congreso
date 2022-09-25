@@ -18,6 +18,7 @@ import Gui.Vistas.Asistente.LeerAsistente;
 import Gui.Vistas.Dashboard.Dashboard;
 import Gui.Vistas.LeerExpositor.LeerExpositor;
 import Gui.Vistas.LeerPresentacion.LeerPresentacion;
+import Gui.Vistas.VistaExpositor.VistaExpositor;
 import Gui.Vistas.VistaPersona.VistaPersona;
 import Gui.Vistas.VistaPresentacion.VistaPresentacion;
 import Congreso.Expositor;
@@ -37,6 +38,7 @@ public class Controlador implements Initializable {
     
     private Map<Presentacion, VistaPresentacion> mapaVistaPresentaciones;
     private Map<Persona, VistaPersona> mapaVistaPersonas;
+    private Map<Expositor, VistaExpositor> mapaVistaExpositores;
 
     public void enCrearPresentacion(EventoPresentacion ep) {
         VistaPresentacion vp = new VistaPresentacion(ep.getPresentacion(), registro, stage, child);
@@ -89,6 +91,13 @@ public class Controlador implements Initializable {
     	child.getScrollBoxAsistentes().getChildren().remove(vp);
     	child.actualizarNumeroAsistentes();
     }
+    
+    public void enCrearExpositor(EventoExpositor ee) {
+        VistaExpositor ve = new VistaExpositor(ee.getExpositor(), registro, stage, child);
+        mapaVistaExpositores.put(ee.getExpositor(), ve);
+        child.getScrollBoxExpositores().getChildren().add(ve);
+        child.actualizarNumeroExpositores();
+    }
 
     /** @brief Constructor se ejecuta antes de leer xml*/
     public Controlador(Stage s, Registro r) {
@@ -108,6 +117,7 @@ public class Controlador implements Initializable {
         
         mapaVistaPresentaciones = new HashMap<Presentacion, VistaPresentacion>();
         mapaVistaPersonas = new HashMap<Persona, VistaPersona>();
+        mapaVistaExpositores = new HashMap<Expositor, VistaExpositor>();
     }
 
     /** @brief Método que se ejecuta luego de leer xml */
@@ -135,6 +145,10 @@ public class Controlador implements Initializable {
         child.addEventFilter(EventoPersona.ELIMINAR_PERSONA, e-> {
             enEliminarPersona(e);
         });
+        
+        child.addEventFilter(EventoExpositor.CREAR_EXPOSITOR, e-> {
+            enCrearExpositor(e);
+        });
 
         for (Presentacion p : registro.getPresentaciones()) {
             child.fireEvent(new EventoPresentacion(EventoPresentacion.CREAR_PRESENTACION, p));
@@ -142,6 +156,10 @@ public class Controlador implements Initializable {
         
         for (Persona p : registro.getAsistentes()) {
             child.fireEvent(new EventoPersona(EventoPersona.CREAR_PERSONA, p));
+        }
+        
+        for (Expositor e : registro.getExpositores()) {
+            child.fireEvent(new EventoExpositor(EventoExpositor.CREAR_EXPOSITOR, e));
         }
     }
 
@@ -184,8 +202,10 @@ public class Controlador implements Initializable {
         popup.setTitle("Crear expositor");
         
         expositor = (Expositor) popup.showDialog();
-        if(expositor != null)
+        if(expositor != null) {
         	registro.insertarExpositor(expositor);
+        	child.fireEvent(new EventoExpositor(EventoExpositor.CREAR_EXPOSITOR, expositor));
+        }
     }
     
     /** @brief Crea un nuevo asistente

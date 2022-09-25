@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.text.TextFlow?>
+
+<VBox style="-fx-border-color: rgb(200,200,200); -fx-border-width: 0 0 1 0;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+   <HBox spacing="10.0" style="-fx-border-color: rgb(200,200,200); -fx-border-width: 0 0 0 0; -fx-background-color: rgb(244,244,244);">
+      <children>
+         <HBox alignment="CENTER">
+            <children>
+               <ImageView fx:id="imgButtonMostrar" fitHeight="10.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand">
+                  <image>
+                     <Image url="@../icons/down_arrow.png" />
+                  </image>
+               </ImageView>
+            </children>
+         </HBox>
+         <VBox alignment="CENTER_LEFT">
+            <children>
+                <Text fx:id="txtNombre" styleClass="h1" text="Nombre">
+                  <font>
+                     <Font name="System Bold" size="12.0" />
+                  </font>
+                </Text>
+            </children>
+         </VBox>
+         <HBox alignment="CENTER_RIGHT" nodeOrientation="LEFT_TO_RIGHT" spacing="20.0" HBox.hgrow="ALWAYS">
+            <children>
+               <ImageView fx:id="imgButtonEditar" fitHeight="29.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand">
+                  <image>
+                     <Image url="@../icons/edit.png" />
+                  </image>
+               </ImageView>
+               <ImageView fx:id="imgButtonEliminar" fitHeight="29.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand">
+                  <image>
+                     <Image url="@../icons/delete.png" />
+                  </image>
+               </ImageView>
+            </children>
+            <opaqueInsets>
+               <Insets />
+            </opaqueInsets>
+         </HBox>
+      </children>
+      <padding>
+         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+      </padding>
+      <opaqueInsets>
+         <Insets />
+      </opaqueInsets>
+   </HBox>
+   <GridPane fx:id="paneVistaExtendida" hgap="15.0" style="-fx-background-color: rgb(250,250,250);">
+     <columnConstraints>
+       <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" />
+       <ColumnConstraints hgrow="SOMETIMES" />
+     </columnConstraints>
+     <rowConstraints>
+       <RowConstraints vgrow="SOMETIMES" />
+       <RowConstraints vgrow="SOMETIMES" />
+       <RowConstraints vgrow="SOMETIMES" />
+         <RowConstraints vgrow="SOMETIMES" />
+         <RowConstraints vgrow="SOMETIMES" />
+     </rowConstraints>
+      <children>
+         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Edad" GridPane.valignment="TOP" />
+         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Teléfono" GridPane.rowIndex="1" GridPane.valignment="TOP" />
+         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Correo" GridPane.rowIndex="2" GridPane.valignment="TOP" />
+         <Text layoutX="20.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="País" GridPane.rowIndex="3" GridPane.valignment="TOP" />
+         <Text layoutX="20.0" layoutY="88.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ocupación" GridPane.rowIndex="4" GridPane.valignment="TOP" />
+         <TextFlow GridPane.columnIndex="1">
+            <children>
+               <Text fx:id="txtEdad" strokeType="OUTSIDE" strokeWidth="0.0" text="Edad" />
+            </children>
+         </TextFlow>
+         <TextFlow GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <children>
+               <Text fx:id="txtFono" strokeType="OUTSIDE" strokeWidth="0.0" text="Teléfono" />
+            </children>
+         </TextFlow>
+         <TextFlow GridPane.columnIndex="1" GridPane.rowIndex="2">
+            <children>
+               <Text fx:id="txtCorreo" strokeType="OUTSIDE" strokeWidth="0.0" text="Correo" />
+            </children>
+         </TextFlow>
+         <TextFlow GridPane.columnIndex="1" GridPane.rowIndex="3">
+            <children>
+               <Text fx:id="txtPais" strokeType="OUTSIDE" strokeWidth="0.0" text="País" />
+            </children>
+         </TextFlow>
+         <TextFlow GridPane.columnIndex="1" GridPane.rowIndex="4">
+            <children>
+               <Text fx:id="txtOcupacion" strokeType="OUTSIDE" strokeWidth="0.0" text="Ocupación" />
+            </children>
+         </TextFlow>
+      </children>
+      <padding>
+         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+      </padding>
+   </GridPane>
+</VBox>

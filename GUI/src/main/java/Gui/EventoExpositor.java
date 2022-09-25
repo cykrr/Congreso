@@ -5,7 +5,7 @@ import javafx.event.Event;
 import javafx.event.EventType;
 
 public class EventoExpositor extends Event {
-    public static final EventType<EventoExpositor> ANY = new EventType<>(Event.ANY, "ANY");
+    // public static final EventType<EventoExpositor> ANY = new EventType<>(Event.ANY, "ANY");
 
     public static final EventType<EventoExpositor> CREAR_EXPOSITOR = 
         new EventType<>(EventoExpositor.ANY, "CREAR_EXPOSITOR");
