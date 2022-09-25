@@ -11,7 +11,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextInputDialog;
+import javafx.scene.control.Tooltip;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
@@ -38,12 +40,16 @@ public class Controlador implements Initializable {
     private     Stage       stage;    // Ventana principal
     private     Ajustes     ajustes;  // Ajustes del programa
     private     Dashboard   dashboard;
+    private     VBox        vistaPrincipal;
     
     private Map<Presentacion, VistaPresentacion> mapaVistaPresentaciones;
     private Map<Persona, VistaPersona> mapaVistaPersonas;
     private Map<Expositor, VistaExpositor> mapaVistaExpositores;
 
     @FXML private VBox dashHolder;
+    @FXML private HBox homeIcon;
+    @FXML private HBox addIcon;
+    @FXML private HBox detailIcon;
 
     public void homeAction() {
 
@@ -161,6 +167,11 @@ public class Controlador implements Initializable {
     public void initialize(URL url, ResourceBundle resources) {
         this.dashHolder.getChildren().add(dashboard);
         VBox.setVgrow(dashboard, Priority.ALWAYS);
+
+        Tooltip.install(this.homeIcon, new Tooltip("Inicio"));
+        Tooltip.install(this.addIcon, new Tooltip("Añadir Presentación"));
+        Tooltip.install(this.detailIcon, new Tooltip("Vista detallada"));
+
 
         agregarListeners();
 
