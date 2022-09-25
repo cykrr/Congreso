@@ -105,6 +105,9 @@ public class Registro {
 	public void eliminarAsistente(Persona a) {
 		mapaAsistentes.remove(a.getNombre());
 		listaAsistentes.remove(a);
+		
+		for(int i = 0; i < listaPresentaciones.size(); i++)
+			listaPresentaciones.get(i).getAsistentes().remove(a);
 	}
 	
 	public void eliminarExpositor(Expositor e) {
