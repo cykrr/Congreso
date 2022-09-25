@@ -161,6 +161,27 @@ public class Controlador implements Initializable {
     public void initialize(URL url, ResourceBundle resources) {
         this.dashHolder.getChildren().add(dashboard);
         VBox.setVgrow(dashboard, Priority.ALWAYS);
+
+        agregarListeners();
+
+        cargarRegistro();
+    }
+
+    private void cargarRegistro() {
+        for (Presentacion p : registro.getPresentaciones()) {
+            dashboard.fireEvent(new EventoPresentacion(EventoPresentacion.CREAR_PRESENTACION, p));
+        }
+        
+        for (Persona p : registro.getAsistentes()) {
+            dashboard.fireEvent(new EventoPersona(EventoPersona.CREAR_PERSONA, p));
+        }
+        
+        for (Expositor e : registro.getExpositores()) {
+            dashboard.fireEvent(new EventoExpositor(EventoExpositor.CREAR_EXPOSITOR, e));
+        }
+    }
+
+    private void agregarListeners() {
         dashboard.addEventFilter(EventoPresentacion.CREAR_PRESENTACION, e-> {
             enCrearPresentacion(e);
         });
@@ -197,17 +218,12 @@ public class Controlador implements Initializable {
             enEliminarExpositor(e);
         });
 
-        for (Presentacion p : registro.getPresentaciones()) {
-            dashboard.fireEvent(new EventoPresentacion(EventoPresentacion.CREAR_PRESENTACION, p));
-        }
-        
-        for (Persona p : registro.getAsistentes()) {
-            dashboard.fireEvent(new EventoPersona(EventoPersona.CREAR_PERSONA, p));
-        }
-        
-        for (Expositor e : registro.getExpositores()) {
-            dashboard.fireEvent(new EventoExpositor(EventoExpositor.CREAR_EXPOSITOR, e));
-        }
+        dashboard.addEventFilter(EventoExpositor.EDITAR_EXPOSITOR, e-> {
+            enCrearExpositor(e);
+        });
+        dashboard.addEventFilter(EventoExpositor.ELIMINAR_EXPOSITOR, e-> {
+            enEliminarExpositor(e);
+        });
     }
 
     /** @brief genera un Popup para crear presentación
