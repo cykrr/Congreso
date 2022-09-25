@@ -17,7 +17,8 @@ public class Presentacion {
     	this.asistentes = new LinkedList<Persona>();
     }
     
-    public Presentacion(String nombre, Expositor expositor, LocalDate fecha, LocalTime hora, int duracion, String descripcion) {
+    public Presentacion(String nombre, Expositor expositor, LocalDate fecha, 
+    					LocalTime hora, int duracion, String descripcion) {
     	this.nombre = nombre;
     	this.expositor = expositor;
     	this.fecha = fecha;
@@ -27,13 +28,25 @@ public class Presentacion {
     	this.asistentes = new LinkedList<Persona>();
     }
     
+    public Presentacion(String nombre, Expositor expositor, Persona nuevoAsistente, LocalDate fecha, 
+			LocalTime hora, int duracion, String descripcion) {
+    	this.nombre = nombre;
+		this.expositor = expositor;
+		this.fecha = fecha;
+		this.hora = hora;
+		this.duracion = duracion;
+		this.descripcion = descripcion;
+		this.asistentes = new LinkedList<Persona>();
+		this.asistentes.add(nuevoAsistente);
+    }
+    
     public void agregarAsistente(Persona asistente){
     	this.asistentes.add(asistente);
     }
     
     public void eliminarAsistente(Persona asistente) {
       this.asistentes.remove(asistente);
-	  }
+	}
     
     public void setDescripcion(String descripcion) {
     	this.descripcion = descripcion;

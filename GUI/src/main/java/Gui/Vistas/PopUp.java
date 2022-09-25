@@ -49,7 +49,7 @@ public class PopUp {
 
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.initOwner(s);
-        stage.setResizable(false);
+        stage.setResizable(true);
 
         Button b = new Button("Guardar");
 

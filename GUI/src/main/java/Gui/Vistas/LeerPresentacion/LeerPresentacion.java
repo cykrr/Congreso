@@ -18,6 +18,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import Congreso.Expositor;
+import Congreso.Persona;
 import Congreso.Presentacion;
 import Congreso.Registro;
 import Congreso.Util;
@@ -31,7 +32,9 @@ public class LeerPresentacion extends GridPane implements Initializable, PopUp.P
 	
     // Elementos XML
     @FXML private ComboBox<Expositor> comboExpositor;
-    @FXML private TextField tfNombre, tfHora, tfDuracion, tfDescripcion;
+    @FXML private ComboBox<Persona> comboAsistentes;
+    @FXML private ComboBox<Persona> comboAsistentesConfirmados;
+    @FXML private TextField tfNombre, tfHora, tfDuracion, tfDescripcion, tfAsistentes;
     @FXML private DatePicker dpFecha;
     @FXML private Button submit;
     @FXML private Text txtHeader;
@@ -68,14 +71,24 @@ public class LeerPresentacion extends GridPane implements Initializable, PopUp.P
 		tfDuracion.setText(Integer.toString(p.getDuracion()));
 		tfDescripcion.setText(p.getDescripcion());
 		comboExpositor.setValue(p.getExpositor());
+		comboAsistentes.setValue(null);
 	}
 
 	@Override
     public void initialize(URL url, ResourceBundle resources) {
-        ObservableList<Expositor> items = comboExpositor.getItems();
+        ObservableList<Expositor> itemsExpositores = comboExpositor.getItems();
         for (Expositor e : registro.getExpositores()) {
-            items.add(e);
+        	itemsExpositores.add(e);
         }
+        ObservableList<Persona> itemsAsistentes = comboAsistentes.getItems();
+        for (Persona e : registro.getAsistentes()) {
+        	itemsAsistentes.add(e);
+        }
+        
+        /*ObservableList<Persona> itemsAsistentesGuardados = comboAsistentesConfirmados.getItems();
+        for (Persona e : p.getAsistentes()) {
+        	itemsAsistentesGuardados.add(e);
+        }*/
     }
 
     @Override
@@ -91,8 +104,11 @@ public class LeerPresentacion extends GridPane implements Initializable, PopUp.P
         String strDuracion = tfDuracion.getText().trim();
         String descripcion = tfDescripcion.getText().trim();
         Expositor expositor = comboExpositor.getValue();
+        Persona asistente = comboAsistentes.getValue();
         
-        if(nombre.isEmpty() || strFecha.isEmpty() || strHora.isEmpty() || strDuracion.isEmpty() || descripcion.isEmpty()) {
+        
+        if(nombre.isEmpty() || strFecha.isEmpty() || strHora.isEmpty() 
+           || strDuracion.isEmpty() || descripcion.isEmpty()) {
         	Alerta.mostrarAlertaAdvertencia("No pueden quedar campos vacíos");
         	return false;
         }
@@ -119,9 +135,29 @@ public class LeerPresentacion extends GridPane implements Initializable, PopUp.P
         	return false;
         }
         
+        if(asistente != null) {
+        	if(asistente.getNombre().isEmpty() || asistente.getCorreo().isEmpty() || 
+        	   Integer.toString(asistente.getEdad()).isEmpty() ||
+        	   Long.toString(asistente.getFono()).isEmpty()) {
+        		Alerta.mostrarAlertaAdvertencia("No esta bien");
+        		return false;
+        	}
+        	/* 
+        	 * Lo hice para probar si tenia todos los datos correspondientes a persona
+        	 * if(!asistente.getNombre().isEmpty()) {
+        		Alerta.mostrarAlertaAdvertencia(Long.toString(asistente.getFono()));
+        		return false;
+        	}*/
+        }
+        
         int duracion = Integer.parseInt(strDuracion);
-        		
-        p = new Presentacion(nombre, expositor, fecha, hora, duracion, descripcion);
+        
+        if(asistente != null) {
+        	p = new Presentacion(nombre, expositor, asistente, fecha, hora, duracion, descripcion);
+        }
+        else {
+        	p = new Presentacion(nombre, expositor, fecha, hora, duracion, descripcion);
+        }
         return true;
     }
     
