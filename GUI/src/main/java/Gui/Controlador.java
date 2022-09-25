@@ -108,12 +108,14 @@ public class Controlador implements Initializable {
         
         mapaVistaPersonas.put(ep.getPersonaNueva(), vpNueva);
     	dashboard.getScrollBoxAsistentes().getChildren().add(index, vpNueva);
+    	actualizarAsistentesEnPresentaciones();
     }
     
     public void enEliminarPersona(EventoPersona ep) {
     	VistaPersona vp = mapaVistaPersonas.remove(ep.getPersona());
     	dashboard.getScrollBoxAsistentes().getChildren().remove(vp);
     	dashboard.actualizarNumeroAsistentes();
+    	actualizarAsistentesEnPresentaciones();
     }
     
     public void enCrearExpositor(EventoExpositor ee) {
@@ -140,6 +142,11 @@ public class Controlador implements Initializable {
     	VistaExpositor ve = mapaVistaExpositores.remove(ee.getExpositor());
     	dashboard.getScrollBoxExpositores().getChildren().remove(ve);
     	dashboard.actualizarNumeroExpositores();
+    }
+    
+    public void actualizarAsistentesEnPresentaciones() {
+    	for(VistaPresentacion vp : mapaVistaPresentaciones.values())
+    		vp.actualizarAsistentes();
     }
 
     /** @brief Constructor se ejecuta antes de leer xml*/

@@ -31,6 +31,10 @@ public class VistaPresentacion extends Vista implements Vista.Manipulable {
         txtHora.setText(p.getStringHora());
         txtDuracion.setText(Integer.toString(p.getDuracion()) + " minutos");
         
+        actualizarAsistentes();
+    }
+    
+    public void actualizarAsistentes() {
         LinkedList<Persona> asistentes = p.getAsistentes();
         txtTotalAsistentes.setText(Integer.toString(asistentes.size()));
         

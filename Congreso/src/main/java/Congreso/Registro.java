@@ -74,8 +74,16 @@ public class Registro {
 	}
 	
 	public void editarAsistente(Persona a1, Persona a2) {
-		eliminarAsistente(a1);
+		mapaAsistentes.remove(a1.getNombre());
+		listaAsistentes.remove(a1);
 		insertarAsistente(a2);
+		
+		for(int i = 0; i < listaPresentaciones.size(); i++) {
+			LinkedList<Persona> asistentes = listaPresentaciones.get(i).getAsistentes();
+			int index = asistentes.indexOf(a1);
+			if(index != -1)
+				asistentes.set(index, a2);
+		}
 	}
 	
 	public void editarExpositor(Expositor e1, Expositor e2) {
