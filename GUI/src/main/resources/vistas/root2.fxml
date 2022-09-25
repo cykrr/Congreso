@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<!-- <?import Gui.Vistas.Calendario?> -->
+<!-- <?import calendario.Calendario?> -->
+
+<VBox prefHeight="303.0" prefWidth="496.0" style="-fx-background-color: #ffffff" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+    <MenuBar>
+        <!-- TODO : Configurar teclas  -->
+        <Menu text="Archivo">
+            <MenuItem text="Abrir archivo [Ctrl + O]" />
+
+            <MenuItem text="Guardar Archivo [Ctrl + S]" />
+            <SeparatorMenuItem />
+            <MenuItem onAction="#importar" text="Importar Archivo [Ctrl + I]" />
+            <MenuItem onAction="#exportar" text="Exportar [Ctrl + E]" />
+            <SeparatorMenuItem />
+            <MenuItem text="Salir [Ctrl + W]" />
+        </Menu>
+        <Menu text="Editar">
+            <MenuItem onAction="#crearPresentacion" text="Crear presentación [Ctrl + P]" />
+            <MenuItem onAction="#crearExpositor" text="Crear expositor [Ctrl + X]" />
+            <MenuItem onAction="#crearAsistente" text="Crear asistente [Ctrl + A]" />
+            <SeparatorMenuItem />
+            <MenuItem onAction="#editarPreferencias" text="Preferencias" />
+        </Menu>
+        <Menu text="Buscar">
+            <MenuItem text="Buscar presentación" />
+            <MenuItem text="Buscar persona" />
+        </Menu>
+    </MenuBar>
+   <HBox prefHeight="360.0" prefWidth="578.0">
+      <children>
+         <VBox maxWidth="50.0" prefWidth="50.0">
+            <children>
+               <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                  <image>
+                     <Image url="@../icons/home.png" />
+                  </image>
+               </ImageView>
+               <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" />
+            </children>
+         </VBox>
+         <VBox fx:id="dashHolder" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS" />
+      </children>
+   </HBox>
+</VBox>
