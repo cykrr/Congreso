@@ -16,15 +16,29 @@ public class EventoPersona extends Event {
     public static final EventType<EventoPersona> ELIMINAR_PERSONA =
         new EventType<>(EventoPersona.ANY, "ELIMINAR_PERSONA");
 
-    Persona persona;
+    private Persona p1;
+    private Persona p2;
 
     public EventoPersona(EventType<? extends Event> et, Persona p) {
         super(et);
-        this.persona = p;
-
+        this.p1 = p;
+    }
+    
+    public EventoPersona(EventType<? extends Event> et, Persona p1, Persona p2) {
+    	super(et);
+    	this.p1 = p1;
+    	this.p2 = p2;
     }
 
     public Persona getPersona() {
-        return persona;
+        return p1;
+    }
+    
+    public Persona getPersonaAntigua() {
+    	return p1;
+    }
+    
+    public Persona getPersonaNueva() {
+    	return p2;
     }
 }

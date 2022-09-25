@@ -5,6 +5,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import Congreso.Persona;
+import Congreso.Registro;
 import Congreso.Util;
 import Gui.Alerta;
 import Gui.Vistas.PopUp;
@@ -15,18 +16,23 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
+import javafx.scene.text.Text;
 
 public class LeerAsistente extends GridPane implements Initializable, PopUp.PopAble {
 
     // Elementos XML
     @FXML private TextField tfNombre, tfEdad, tfFono, tfCorreo;
     @FXML private Button submit;
+    @FXML private Text txtHeader;
 
     // Valor de retorno
     private Persona asistente = null;
+    private Registro registro;
 
-    public LeerAsistente()  {
+    public LeerAsistente(Registro r)  {
         super();
+        this.registro = registro;
+        
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/vistas/leerAsistente.fxml"));
         fxmlLoader.setController(this);
         Node n = null;
@@ -37,6 +43,14 @@ public class LeerAsistente extends GridPane implements Initializable, PopUp.PopA
             throw new RuntimeException(exception);
         }
         this.getChildren().add(n);
+    }
+    
+    public LeerAsistente(Registro r, Persona p) {
+    	this(r);
+    	tfNombre.setText(p.getNombre());
+    	tfEdad.setText(Integer.toString(p.getEdad()));
+    	tfFono.setText(Long.toString(p.getFono()));
+    	tfCorreo.setText(p.getCorreo());
     }
 
     @Override
@@ -86,5 +100,9 @@ public class LeerAsistente extends GridPane implements Initializable, PopUp.PopA
         
         asistente = new Persona(nombre, edad, fono, correo);
         return true;
+    }
+    
+    public void setHeader(String text) {
+    	txtHeader.setText(text);
     }
 }

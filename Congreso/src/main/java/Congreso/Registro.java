@@ -73,9 +73,19 @@ public class Registro {
 		insertarPresentacion(p2);
 	}
 	
+	public void editarAsistente(Persona a1, Persona a2) {
+		eliminarAsistente(a1);
+		insertarAsistente(a2);
+	}
+	
 	public void eliminarPresentacion(Presentacion p) {
 		mapaPresentaciones.remove(p.getNombre());
 		listaPresentaciones.remove(p);
+	}
+
+	public void eliminarAsistente(Persona a) {
+		mapaAsistentes.remove(a.getNombre());
+		listaAsistentes.remove(a);
 	}
    
 	public Presentacion buscarPresentacion(String nombre) {

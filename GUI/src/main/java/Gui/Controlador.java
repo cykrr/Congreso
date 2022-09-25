@@ -77,6 +77,25 @@ public class Controlador implements Initializable {
         child.getScrollBoxAsistentes().getChildren().add(vp);
         child.actualizarNumeroAsistentes();
     }
+    
+    public void enEditarPersona(EventoPersona ep) {	
+    	VPersona vpAntigua = mapaVpersonas.remove(ep.getPersonaAntigua());
+    	int index = child.getScrollBoxAsistentes().getChildren().indexOf(vpAntigua);
+    	child.getScrollBoxAsistentes().getChildren().remove(index);
+    	
+        VPersona vpNueva = new VPersona(ep.getPersonaNueva(), registro, stage, child);
+        if(vpAntigua.estaExtendida())
+        	vpNueva.alternarVistaExtendida();
+        
+        mapaVpersonas.put(ep.getPersonaNueva(), vpNueva);
+    	child.getScrollBoxAsistentes().getChildren().add(index, vpNueva);
+    }
+    
+    public void enEliminarPersona(EventoPersona ep) {
+    	VPersona vp = mapaVpersonas.remove(ep.getPersona());
+    	child.getScrollBoxAsistentes().getChildren().remove(vp);
+    	child.actualizarNumeroAsistentes();
+    }
 
     /** @brief Constructor se ejecuta antes de leer xml*/
     public Controlador(Stage s, Registro r) {
@@ -114,6 +133,14 @@ public class Controlador implements Initializable {
         
         child.addEventFilter(EventoPersona.CREAR_PERSONA, e-> {
             enCrearPersona(e);
+        });
+        
+        child.addEventFilter(EventoPersona.EDITAR_PERSONA, e-> {
+            enEditarPersona(e);
+        });
+        
+        child.addEventFilter(EventoPersona.ELIMINAR_PERSONA, e-> {
+            enEliminarPersona(e);
         });
 
         for (Presentacion p : registro.getPresentaciones()) {
@@ -175,7 +202,7 @@ public class Controlador implements Initializable {
     public void crearAsistente() {
     	Persona asistente = null;
     	
-    	LeerAsistente la = new LeerAsistente();
+    	LeerAsistente la = new LeerAsistente(registro);
     	PopUp popup = new PopUp(stage, la);
     	popup.setTitle("Crear asistente");
     	
