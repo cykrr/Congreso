@@ -7,10 +7,13 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.ResourceBundle;
 
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import Gui.Vistas.PopUp;
@@ -34,69 +37,71 @@ public class Controlador implements Initializable {
     private     Registro    registro; // Referencia a la base de datos del programa
     private     Stage       stage;    // Ventana principal
     private     Ajustes     ajustes;  // Ajustes del programa
-    private     Dashboard   child;
+    private     Dashboard   dashboard;
     
     private Map<Presentacion, VistaPresentacion> mapaVistaPresentaciones;
     private Map<Persona, VistaPersona> mapaVistaPersonas;
     private Map<Expositor, VistaExpositor> mapaVistaExpositores;
 
+    @FXML private VBox dashHolder;
+
     public void enCrearPresentacion(EventoPresentacion ep) {
-        VistaPresentacion vp = new VistaPresentacion(ep.getPresentacion(), registro, stage, child);
+        VistaPresentacion vp = new VistaPresentacion(ep.getPresentacion(), registro, stage, dashboard);
         mapaVistaPresentaciones.put(ep.getPresentacion(), vp);
-        child.getScrollBoxPresentaciones().getChildren().add(vp);
-        child.actualizarNumeroPresentaciones();
+        dashboard.getScrollBoxPresentaciones().getChildren().add(vp);
+        dashboard.actualizarNumeroPresentaciones();
     }
     
     public void enEditarPresentacion(EventoPresentacion ep) {	
     	VistaPresentacion vpAntigua = mapaVistaPresentaciones.remove(ep.getPresentacionAntigua());
-    	int index = child.getScrollBoxPresentaciones().getChildren().indexOf(vpAntigua);
-    	child.getScrollBoxPresentaciones().getChildren().remove(index);
+    	int index = dashboard.getScrollBoxPresentaciones().getChildren().indexOf(vpAntigua);
+    	dashboard.getScrollBoxPresentaciones().getChildren().remove(index);
     	
-        VistaPresentacion vpNueva = new VistaPresentacion(ep.getPresentacionNueva(), registro, stage, child);
+        VistaPresentacion vpNueva = new VistaPresentacion(ep.getPresentacionNueva(), registro, stage, dashboard);
         if(vpAntigua.estaExtendida())
         	vpNueva.alternarVistaExtendida();
         
         mapaVistaPresentaciones.put(ep.getPresentacionNueva(), vpNueva);
-    	child.getScrollBoxPresentaciones().getChildren().add(index, vpNueva);
+    	dashboard.getScrollBoxPresentaciones().getChildren().add(index, vpNueva);
     }
     
     public void enEliminarPresentacion(EventoPresentacion ep) {
     	VistaPresentacion vp = mapaVistaPresentaciones.remove(ep.getPresentacion());
-    	child.getScrollBoxPresentaciones().getChildren().remove(vp);
-    	child.actualizarNumeroPresentaciones();
+    	dashboard.getScrollBoxPresentaciones().getChildren().remove(vp);
+    	dashboard.actualizarNumeroPresentaciones();
     }
     
     public void enCrearPersona(EventoPersona ep) {
-        VistaPersona vp = new VistaPersona(ep.getPersona(), registro, stage, child);
+        VistaPersona vp = new VistaPersona(ep.getPersona(), registro, stage, dashboard);
         mapaVistaPersonas.put(ep.getPersona(), vp);
-        child.getScrollBoxAsistentes().getChildren().add(vp);
-        child.actualizarNumeroAsistentes();
+        dashboard.getScrollBoxAsistentes().getChildren().add(vp);
+        dashboard.actualizarNumeroAsistentes();
     }
     
     public void enEditarPersona(EventoPersona ep) {	
     	VistaPersona vpAntigua = mapaVistaPersonas.remove(ep.getPersonaAntigua());
-    	int index = child.getScrollBoxAsistentes().getChildren().indexOf(vpAntigua);
-    	child.getScrollBoxAsistentes().getChildren().remove(index);
+    	int index = dashboard.getScrollBoxAsistentes().getChildren().indexOf(vpAntigua);
+    	dashboard.getScrollBoxAsistentes().getChildren().remove(index);
     	
-        VistaPersona vpNueva = new VistaPersona(ep.getPersonaNueva(), registro, stage, child);
+        VistaPersona vpNueva = new VistaPersona(ep.getPersonaNueva(), registro, stage, dashboard);
         if(vpAntigua.estaExtendida())
         	vpNueva.alternarVistaExtendida();
         
         mapaVistaPersonas.put(ep.getPersonaNueva(), vpNueva);
-    	child.getScrollBoxAsistentes().getChildren().add(index, vpNueva);
+    	dashboard.getScrollBoxAsistentes().getChildren().add(index, vpNueva);
     }
     
     public void enEliminarPersona(EventoPersona ep) {
     	VistaPersona vp = mapaVistaPersonas.remove(ep.getPersona());
-    	child.getScrollBoxAsistentes().getChildren().remove(vp);
-    	child.actualizarNumeroAsistentes();
+    	dashboard.getScrollBoxAsistentes().getChildren().remove(vp);
+    	dashboard.actualizarNumeroAsistentes();
     }
     
     public void enCrearExpositor(EventoExpositor ee) {
-        VistaExpositor ve = new VistaExpositor(ee.getExpositor(), registro, stage, child);
+        VistaExpositor ve = new VistaExpositor(ee.getExpositor(), registro, stage, dashboard);
         mapaVistaExpositores.put(ee.getExpositor(), ve);
-        child.getScrollBoxExpositores().getChildren().add(ve);
-        child.actualizarNumeroExpositores();
+        dashboard.getScrollBoxExpositores().getChildren().add(ve);
+        dashboard.actualizarNumeroExpositores();
     }
 
     /** @brief Constructor se ejecuta antes de leer xml*/
@@ -118,48 +123,51 @@ public class Controlador implements Initializable {
         mapaVistaPresentaciones = new HashMap<Presentacion, VistaPresentacion>();
         mapaVistaPersonas = new HashMap<Persona, VistaPersona>();
         mapaVistaExpositores = new HashMap<Expositor, VistaExpositor>();
+        this.dashboard = new Dashboard(r);
     }
 
     /** @brief Método que se ejecuta luego de leer xml */
     public void initialize(URL url, ResourceBundle resources) {
-        child.addEventFilter(EventoPresentacion.CREAR_PRESENTACION, e-> {
+        this.dashHolder.getChildren().add(dashboard);
+        VBox.setVgrow(dashboard, Priority.ALWAYS);
+        dashboard.addEventFilter(EventoPresentacion.CREAR_PRESENTACION, e-> {
             enCrearPresentacion(e);
         });
         
-        child.addEventFilter(EventoPresentacion.EDITAR_PRESENTACION, e-> {
+        dashboard.addEventFilter(EventoPresentacion.EDITAR_PRESENTACION, e-> {
             enEditarPresentacion(e);
         });
         
-        child.addEventFilter(EventoPresentacion.ELIMINAR_PRESENTACION, e-> {
+        dashboard.addEventFilter(EventoPresentacion.ELIMINAR_PRESENTACION, e-> {
             enEliminarPresentacion(e);
         });
         
-        child.addEventFilter(EventoPersona.CREAR_PERSONA, e-> {
+        dashboard.addEventFilter(EventoPersona.CREAR_PERSONA, e-> {
             enCrearPersona(e);
         });
         
-        child.addEventFilter(EventoPersona.EDITAR_PERSONA, e-> {
+        dashboard.addEventFilter(EventoPersona.EDITAR_PERSONA, e-> {
             enEditarPersona(e);
         });
         
-        child.addEventFilter(EventoPersona.ELIMINAR_PERSONA, e-> {
+        dashboard.addEventFilter(EventoPersona.ELIMINAR_PERSONA, e-> {
             enEliminarPersona(e);
         });
         
-        child.addEventFilter(EventoExpositor.CREAR_EXPOSITOR, e-> {
+        dashboard.addEventFilter(EventoExpositor.CREAR_EXPOSITOR, e-> {
             enCrearExpositor(e);
         });
 
         for (Presentacion p : registro.getPresentaciones()) {
-            child.fireEvent(new EventoPresentacion(EventoPresentacion.CREAR_PRESENTACION, p));
+            dashboard.fireEvent(new EventoPresentacion(EventoPresentacion.CREAR_PRESENTACION, p));
         }
         
         for (Persona p : registro.getAsistentes()) {
-            child.fireEvent(new EventoPersona(EventoPersona.CREAR_PERSONA, p));
+            dashboard.fireEvent(new EventoPersona(EventoPersona.CREAR_PERSONA, p));
         }
         
         for (Expositor e : registro.getExpositores()) {
-            child.fireEvent(new EventoExpositor(EventoExpositor.CREAR_EXPOSITOR, e));
+            dashboard.fireEvent(new EventoExpositor(EventoExpositor.CREAR_EXPOSITOR, e));
         }
     }
 
@@ -183,7 +191,7 @@ public class Controlador implements Initializable {
         retorno = (Presentacion)popup.showDialog();
         if (retorno != null) {
             registro.insertarPresentacion(retorno);
-            child.fireEvent(new EventoPresentacion(EventoPresentacion.CREAR_PRESENTACION, retorno));
+            dashboard.fireEvent(new EventoPresentacion(EventoPresentacion.CREAR_PRESENTACION, retorno));
             System.out.println(retorno);
         } else {
             System.err.println("no hay presentacion");
@@ -204,7 +212,7 @@ public class Controlador implements Initializable {
         expositor = (Expositor) popup.showDialog();
         if(expositor != null) {
         	registro.insertarExpositor(expositor);
-        	child.fireEvent(new EventoExpositor(EventoExpositor.CREAR_EXPOSITOR, expositor));
+        	dashboard.fireEvent(new EventoExpositor(EventoExpositor.CREAR_EXPOSITOR, expositor));
         }
     }
     
@@ -276,7 +284,7 @@ public class Controlador implements Initializable {
         dialog.setContentText("Please enter your name:");
     }
 
-    public void setChild(Dashboard child) {
-        this.child = child;
+    public void setDashboard(Dashboard dashboard) {
+        this.dashboard = dashboard;
     }
 }

@@ -55,12 +55,9 @@ public class Gui extends Application {
         this.controlador = new Controlador(s, registro);
 
         this.stage = s;
-        Dashboard d = new Dashboard(registro);
-        controlador.setChild(d);
         inflar();
-        this.root.getChildren().add(d);
-        VBox.setVgrow(d, Priority.ALWAYS);
-        d.getStylesheets().add("/styles.css");
+        root.getStylesheets().add("/styles.css");
+        s.sizeToScene();
     }
 
     /** 

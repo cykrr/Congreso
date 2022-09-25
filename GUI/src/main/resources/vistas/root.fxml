@@ -1,63 +1,94 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import Gui.Vistas.Presentacion.*?>
-
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.SeparatorMenuItem?>
-<?import javafx.scene.control.DatePicker?>
-<?import javafx.scene.control.skin.DatePickerSkin?>
-<?import javafx.scene.Node?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
 <!-- <?import Gui.Vistas.Calendario?> -->
-<?import Gui.Vistas.ListaPresentaciones.*?>
-<?import Gui.Vistas.Dashboard.*?>
 <!-- <?import calendario.Calendario?> -->
 
-<VBox
-    xmlns="http://javafx.com/javafx" 
-    xmlns:fx="http://javafx.com/fxml"
-    style = "-fx-background-color: #ffffff"
-    >
+<VBox style="-fx-background-color: #efefef" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
     <MenuBar>
         <!-- TODO : Configurar teclas  -->
-        <Menu text = "Archivo">
-            <MenuItem text="Abrir archivo [Ctrl + O]"/>
+        <Menu text="Archivo">
+            <MenuItem text="Abrir archivo [Ctrl + O]" />
 
-            <MenuItem text="Guardar Archivo [Ctrl + S]"/>
-            <SeparatorMenuItem/>
-            <MenuItem 
-                text="Importar Archivo [Ctrl + I]"
-                onAction="#importar"/>
-            <MenuItem 
-                text="Exportar [Ctrl + E]"
-                onAction="#exportar"/>
-            <SeparatorMenuItem/>
-            <MenuItem text="Salir [Ctrl + W]"/>
+            <MenuItem text="Guardar Archivo [Ctrl + S]" />
+            <SeparatorMenuItem />
+            <MenuItem onAction="#importar" text="Importar Archivo [Ctrl + I]" />
+            <MenuItem onAction="#exportar" text="Exportar [Ctrl + E]" />
+            <SeparatorMenuItem />
+            <MenuItem text="Salir [Ctrl + W]" />
         </Menu>
-        <Menu text = "Editar">
-            <MenuItem 
-                text="Crear presentación [Ctrl + P]"
-                onAction = "#crearPresentacion"/>
-            <MenuItem 
-                text="Crear expositor [Ctrl + X]"
-                onAction = "#crearExpositor"/>
-            <MenuItem 
-                text="Crear asistente [Ctrl + A]"
-                onAction = "#crearAsistente"/>
-            <SeparatorMenuItem/>
-            <MenuItem
-                text="Preferencias"
-                onAction = "#editarPreferencias"/>
+        <Menu text="Editar">
+            <MenuItem onAction="#crearPresentacion" text="Crear presentación [Ctrl + P]" />
+            <MenuItem onAction="#crearExpositor" text="Crear expositor [Ctrl + X]" />
+            <MenuItem onAction="#crearAsistente" text="Crear asistente [Ctrl + A]" />
+            <SeparatorMenuItem />
+            <MenuItem onAction="#editarPreferencias" text="Preferencias" />
         </Menu>
-        <Menu text = "Buscar">
+        <Menu text="Buscar">
             <MenuItem text="Buscar presentación" />
             <MenuItem text="Buscar persona" />
         </Menu>
     </MenuBar>
+    <HBox VBox.vgrow = "ALWAYS">
+        <children>
+            <!-- Side bar  -->
+            <VBox minWidth="37.5" prefWidth="37.5">
+                <children>
+                    <!-- Home icon -->
+                    <HBox fx:id = "homeIcon" styleClass = "btn" onAction = "#homeAction">
+                        <VBox.margin>
+                            <Insets bottom="5.0" left="5.0" right="5.0" top="10.0" />
+                        </VBox.margin>
+                        <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+                            <HBox.margin>
+                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                            </HBox.margin>
+                            <image>
+                                <Image url="@../icons/home.png" />
+                            </image>
+                        </ImageView>
+                    </HBox>
+                    <!-- detail icon -->
+                    <HBox fx:id = "detailIcon" styleClass = "btn" onAction = "#detailAction">
+                        <VBox.margin>
+                            <Insets bottom="5.0" left="5.0" right="5.0" top="10.0" />
+                        </VBox.margin>
+                        <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+                            <HBox.margin>
+                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                            </HBox.margin>
+                            <image>
+                                <Image url="@../icons/detail.png" />
+                            </image>
+                        </ImageView>
+                    </HBox>
+                    <!-- Add icon -->
+                    <HBox fx:id = "addIcon" styleClass = "btn" onAction = "#addAction">
+                        <VBox.margin>
+                            <Insets bottom="5.0" left="5.0" right="5.0" top="10.0" />
+                        </VBox.margin>
+                        <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+                            <HBox.margin>
+                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                            </HBox.margin>
+                            <image>
+                                <Image url="@../icons/add.png" />
+                            </image>
+                        </ImageView>
+                    </HBox>
+                </children>
+            </VBox>
+            <!-- Main View holder  -->
+            <VBox fx:id="dashHolder" HBox.hgrow="ALWAYS" />
+        </children>
+    </HBox>
 </VBox>
-
