@@ -51,6 +51,10 @@ public class VistaPresentacion extends Vista implements Vista.Manipulable {
         }
     }
     
+    public void actualizarExpositor() {
+    	txtExpositor.setText(p.getExpositor().getNombre());
+    }
+    
     @Override
     public void editar() {
     	LeerPresentacion lp = new LeerPresentacion(getRegistro(), p);

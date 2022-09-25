@@ -87,8 +87,14 @@ public class Registro {
 	}
 	
 	public void editarExpositor(Expositor e1, Expositor e2) {
-		eliminarExpositor(e1);
+		mapaExpositores.remove(e1.getNombre());
+		listaExpositores.remove(e1);
 		insertarExpositor(e2);
+		
+		for(int i = 0; i < listaPresentaciones.size(); i++) {
+			if(e1 == listaPresentaciones.get(i).getExpositor())
+				listaPresentaciones.get(i).setExpositor(e2);
+		}
 	}
 	
 	public void eliminarPresentacion(Presentacion p) {

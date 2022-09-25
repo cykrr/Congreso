@@ -136,6 +136,7 @@ public class Controlador implements Initializable {
         
         mapaVistaExpositores.put(ee.getExpositorNuevo(), veNueva);
     	dashboard.getScrollBoxExpositores().getChildren().add(index, veNueva);
+    	actualizarExpositorEnPresentaciones();
     }
     
     public void enEliminarExpositor(EventoExpositor ee) {
@@ -147,6 +148,11 @@ public class Controlador implements Initializable {
     public void actualizarAsistentesEnPresentaciones() {
     	for(VistaPresentacion vp : mapaVistaPresentaciones.values())
     		vp.actualizarAsistentes();
+    }
+    
+    public void actualizarExpositorEnPresentaciones() {
+    	for(VistaPresentacion vp : mapaVistaPresentaciones.values())
+    		vp.actualizarExpositor();
     }
 
     /** @brief Constructor se ejecuta antes de leer xml*/
