@@ -237,7 +237,6 @@ public class Controlador implements Initializable {
     public void crearPresentacion() {
         Presentacion retorno = null;
         // TODO : Proteger expositores y asistentes de modificación
-        // TODO : Añadir hora y duración de la presentación
 
         LeerPresentacion lp = new LeerPresentacion(registro);
         PopUp popup = new PopUp(stage, lp);
