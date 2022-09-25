@@ -29,7 +29,7 @@ public class LeerAsistente extends GridPane implements Initializable, PopUp.PopA
     private Persona asistente = null;
     private Registro registro;
 
-    public LeerAsistente(Registro r)  {
+    public LeerAsistente(Registro registro)  {
         super();
         this.registro = registro;
         
@@ -45,8 +45,8 @@ public class LeerAsistente extends GridPane implements Initializable, PopUp.PopA
         this.getChildren().add(n);
     }
     
-    public LeerAsistente(Registro r, Persona p) {
-    	this(r);
+    public LeerAsistente(Registro registro, Persona p) {
+    	this(registro);
     	tfNombre.setText(p.getNombre());
     	tfEdad.setText(Integer.toString(p.getEdad()));
     	tfFono.setText(Long.toString(p.getFono()));

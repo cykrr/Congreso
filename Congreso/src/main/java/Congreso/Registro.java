@@ -78,6 +78,11 @@ public class Registro {
 		insertarAsistente(a2);
 	}
 	
+	public void editarExpositor(Expositor e1, Expositor e2) {
+		eliminarExpositor(e1);
+		insertarExpositor(e2);
+	}
+	
 	public void eliminarPresentacion(Presentacion p) {
 		mapaPresentaciones.remove(p.getNombre());
 		listaPresentaciones.remove(p);
@@ -86,6 +91,11 @@ public class Registro {
 	public void eliminarAsistente(Persona a) {
 		mapaAsistentes.remove(a.getNombre());
 		listaAsistentes.remove(a);
+	}
+	
+	public void eliminarExpositor(Expositor e) {
+		mapaExpositores.remove(e.getNombre());
+		listaExpositores.remove(e);
 	}
    
 	public Presentacion buscarPresentacion(String nombre) {
