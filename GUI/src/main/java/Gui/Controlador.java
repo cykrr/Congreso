@@ -217,13 +217,6 @@ public class Controlador implements Initializable {
         dashboard.addEventFilter(EventoExpositor.ELIMINAR_EXPOSITOR, e-> {
             enEliminarExpositor(e);
         });
-
-        dashboard.addEventFilter(EventoExpositor.EDITAR_EXPOSITOR, e-> {
-            enCrearExpositor(e);
-        });
-        dashboard.addEventFilter(EventoExpositor.ELIMINAR_EXPOSITOR, e-> {
-            enEliminarExpositor(e);
-        });
     }
 
     /** @brief genera un Popup para crear presentación
