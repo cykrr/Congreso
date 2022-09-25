@@ -1,4 +1,4 @@
-package Gui.Vistas.VPersona;
+package Gui.Vistas.VistaPersona;
 
 import Congreso.Persona;
 import Congreso.Registro;
@@ -12,12 +12,12 @@ import javafx.fxml.FXML;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-public class VPersona extends Vista implements Vista.Manipulable {
+public class VistaPersona extends Vista implements Vista.Manipulable {
     @FXML Text txtNombre, txtEdad, txtFono, txtCorreo;
     
     private Persona p;
     
-    public VPersona(Persona p, Registro registro, Stage stage, Dashboard dashboard) {
+    public VistaPersona(Persona p, Registro registro, Stage stage, Dashboard dashboard) {
         super(registro, stage, dashboard, "/vistas/vPersona.fxml");
         this.p = p;
     	

@@ -1,4 +1,4 @@
-package Gui.Vistas.VPresentacion;
+package Gui.Vistas.VistaPresentacion;
 
 import java.util.LinkedList;
 
@@ -15,12 +15,12 @@ import javafx.fxml.FXML;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-public class Vpresentacion extends Vista implements Vista.Manipulable {
+public class VistaPresentacion extends Vista implements Vista.Manipulable {
     @FXML Text txtNombre, txtExpositor, txtDescripcion, txtFecha, txtHora, txtDuracion, txtTotalAsistentes, txtAsistentes;
     
     private Presentacion p;
     
-    public Vpresentacion(Presentacion p, Registro registro, Stage stage, Dashboard dashboard) {
+    public VistaPresentacion(Presentacion p, Registro registro, Stage stage, Dashboard dashboard) {
         super(registro, stage, dashboard, "/vistas/vPresentacion.fxml");      
         this.p = p;
     	

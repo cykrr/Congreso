@@ -18,8 +18,8 @@ import Gui.Vistas.Asistente.LeerAsistente;
 import Gui.Vistas.Dashboard.Dashboard;
 import Gui.Vistas.LeerExpositor.LeerExpositor;
 import Gui.Vistas.LeerPresentacion.LeerPresentacion;
-import Gui.Vistas.VPersona.VPersona;
-import Gui.Vistas.VPresentacion.Vpresentacion;
+import Gui.Vistas.VistaPersona.VistaPersona;
+import Gui.Vistas.VistaPresentacion.VistaPresentacion;
 import Congreso.Expositor;
 import Congreso.Persona;
 import Congreso.Presentacion;
@@ -35,57 +35,57 @@ public class Controlador implements Initializable {
     private     Ajustes     ajustes;  // Ajustes del programa
     private     Dashboard   child;
     
-    private Map<Presentacion, Vpresentacion> mapaVpresentaciones;
-    private Map<Persona, VPersona> mapaVpersonas;
+    private Map<Presentacion, VistaPresentacion> mapaVistaPresentaciones;
+    private Map<Persona, VistaPersona> mapaVistaPersonas;
 
     public void enCrearPresentacion(EventoPresentacion ep) {
-        Vpresentacion vp = new Vpresentacion(ep.getPresentacion(), registro, stage, child);
-        mapaVpresentaciones.put(ep.getPresentacion(), vp);
+        VistaPresentacion vp = new VistaPresentacion(ep.getPresentacion(), registro, stage, child);
+        mapaVistaPresentaciones.put(ep.getPresentacion(), vp);
         child.getScrollBoxPresentaciones().getChildren().add(vp);
         child.actualizarNumeroPresentaciones();
     }
     
     public void enEditarPresentacion(EventoPresentacion ep) {	
-    	Vpresentacion vpAntigua = mapaVpresentaciones.remove(ep.getPresentacionAntigua());
+    	VistaPresentacion vpAntigua = mapaVistaPresentaciones.remove(ep.getPresentacionAntigua());
     	int index = child.getScrollBoxPresentaciones().getChildren().indexOf(vpAntigua);
     	child.getScrollBoxPresentaciones().getChildren().remove(index);
     	
-        Vpresentacion vpNueva = new Vpresentacion(ep.getPresentacionNueva(), registro, stage, child);
+        VistaPresentacion vpNueva = new VistaPresentacion(ep.getPresentacionNueva(), registro, stage, child);
         if(vpAntigua.estaExtendida())
         	vpNueva.alternarVistaExtendida();
         
-        mapaVpresentaciones.put(ep.getPresentacionNueva(), vpNueva);
+        mapaVistaPresentaciones.put(ep.getPresentacionNueva(), vpNueva);
     	child.getScrollBoxPresentaciones().getChildren().add(index, vpNueva);
     }
     
     public void enEliminarPresentacion(EventoPresentacion ep) {
-    	Vpresentacion vp = mapaVpresentaciones.remove(ep.getPresentacion());
+    	VistaPresentacion vp = mapaVistaPresentaciones.remove(ep.getPresentacion());
     	child.getScrollBoxPresentaciones().getChildren().remove(vp);
     	child.actualizarNumeroPresentaciones();
     }
     
     public void enCrearPersona(EventoPersona ep) {
-        VPersona vp = new VPersona(ep.getPersona(), registro, stage, child);
-        mapaVpersonas.put(ep.getPersona(), vp);
+        VistaPersona vp = new VistaPersona(ep.getPersona(), registro, stage, child);
+        mapaVistaPersonas.put(ep.getPersona(), vp);
         child.getScrollBoxAsistentes().getChildren().add(vp);
         child.actualizarNumeroAsistentes();
     }
     
     public void enEditarPersona(EventoPersona ep) {	
-    	VPersona vpAntigua = mapaVpersonas.remove(ep.getPersonaAntigua());
+    	VistaPersona vpAntigua = mapaVistaPersonas.remove(ep.getPersonaAntigua());
     	int index = child.getScrollBoxAsistentes().getChildren().indexOf(vpAntigua);
     	child.getScrollBoxAsistentes().getChildren().remove(index);
     	
-        VPersona vpNueva = new VPersona(ep.getPersonaNueva(), registro, stage, child);
+        VistaPersona vpNueva = new VistaPersona(ep.getPersonaNueva(), registro, stage, child);
         if(vpAntigua.estaExtendida())
         	vpNueva.alternarVistaExtendida();
         
-        mapaVpersonas.put(ep.getPersonaNueva(), vpNueva);
+        mapaVistaPersonas.put(ep.getPersonaNueva(), vpNueva);
     	child.getScrollBoxAsistentes().getChildren().add(index, vpNueva);
     }
     
     public void enEliminarPersona(EventoPersona ep) {
-    	VPersona vp = mapaVpersonas.remove(ep.getPersona());
+    	VistaPersona vp = mapaVistaPersonas.remove(ep.getPersona());
     	child.getScrollBoxAsistentes().getChildren().remove(vp);
     	child.actualizarNumeroAsistentes();
     }
@@ -106,8 +106,8 @@ public class Controlador implements Initializable {
         				  ajustes.carpeta + "/Expositores.csv",
         				  ajustes.carpeta + "/Asistentes.csv");
         
-        mapaVpresentaciones = new HashMap<Presentacion, Vpresentacion>();
-        mapaVpersonas = new HashMap<Persona, VPersona>();
+        mapaVistaPresentaciones = new HashMap<Presentacion, VistaPresentacion>();
+        mapaVistaPersonas = new HashMap<Persona, VistaPersona>();
     }
 
     /** @brief Método que se ejecuta luego de leer xml */
