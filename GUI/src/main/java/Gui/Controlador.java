@@ -7,12 +7,14 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.ResourceBundle;
 
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.control.Tooltip;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
@@ -56,11 +58,10 @@ public class Controlador implements Initializable {
     }
 
     public void addAction() {
-
+        crearPresentacion();
     }
 
     public void detailAction() {
-
     }
 
     public void enCrearPresentacion(EventoPresentacion ep) {
@@ -168,14 +169,27 @@ public class Controlador implements Initializable {
         this.vistaPrincipal.getChildren().add(dashboard);
         VBox.setVgrow(dashboard, Priority.ALWAYS);
 
+        configurarBarraLateral();
+        agregarListeners();
+        cargarRegistro();
+    }
+
+    /**
+     * 
+     */
+    private void configurarBarraLateral() {
+        agregarTooltips();
+        addIcon.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+            @Override public void handle(MouseEvent e) {
+                crearPresentacion();
+            }
+        });
+    }
+
+private void agregarTooltips() {
         Tooltip.install(this.homeIcon, new Tooltip("Inicio"));
         Tooltip.install(this.addIcon, new Tooltip("Añadir Presentación"));
         Tooltip.install(this.detailIcon, new Tooltip("Vista detallada"));
-
-
-        agregarListeners();
-
-        cargarRegistro();
     }
 
     private void cargarRegistro() {
