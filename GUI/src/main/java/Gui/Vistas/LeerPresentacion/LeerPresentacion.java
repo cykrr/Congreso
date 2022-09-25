@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.List;
 import java.util.ResourceBundle;
 
 import javafx.collections.ObservableList;
@@ -19,7 +18,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import Congreso.Expositor;
-import Congreso.Persona;
 import Congreso.Presentacion;
 import Congreso.Registro;
 import Congreso.Util;

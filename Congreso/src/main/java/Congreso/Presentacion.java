@@ -1,11 +1,8 @@
 package Congreso;
 import java.time.LocalTime;
-import java.time.format.*;
 import java.time.LocalDate;
 
 import java.util.LinkedList;
-import java.util.Map;
-import java.util.HashMap;
 
 public class Presentacion {
 	private String nombre;
