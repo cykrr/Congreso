@@ -106,5 +106,18 @@
             GridPane.columnIndex="1"
             GridPane.rowIndex="6"
             />
+        
+        <Label
+            text = "Agregar Asistente: "
+            GridPane.columnIndex="0"
+            GridPane.rowIndex="7"
+            />
+
+        <ComboBox
+            fx:id = "comboAsistentes"
+            promptText = "Nuevo asistente"
+            GridPane.columnIndex="1"
+            GridPane.rowIndex="7"
+            />
     </children>
 </GridPane>

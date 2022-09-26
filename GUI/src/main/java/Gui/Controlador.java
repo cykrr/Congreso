@@ -83,17 +83,20 @@ public class Controlador implements Initializable {
     	dashboard.getScrollBoxPresentaciones().getChildren().remove(index);
     	
         VistaPresentacion vpNueva = new VistaPresentacion(ep.getPresentacionNueva(), registro, stage, dashboard);
-        if(vpAntigua.estaExtendida())
+        if(vpAntigua.estaExtendida()) {
         	vpNueva.alternarVistaExtendida();
+        }
         
         mapaVistaPresentaciones.put(ep.getPresentacionNueva(), vpNueva);
     	dashboard.getScrollBoxPresentaciones().getChildren().add(index, vpNueva);
+    	actualizarAsistentesEnPresentaciones();
     }
     
     public void enEliminarPresentacion(EventoPresentacion ep) {
     	VistaPresentacion vp = mapaVistaPresentaciones.remove(ep.getPresentacion());
     	dashboard.getScrollBoxPresentaciones().getChildren().remove(vp);
     	dashboard.actualizarNumeroPresentaciones();
+    	actualizarAsistentesEnPresentaciones();
     }
     
     public void enCrearPersona(EventoPersona ep) {
@@ -215,7 +218,7 @@ public class Controlador implements Initializable {
         });
     }
 
-private void agregarTooltips() {
+    private void agregarTooltips() {
         Tooltip.install(this.homeIcon, new Tooltip("Inicio"));
         Tooltip.install(this.addIcon, new Tooltip("Añadir Presentación"));
         Tooltip.install(this.detailIcon, new Tooltip("Vista detallada"));

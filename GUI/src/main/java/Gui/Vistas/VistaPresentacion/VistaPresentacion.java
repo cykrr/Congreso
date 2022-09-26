@@ -30,8 +30,8 @@ public class VistaPresentacion extends Vista implements Vista.Manipulable {
         txtFecha.setText(p.getStringFecha());
         txtHora.setText(p.getStringHora());
         txtDuracion.setText(Integer.toString(p.getDuracion()) + " minutos");
-        
         actualizarAsistentes();
+        
     }
     
     public void actualizarAsistentes() {
@@ -62,7 +62,7 @@ public class VistaPresentacion extends Vista implements Vista.Manipulable {
     	
     	PopUp popup = new PopUp(getStage(), lp);
     	popup.setTitle("Editar presentación");
-            
+        
         Presentacion retorno = (Presentacion)popup.showDialog();
         if (retorno != null) {
         	getRegistro().editarPresentacion(p, retorno);

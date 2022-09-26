@@ -38,22 +38,6 @@ public class Menu {
         System.out.println("s: Salir");
         System.out.print("--- ");
     }
-
-    public void crearPresentacion() throws IOException {
-    	String nombre = "";
-        System.out.println("Ingrese el nombre de la presentación:");
-        
-        while(nombre.equals("")) 
-        	nombre = getLine();
-        
-        crearPresentacion(nombre);
-        System.out.println("---");
-    }
-    
-    public void crearPresentacion(String nombre) {
-        Presentacion p  = new Presentacion(nombre);
-        r.insertarPresentacion(p);
-    }
     
     public void editarPresentacion() throws IOException {
     	String nombre = "";
