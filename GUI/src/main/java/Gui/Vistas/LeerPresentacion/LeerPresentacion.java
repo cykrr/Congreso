@@ -41,6 +41,8 @@ public class LeerPresentacion extends GridPane implements Initializable, PopUp.P
 
     // Valor de retorno
     private Presentacion p = null;
+    
+    private boolean editando = false;
 
     /* Constructor de la vista
      * Requiere el registro para utilizarlo
@@ -62,6 +64,8 @@ public class LeerPresentacion extends GridPane implements Initializable, PopUp.P
 
     public LeerPresentacion(Registro r, Presentacion p) {
 		this(r);
+		editando = true;
+		
 		tfNombre.setText(p.getNombre());
 		dpFecha.setValue(p.getFecha());
 		tfHora.setText(p.getStringHora());
@@ -94,6 +98,11 @@ public class LeerPresentacion extends GridPane implements Initializable, PopUp.P
         
         if(nombre.isEmpty() || strFecha.isEmpty() || strHora.isEmpty() || strDuracion.isEmpty() || descripcion.isEmpty()) {
         	Alerta.mostrarAlertaAdvertencia("No pueden quedar campos vacíos");
+        	return false;
+        }
+        
+        if(registro.buscarPresentacion(nombre) != null && editando == false) {
+        	Alerta.mostrarAlertaAdvertencia("El nombre de la presentación ya existe");
         	return false;
         }
         
