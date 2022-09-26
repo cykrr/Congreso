@@ -27,6 +27,20 @@ public class Vista extends VBox {
         public void editar();
         public void eliminar();
     }
+
+    public Vista(String fileName)  {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(fileName));
+        fxmlLoader.setController(this);
+        Node n = null;
+
+        try {
+            n = fxmlLoader.load();
+        } catch (IOException exception) {
+            throw new RuntimeException(exception);
+        }
+        this.getChildren().add(n);
+
+    }
     
     public Vista(Registro registro, Stage stage, Dashboard dashboard, String fileName) {
         super();

@@ -23,6 +23,7 @@ import javafx.stage.Stage;
 import Gui.Vistas.PopUp;
 import Gui.Vistas.Asistente.LeerAsistente;
 import Gui.Vistas.Dashboard.Dashboard;
+import Gui.Vistas.Detalle.Detalle;
 import Gui.Vistas.LeerExpositor.LeerExpositor;
 import Gui.Vistas.LeerPresentacion.LeerPresentacion;
 import Gui.Vistas.VistaExpositor.VistaExpositor;
@@ -35,13 +36,14 @@ import Congreso.Registro;
 import Congreso.Util;
 
 
-/** @brief Inicializa la clase raíz de la ventana */
+/** Inicializa la clase raíz de la ventana */
 public class Controlador implements Initializable {
 	
     private     Registro    registro; // Referencia a la base de datos del programa
     private     Stage       stage;    // Ventana principal
     private     Ajustes     ajustes;  // Ajustes del programa
     private     Dashboard   dashboard;
+    private     Detalle   detail;
     
     private Map<Presentacion, VistaPresentacion> mapaVistaPresentaciones;
     private Map<Persona, VistaPersona> mapaVistaPersonas;
@@ -54,7 +56,8 @@ public class Controlador implements Initializable {
     @FXML private     VBox        vistaPrincipal;
 
     public void homeAction() {
-
+        this.vistaPrincipal.getChildren().clear();
+        this.vistaPrincipal.getChildren().add(dashboard);
     }
 
     public void addAction() {
@@ -62,8 +65,11 @@ public class Controlador implements Initializable {
     }
 
     public void detailAction() {
+        this.vistaPrincipal.getChildren().clear();
+        if (detail == null)
+            detail = new Detalle(registro);
+        this.vistaPrincipal.getChildren().add(detail);
     }
-
     public void enCrearPresentacion(EventoPresentacion ep) {
         VistaPresentacion vp = new VistaPresentacion(ep.getPresentacion(), registro, stage, dashboard);
         mapaVistaPresentaciones.put(ep.getPresentacion(), vp);
@@ -192,6 +198,16 @@ public class Controlador implements Initializable {
      */
     private void configurarBarraLateral() {
         agregarTooltips();
+        detailIcon.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+            @Override public void handle(MouseEvent e) {
+                detailAction();
+            }
+        });
+        homeIcon.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+            @Override public void handle(MouseEvent e) {
+                homeAction();
+            }
+        });
         addIcon.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             @Override public void handle(MouseEvent e) {
                 crearPresentacion();
@@ -257,11 +273,11 @@ private void agregarTooltips() {
         });
     }
 
-    /** @brief genera un Popup para crear presentación
-     *
+    /** @brief genera un Popup para crear presentación.
+     *<p>
      * Crea una nueva presentación por medio
      * de un PopUp y la añade al registro.
-     *
+     * 
      * Es posible invocar esta función desde la barra menú de la
      * aplicación
      */

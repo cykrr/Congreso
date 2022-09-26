@@ -46,6 +46,10 @@
     -fx-font-size: 20;
 }
 
+.h2 {
+    -fx-font-size: 20;
+}
+
 .search {
     -fx-cursor: text;
 }

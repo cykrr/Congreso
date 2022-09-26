@@ -16,6 +16,16 @@ public class VistaPersona extends Vista implements Vista.Manipulable {
     @FXML Text txtNombre, txtEdad, txtFono, txtCorreo;
     
     private Persona p;
+
+    public VistaPersona(Persona p, Registro registro) {
+        super("/vistas/vPersona.fxml");
+        this.p = p;
+    	
+        txtNombre.setText(p.getNombre());
+        txtEdad.setText(Integer.toString(p.getEdad()));
+        txtFono.setText(Long.toString(p.getFono()));
+        txtCorreo.setText(p.getCorreo());
+    }
     
     public VistaPersona(Persona p, Registro registro, Stage stage, Dashboard dashboard) {
         super(registro, stage, dashboard, "/vistas/vPersona.fxml");
