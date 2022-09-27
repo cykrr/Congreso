@@ -17,32 +17,26 @@ import javafx.fxml.FXMLLoader;
 
 
 public class Gui extends Application {
-    /*! @brief Ventana principal: 
-     *
-     * Almacena la Escena principal (Scene) la cual se
+    /*! Ventana principal. Almacena la Escena principal (Scene) la cual se
      * genera en base al nodo raíz root
      */
     private     Stage       stage;      
 
-    /*! @brief Nodo principal 
-     *
-     * Almacena todos los componentes de la vista principal
-     * (root.fxml)
+    /*! Nodo principal. Almacena todos los componentes de la vista principal
+     * @see GUI/src/main/resources/Vistas/root.fxml
      */
     private     VBox        root;       
 
-    /*! @brief Carga información del Registro
+    /*! Carga información del Registro
      *  @see Congreso.Registro*/
     private     Controlador controlador;
 
-    /*! @brief Base de datos de la App */
+    /*!  Base de datos de la App */
     private     Registro    registro;   
     
-    /** @brief Punto de inicio del GUI
-     *
-     * Carga los ajustes del usuario usando la clase Ajustes.
-     * Crea un controlador que se encargará de configurar la ventana
-     * con la información correspondiente. Guarda el Stage en el
+    /**  Punto de inicio del GUI. Carga los ajustes del usuario usando la
+     * clase Ajustes. Crea un controlador que se encargará de configurar la
+     * ventana con la información correspondiente. Guarda el Stage en el
      * controlador y carga la raíz.
      *
      * @see Gui.Ajustes
@@ -82,8 +76,8 @@ public class Gui extends Application {
     }
 
     /** 
-     * @brief Carga la Vista raíz con los componentes
-     * encontrados en el archivo res/vistas/root.xml
+     *  Carga la Vista raíz con los componentes
+     * encontrados en el archivo GUI/src/main/resources/vistas/root.xml
      */
     private void inflar() {
         FXMLLoader loader = new FXMLLoader();

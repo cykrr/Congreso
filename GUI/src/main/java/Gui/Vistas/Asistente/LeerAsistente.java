@@ -28,6 +28,7 @@ public class LeerAsistente extends GridPane implements Initializable, PopUp.PopA
     // Valor de retorno
     private Persona asistente = null;
     private Registro registro;
+    private boolean editando = false;
 
     public LeerAsistente(Registro registro)  {
         super();
@@ -47,6 +48,8 @@ public class LeerAsistente extends GridPane implements Initializable, PopUp.PopA
     
     public LeerAsistente(Registro registro, Persona p) {
     	this(registro);
+    	editando = true;
+    	
     	tfNombre.setText(p.getNombre());
     	tfEdad.setText(Integer.toString(p.getEdad()));
     	tfFono.setText(Long.toString(p.getFono()));
@@ -77,6 +80,11 @@ public class LeerAsistente extends GridPane implements Initializable, PopUp.PopA
         
         if(!Util.isAlphaOrSpace(nombre)) {
         	Alerta.mostrarAlertaAdvertencia("El nombre ingresado no es válido");
+        	return false;
+        }
+        
+        if(registro.buscarAsistente(nombre) != null && editando == false) {
+        	Alerta.mostrarAlertaAdvertencia("El asistente ingresado ya existe");
         	return false;
         }
         

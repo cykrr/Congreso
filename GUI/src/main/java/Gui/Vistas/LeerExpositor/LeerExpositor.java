@@ -28,6 +28,7 @@ public class LeerExpositor extends GridPane implements Initializable, PopUp.PopA
     // Valor de retorno
     private Expositor expositor = null;
     private Registro registro;
+    private boolean editando = false;
 
     public LeerExpositor(Registro registro)  {
         super();
@@ -47,6 +48,8 @@ public class LeerExpositor extends GridPane implements Initializable, PopUp.PopA
     
     public LeerExpositor(Registro registro, Expositor e) {
     	this(registro);
+    	editando = true;
+    	
     	tfNombre.setText(e.getNombre());
     	tfEdad.setText(Integer.toString(e.getEdad()));
     	tfFono.setText(Long.toString(e.getFono()));
@@ -81,6 +84,11 @@ public class LeerExpositor extends GridPane implements Initializable, PopUp.PopA
         
         if(!Util.isAlphaOrSpace(nombre)) {
         	Alerta.mostrarAlertaAdvertencia("El nombre ingresado no es válido");
+        	return false;
+        }
+        
+        if(registro.buscarExpositor(nombre) != null && editando == false) {
+        	Alerta.mostrarAlertaAdvertencia("El expositor ingresado ya existe");
         	return false;
         }
         
