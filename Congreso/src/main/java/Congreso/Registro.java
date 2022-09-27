@@ -14,7 +14,7 @@ import java.io.IOException;
 
 
 /* Almacena toda la información correspondiente al
- * runtime: Mapas para rápido acceso a las presentaciones
+ * runtime. Mapas para rápido acceso a las presentaciones
  * por distintos atributos. */
 public class Registro {
     private Map<String, Presentacion> mapaPresentaciones;
@@ -49,6 +49,9 @@ public class Registro {
         }
     }
 
+	/** Inserta un expositor en la base de datos
+	 *  @param e Expositor a insertar
+	 */
     public void insertarExpositor(Expositor e) {
         Expositor busqueda = buscarExpositor(e.getNombre());
         if (busqueda == null) {
@@ -57,6 +60,9 @@ public class Registro {
         }
     }
     
+	/** Inserta un asistente en la base de datos
+	 *  @param a Asistente a insertar
+	 */
     public void insertarAsistente(Persona a) {
         Persona busqueda = buscarAsistente(a.getNombre());
         if (busqueda == null) {
@@ -65,6 +71,13 @@ public class Registro {
         }
     }
     
+	/** Edita una presentación en la base de datos.
+	 *  Elimina la presentación anterior y añade la nueva, transfiriendo los
+	 *  asistentes de la anterior a la nueva.
+	 * 
+	 *  @param p1 Presentación pre-modificación
+	 *  @param p2 Presentación post-modificación
+	 */
 	public void editarPresentacion(Presentacion p1, Presentacion p2) {
 		LinkedList<Persona> asistentes = p1.getAsistentes();
      	// Benja: No deberíamos usar la lista ya presente en el tipo Presentación?
@@ -75,6 +88,14 @@ public class Registro {
 		insertarPresentacion(p2);
 	}
 	
+	/** Edita un asistente en la base de datos.
+	 *  Elimina el asistente anterior y añade el nuevo.
+	 * 
+	 *  Se encarga de actualizar todas las presentaciones afectadas por la
+	 *  modificación
+	 *  @param a1 Asistente pre-modificación
+	 *  @param a2 Asistente post-modificación
+	 */
 	public void editarAsistente(Persona a1, Persona a2) {
 		mapaAsistentes.remove(a1.getNombre());
 		listaAsistentes.remove(a1);
@@ -88,6 +109,14 @@ public class Registro {
 		}
 	}
 	
+	/** Edita un Expositor en la base de datos.
+	 *  Elimina el expositor anterior y añade el nuevo.
+	 * 
+	 *  Se encarga de actualizar todas las presentaciones afectadas por la
+	 *  modificación
+	 *  @param a1 Asistente pre-modificación
+	 *  @param a2 Asistente post-modificación
+	 */
 	public void editarExpositor(Expositor e1, Expositor e2) {
 		mapaExpositores.remove(e1.getNombre());
 		listaExpositores.remove(e1);
@@ -99,11 +128,21 @@ public class Registro {
 		}
 	}
 	
+	/** Elimina una presentación de la base de datos.
+	 * 
+	 * @param p Presentación a eliminar.
+	 */
 	public void eliminarPresentacion(Presentacion p) {
 		mapaPresentaciones.remove(p.getNombre());
 		listaPresentaciones.remove(p);
 	}
 
+	/** Elimina una asistente de la base de datos.
+	 *  Se encarga de eliminar el asistente de todas las presentaciones
+	 *  involucradas.
+	 * 
+	 * @param p Asistente a eliminar.
+	 */
 	public void eliminarAsistente(Persona a) {
 		mapaAsistentes.remove(a.getNombre());
 		listaAsistentes.remove(a);
@@ -112,29 +151,42 @@ public class Registro {
 			listaPresentaciones.get(i).getAsistentes().remove(a);
 	}
 	
+	/** Elimina un expositor de la base de datos.
+	 * @param e Expositor a ser eliminado. */
 	public void eliminarExpositor(Expositor e) {
 		mapaExpositores.remove(e.getNombre());
 		listaExpositores.remove(e);
 	}
    
+	/** Busca una presentación en la base de datos dado su nombre. */
 	public Presentacion buscarPresentacion(String nombre) {
         return mapaPresentaciones.get(nombre);
     }
     
+	/** Busca un expositor en la base de datos dado su nombre. */
     public Expositor buscarExpositor(String nombre) {
     	return mapaExpositores.get(nombre);
     }
     
+	/** Busca un asistente en la base de datos dado su nombre. */
     public Persona buscarAsistente(String nombre) {
     	return mapaAsistentes.get(nombre);
     }
     
+	/** Importa archivos dado nombres de los archivos a cargar 
+	 * @param csvPresentaciones Archivo del que cargar las presentaciones.
+	 * @param csvExpositores Archivo del que cargar los expositores.
+	 * @param csvAsistentes Archivo del que cargar los asistentes.
+	*/
 	public void importar(String csvPresentaciones, String csvExpositores, String csvAsistentes) {
 		importarExpositores(csvExpositores);
 		importarAsistentes(csvAsistentes);
 		importarPresentaciones(csvPresentaciones);
 	}
     
+	/** Importa presentaciones dado un nombre de archivo
+	 * @param nombreArchivo nombre del archivo a cargar.
+	 */
     private void importarPresentaciones(String nombreArchivo) {
     	try {
 			BufferedReader br = new BufferedReader(new FileReader(nombreArchivo));
@@ -182,6 +234,9 @@ public class Registro {
     	}
     }
     
+	/** Importa expositores dado un nombre de archivo
+	 * @param nombreArchivo nombre del archivo a cargar.
+	 */
     private void importarExpositores(String nombreArchivo) {
     	try {
 			BufferedReader br = new BufferedReader(new FileReader(nombreArchivo));
@@ -210,6 +265,9 @@ public class Registro {
     	}
     }
     
+	/** Importa asistentes dado un nombre de archivo
+	 * @param nombreArchivo nombre del archivo a cargar.
+	 */
     private void importarAsistentes(String nombreArchivo) {	
     	try {
 			BufferedReader br = new BufferedReader(new FileReader(nombreArchivo));
@@ -243,6 +301,9 @@ public class Registro {
     	exportarAsistentes(csvAsistentes);
     }
 
+	/** Exporta presentaciones dado un nombre de archivo.
+	 * @param nombreArchivo nombre del archivo a exportar.
+	 */
     private void exportarPresentaciones(String nombreArchivo) {
     	try {
 	        BufferedWriter bw = new BufferedWriter(new FileWriter(nombreArchivo));
@@ -274,6 +335,9 @@ public class Registro {
 		}
 	}
 
+	/** Exporta expositores dado un nombre de archivo.
+	 * @param nombreArchivo nombre del archivo a exportar.
+	 */
 	private void exportarExpositores(String nombreArchivo) {
     	try {
     		BufferedWriter bw = new BufferedWriter(new FileWriter(nombreArchivo));
@@ -294,6 +358,9 @@ public class Registro {
 		}
 	}
 
+	/** Exporta asistentes dado un nombre de archivo.
+	 * @param nombreArchivo nombre del archivo a exportar.
+	 */
 	private void exportarAsistentes(String nombreArchivo) {
     	try {
     		BufferedWriter bw = new BufferedWriter(new FileWriter(nombreArchivo));
@@ -312,6 +379,9 @@ public class Registro {
 		}
 	}
 
+	/** Muestra las presentaciones en la base de datos
+	 *  -- Método desactualizado. Sólo se utiliza en CLI. --
+	 */
     public void mostrarPresentaciones() throws IOException {
         if (mapaPresentaciones.size() == 0)
         	System.out.println("No se encontraron " + "presentaciones");
@@ -324,6 +394,8 @@ public class Registro {
         }
         System.out.println("---");
     }
+
+	// Setters - Getters
 
     public List<Expositor> getExpositores() {
         return Collections.unmodifiableList(listaExpositores);
