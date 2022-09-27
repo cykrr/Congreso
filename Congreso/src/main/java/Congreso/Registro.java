@@ -256,6 +256,8 @@ public class Registro {
 	        	bw.write(p.getDia() + ";");
 	        	bw.write(p.getMes() + ";");
 	        	bw.write(p.getAño() + ";");
+	        	bw.write(p.getHrInicio() + ";");
+	        	bw.write(p.getMinInicio() + ";");
 	        	bw.write(p.getDuracion() + ";");
 	        	bw.write(p.getDescripcion() + ";");
 	        	bw.write("\"");

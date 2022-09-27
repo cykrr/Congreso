@@ -11,6 +11,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.control.Tooltip;
 import javafx.scene.control.Alert.AlertType;
@@ -48,7 +49,7 @@ public class Controlador implements Initializable {
     private Map<Presentacion, VistaPresentacion> mapaVistaPresentaciones;
     private Map<Persona, VistaPersona> mapaVistaPersonas;
     private Map<Expositor, VistaExpositor> mapaVistaExpositores;
-
+    
     @FXML private HBox homeIcon;
     @FXML private HBox addIcon;
     @FXML private HBox detailIcon;
@@ -117,14 +118,13 @@ public class Controlador implements Initializable {
         
         mapaVistaPersonas.put(ep.getPersonaNueva(), vpNueva);
     	dashboard.getScrollBoxAsistentes().getChildren().add(index, vpNueva);
-    	actualizarAsistentesEnPresentaciones();
+    	dashboard.actualizarNumeroAsistentes();
     }
     
     public void enEliminarPersona(EventoPersona ep) {
     	VistaPersona vp = mapaVistaPersonas.remove(ep.getPersona());
     	dashboard.getScrollBoxAsistentes().getChildren().remove(vp);
     	dashboard.actualizarNumeroAsistentes();
-    	actualizarAsistentesEnPresentaciones();
     }
     
     public void enCrearExpositor(EventoExpositor ee) {
@@ -373,10 +373,14 @@ public class Controlador implements Initializable {
         */
     }
     
+    public void exportar(String carpeta) {
+        registro.exportar(carpeta + "/Presentaciones.csv",
+				  		  carpeta + "/Expositores.csv",
+				  		  carpeta + "/Asistentes.csv");
+    }
+    
     public void exportar() {
-        registro.exportar(ajustes.carpeta + "/savedPresentaciones.csv",
-				  		  ajustes.carpeta + "/savedExpositores.csv",
-				  		  ajustes.carpeta + "/savedAsistentes.csv");
+        exportar(ajustes.carpeta);
     }
 
     // TODO : Añadir más ajustes

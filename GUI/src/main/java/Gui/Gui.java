@@ -6,6 +6,9 @@ import Congreso.Registro;
 import Gui.Vistas.Dashboard.Dashboard;
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -58,6 +61,27 @@ public class Gui extends Application {
         inflar();
         root.getStylesheets().add("/styles.css");
         s.sizeToScene();
+        
+        stage.setOnCloseRequest(event -> {
+        	event.consume();
+        	cerrar(stage);
+        });
+    }
+    
+    // Preguntar si guardar o no los cambios al cerrar el programa
+    public void cerrar(Stage stage) {
+    	Alert alerta = new Alert(AlertType.CONFIRMATION);
+    	alerta.setTitle("Cerrando Programa");
+    	alerta.setHeaderText("¿Deseas guardar los cambios hechos?");
+    	
+    	if(alerta.showAndWait().get() == ButtonType.OK) {
+    		this.controlador.exportar();
+    		System.out.println("\nGuardado Exitosamente");
+    		stage.close();
+    	}
+    	else if(alerta.showAndWait().get() == ButtonType.CANCEL) {
+    		stage.close();
+    	}
     }
 
     /** 
