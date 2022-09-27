@@ -186,10 +186,10 @@ public class Presentacion {
     	return Util.timeFormatterOutput.format(hora);
     }
     
-    public int getHrInicio() {
+    public int getHoraInicio() {
     	return 	hora.getHour();
     }
-    public int getMinInicio() {
+    public int getMinutoInicio() {
     	return 	hora.getMinute();
     }
     
