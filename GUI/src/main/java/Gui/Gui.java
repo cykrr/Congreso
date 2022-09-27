@@ -77,11 +77,8 @@ public class Gui extends Application {
     	if(alerta.showAndWait().get() == ButtonType.OK) {
     		this.controlador.exportar();
     		System.out.println("\nGuardado Exitosamente");
-    		stage.close();
     	}
-    	else if(alerta.showAndWait().get() == ButtonType.CANCEL) {
-    		stage.close();
-    	}
+    	stage.close();
     }
 
     /** 
