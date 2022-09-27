@@ -56,7 +56,7 @@ public class Gui extends Application {
 
     /** 
      *  Carga la Vista raíz con los componentes
-     * encontrados en el archivo res/vistas/root.xml
+     * encontrados en el archivo GUI/src/main/resources/vistas/root.xml
      */
     private void inflar() {
         FXMLLoader loader = new FXMLLoader();
