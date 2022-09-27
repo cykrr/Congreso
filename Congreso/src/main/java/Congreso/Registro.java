@@ -67,6 +67,8 @@ public class Registro {
     
 	public void editarPresentacion(Presentacion p1, Presentacion p2) {
 		LinkedList<Persona> asistentes = p1.getAsistentes();
+     	// Benja: No deberíamos usar la lista ya presente en el tipo Presentación?
+		// TODO : Podemos pasar colecciones?
 		p2.setAsistentes(asistentes);
 		
 		eliminarPresentacion(p1);
