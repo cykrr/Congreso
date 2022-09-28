@@ -63,7 +63,7 @@ public class BusquedaPorFecha  extends VBox implements Initializable {
         
         for (Presentacion p : r.getPresentaciones()) {
             if (p.getFecha().isEqual(fecha) || p.getFecha().isAfter(fecha)) {
-                VistaPresentacion vp = new VistaPresentacion(p, r);
+                VistaPresentacion vp = new VistaPresentacion(p);
                 scrollBox.getChildren().add(vp);
             }
         }

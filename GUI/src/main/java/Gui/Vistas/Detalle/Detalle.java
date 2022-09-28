@@ -61,7 +61,7 @@ public class Detalle extends VBox implements Initializable {
         scrollBox.getChildren().clear();
         for (Persona a : r.getAsistentes()) {
             if (a.getEdad() > edad) {
-                VistaPersona vp = new VistaPersona(a, r);
+                VistaPersona vp = new VistaPersona(a);
                 scrollBox.getChildren().add(vp);
             }
         }

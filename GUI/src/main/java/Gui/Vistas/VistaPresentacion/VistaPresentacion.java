@@ -20,7 +20,7 @@ public class VistaPresentacion extends Vista implements Vista.Manipulable {
     
     private Presentacion p;
     
-    public VistaPresentacion(Presentacion p, Registro registro) {
+    public VistaPresentacion(Presentacion p) {
         super("/vistas/vPresentacion.fxml");
         this.p = p;
     	
