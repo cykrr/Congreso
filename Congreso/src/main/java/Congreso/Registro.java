@@ -80,13 +80,13 @@ public class Registro {
 	 */
 	public void editarPresentacion(Presentacion p1, Presentacion p2) {
 		LinkedList<Persona> asistentes = p1.getAsistentes();
+
 		if(p2.getAsistentes().size() > 0) {
 			LinkedList<Persona> asistentesAgregar = p2.getAsistentes();
 			
 			asistentes.addAll(asistentesAgregar);
 		}
-     	
-		// TODO : Podemos pasar colecciones?
+		// TODO : Podemos pasar colecciones
 		p2.setAsistentes(asistentes);
 		
 		eliminarPresentacion(p1);

@@ -27,6 +27,8 @@ public class Presentacion {
 
     /*! Lista de asistentes de la presentación */
 	private LinkedList<Persona> asistentes;
+	
+	private Persona asistenteToRemove;
 
     /** Constructor principal, inicializa la lista de
      * asistentes (sin asistentes).
@@ -34,6 +36,7 @@ public class Presentacion {
       */
     public Presentacion() {
     	this.asistentes = new LinkedList<Persona>();
+    	this.asistenteToRemove = null;
     }
     
     /** Constructor general para el tipo presentación
@@ -58,6 +61,7 @@ public class Presentacion {
     	this.duracion = duracion;
     	this.descripcion = descripcion;
     	this.asistentes = new LinkedList<Persona>();
+    	this.asistenteToRemove = null;
     }
     
     /** Agrega un asistente de tipo Persona a la presentación insertándolo en
@@ -66,6 +70,21 @@ public class Presentacion {
      */
     public void agregarAsistente(Persona asistente){
     	this.asistentes.add(asistente);
+    }
+    
+    /** Elimina un asistente de tipo Persona en la presentación insertándolo .
+     * @param asistente Asistente a ser eliminado.
+     */
+    public void removerAsistente(Persona asistente){
+    	this.asistentes.remove(asistente);
+    }
+    
+    /** Agrega un asistente de tipo Persona a eliminar de la presentación insertándolo en
+     *  la variable asistenteToRemove.
+     * @param asistente Asistente a ser añadido.
+     */
+    public void agregarAsistenteToRemove(Persona asistente){
+    	this.asistenteToRemove = asistente;
     }
     
     /** Dada una referencia a un asistente, lo elimina de la lista de
@@ -267,6 +286,14 @@ public class Presentacion {
     
     public Expositor getExpositor() {
     	return expositor;
+    }
+    
+    public Persona getAsistenteToRemove() {
+    	return this.asistenteToRemove;
+    }
+    
+    public Persona getAsistenteToRemove(Presentacion p) {
+    	return p.getAsistenteToRemove();
     }
     
     public int getDia() {
