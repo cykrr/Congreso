@@ -86,6 +86,7 @@ public class Registro {
 			
 			asistentes.addAll(asistentesAgregar);
 		}
+		
 		// TODO : Podemos pasar colecciones
 		p2.setAsistentes(asistentes);
 		
