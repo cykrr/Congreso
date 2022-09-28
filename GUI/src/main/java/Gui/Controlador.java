@@ -24,6 +24,7 @@ import javafx.stage.Stage;
 import Gui.Vistas.PopUp;
 import Gui.Vistas.Asistente.LeerAsistente;
 import Gui.Vistas.Dashboard.Dashboard;
+import Gui.Vistas.Detalle.BusquedaPorFecha;
 import Gui.Vistas.Detalle.Detalle;
 import Gui.Vistas.LeerExpositor.LeerExpositor;
 import Gui.Vistas.LeerPresentacion.LeerPresentacion;
@@ -45,6 +46,7 @@ public class Controlador implements Initializable {
     private     Ajustes     ajustes;  // Ajustes del programa
     private     Dashboard   dashboard;
     private     Detalle   detail;
+    private     BusquedaPorFecha   search;
     
     private Map<Presentacion, VistaPresentacion> mapaVistaPresentaciones;
     private Map<Persona, VistaPersona> mapaVistaPersonas;
@@ -53,6 +55,7 @@ public class Controlador implements Initializable {
     @FXML private HBox homeIcon;
     @FXML private HBox addIcon;
     @FXML private HBox detailIcon;
+    @FXML private HBox searchIcon;
 
     @FXML private     VBox        vistaPrincipal;
 
@@ -71,6 +74,14 @@ public class Controlador implements Initializable {
             detail = new Detalle(registro);
         this.vistaPrincipal.getChildren().add(detail);
     }
+    
+    public void searchAction() {
+        this.vistaPrincipal.getChildren().clear();
+        if (search == null)
+            search = new BusquedaPorFecha(registro);
+        this.vistaPrincipal.getChildren().add(search);
+    }
+    
     public void enCrearPresentacion(EventoPresentacion ep) {
         VistaPresentacion vp = new VistaPresentacion(ep.getPresentacion(), registro, stage, dashboard);
         mapaVistaPresentaciones.put(ep.getPresentacion(), vp);
@@ -214,6 +225,11 @@ public class Controlador implements Initializable {
         addIcon.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             @Override public void handle(MouseEvent e) {
                 crearPresentacion();
+            }
+        });
+        searchIcon.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+            @Override public void handle(MouseEvent e) {
+                searchAction();
             }
         });
     }

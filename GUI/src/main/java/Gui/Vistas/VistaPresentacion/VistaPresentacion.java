@@ -20,6 +20,19 @@ public class VistaPresentacion extends Vista implements Vista.Manipulable {
     
     private Presentacion p;
     
+    public VistaPresentacion(Presentacion p, Registro registro) {
+        super("/vistas/vPresentacion.fxml");
+        this.p = p;
+    	
+        txtNombre.setText(p.getNombre());
+        txtExpositor.setText(p.getExpositor().getNombre());
+        txtDescripcion.setText(p.getDescripcion());
+        txtFecha.setText(p.getStringFecha());
+        txtHora.setText(p.getStringHora());
+        txtDuracion.setText(Integer.toString(p.getDuracion()) + " minutos");
+        actualizarAsistentes();
+    }
+    
     public VistaPresentacion(Presentacion p, Registro registro, Stage stage, Dashboard dashboard) {
         super(registro, stage, dashboard, "/vistas/vPresentacion.fxml");      
         this.p = p;
@@ -31,7 +44,6 @@ public class VistaPresentacion extends Vista implements Vista.Manipulable {
         txtHora.setText(p.getStringHora());
         txtDuracion.setText(Integer.toString(p.getDuracion()) + " minutos");
         actualizarAsistentes();
-        
     }
     
     public void actualizarAsistentes() {

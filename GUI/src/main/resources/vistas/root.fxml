@@ -72,6 +72,20 @@
                             </image>
                         </ImageView>
                     </HBox>
+                    <!-- search icon -->
+                    <HBox fx:id = "searchIcon" styleClass = "btn">
+                        <VBox.margin>
+                            <Insets bottom="5.0" left="5.0" right="5.0" top="10.0" />
+                        </VBox.margin>
+                        <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+                            <HBox.margin>
+                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                            </HBox.margin>
+                            <image>
+                                <Image url="@../icons/lupa.png" />
+                            </image>
+                        </ImageView>
+                    </HBox>
                     <!-- Add icon -->
                     <HBox fx:id = "addIcon" styleClass = "btn">
                         <VBox.margin>
