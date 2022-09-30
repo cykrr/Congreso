@@ -1,7 +1,7 @@
 package Congreso;
 
-import java.util.Collections;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -188,6 +188,15 @@ public class Registro {
     	return mapaAsistentes.get(nombre);
     }
     
+    /** Busca si el expositor se encuentra en alguna presentación */
+    public boolean expositorEnPresentacion(Expositor e) {
+    	for(int i = 0; i < listaPresentaciones.size(); i++) {
+    		if(e == listaPresentaciones.get(i).getExpositor())
+    			return true;
+    	}	
+    	return false;
+    }
+    
 	/** Importa archivos dado nombres de los archivos a cargar 
 	 * @param csvPresentaciones Archivo del que cargar las presentaciones.
 	 * @param csvExpositores Archivo del que cargar los expositores.
@@ -366,16 +375,16 @@ public class Registro {
 
 	// Setters - Getters
 
-    public List<Expositor> getExpositores() {
-        return Collections.unmodifiableList(listaExpositores);
+    public Iterator<Presentacion> getPresentaciones() {
+        return listaPresentaciones.iterator();
+    }
+    
+    public Iterator<Expositor> getExpositores() {
+        return listaExpositores.iterator();
     }
 
-    public List<Persona> getAsistentes() {
-        return Collections.unmodifiableList(listaAsistentes);
-    }
-
-    public List<Presentacion> getPresentaciones() {
-        return Collections.unmodifiableList(listaPresentaciones);
+    public Iterator<Persona> getAsistentes() {
+        return listaAsistentes.iterator();
     }
     
     public Integer getCantidadPresentaciones() {

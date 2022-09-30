@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.Iterator;
 import java.util.ResourceBundle;
 
 import javafx.collections.ObservableList;
@@ -83,13 +84,17 @@ public class LeerPresentacion extends GridPane implements Initializable, PopUp.P
 	@Override
     public void initialize(URL url, ResourceBundle resources) {
 		ObservableList<Expositor> itemsExpositores = comboExpositor.getItems();
-        for (Expositor e : registro.getExpositores()) {
-        	itemsExpositores.add(e);
+		Iterator<Expositor> iteratorExpositores = registro.getExpositores();
+		
+        while(iteratorExpositores.hasNext()) {
+        	itemsExpositores.add(iteratorExpositores.next());
         }
         
         ObservableList<Persona> itemsAsistentes = comboAsistentes.getItems();
-        for (Persona e : registro.getAsistentes()) {
-        	itemsAsistentes.add(e);
+        Iterator<Persona> iteratorAsistentes = registro.getAsistentes();
+        
+        while(iteratorAsistentes.hasNext()) {
+        	itemsAsistentes.add(iteratorAsistentes.next());
         }
     }
 

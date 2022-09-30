@@ -1,10 +1,9 @@
 package Gui.Vistas.Detalle;
 
 import java.io.IOException;
-import java.net.URL;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
-import java.util.ResourceBundle;
+import java.util.Iterator;
 
 import Congreso.Presentacion;
 import Congreso.Registro;
@@ -13,12 +12,11 @@ import Gui.Alerta;
 import Gui.Vistas.VistaPresentacion.VistaPresentacion;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.DatePicker;
 import javafx.scene.layout.VBox;
 
-public class BusquedaPorFecha  extends VBox implements Initializable {
+public class BusquedaPorFecha extends VBox {
 	
     @FXML private VBox scrollBox;
     private Registro r;
@@ -43,11 +41,6 @@ public class BusquedaPorFecha  extends VBox implements Initializable {
 
         this.getChildren().add(n);
     }
-    
-    public void initialize(URL url, ResourceBundle rb)
-    {
-    	
-    }
 
     public void textInput() {
         String t = this.dpFecha.getEditor().getText().trim();
@@ -61,12 +54,16 @@ public class BusquedaPorFecha  extends VBox implements Initializable {
         
         scrollBox.getChildren().clear();
         
-        for (Presentacion p : r.getPresentaciones()) {
+        Iterator<Presentacion> itPresentaciones = r.getPresentaciones();
+        while(itPresentaciones.hasNext()) {
+        	Presentacion p = itPresentaciones.next();
+        	
             if (p.getFecha().isEqual(fecha) || p.getFecha().isAfter(fecha)) {
                 VistaPresentacion vp = new VistaPresentacion(p);
                 scrollBox.getChildren().add(vp);
             }
         }
-
+        
     }
+    
 }

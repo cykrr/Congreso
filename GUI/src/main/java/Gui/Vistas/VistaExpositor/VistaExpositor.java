@@ -1,12 +1,10 @@
 package Gui.Vistas.VistaExpositor;
 
 import Congreso.Expositor;
-import Congreso.Presentacion;
 import Congreso.Registro;
 import Congreso.excepciones.NullExpositorException;
 import Gui.Alerta;
 import Gui.EventoExpositor;
-import Gui.EventoPersona;
 import Gui.Vistas.PopUp;
 import Gui.Vistas.Vista;
 import Gui.Vistas.Dashboard.Dashboard;
@@ -53,14 +51,11 @@ public class VistaExpositor extends Vista implements Vista.Manipulable {
 
 	@Override
 	public void eliminar() {
-		for(int i = 0; i < getRegistro().getPresentaciones().size(); i++) {
-			Presentacion p = getRegistro().getPresentaciones().get(i);
-			if(p.getExpositor() == e) {
-				Alerta.mostrarAlertaError(
-						"Error al eliminar expositor \"" + e.getNombre() + "\"",
-						"Expositor presenta en una o más presentaciones");
-				return;
-			}
+		if(getRegistro().expositorEnPresentacion(e)) {
+			Alerta.mostrarAlertaError(
+					"Error al eliminar expositor \"" + e.getNombre() + "\"",
+					"Expositor presenta en una o más presentaciones");
+			return;
 		}
 		
     	boolean opcion = Alerta.mostrarAlertaConfirmacion("¿Desea eliminar al expositor \"" + e.getNombre() + "\"?");

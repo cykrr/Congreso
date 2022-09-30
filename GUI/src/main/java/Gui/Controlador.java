@@ -4,6 +4,7 @@ import java.io.File;
 
 import java.net.URL;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.ResourceBundle;
 
@@ -11,7 +12,6 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.control.Tooltip;
 import javafx.scene.control.Alert.AlertType;
@@ -241,16 +241,20 @@ public class Controlador implements Initializable {
     }
 
     private void cargarRegistro() {
-        for (Presentacion p : registro.getPresentaciones()) {
-            dashboard.fireEvent(new EventoPresentacion(EventoPresentacion.CREAR_PRESENTACION, p));
+    	Iterator<Presentacion> itPresentaciones = registro.getPresentaciones();
+    	Iterator<Expositor> itExpositores = registro.getExpositores();
+    	Iterator<Persona> itAsistentes = registro.getAsistentes();
+    	
+    	while(itPresentaciones.hasNext()) {
+            dashboard.fireEvent(new EventoPresentacion(EventoPresentacion.CREAR_PRESENTACION, itPresentaciones.next()));
+    	}
+    	
+        while(itExpositores.hasNext()) {
+            dashboard.fireEvent(new EventoExpositor(EventoExpositor.CREAR_EXPOSITOR, itExpositores.next()));
         }
         
-        for (Persona p : registro.getAsistentes()) {
-            dashboard.fireEvent(new EventoPersona(EventoPersona.CREAR_PERSONA, p));
-        }
-        
-        for (Expositor e : registro.getExpositores()) {
-            dashboard.fireEvent(new EventoExpositor(EventoExpositor.CREAR_EXPOSITOR, e));
+        while(itAsistentes.hasNext()) {
+            dashboard.fireEvent(new EventoPersona(EventoPersona.CREAR_PERSONA, itAsistentes.next()));
         }
     }
 
