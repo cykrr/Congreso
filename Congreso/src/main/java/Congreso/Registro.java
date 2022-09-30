@@ -12,7 +12,12 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.nio.charset.StandardCharsets;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 
 
@@ -197,7 +202,7 @@ public class Registro {
 			importarPresentaciones(csvPresentaciones);
 		} catch(Exception e) {
 			e.printStackTrace();
-			return false;
+			System.exit(1);
 		}
 		return true;
 	}
@@ -206,195 +211,159 @@ public class Registro {
 	 * @param nombreArchivo nombre del archivo a cargar.
 	 */
     private void importarPresentaciones(String nombreArchivo) throws Exception {
-    	try {
-			BufferedReader br = new BufferedReader(new FileReader(nombreArchivo));
-	    	
-	        String line;
-			while((line = br.readLine()) != null) {
-				line = new String(line.getBytes("ISO-8859-1"), "UTF-8");
-			    LinkedList<String> lineArray = CSVTokener.csvArray(new CSVTokener(line));
-			    if (lineArray.size() != 10)
-			    	continue; // Cantidad de campos por linea no coincide
-			    
-			    Presentacion p = new Presentacion();
-			    p.setNombre(lineArray.get(0));
-			    
-			    Expositor expositor = buscarExpositor(lineArray.get(1));
-			    p.setExpositor(expositor);
-			    
-			    p.setDia(Integer.parseInt(lineArray.get(2)));
-			    p.setMes(Integer.parseInt(lineArray.get(3)));
-			    p.setAño(Integer.parseInt(lineArray.get(4)));
-			    p.setHora(Integer.parseInt(lineArray.get(5)));
-			    p.setMinuto(Integer.parseInt(lineArray.get(6)));
-			    p.setDuracion(Integer.parseInt(lineArray.get(7)));
-			    p.setDescripcion(lineArray.get(8));
-			    
-			    String asistentes = lineArray.get(9);
-			    asistentes = asistentes.substring(1, asistentes.length() - 1);
-			    LinkedList<String> listaAsistentes = CSVTokener.csvArray(new CSVTokener(asistentes));
-			    
-			    for(int i = 0; i < listaAsistentes.size(); i++) {
-				    Persona asistente = buscarAsistente(listaAsistentes.get(i));
-				    if(asistente == null)
-				    	continue; // Asistente no existe
-			    	p.agregarAsistente(asistente);
-			    }
-			    
-			    insertarPresentacion(p);
-			}
-		        
-		    br.close();
-    	} catch(Exception e) {
-    		e.printStackTrace();
-    	}
+		BufferedReader br = new BufferedReader(new FileReader(nombreArchivo));
+    	
+        String line;
+		while((line = br.readLine()) != null) {
+			line = new String(line.getBytes("ISO-8859-1"), "UTF-8");
+		    LinkedList<String> lineArray = CSVTokener.csvArray(new CSVTokener(line));
+		    
+		    String nombre = lineArray.get(0);
+		    Expositor expositor = buscarExpositor(lineArray.get(1));
+		    LocalDate fecha = Util.parseDate(lineArray.get(2));
+		    LocalTime hora = Util.parseTime(lineArray.get(3));
+		    int duracion = Integer.parseInt(lineArray.get(4));
+		    String descripcion = lineArray.get(5);
+		    
+		    Presentacion p = new Presentacion(nombre, expositor, fecha, hora, duracion, descripcion);
+		    insertarPresentacion(p);
+		    
+		    String asistentes = lineArray.get(6);
+		    asistentes = asistentes.substring(1, asistentes.length() - 1);
+		    LinkedList<String> listaAsistentes = CSVTokener.csvArray(new CSVTokener(asistentes));
+		    
+		    for(int i = 0; i < listaAsistentes.size(); i++) {
+			    Persona asistente = buscarAsistente(listaAsistentes.get(i));
+		    	p.agregarAsistente(asistente);
+		    }
+		}
+	        
+	    br.close();
     }
     
 	/** Importa expositores dado un nombre de archivo
 	 * @param nombreArchivo nombre del archivo a cargar.
 	 */
     private void importarExpositores(String nombreArchivo) throws Exception {
-    	try {
-			BufferedReader br = new BufferedReader(new FileReader(nombreArchivo));
+    	BufferedReader br = new BufferedReader(new FileReader(nombreArchivo));
 	    	
-	        String line;
-			while((line = br.readLine()) != null) {
-				line = new String(line.getBytes("ISO-8859-1"), "UTF-8");
-			    LinkedList<String> lineArray = CSVTokener.csvArray(new CSVTokener(line));
-			    if (lineArray.size() != 6)
-			    	break; // Cantidad de campos por linea no coincide
-			            
-			    String nombre = lineArray.get(0);
-			    int edad = Integer.parseInt(lineArray.get(1));
-			    int fono = Integer.parseInt(lineArray.get(2));
-			    String correo = lineArray.get(3);
-			    String pais = lineArray.get(4);
-			    String ocupacion = lineArray.get(5);
-			    
-			    Expositor expositor = new Expositor(nombre, edad, fono, correo, pais, ocupacion);
-			    insertarExpositor(expositor);
-			}
-		        
-		    br.close();
-    	} catch(IOException e) {
-    		e.printStackTrace();
-    	}
+        String line;
+		while((line = br.readLine()) != null) {
+			line = new String(line.getBytes("ISO-8859-1"), "UTF-8");
+		    LinkedList<String> lineArray = CSVTokener.csvArray(new CSVTokener(line));
+		            
+		    String nombre = lineArray.get(0);
+		    int edad = Integer.parseInt(lineArray.get(1));
+		    int fono = Integer.parseInt(lineArray.get(2));
+		    String correo = lineArray.get(3);
+		    String pais = lineArray.get(4);
+		    String ocupacion = lineArray.get(5);
+		    
+		    Expositor expositor = new Expositor(nombre, edad, fono, correo, pais, ocupacion);
+		    insertarExpositor(expositor);
+		}
+	        
+	    br.close();
     }
     
 	/** Importa asistentes dado un nombre de archivo
 	 * @param nombreArchivo nombre del archivo a cargar.
 	 */
     private void importarAsistentes(String nombreArchivo) throws Exception {	
-    	try {
-			BufferedReader br = new BufferedReader(new FileReader(nombreArchivo));
-	    	
-	        String line;
-			while((line = br.readLine()) != null) {
-				line = new String(line.getBytes("ISO-8859-1"), "UTF-8");
-			    LinkedList<String> lineArray = CSVTokener.csvArray(new CSVTokener(line));
-			    if (lineArray.size() != 4)
-			    	break; // Cantidad de campos por linea no coincide
-			            
-			    String nombre = lineArray.get(0);
-			    int edad = Integer.parseInt(lineArray.get(1));
-			    int fono = Integer.parseInt(lineArray.get(2));
-			    String correo = lineArray.get(3);
-			    
-			    Persona asistente = new Persona(nombre, edad, fono, correo);
-			    insertarAsistente(asistente);
-			}
-		        
-		    br.close();
-    	} catch(IOException e) {
-    		e.printStackTrace();
-    	}	
+		BufferedReader br = new BufferedReader(new FileReader(nombreArchivo));
+    	
+        String line;
+		while((line = br.readLine()) != null) {
+			line = new String(line.getBytes("ISO-8859-1"), "UTF-8");
+		    LinkedList<String> lineArray = CSVTokener.csvArray(new CSVTokener(line));
+		            
+		    String nombre = lineArray.get(0);
+		    int edad = Integer.parseInt(lineArray.get(1));
+		    int fono = Integer.parseInt(lineArray.get(2));
+		    String correo = lineArray.get(3);
+		    
+		    Persona asistente = new Persona(nombre, edad, fono, correo);
+		    insertarAsistente(asistente);
+		}
+	        
+	    br.close();
     }
 
     /* Guarda los contenidos del registro */
     public void exportar(String csvPresentaciones, String csvExpositores, String csvAsistentes) {
-    	exportarPresentaciones(csvPresentaciones);
-    	exportarExpositores(csvExpositores);
-    	exportarAsistentes(csvAsistentes);
+		try {
+			exportarPresentaciones(csvPresentaciones);
+			exportarExpositores(csvExpositores);
+			exportarAsistentes(csvAsistentes);
+		} catch(Exception e) {
+			e.printStackTrace();
+			System.exit(1);
+		}
     }
 
 	/** Exporta presentaciones dado un nombre de archivo.
 	 * @param nombreArchivo nombre del archivo a exportar.
 	 */
-    private void exportarPresentaciones(String nombreArchivo) {
-    	try {
-	        BufferedWriter bw = new BufferedWriter(new FileWriter(nombreArchivo));
-	        for(int i = 0; i < listaPresentaciones.size(); i++) {
-	        	Presentacion p = listaPresentaciones.get(i);
-	        	bw.write(p.getNombre() + ";");
-	        	bw.write(p.getExpositor().getNombre() + ";");
-	        	bw.write(p.getDia() + ";");
-	        	bw.write(p.getMes() + ";");
-	        	bw.write(p.getAño() + ";");
-	        	bw.write(p.getHoraInicio() + ";");
-	        	bw.write(p.getMinutoInicio() + ";");
-	        	bw.write(p.getDuracion() + ";");
-	        	bw.write(p.getDescripcion() + ";");
-	        	bw.write("\"");
-	        	
-	        	for(int j = 0; j < p.getAsistentes().size(); j++) {
-	        		Persona asistente = p.getAsistentes().get(j);		
-	        		bw.write(asistente.getNombre());
-	        		
-	        		if(j < p.getAsistentes().size() - 1)
-	        			bw.write(";");
-	        	}
-	        	
-	        	bw.write("\"\n");
-	        }
-	        
-	        bw.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+    private void exportarPresentaciones(String nombreArchivo) throws Exception {
+    	BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(nombreArchivo), StandardCharsets.UTF_8));
+        for(int i = 0; i < listaPresentaciones.size(); i++) {
+        	Presentacion p = listaPresentaciones.get(i);
+        	bw.write(p.getNombre() + ";");
+        	bw.write(p.getExpositor().getNombre() + ";");
+        	bw.write(p.getStringFecha() + ";");
+        	bw.write(p.getStringHora() + ";");
+        	bw.write(p.getDuracion() + ";");
+        	bw.write(p.getDescripcion() + ";");
+        	bw.write("\"");
+        	
+        	for(int j = 0; j < p.getAsistentes().size(); j++) {
+        		Persona asistente = p.getAsistentes().get(j);		
+        		bw.write(asistente.getNombre());
+        		
+        		if(j < p.getAsistentes().size() - 1)
+        			bw.write(";");
+        	}
+        	
+        	bw.write("\"\n");
+        }
+        
+        bw.close();
 	}
 
 	/** Exporta expositores dado un nombre de archivo.
 	 * @param nombreArchivo nombre del archivo a exportar.
 	 */
-	private void exportarExpositores(String nombreArchivo) {
-    	try {
-    		BufferedWriter bw = new BufferedWriter(new FileWriter(nombreArchivo));
-	        for(int i = 0; i < listaExpositores.size(); i++) {
-	        	Expositor expositor = listaExpositores.get(i);
-	        	bw.write(expositor.getNombre() + ";");
-	        	bw.write(expositor.getEdad() + ";");
-	        	bw.write(expositor.getFono() + ";");
-	        	bw.write(expositor.getCorreo() + ";");
-	        	bw.write(expositor.getPais() + ";");
-	        	bw.write(expositor.getOcupacion());
-	        	bw.write("\n");
-	        }
-	        
-	        bw.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+	private void exportarExpositores(String nombreArchivo) throws Exception {
+		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(nombreArchivo), StandardCharsets.UTF_8));
+        for(int i = 0; i < listaExpositores.size(); i++) {
+        	Expositor expositor = listaExpositores.get(i);
+        	bw.write(expositor.getNombre() + ";");
+        	bw.write(expositor.getEdad() + ";");
+        	bw.write(expositor.getFono() + ";");
+        	bw.write(expositor.getCorreo() + ";");
+        	bw.write(expositor.getPais() + ";");
+        	bw.write(expositor.getOcupacion());
+        	bw.write("\n");
+        }
+        
+        bw.close();
 	}
 
 	/** Exporta asistentes dado un nombre de archivo.
 	 * @param nombreArchivo nombre del archivo a exportar.
 	 */
-	private void exportarAsistentes(String nombreArchivo) {
-    	try {
-    		BufferedWriter bw = new BufferedWriter(new FileWriter(nombreArchivo));
-	        for(int i = 0; i < listaAsistentes.size(); i++) {
-	        	Persona asistente = listaAsistentes.get(i);
-	        	bw.write(asistente.getNombre() + ";");
-	        	bw.write(asistente.getEdad() + ";");
-	        	bw.write(asistente.getFono() + ";");
-	        	bw.write(asistente.getCorreo());
-	        	bw.write("\n");
-	        }
-	        
-	        bw.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+	private void exportarAsistentes(String nombreArchivo) throws Exception {
+		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(nombreArchivo), StandardCharsets.UTF_8));
+        for(int i = 0; i < listaAsistentes.size(); i++) {
+        	Persona asistente = listaAsistentes.get(i);
+        	bw.write(asistente.getNombre() + ";");
+        	bw.write(asistente.getEdad() + ";");
+        	bw.write(asistente.getFono() + ";");
+        	bw.write(asistente.getCorreo());
+        	bw.write("\n");
+        }
+        
+        bw.close();
 	}
 
 	/** Muestra las presentaciones en la base de datos

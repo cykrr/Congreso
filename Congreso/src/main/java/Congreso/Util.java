@@ -13,28 +13,12 @@ public class Util {
 	public final static DateTimeFormatter timeFormatterInput = DateTimeFormatter.ofPattern("H:m").withResolverStyle(ResolverStyle.STRICT);
 	public final static DateTimeFormatter timeFormatterOutput = DateTimeFormatter.ofPattern("HH:mm").withResolverStyle(ResolverStyle.STRICT);
 	
-	public static LocalDate parseDate(String strDate) {
-		LocalDate date;	
-		
-		try {
-			date = LocalDate.parse(strDate, dateFormatterInput);
-		} catch (DateTimeParseException | NullPointerException e) {
-			return null;
-	    }
-		
-		return date;
+	public static LocalDate parseDate(String strDate) throws DateTimeParseException {
+		return LocalDate.parse(strDate, dateFormatterInput);
 	}
 	
-	public static LocalTime parseTime(String strTime) {
-		LocalTime time;	
-		
-		try {
-			time = LocalTime.parse(strTime, timeFormatterInput);
-		} catch (DateTimeParseException | NullPointerException e) {
-			return null;
-	    }
-		
-		return time;
+	public static LocalTime parseTime(String strTime) throws DateTimeParseException {
+		return LocalTime.parse(strTime, timeFormatterInput);
 	}
 	
 	public static String getFileExtension(File file) {
