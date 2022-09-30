@@ -14,7 +14,12 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import Congreso.Expositor;
 import Congreso.Registro;
-import Congreso.Util;
+import Congreso.excepciones.InvalidCorreoException;
+import Congreso.excepciones.InvalidEdadException;
+import Congreso.excepciones.InvalidFonoException;
+import Congreso.excepciones.InvalidNombreException;
+import Congreso.excepciones.InvalidOcupacionException;
+import Congreso.excepciones.InvalidPaisException;
 import Gui.Alerta;
 import Gui.Vistas.PopUp;
 
@@ -82,46 +87,45 @@ public class LeerExpositor extends GridPane implements Initializable, PopUp.PopA
             return false;
         }
         
-        if(!Util.isAlphaOrSpace(nombre)) {
-        	Alerta.mostrarAlertaAdvertencia("El nombre ingresado no es válido");
-        	return false;
-        }
-        
         if(registro.buscarExpositor(nombre) != null && editando == false) {
-        	Alerta.mostrarAlertaAdvertencia("El expositor ingresado ya existe");
+        	Alerta.mostrarAlertaAdvertencia("Ya existe un expositor con el nombre ingresado");
         	return false;
         }
         
-        if(!Util.isNumeric(strEdad)) {
+        int edad;
+        long fono;
+        
+        try {
+        	edad = Integer.parseInt(strEdad);
+        } catch(NumberFormatException e) {
         	Alerta.mostrarAlertaAdvertencia("La edad ingresada no es válida");
         	return false;
         }
         
-        if(!Util.isNumeric(strFono)) {
+        try {
+        	fono = Long.parseLong(strFono);
+        } catch(NumberFormatException e) {
         	Alerta.mostrarAlertaAdvertencia("El teléfono ingresado no es válido");
         	return false;
         }
         
-        if(!Util.validateEmail(correo)) {
-        	Alerta.mostrarAlertaAdvertencia("El email ingresado no es válido");
-        	return false;
-        }
-        
-        if(!Util.isAlphaOrSpace(pais)) {
-        	Alerta.mostrarAlertaAdvertencia("El país ingresado no es válido");
-        	return false;
-        }
-        
-        if(!Util.isAlphaOrSpace(ocupacion)) {
-        	Alerta.mostrarAlertaAdvertencia("La ocupación ingresada no es válida");
-        	return false;
-        }
-        
-        int edad = Integer.parseInt(strEdad);
-        int fono = Integer.parseInt(strFono);
-        
-        expositor = new Expositor(nombre, edad, fono, correo, pais, ocupacion);
-        return true;
+        try {
+			expositor = new Expositor(nombre, edad, fono, correo, pais, ocupacion);
+			return true;
+		} catch (InvalidNombreException e) {
+			Alerta.mostrarAlertaAdvertencia("El nombre no puede contener caracteres especiales");
+		} catch (InvalidEdadException e) {
+			Alerta.mostrarAlertaAdvertencia("La edad debe estar en el rango de 1 a 100");
+		} catch (InvalidFonoException e) {
+			Alerta.mostrarAlertaAdvertencia("El teléfono debe tener entre 8 y 12 dígitos");
+		} catch (InvalidCorreoException e) {
+			Alerta.mostrarAlertaAdvertencia("El correo ingresado no es válido");
+		} catch (InvalidPaisException e) {
+			Alerta.mostrarAlertaAdvertencia("El país no puede contener caracteres especiales");
+		} catch (InvalidOcupacionException e) {
+			Alerta.mostrarAlertaAdvertencia("La ocupación no puede contener caracteres especiales");
+		}
+        return false;
     }
     
     public void setHeader(String text) {

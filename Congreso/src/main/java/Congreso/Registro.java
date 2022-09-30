@@ -5,6 +5,9 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+
+import Congreso.excepciones.NullExpositorException;
+
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.BufferedReader;
@@ -122,16 +125,19 @@ public class Registro {
 	 *  modificación
 	 *  @param a1 Asistente pre-modificación
 	 *  @param a2 Asistente post-modificación
+	 * @throws NullExpositorException 
 	 */
-	public void editarExpositor(Expositor e1, Expositor e2) {
+	public void editarExpositor(Expositor e1, Expositor e2) throws NullExpositorException {
+		for(int i = 0; i < listaPresentaciones.size(); i++) {
+			if(e1 == listaPresentaciones.get(i).getExpositor()) {
+				listaPresentaciones.get(i).setExpositor(e2);
+				break;
+			}
+		}
+		
 		mapaExpositores.remove(e1.getNombre());
 		listaExpositores.remove(e1);
 		insertarExpositor(e2);
-		
-		for(int i = 0; i < listaPresentaciones.size(); i++) {
-			if(e1 == listaPresentaciones.get(i).getExpositor())
-				listaPresentaciones.get(i).setExpositor(e2);
-		}
 	}
 	
 	/** Elimina una presentación de la base de datos.
@@ -184,16 +190,22 @@ public class Registro {
 	 * @param csvExpositores Archivo del que cargar los expositores.
 	 * @param csvAsistentes Archivo del que cargar los asistentes.
 	*/
-	public void importar(String csvPresentaciones, String csvExpositores, String csvAsistentes) {
-		importarExpositores(csvExpositores);
-		importarAsistentes(csvAsistentes);
-		importarPresentaciones(csvPresentaciones);
+	public boolean importar(String csvPresentaciones, String csvExpositores, String csvAsistentes) {
+		try {
+			importarExpositores(csvExpositores);
+			importarAsistentes(csvAsistentes);
+			importarPresentaciones(csvPresentaciones);
+		} catch(Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+		return true;
 	}
     
 	/** Importa presentaciones dado un nombre de archivo
 	 * @param nombreArchivo nombre del archivo a cargar.
 	 */
-    private void importarPresentaciones(String nombreArchivo) {
+    private void importarPresentaciones(String nombreArchivo) throws Exception {
     	try {
 			BufferedReader br = new BufferedReader(new FileReader(nombreArchivo));
 	    	
@@ -203,13 +215,11 @@ public class Registro {
 			    LinkedList<String> lineArray = CSVTokener.csvArray(new CSVTokener(line));
 			    if (lineArray.size() != 10)
 			    	continue; // Cantidad de campos por linea no coincide
-			            
+			    
 			    Presentacion p = new Presentacion();
 			    p.setNombre(lineArray.get(0));
 			    
 			    Expositor expositor = buscarExpositor(lineArray.get(1));
-			    if(expositor == null)
-			    	continue; // Expositor no existe
 			    p.setExpositor(expositor);
 			    
 			    p.setDia(Integer.parseInt(lineArray.get(2)));
@@ -235,7 +245,7 @@ public class Registro {
 			}
 		        
 		    br.close();
-    	} catch(IOException e) {
+    	} catch(Exception e) {
     		e.printStackTrace();
     	}
     }
@@ -243,7 +253,7 @@ public class Registro {
 	/** Importa expositores dado un nombre de archivo
 	 * @param nombreArchivo nombre del archivo a cargar.
 	 */
-    private void importarExpositores(String nombreArchivo) {
+    private void importarExpositores(String nombreArchivo) throws Exception {
     	try {
 			BufferedReader br = new BufferedReader(new FileReader(nombreArchivo));
 	    	
@@ -274,7 +284,7 @@ public class Registro {
 	/** Importa asistentes dado un nombre de archivo
 	 * @param nombreArchivo nombre del archivo a cargar.
 	 */
-    private void importarAsistentes(String nombreArchivo) {	
+    private void importarAsistentes(String nombreArchivo) throws Exception {	
     	try {
 			BufferedReader br = new BufferedReader(new FileReader(nombreArchivo));
 	    	

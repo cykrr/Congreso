@@ -4,6 +4,10 @@ import java.time.LocalDate;
 
 import java.util.LinkedList;
 
+import Congreso.excepciones.InvalidDuracionException;
+import Congreso.excepciones.InvalidNombreException;
+import Congreso.excepciones.NullExpositorException;
+
 /* Presentación a ser almacenada en la base de datos del congreso.
  */
 public class Presentacion {
@@ -48,20 +52,156 @@ public class Presentacion {
      * @param hora Hora de la presentación
      * @param duracion Duración de la presentación
      * @param descripcion Descripción de la presentación
+     * @throws InvalidNombreException 
+     * @throws NullExpositorException 
+     * @throws InvalidDuracionException 
      * 
      * @see Congreso.Expositor
      * @see Congreso.Persona
      */
-    public Presentacion(String nombre, Expositor expositor, LocalDate fecha,
-            LocalTime hora, int duracion, String descripcion) {
-    	this.nombre = nombre;
-    	this.expositor = expositor;
-    	this.fecha = fecha;
-    	this.hora = hora;
-    	this.duracion = duracion;
-    	this.descripcion = descripcion;
+    public Presentacion(String nombre, Expositor expositor, LocalDate fecha, LocalTime hora, int duracion, String descripcion) 
+    		throws InvalidNombreException, NullExpositorException, InvalidDuracionException {
+    	setNombre(nombre);
+    	setExpositor(expositor);
+    	setFecha(fecha);
+    	setHora(hora);
+    	setDuracion(duracion);
+    	setDescripcion(descripcion);
+    	
     	this.asistentes = new LinkedList<Persona>();
     	this.asistenteToRemove = null;
+    }
+    
+    /** Establece el nombre de la presentación. Utilizado al importar archivos 
+     * al Registro.
+     * @see Registro
+     * @param n Nombre de la presentación.
+     */
+    public void setNombre(String nombre) throws InvalidNombreException {
+    	if(!Util.isAlphaOrSpace(nombre))
+    		throw new InvalidNombreException(nombre);
+    	
+        this.nombre = nombre;
+    }
+    
+    /** Establece el Expositor de la presentación. Utilizado al importar archivos 
+     * al Registro.
+     * @see Registro
+     * @param expositor Referencia al expositor de la presentación
+     */
+    public void setExpositor(Expositor expositor) throws NullExpositorException {
+    	if(expositor == null)
+    		throw new NullExpositorException(nombre);
+    	
+    	this.expositor = expositor;
+    }
+    
+    /** Actualiza la fecha de la presentación 
+     * @param fecha Fecha a establecer
+     * @see LocalDate
+    */
+    public void setFecha(LocalDate fecha) {
+        this.fecha = fecha;
+    }
+    
+    /** Actualiza la hora de la presentación
+     * @param hora Hora a establecer
+     * @see LocalTime
+     */
+    public void setHora(LocalTime hora) {
+        this.hora = hora;
+    }
+    
+    /** Establece la duración de la presentación. Utilizado al importar archivos 
+     * al Registro.
+     * @see Registro
+     */
+    public void setDuracion(int duracion) throws InvalidDuracionException {
+    	if(duracion < 1 || duracion > 300)
+    		throw new InvalidDuracionException(duracion);
+    	
+    	this.duracion = duracion;
+    }
+    
+    /** Dado un string, establece la descripción de la presentación
+     * @param descripcion Descripción a establecer.
+     */
+    public void setDescripcion(String descripcion) {
+    	this.descripcion = descripcion;
+    }
+    
+    /** Establece la hora de la presentación. Utilizado al importar archivos al
+     * Registro.
+     * @see Registro
+     */
+    public void setHora(int hora) {
+        this.hora = LocalTime.of(hora, 0);
+    }
+
+    /** Establece el minuto de la presentación. Utilizado al importar archivos 
+     * al Registro.
+     * @see Registro
+     */
+    public void setMinuto(int min) {
+        this.hora = LocalTime.of(hora.getHour(), min);
+    }
+
+    /** Establece el día de la presentación. Utilizado al importar archivos 
+     * al Registro.
+     * @see Registro
+     */
+    public void setDia(int dia) {
+        this.fecha = LocalDate.of(fecha.getYear(), fecha.getMonth(), dia);
+    }
+
+    /** Establece el mes de la presentación. Utilizado al importar archivos 
+     * al Registro.
+     * @see Registro
+     */
+    public void setMes(int mes) {
+        this.fecha = LocalDate.of(fecha.getYear(), mes, fecha.getDayOfMonth());
+    }
+
+    /** Establece el año de la presentación. Utilizado al importar archivos 
+     * al Registro.
+     * @see Registro
+     */
+    public void setAño(int año) {
+        this.fecha = LocalDate.of(año, fecha.getMonth(), fecha.getDayOfMonth());
+    }
+    
+    /** Dado un string de fecha establece la fecha de la presentación
+     * -- Método desactualizado (sólo se utiliza en CLI/MenuEditar.java) --
+     */
+    public void setFecha(String fecha) {
+    	String[] parts = fecha.split("-");
+    	this.fecha = LocalDate.of(Integer.parseInt(parts[2]), 
+    						      Integer.parseInt(parts[1]),
+    							  Integer.parseInt(parts[0]));
+    }
+
+    /** Dado dia, mes y año como enteros, actualiza la fecha de la presentación
+     * -- Método desactualizado (no se utiliza) --
+     */
+    public void setFecha(int dia, int mes, int ano) {
+        this.fecha = LocalDate.of(ano, mes, dia);
+    }
+    
+    /* Sólo se utiliza en menuEditar */
+    public void setHora(String hora) {
+    	String[] parts = hora.split(":");
+    	this.hora = LocalTime.of(Integer.parseInt(parts[0]),
+    							 Integer.parseInt(parts[1]));
+    }
+
+    /** Establece la lista de asistentes de la presentación. Utilizado al importar archivos 
+     * al Registro.
+     * 
+     * @see Registro
+     * @param asistentes Nueva lista de asistentes.
+     */
+    public void setAsistentes(LinkedList<Persona> asistentes) {
+        this.asistentes = asistentes;
     }
     
     /** Agrega un asistente de tipo Persona a la presentación insertándolo en
@@ -94,129 +234,6 @@ public class Presentacion {
     public void eliminarAsistente(Persona asistente) {
       this.asistentes.remove(asistente);
 	  }
-    
-    /** Dado un string, establece la descripción de la presentación
-     * @param descripcion Descripción a establecer.
-     */
-    public void setDescripcion(String descripcion) {
-    	this.descripcion = descripcion;
-    }
-    
-    /** Dado un string de fecha establece la fecha de la presentación
-     * -- Método desactualizado (sólo se utiliza en CLI/MenuEditar.java) --
-     */
-    public void setFecha(String fecha) {
-    	String[] parts = fecha.split("-");
-    	this.fecha = LocalDate.of(Integer.parseInt(parts[2]), 
-    						      Integer.parseInt(parts[1]),
-    							  Integer.parseInt(parts[0]));
-    }
-
-    /** Dado dia, mes y año como enteros, actualiza la fecha de la presentación
-     * -- Método desactualizado (no se utiliza) --
-     */
-    public void setFecha(int dia, int mes, int ano) {
-        this.fecha = LocalDate.of(ano, mes, dia);
-    }
-
-    /** Actualiza la fecha de la presentación 
-     * @param fecha Fecha a establecer
-     * @see LocalDate
-    */
-    public void setFecha(LocalDate fecha) {
-        this.fecha = fecha;
-    }
-    
-    /** Actualiza la hora de la presentación
-     * @param hora Hora a establecer
-     * @see LocalTime
-     */
-    public void setHora(LocalTime hora) {
-        this.hora = hora;
-    }
-    
-    /* Sólo se utiliza en menuEditar */
-    public void setHora(String hora) {
-    	String[] parts = hora.split(":");
-    	this.hora = LocalTime.of(Integer.parseInt(parts[0]),
-    							 Integer.parseInt(parts[1]));
-    }
-
-    /** Establece la hora de la presentación. Utilizado al importar archivos al
-     * Registro.
-     * @see Registro
-     */
-    public void setHora(int hora) {
-        this.hora = LocalTime.of(hora, 0);
-    }
-
-    /** Establece el minuto de la presentación. Utilizado al importar archivos 
-     * al Registro.
-     * @see Registro
-     */
-    public void setMinuto(int min) {
-        this.hora = LocalTime.of(hora.getHour(), min);
-    }
-    
-    /** Establece la duración de la presentación. Utilizado al importar archivos 
-     * al Registro.
-     * @see Registro
-     */
-    public void setDuracion(int duracion) {
-    	this.duracion = duracion;
-    }
-
-    /** Establece el día de la presentación. Utilizado al importar archivos 
-     * al Registro.
-     * @see Registro
-     */
-    public void setDia(int dia) {
-        this.fecha = LocalDate.of(fecha.getYear(), fecha.getMonth(), dia);
-    }
-
-    /** Establece el mes de la presentación. Utilizado al importar archivos 
-     * al Registro.
-     * @see Registro
-     */
-    public void setMes(int mes) {
-        this.fecha = LocalDate.of(fecha.getYear(), mes, fecha.getDayOfMonth());
-    }
-
-    /** Establece el año de la presentación. Utilizado al importar archivos 
-     * al Registro.
-     * @see Registro
-     */
-    public void setAño(int año) {
-        this.fecha = LocalDate.of(año, fecha.getMonth(), fecha.getDayOfMonth());
-    }
-    
-    /** Establece el Expositor de la presentación. Utilizado al importar archivos 
-     * al Registro.
-     * @see Registro
-     * @param expositor Referencia al expositor de la presentación
-     */
-    public void setExpositor(Expositor expositor) {
-    	this.expositor = expositor;
-    }
-
-    /** Establece el nombre de la presentación. Utilizado al importar archivos 
-     * al Registro.
-     * @see Registro
-     * @param n Nombre de la presentación.
-     */
-    public void setNombre(String n)  {
-        this.nombre = n;
-    }
-
-    /** Establece la lista de asistentes de la presentación. Utilizado al importar archivos 
-     * al Registro.
-     * 
-     * @see Registro
-     * @param asistentes Nueva lista de asistentes.
-     */
-    public void setAsistentes(LinkedList<Persona> asistentes) {
-        this.asistentes = asistentes;
-    }
 
     /** Dado el nombre de un asistente, revisa si este asistirá a la
      *  presentación.

@@ -58,4 +58,13 @@ public class Util {
 		String pattern = "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$";
 		return email.matches(pattern);
 	}
+	
+	public static int countDigits(long number) {
+		int count = 0;
+	    while (number != 0) {
+	        number /= 10;
+	        count++;
+	    }
+	    return count;
+	}
 }

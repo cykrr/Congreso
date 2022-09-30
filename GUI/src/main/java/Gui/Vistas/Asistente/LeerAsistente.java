@@ -7,6 +7,10 @@ import java.util.ResourceBundle;
 import Congreso.Persona;
 import Congreso.Registro;
 import Congreso.Util;
+import Congreso.excepciones.InvalidCorreoException;
+import Congreso.excepciones.InvalidEdadException;
+import Congreso.excepciones.InvalidFonoException;
+import Congreso.excepciones.InvalidNombreException;
 import Gui.Alerta;
 import Gui.Vistas.PopUp;
 import javafx.fxml.FXML;
@@ -78,13 +82,8 @@ public class LeerAsistente extends GridPane implements Initializable, PopUp.PopA
             return false;
         }
         
-        if(!Util.isAlphaOrSpace(nombre)) {
-        	Alerta.mostrarAlertaAdvertencia("El nombre ingresado no es válido");
-        	return false;
-        }
-        
         if(registro.buscarAsistente(nombre) != null && editando == false) {
-        	Alerta.mostrarAlertaAdvertencia("El asistente ingresado ya existe");
+        	Alerta.mostrarAlertaAdvertencia("Ya existe un asistente con el nombre ingresado");
         	return false;
         }
         
@@ -98,16 +97,22 @@ public class LeerAsistente extends GridPane implements Initializable, PopUp.PopA
         	return false;
         }
         
-        if(!Util.validateEmail(correo)) {
-        	Alerta.mostrarAlertaAdvertencia("El email ingresado no es válido");
-        	return false;
-        }
-        
         int edad = Integer.parseInt(strEdad);
-        int fono = Integer.parseInt(strFono);
+        long fono = Long.parseLong(strFono);
         
-        asistente = new Persona(nombre, edad, fono, correo);
-        return true;
+        try {
+			asistente = new Persona(nombre, edad, fono, correo);
+			return true;
+		} catch (InvalidNombreException e) {
+			Alerta.mostrarAlertaAdvertencia("El nombre no puede contener caracteres especiales");
+		} catch (InvalidEdadException e) {
+			Alerta.mostrarAlertaAdvertencia("La edad debe estar en el rango de 1 a 100");
+		} catch (InvalidFonoException e) {
+			Alerta.mostrarAlertaAdvertencia("El teléfono debe tener entre 8 y 12 dígitos");
+		} catch (InvalidCorreoException e) {
+			Alerta.mostrarAlertaAdvertencia("El correo ingresado no es válido");
+		}
+        return false;
     }
     
     public void setHeader(String text) {

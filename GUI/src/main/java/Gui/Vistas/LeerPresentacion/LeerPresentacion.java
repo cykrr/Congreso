@@ -22,6 +22,9 @@ import Congreso.Persona;
 import Congreso.Presentacion;
 import Congreso.Registro;
 import Congreso.Util;
+import Congreso.excepciones.InvalidDuracionException;
+import Congreso.excepciones.InvalidNombreException;
+import Congreso.excepciones.NullExpositorException;
 import Gui.Alerta;
 import Gui.Vistas.PopUp;
 
@@ -132,29 +135,31 @@ public class LeerPresentacion extends GridPane implements Initializable, PopUp.P
         	Alerta.mostrarAlertaAdvertencia("La duración ingresada no es válida");
         	return false;
         }
- 
-        if(expositor == null) {
-        	Alerta.mostrarAlertaAdvertencia("Seleccione un expositor");
-        	return false;
-        }
         
         if(asistente != null) {
         	if(asistente.getNombre().isEmpty() || asistente.getCorreo().isEmpty() || 
-        	   Integer.toString(asistente.getEdad()).isEmpty() ||
-        	   Long.toString(asistente.getFono()).isEmpty()) {
-        		Alerta.mostrarAlertaAdvertencia("El assitente no esta bien guardado");
+        	    Integer.toString(asistente.getEdad()).isEmpty() ||
+        	    Long.toString(asistente.getFono()).isEmpty()) {
+        		Alerta.mostrarAlertaAdvertencia("El asistente no esta bien guardado");
         		return false;
         	}
         }
         
         int duracion = Integer.parseInt(strDuracion);
         
-        p = new Presentacion(nombre, expositor, fecha, hora, duracion, descripcion);
-        if(asistente != null) {
-        	p.agregarAsistente(asistente);
-        }
+        try {
+			p = new Presentacion(nombre, expositor, fecha, hora, duracion, descripcion);
+			p.agregarAsistente(asistente);
+			return true;
+		} catch (InvalidNombreException e) {
+			Alerta.mostrarAlertaAdvertencia("El nombre no puede contener caracteres especiales");
+		} catch (NullExpositorException e) {
+			Alerta.mostrarAlertaAdvertencia("El expositor seleccionado no es válido");
+		} catch (InvalidDuracionException e) {
+			Alerta.mostrarAlertaAdvertencia("La duración debe estar en el rango de 1 a 300");
+		}
         
-        return true;
+        return false;
     }
     
     public void setHeader(String text) {
