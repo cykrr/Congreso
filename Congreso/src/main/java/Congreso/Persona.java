@@ -1,16 +1,53 @@
 package Congreso;
+
+import Congreso.excepciones.InvalidCorreoException;
+import Congreso.excepciones.InvalidEdadException;
+import Congreso.excepciones.InvalidFonoException;
+import Congreso.excepciones.InvalidNombreException;
+
 public class Persona {
     private String nombre;
     private int edad;
-    private long fono; // Número telefónico
+    private long fono;
     private String correo;
     
-    public Persona(String nombre, int edad, long fono, String correo){
-    	this.nombre = nombre;
-    	this.edad = edad;
-    	this.fono = fono;
-    	this.setCorreo(correo);
+    public Persona(String nombre, int edad, long fono, String correo) 
+    		throws InvalidNombreException, InvalidEdadException, InvalidFonoException, InvalidCorreoException {
+    	setNombre(nombre);
+    	setEdad(edad);
+    	setFono(fono);
+    	setCorreo(correo);
     }
+    
+    public void setNombre(String nombre) throws InvalidNombreException {
+    	if(!Util.isAlphaOrSpace(nombre))
+    		throw new InvalidNombreException(nombre);
+    	
+    	this.nombre = nombre;
+    }
+    
+    public void setEdad(int edad) throws InvalidEdadException {
+    	if(edad > 100 || edad < 1)
+    		throw new InvalidEdadException(edad);
+    	
+    	this.edad = edad;
+    }
+    
+    public void setFono(long fono) throws InvalidFonoException {
+    	int digitos = Util.countDigits(fono);
+    	if(digitos < 8 || digitos > 12)
+    		throw new InvalidFonoException(fono);
+    	
+    	this.fono = fono;
+    }
+    
+	public void setCorreo(String correo) throws InvalidCorreoException {
+		if(!Util.validateEmail(correo))
+			throw new InvalidCorreoException(correo);
+		
+		this.correo = correo;
+	}
+	
     
     public String getNombre() {
     	return this.nombre;
@@ -19,30 +56,18 @@ public class Persona {
     public int getEdad() {
     	return this.edad;
     }
-
-    public void setEdad(int edad) {
-        this.edad = edad;
-    }
     
     public long getFono() {
     	return this.fono;
     }
-
-	public void mostrarDatos() {
-		System.out.println("Nombre: " + nombre);
-		System.out.println("Teléfono: " + fono);
-		System.out.println("Edad: " + edad);
-	}
-
-    @Override public String toString() {
-        return this.nombre;
-    }
-
+    
 	public String getCorreo() {
 		return correo;
 	}
 
-	public void setCorreo(String correo) {
-		this.correo = correo;
-	}
+    @Override 
+    public String toString() {
+        return this.nombre;
+    }
+
 }

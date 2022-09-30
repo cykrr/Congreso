@@ -3,6 +3,7 @@ package Gui.Vistas.VistaExpositor;
 import Congreso.Expositor;
 import Congreso.Presentacion;
 import Congreso.Registro;
+import Congreso.excepciones.NullExpositorException;
 import Gui.Alerta;
 import Gui.EventoExpositor;
 import Gui.EventoPersona;
@@ -41,7 +42,11 @@ public class VistaExpositor extends Vista implements Vista.Manipulable {
             
         Expositor retorno = (Expositor)popup.showDialog();
         if (retorno != null) {
-        	getRegistro().editarExpositor(e, retorno);
+        	try {
+				getRegistro().editarExpositor(e, retorno);
+			} catch (NullExpositorException err) {
+				err.printStackTrace();
+			}
             getDashboard().fireEvent(new EventoExpositor(EventoExpositor.EDITAR_EXPOSITOR, e, retorno));
         }
 	}
