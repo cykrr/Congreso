@@ -18,12 +18,8 @@
     <MenuBar>
         <!-- TODO : Configurar teclas  -->
         <Menu text="Archivo">
-            <MenuItem text="Abrir archivo [Ctrl + O]" />
-
-            <MenuItem text="Guardar Archivo [Ctrl + S]" />
-            <SeparatorMenuItem />
-            <MenuItem onAction="#importar" text="Importar Archivo [Ctrl + I]" />
-            <MenuItem onAction="#exportar" text="Exportar [Ctrl + E]" />
+            <MenuItem onAction="#importar" text="Abrir archivo [Ctrl + I]" />
+            <MenuItem onAction="#exportar" text="Guardar cambios [Ctrl + E]" />
             <SeparatorMenuItem />
             <MenuItem text="Salir [Ctrl + W]" />
         </Menu>

@@ -62,13 +62,14 @@ public class Gui extends Application {
         });
     }
     
-    // Preguntar si guardar o no los cambios al cerrar el programa
+    /*
+     *  Carga una ventana de alerta cuando decide cerrar el programa, esta ventana
+     *  deja al usuario decidir si guardar los cambios hechos que no se han guardado,
+     *  si presiona no, el programa cierra sin guardar
+     * */
     public void cerrar(Stage stage) {
-    	Alert alerta = new Alert(AlertType.CONFIRMATION);
-    	alerta.setTitle("Cerrando Programa");
-    	alerta.setHeaderText("¿Deseas guardar los cambios hechos?");
-    	
-    	if(alerta.showAndWait().get() == ButtonType.OK) {
+    	boolean save = Alerta.mostrarAlertaSalirPrograma("¿Deseas guardar los cambios hechos?");
+    	if(save) {
     		this.controlador.exportar();
     		System.out.println("\nGuardado Exitosamente");
     	}

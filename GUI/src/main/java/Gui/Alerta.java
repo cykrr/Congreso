@@ -1,11 +1,18 @@
 package Gui;
+
 import java.util.Optional;
 
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.Dialog;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar;
+import javafx.scene.control.ButtonBar.ButtonData;
 
 public class Alerta {
+	private static ButtonType yesButton = new ButtonType("Si", ButtonBar.ButtonData.OK_DONE);
+	private static ButtonType noButton = new ButtonType("No", ButtonBar.ButtonData.CANCEL_CLOSE);
 	
 	public static void mostrarAlertaAdvertencia(String header) {
         Alert alert = new Alert(AlertType.WARNING);
@@ -21,6 +28,20 @@ public class Alerta {
 		Optional<ButtonType> result = alert.showAndWait();
 		
 		if(result.get() == ButtonType.OK)
+			return true;
+		return false;
+	}
+	
+	public static boolean mostrarAlertaSalirPrograma(String header) {
+		Alert alert = new Alert(AlertType.WARNING,
+						header,
+		                yesButton,
+		                noButton);
+		alert.setTitle("Salir");
+		alert.setHeaderText("Antes de cerrar del programa");
+		Optional<ButtonType> result = alert.showAndWait();
+		
+		if(result.orElse(noButton) == yesButton)
 			return true;
 		return false;
 	}
