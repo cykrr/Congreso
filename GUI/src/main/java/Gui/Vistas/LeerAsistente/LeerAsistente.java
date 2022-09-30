@@ -1,4 +1,4 @@
-package Gui.Vistas.Asistente;
+package Gui.Vistas.LeerAsistente;
 
 import java.io.IOException;
 import java.net.URL;

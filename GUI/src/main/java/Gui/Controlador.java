@@ -22,10 +22,10 @@ import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import Gui.Vistas.PopUp;
-import Gui.Vistas.Asistente.LeerAsistente;
 import Gui.Vistas.Dashboard.Dashboard;
 import Gui.Vistas.Detalle.BusquedaPorFecha;
-import Gui.Vistas.Detalle.Detalle;
+import Gui.Vistas.LeerAsistente.LeerAsistente;
+import Gui.Vistas.Detalle.BusquedaPorEdad;
 import Gui.Vistas.LeerExpositor.LeerExpositor;
 import Gui.Vistas.LeerPresentacion.LeerPresentacion;
 import Gui.Vistas.VistaExpositor.VistaExpositor;
@@ -45,7 +45,7 @@ public class Controlador implements Initializable {
     private     Stage       stage;    // Ventana principal
     private     Ajustes     ajustes;  // Ajustes del programa
     private     Dashboard   dashboard;
-    private     Detalle   detail;
+    private     BusquedaPorEdad   detail;
     private     BusquedaPorFecha   search;
     
     private Map<Presentacion, VistaPresentacion> mapaVistaPresentaciones;
@@ -71,7 +71,7 @@ public class Controlador implements Initializable {
     public void detailAction() {
         this.vistaPrincipal.getChildren().clear();
         if (detail == null)
-            detail = new Detalle(registro);
+            detail = new BusquedaPorEdad(registro);
         this.vistaPrincipal.getChildren().add(detail);
     }
     

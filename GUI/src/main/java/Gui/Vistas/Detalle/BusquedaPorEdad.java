@@ -12,12 +12,12 @@ import javafx.scene.Node;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 
-public class Detalle extends VBox {
+public class BusquedaPorEdad extends VBox {
 
     @FXML private TextField textBox;
     @FXML private VBox scrollBox;
     private Registro r;
-    public Detalle(Registro r)
+    public BusquedaPorEdad(Registro r)
     {
         super();
         this.r = r;
