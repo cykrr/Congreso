@@ -18,8 +18,6 @@ import Congreso.excepciones.InvalidCorreoException;
 import Congreso.excepciones.InvalidEdadException;
 import Congreso.excepciones.InvalidFonoException;
 import Congreso.excepciones.InvalidNombreException;
-import Congreso.excepciones.InvalidOcupacionException;
-import Congreso.excepciones.InvalidPaisException;
 import Gui.Alerta;
 import Gui.Vistas.PopUp;
 
@@ -120,11 +118,8 @@ public class LeerExpositor extends GridPane implements Initializable, PopUp.PopA
 			Alerta.mostrarAlertaAdvertencia("El teléfono debe tener entre 8 y 12 dígitos");
 		} catch (InvalidCorreoException e) {
 			Alerta.mostrarAlertaAdvertencia("El correo ingresado no es válido");
-		} catch (InvalidPaisException e) {
-			Alerta.mostrarAlertaAdvertencia("El país no puede contener caracteres especiales");
-		} catch (InvalidOcupacionException e) {
-			Alerta.mostrarAlertaAdvertencia("La ocupación no puede contener caracteres especiales");
 		}
+        
         return false;
     }
     
