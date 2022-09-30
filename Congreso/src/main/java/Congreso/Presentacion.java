@@ -169,63 +169,6 @@ public class Presentacion {
      */
     public void eliminarAsistente(Persona asistente) {
       this.asistentes.remove(asistente);
-	  }
-
-    /** Dado el nombre de un asistente, revisa si este asistirá a la
-     *  presentación.
-     *  @param nombre Nombre del asistente a buscar
-     *  @return Referencia al asistente || null
-     */
-    public Persona buscarAsistente(String nombre) {
-		for(int i = 0; i < asistentes.size(); i++) {
-			Persona persona = asistentes.get(i);
-			if(nombre.equals(persona.getNombre()))
-				return persona;
-		}
-		return null;
-    }
-    
-    /** Muestra la presentación actual
-     * -- Método desactualizado. Sólo se usa en CLI. --
-     */
-    public void mostrar() {
-    	System.out.println("Nombre: " + nombre);
-    	System.out.println("Expositor: " + (expositor != null ? expositor.getNombre() : "No asignado"));
-    	System.out.println("Descripción: " + (descripcion != null ? descripcion : "No asignada"));
-    	
-    	System.out.println("Fecha: " + (fecha != null ? fecha : "No asignada"));
-    	System.out.println("Hora: " + (hora != null ? hora : "No asignada"));
-
-    	System.out.println("Duración: " + (duracion != 0 ? duracion : "No asignada"));
-    	if(asistentes.size() < 1) {
-    		System.out.println("Asistencia: Nadie ha confirmado su asistencia");
-    	}
-    	else {
-    		System.out.println("Asistencia: ");
-    		for(int i = 0; i < asistentes.size(); i++) {
-    			System.out.println("	"+ asistentes.get(i).getNombre());
-    		}
-    	}
-    }
-
-    /** Muestra los asistentes de la presentación
-     *  -- Método desactualizado. Sólo se utiliza en CLI --
-     */
-
-    public void mostrarAsistentes() {
-    	int cantidadAsistentes = asistentes.size();
-    	if(cantidadAsistentes < 1) {
-    		System.out.println("No hay asistentes para mostrar");
-    		return;
-    	}
-    	
-    	System.out.println(String.format("%-20s %-20s %-20s", "Nombre", "Edad", "Teléfono"));
-    	for(int i = 0; i < cantidadAsistentes; i++) {
-    		Persona p = asistentes.get(i);
-    		System.out.println(String.format("%-20s %-20s %-20s", p.getNombre(), p.getEdad(), p.getFono()));
-    	}    	
-    	
-    	System.out.println("Total de asistentes: " + cantidadAsistentes);
     }
 
     @Override

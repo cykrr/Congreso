@@ -9,11 +9,9 @@ import java.util.Map;
 import Congreso.excepciones.NullExpositorException;
 
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
@@ -365,22 +363,6 @@ public class Registro {
         
         bw.close();
 	}
-
-	/** Muestra las presentaciones en la base de datos
-	 *  -- Método desactualizado. Sólo se utiliza en CLI. --
-	 */
-    public void mostrarPresentaciones() throws IOException {
-        if (mapaPresentaciones.size() == 0)
-        	System.out.println("No se encontraron " + "presentaciones");
-        else {
-            System.out.println("Mostrando presentaciones:\n---");
-            for (Map.Entry<String, Presentacion> p: mapaPresentaciones.entrySet()) {
-                p.getValue().mostrar();
-            	System.out.print("\n");
-            }
-        }
-        System.out.println("---");
-    }
 
 	// Setters - Getters
 
