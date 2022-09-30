@@ -101,14 +101,12 @@ public class Controlador implements Initializable {
         
         mapaVistaPresentaciones.put(ep.getPresentacionNueva(), vpNueva);
     	dashboard.getScrollBoxPresentaciones().getChildren().add(index, vpNueva);
-    	actualizarAsistentesEnPresentaciones();
     }
     
     public void enEliminarPresentacion(EventoPresentacion ep) {
     	VistaPresentacion vp = mapaVistaPresentaciones.remove(ep.getPresentacion());
     	dashboard.getScrollBoxPresentaciones().getChildren().remove(vp);
     	dashboard.actualizarNumeroPresentaciones();
-    	actualizarAsistentesEnPresentaciones();
     }
     
     public void enCrearPersona(EventoPersona ep) {
@@ -130,12 +128,14 @@ public class Controlador implements Initializable {
         mapaVistaPersonas.put(ep.getPersonaNueva(), vpNueva);
     	dashboard.getScrollBoxAsistentes().getChildren().add(index, vpNueva);
     	dashboard.actualizarNumeroAsistentes();
+    	actualizarAsistentesEnPresentaciones();
     }
     
     public void enEliminarPersona(EventoPersona ep) {
     	VistaPersona vp = mapaVistaPersonas.remove(ep.getPersona());
     	dashboard.getScrollBoxAsistentes().getChildren().remove(vp);
     	dashboard.actualizarNumeroAsistentes();
+    	actualizarAsistentesEnPresentaciones();
     }
     
     public void enCrearExpositor(EventoExpositor ee) {
