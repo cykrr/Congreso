@@ -1,37 +1,37 @@
 package Gui.Vistas.Detalle;
+
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.ResourceBundle;
 
-import Congreso.Persona;
+import Congreso.Presentacion;
 import Congreso.Registro;
+import Congreso.Util;
 import Gui.Alerta;
-import Gui.Vistas.VistaPersona.VistaPersona;
-import javafx.event.EventHandler;
+import Gui.Vistas.VistaPresentacion.VistaPresentacion;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.HBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.layout.VBox;
 
-public class Detalle extends VBox implements Initializable {
-
-    @FXML private TextField textBox;
+public class BusquedaPorFecha  extends VBox implements Initializable {
+	
     @FXML private VBox scrollBox;
     private Registro r;
-    public Detalle(Registro r)
+    @FXML private DatePicker dpFecha;
+    
+    public BusquedaPorFecha(Registro r)
     {
         super();
         this.r = r;
         // TODO : Convertir importar en una clase abstracta que recibe como parametro
         // el tipo de ventana y la ruta al xml.
         
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/vistas/detalle.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/vistas/BusquedaPorFecha.fxml"));
         fxmlLoader.setController(this);
         Node n = null;
 
@@ -43,25 +43,27 @@ public class Detalle extends VBox implements Initializable {
 
         this.getChildren().add(n);
     }
-
-
+    
     public void initialize(URL url, ResourceBundle rb)
     {
+    	
     }
 
     public void textInput() {
-        String t = this.textBox.getText();
-        int edad;
+        String t = this.dpFecha.getEditor().getText().trim();
+        LocalDate fecha = this.dpFecha.getValue();
         try {
-            edad = Integer.parseInt(t);
-        } catch(NumberFormatException e) {
-            Alerta.mostrarAlertaAdvertencia("Ingrese un número.");
+            fecha = Util.parseDate(t);
+        } catch(DateTimeParseException | NullPointerException e) {
+            Alerta.mostrarAlertaAdvertencia("Ingrese una fecha válida.");
             return;
         }
+        
         scrollBox.getChildren().clear();
-        for (Persona a : r.getAsistentes()) {
-            if (a.getEdad() > edad) {
-                VistaPersona vp = new VistaPersona(a);
+        
+        for (Presentacion p : r.getPresentaciones()) {
+            if (p.getFecha().isEqual(fecha) || p.getFecha().isAfter(fecha)) {
+                VistaPresentacion vp = new VistaPresentacion(p);
                 scrollBox.getChildren().add(vp);
             }
         }

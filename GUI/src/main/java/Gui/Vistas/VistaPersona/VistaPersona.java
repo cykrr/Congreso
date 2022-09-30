@@ -17,7 +17,7 @@ public class VistaPersona extends Vista implements Vista.Manipulable {
     
     private Persona p;
 
-    public VistaPersona(Persona p, Registro registro) {
+    public VistaPersona(Persona p) {
         super("/vistas/vPersona.fxml");
         this.p = p;
     	
