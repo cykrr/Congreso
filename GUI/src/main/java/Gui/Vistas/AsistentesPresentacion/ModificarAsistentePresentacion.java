@@ -11,7 +11,6 @@ import Gui.Vistas.PopUp.PopAble;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.ComboBox;
 import javafx.scene.layout.GridPane;
@@ -43,15 +42,19 @@ public class ModificarAsistentePresentacion extends GridPane implements PopAble 
         this.getChildren().add(n);
     }
     
-	public void inicializar(boolean agregando) {
+	public void inicializar() {
 		ObservableList<Persona> itemsAsistentes = comboAsistentes.getItems();
 		Iterator<Persona> iteratorAsistentes = registro.getAsistentes();
 		
         while(iteratorAsistentes.hasNext()) {
         	Persona tmp = iteratorAsistentes.next();
-        	if(presentacion.contieneAsistente(tmp) != agregando)
+        	if(presentacion.contieneAsistente(tmp))
         		itemsAsistentes.add(tmp);
         }
+	}
+	
+	public ComboBox<Persona> getBoxAsistentes() {
+		return comboAsistentes;
 	}
 
 	@Override
@@ -72,6 +75,14 @@ public class ModificarAsistentePresentacion extends GridPane implements PopAble 
     
 	public void setHeader(String text) {
 		txtHeader.setText(text);
+	}
+	
+	public Registro getRegistro() {
+		return registro;
+	}
+	
+	public Presentacion getPresentacion() {
+		return presentacion;
 	}
 	
 }

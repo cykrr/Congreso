@@ -7,7 +7,7 @@ public class EliminarAsistentePresentacion extends ModificarAsistentePresentacio
 	
 	public EliminarAsistentePresentacion(Registro registro, Presentacion presentacion) {
 		super(registro, presentacion, "/vistas/eliminarAsistentePresentacion.fxml");
-		inicializar(false);
+		inicializar();
 	}
 	
 }

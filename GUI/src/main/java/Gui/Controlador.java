@@ -1,6 +1,4 @@
 package Gui;
-import java.io.File;
-
 
 import java.net.URL;
 import java.util.HashMap;
@@ -11,15 +9,12 @@ import java.util.ResourceBundle;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.control.Tooltip;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
-import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import Gui.Vistas.PopUp;
 import Gui.Vistas.Dashboard.Dashboard;
@@ -35,7 +30,6 @@ import Congreso.Expositor;
 import Congreso.Persona;
 import Congreso.Presentacion;
 import Congreso.Registro;
-import Congreso.Util;
 
 
 /** Inicializa la clase raíz de la ventana */
@@ -378,41 +372,6 @@ public class Controlador implements Initializable {
     		registro.insertarAsistente(asistente);
 
         }
-    }
-
-    /* Importa un archivo por medio de un
-     * file picker */
-    public void importar() {
-        System.out.println("Importando");
-        FileChooser fc = new FileChooser();
-        fc.setTitle("Seleccione el archivo a importar");
-        File file;
-        while(true) {
-        	file = fc.showOpenDialog(stage);
-
-        	// si no se elige ningún archivo
-        	if(file == null)
-        		return;
-
-            // TODO : Mejor protección ante archivos no csv
-            if (!Util.getFileExtension(file).equals("csv")) {
-                Alert alert = new Alert(AlertType.WARNING);
-                alert.setTitle("Error");
-                alert.setHeaderText("El archivo debe ser del tipo CSV");
-                alert.showAndWait();
-            } else {
-            	break;
-            }
-        }
-
-        
-        /*
-        try {
-            registro.importar(file.getPath());
-        } catch (IOException e) {
-            System.err.println("Error abriendo archivo");
-        }
-        */
     }
     
     public void exportar(String carpeta) {
