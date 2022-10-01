@@ -37,7 +37,7 @@ public class Alerta {
 						header,
 		                yesButton,
 		                noButton);
-		alert.setTitle("Cerrand Programa");
+		alert.setTitle("Cerrando Programa");
 		alert.setHeaderText("Antes de cerrar del programa");
 		Optional<ButtonType> result = alert.showAndWait();
 		

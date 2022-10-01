@@ -7,7 +7,6 @@ import java.util.ResourceBundle;
 import Congreso.Registro;
 
 // TODO : Sacar de paquete
-import Gui.Vistas.Busqueda.Busqueda;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -27,9 +26,6 @@ public class Dashboard extends VBox implements Initializable {
 
 
     private     Registro    registro;
-
-    @FXML
-    private     Busqueda    cajaBusqueda;
 
     @FXML
     private     ScrollPane        scroll;
@@ -125,11 +121,6 @@ public class Dashboard extends VBox implements Initializable {
         seleccionBox = scrollBox;
         seleccionBox.setVisible(true);
         seleccionBox.setManaged(true);
-    }
-    
-    public void buscar() {
-        String b = cajaBusqueda.getValue();
-        System.out.println("hola " + b);
     }
 
     public VBox getScrollBoxPresentaciones() {

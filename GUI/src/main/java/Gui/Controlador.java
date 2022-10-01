@@ -1,7 +1,6 @@
 package Gui;
 import java.io.File;
-
-
+import java.io.IOException;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -365,41 +364,6 @@ public class Controlador implements Initializable {
     		registro.insertarAsistente(asistente);
 
         }
-    }
-
-    /* Importa un archivo por medio de un
-     * file picker */
-    public void importar() {
-        System.out.println("Importando");
-        FileChooser fc = new FileChooser();
-        fc.setTitle("Seleccione el archivo a importar");
-        File file;
-        while(true) {
-        	file = fc.showOpenDialog(stage);
-
-        	// si no se elige ningún archivo
-        	if(file == null)
-        		return;
-
-            // TODO : Mejor protección ante archivos no csv
-            if (!Util.getFileExtension(file).equals("csv")) {
-                Alert alert = new Alert(AlertType.WARNING);
-                alert.setTitle("Error");
-                alert.setHeaderText("El archivo debe ser del tipo CSV");
-                alert.showAndWait();
-            } else {
-            	break;
-            }
-        }
-
-        
-        /*
-        try {
-            registro.importar(file.getPath());
-        } catch (IOException e) {
-            System.err.println("Error abriendo archivo");
-        }
-        */
     }
     
     public void exportar(String carpeta) {
