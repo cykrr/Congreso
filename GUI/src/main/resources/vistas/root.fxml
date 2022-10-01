@@ -51,7 +51,7 @@
                         </ImageView>
                     </HBox>
                     <!-- detail icon -->
-                    <HBox fx:id = "detailIcon" styleClass = "btn">
+                    <HBox fx:id = "buscarEdadIcon" styleClass = "btn">
                         <VBox.margin>
                             <Insets bottom="5.0" left="5.0" right="5.0" top="10.0" />
                         </VBox.margin>
@@ -65,7 +65,7 @@
                         </ImageView>
                     </HBox>
                     <!-- search icon -->
-                    <HBox fx:id = "searchIcon" styleClass = "btn">
+                    <HBox fx:id = "buscarFechaIcon" styleClass = "btn">
                         <VBox.margin>
                             <Insets bottom="5.0" left="5.0" right="5.0" top="10.0" />
                         </VBox.margin>

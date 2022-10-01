@@ -24,7 +24,7 @@ public class BusquedaPorEdad extends VBox {
         // TODO : Convertir importar en una clase abstracta que recibe como parametro
         // el tipo de ventana y la ruta al xml.
         
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/vistas/detalle.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/vistas/BusquedaPorEdad.fxml"));
         fxmlLoader.setController(this);
         Node n = null;
 
