@@ -45,8 +45,8 @@ public class Controlador implements Initializable {
     private     Stage       stage;    // Ventana principal
     private     Ajustes     ajustes;  // Ajustes del programa
     private     Dashboard   dashboard;
-    private     BusquedaPorEdad   detail;
-    private     BusquedaPorFecha   search;
+    private     BusquedaPorEdad   busquedaEdad;
+    private     BusquedaPorFecha   busquedaFecha;
     
     private Map<Presentacion, VistaPrincipalPresentacion> mapaVistaPresentaciones;
     private Map<Persona, VistaPrincipalPersona> mapaVistaPersonas;
@@ -59,7 +59,7 @@ public class Controlador implements Initializable {
 
     @FXML private     VBox        vistaPrincipal;
 
-    public void homeAction() {
+    public void mostrarVentanaDashboard() {
         this.vistaPrincipal.getChildren().clear();
         this.vistaPrincipal.getChildren().add(dashboard);
     }
@@ -68,18 +68,18 @@ public class Controlador implements Initializable {
         crearPresentacion();
     }
 
-    public void detailAction() {
+    public void mostrarVentanaBusquedaEdad() {
         this.vistaPrincipal.getChildren().clear();
-        if (detail == null)
-            detail = new BusquedaPorEdad(registro);
-        this.vistaPrincipal.getChildren().add(detail);
+        if (busquedaEdad == null)
+            busquedaEdad = new BusquedaPorEdad(registro);
+        this.vistaPrincipal.getChildren().add(busquedaEdad);
     }
     
-    public void searchAction() {
+    public void mostrarVentanaBusquedaFecha() {
         this.vistaPrincipal.getChildren().clear();
-        if (search == null)
-            search = new BusquedaPorFecha(registro);
-        this.vistaPrincipal.getChildren().add(search);
+        if (busquedaFecha == null)
+            busquedaFecha = new BusquedaPorFecha(registro);
+        this.vistaPrincipal.getChildren().add(busquedaFecha);
     }
     
     public void enCrearPresentacion(EventoPresentacion ep) {
@@ -219,12 +219,12 @@ public class Controlador implements Initializable {
         agregarTooltips();
         detailIcon.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             @Override public void handle(MouseEvent e) {
-                detailAction();
+                mostrarVentanaBusquedaEdad();
             }
         });
         homeIcon.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             @Override public void handle(MouseEvent e) {
-                homeAction();
+                mostrarVentanaDashboard();
             }
         });
         addIcon.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
@@ -234,7 +234,7 @@ public class Controlador implements Initializable {
         });
         searchIcon.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             @Override public void handle(MouseEvent e) {
-                searchAction();
+                mostrarVentanaBusquedaFecha();
             }
         });
     }

@@ -31,17 +31,6 @@ public class Presentacion {
 
     /*! Lista de asistentes de la presentación */
 	private LinkedList<Persona> asistentes;
-	
-	private Persona asistenteToRemove;
-
-    /** Constructor principal, inicializa la lista de
-     * asistentes (sin asistentes).
-     * @see Congreso.Persona
-      */
-    public Presentacion() {
-    	this.asistentes = new LinkedList<Persona>();
-    	this.asistenteToRemove = null;
-    }
     
     /** Constructor general para el tipo presentación
      * inicializa todos los atributos.
@@ -69,7 +58,6 @@ public class Presentacion {
     	setDescripcion(descripcion);
     	
     	this.asistentes = new LinkedList<Persona>();
-    	this.asistenteToRemove = null;
     }
     
     /** Establece el nombre de la presentación. Utilizado al importar archivos 
@@ -148,25 +136,6 @@ public class Presentacion {
     	this.asistentes.add(asistente);
     }
     
-    /** Elimina un asistente de tipo Persona en la presentación insertándolo .
-     * @param asistente Asistente a ser eliminado.
-     */
-    public void removerAsistente(Persona asistente){
-    	this.asistentes.remove(asistente);
-    }
-    
-    /** Agrega un asistente de tipo Persona a eliminar de la presentación insertándolo en
-     *  la variable asistenteToRemove.
-     * @param asistente Asistente a ser añadido.
-     */
-    public void agregarAsistenteToRemove(Persona asistente){
-    	this.asistenteToRemove = asistente;
-    }
-    
-	public boolean contieneAsistente(Persona asistente) {
-		return asistentes.contains(asistente);
-	}
-    
     /** Dada una referencia a un asistente, lo elimina de la lista de
      *  asistentes.
      *  @param asistente Asistente a ser eliminado.
@@ -174,6 +143,10 @@ public class Presentacion {
     public void eliminarAsistente(Persona asistente) {
       this.asistentes.remove(asistente);
     }
+    
+	public boolean contieneAsistente(Persona asistente) {
+		return asistentes.contains(asistente);
+	}
 
     @Override
     public String toString() {
@@ -188,12 +161,8 @@ public class Presentacion {
     	return expositor;
     }
     
-    public Persona getAsistenteToRemove() {
-    	return this.asistenteToRemove;
-    }
-    
-    public Persona getAsistenteToRemove(Presentacion p) {
-    	return p.getAsistenteToRemove();
+    public LocalDate getFecha() {
+    	return fecha;
     }
     
     public int getDia() {
@@ -208,10 +177,6 @@ public class Presentacion {
     	return fecha.getYear();
     }
     
-    public LocalDate getFecha() {
-    	return fecha;
-    }
-    
     public String getStringFecha() {
     	return Util.dateFormatterOutput.format(fecha);
     }
@@ -220,15 +185,15 @@ public class Presentacion {
     	return hora;
     }
     
-    public String getStringHora() {
-    	return Util.timeFormatterOutput.format(hora);
-    }
-    
     public int getHoraInicio() {
     	return 	hora.getHour();
     }
     public int getMinutoInicio() {
     	return 	hora.getMinute();
+    }
+    
+    public String getStringHora() {
+    	return Util.timeFormatterOutput.format(hora);
     }
     
     public int getDuracion() {
