@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.geometry.Rectangle2D?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -36,6 +37,19 @@
          </VBox>
          <HBox alignment="CENTER_RIGHT" nodeOrientation="LEFT_TO_RIGHT" spacing="20.0" HBox.hgrow="ALWAYS">
             <children>
+               <ImageView fx:id="imgButtonAgregarAsistente" fitHeight="34.8" fitWidth="26.4" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand">
+                  <image>
+                     <Image url="@../icons/add_asistente.png" />
+                  </image>
+               </ImageView>
+               <ImageView fx:id="imgButtonEliminarAsistente" fitHeight="34.8" fitWidth="26.4" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand">
+                  <image>
+                     <Image url="@../icons/remove_asistente.png" />
+                  </image>
+                  <viewport>
+                     <Rectangle2D />
+                  </viewport>
+               </ImageView>
                <ImageView fx:id="imgButtonEditar" fitHeight="29.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true" style="-fx-cursor: hand">
                   <image>
                      <Image url="@../icons/edit.png" />

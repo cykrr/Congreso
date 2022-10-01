@@ -9,34 +9,37 @@ import Gui.Alerta;
 import Gui.EventoPresentacion;
 import Gui.Vistas.PopUp;
 import Gui.Vistas.Vista;
+import Gui.Vistas.AsistentesPresentacion.AgregarAsistentePresentacion;
+import Gui.Vistas.AsistentesPresentacion.EliminarAsistentePresentacion;
 import Gui.Vistas.Dashboard.Dashboard;
 import Gui.Vistas.LeerPresentacion.LeerPresentacion;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class VistaPresentacion extends Vista implements Vista.Manipulable {
-    @FXML Text txtNombre, txtExpositor, txtDescripcion, txtFecha, txtHora, txtDuracion, txtTotalAsistentes, txtAsistentes;
+    @FXML Text txtNombre, txtExpositor, txtDescripcion, txtFecha, 
+    		   txtHora, txtDuracion, txtTotalAsistentes, txtAsistentes;
+    @FXML ImageView imgButtonAgregarAsistente, imgButtonEliminarAsistente;
     
     private Presentacion p;
     
     public VistaPresentacion(Presentacion p) {
         super("/vistas/vPresentacion.fxml");
         this.p = p;
-    	
-        txtNombre.setText(p.getNombre());
-        txtExpositor.setText(p.getExpositor().getNombre());
-        txtDescripcion.setText(p.getDescripcion());
-        txtFecha.setText(p.getStringFecha());
-        txtHora.setText(p.getStringHora());
-        txtDuracion.setText(Integer.toString(p.getDuracion()) + " minutos");
-        actualizarAsistentes();
+        inicializar();
     }
     
     public VistaPresentacion(Presentacion p, Registro registro, Stage stage, Dashboard dashboard) {
         super(registro, stage, dashboard, "/vistas/vPresentacion.fxml");      
-        this.p = p;
-    	
+        this.p = p;  	
+        inicializar();
+    }
+    
+	public void inicializar() {
         txtNombre.setText(p.getNombre());
         txtExpositor.setText(p.getExpositor().getNombre());
         txtDescripcion.setText(p.getDescripcion());
@@ -44,7 +47,51 @@ public class VistaPresentacion extends Vista implements Vista.Manipulable {
         txtHora.setText(p.getStringHora());
         txtDuracion.setText(Integer.toString(p.getDuracion()) + " minutos");
         actualizarAsistentes();
-    }
+        
+        imgButtonAgregarAsistente.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                agregarAsistente();
+                event.consume();
+            }
+        });
+        
+        imgButtonEliminarAsistente.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                eliminarAsistente();
+                event.consume();
+            }
+        });       
+	}
+	
+	private void agregarAsistente() {
+    	AgregarAsistentePresentacion ap = new AgregarAsistentePresentacion(getRegistro(), p);
+    	ap.setHeader("Agregando asistente a presentación " + p.getNombre());
+    	
+    	PopUp popup = new PopUp(getStage(), ap);
+    	popup.setTitle("Agregar asistente a presentación");
+        
+        Persona retorno = (Persona) popup.showDialog();	
+        if(retorno != null) {
+        	p.agregarAsistente(retorno);
+        	getDashboard().fireEvent(new EventoPresentacion(EventoPresentacion.MODIFICAR_ASISTENTES, p));
+        }
+	}
+	
+	private void eliminarAsistente() {
+    	EliminarAsistentePresentacion ep = new EliminarAsistentePresentacion(getRegistro(), p);
+    	ep.setHeader("Eliminando asistente de presentación " + p.getNombre());
+    	
+    	PopUp popup = new PopUp(getStage(), ep);
+    	popup.setTitle("Eliminar asistente de presentación");
+        
+        Persona retorno = (Persona) popup.showDialog();	
+        if(retorno != null) {
+        	p.eliminarAsistente(retorno);
+        	getDashboard().fireEvent(new EventoPresentacion(EventoPresentacion.MODIFICAR_ASISTENTES, p));
+        }	
+	}
     
     public void actualizarAsistentes() {
         LinkedList<Persona> asistentes = p.getAsistentes();

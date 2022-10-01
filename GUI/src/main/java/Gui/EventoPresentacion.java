@@ -19,6 +19,10 @@ public class EventoPresentacion extends Event {
     public static final EventType<EventoPresentacion> ELIMINAR_PRESENTACION = new EventType<>(
             EventoPresentacion.ANY,
             "ELIMINAR_PRESENTACION");
+    
+    public static final EventType<EventoPresentacion> MODIFICAR_ASISTENTES = new EventType<>(
+            EventoPresentacion.ANY,
+            "MODIFICAR_ASISTENTES");
 
     private Presentacion p1;
     private Presentacion p2;

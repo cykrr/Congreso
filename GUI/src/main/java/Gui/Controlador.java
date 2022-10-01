@@ -109,6 +109,11 @@ public class Controlador implements Initializable {
     	dashboard.actualizarNumeroPresentaciones();
     }
     
+    public void enModificarAsistentes(EventoPresentacion ep) {
+        VistaPresentacion vp = mapaVistaPresentaciones.get(ep.getPresentacion());
+        vp.actualizarAsistentes();
+    }
+    
     public void enCrearPersona(EventoPersona ep) {
         VistaPersona vp = new VistaPersona(ep.getPersona(), registro, stage, dashboard);
         mapaVistaPersonas.put(ep.getPersona(), vp);
@@ -269,6 +274,10 @@ public class Controlador implements Initializable {
         
         dashboard.addEventFilter(EventoPresentacion.ELIMINAR_PRESENTACION, e-> {
             enEliminarPresentacion(e);
+        });
+        
+        dashboard.addEventFilter(EventoPresentacion.MODIFICAR_ASISTENTES, e-> {
+        	enModificarAsistentes(e);
         });
         
         dashboard.addEventFilter(EventoPersona.CREAR_PERSONA, e-> {

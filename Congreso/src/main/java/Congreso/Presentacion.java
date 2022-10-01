@@ -163,6 +163,10 @@ public class Presentacion {
     	this.asistenteToRemove = asistente;
     }
     
+	public boolean contieneAsistente(Persona asistente) {
+		return asistentes.contains(asistente);
+	}
+    
     /** Dada una referencia a un asistente, lo elimina de la lista de
      *  asistentes.
      *  @param asistente Asistente a ser eliminado.
@@ -238,4 +242,5 @@ public class Presentacion {
     public LinkedList<Persona> getAsistentes() {
     	return asistentes;
     }
+
 }
