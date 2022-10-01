@@ -6,7 +6,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
-<?import Gui.Vistas.Busqueda.*?>
 
 <VBox style="-fx-background-color: #ffffff" VBox.vgrow="ALWAYS" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
 
@@ -27,19 +26,6 @@
                   <Insets left="20.0" top="20.0" />
                </HBox.margin>
             </Text>
-        </HBox>
-        <HBox maxHeight="50.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="100.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
-            <children>
-                <!-- <Pane fx:id="dropDown" prefHeight="50.0" prefWidth="50.0" /> -->
-                <HBox nodeOrientation="LEFT_TO_RIGHT">
-                    <Busqueda fx:id="cajaBusqueda" onAction="#buscar" >
-                        <HBox.margin>
-                            <Insets bottom="0" left="0" right="30" top="10" />
-                        </HBox.margin>
-                    </Busqueda>
-                </HBox>
-
-            </children>
         </HBox>
     </HBox>
     <HBox prefHeight="150.0" prefWidth="250.0">
