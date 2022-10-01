@@ -19,7 +19,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import Congreso.Expositor;
-import Congreso.Persona;
 import Congreso.Presentacion;
 import Congreso.Registro;
 import Congreso.Util;
@@ -36,8 +35,6 @@ public class LeerPresentacion extends GridPane implements Initializable, PopUp.P
 	
     // Elementos XML
     @FXML private ComboBox<Expositor> comboExpositor;
-    @FXML private ComboBox<Persona> comboAsistentes;
-    @FXML private ComboBox<Persona> comboAsistentesConfirmados;
     @FXML private TextField tfNombre, tfHora, tfDuracion, tfDescripcion, tfAsistentes;
     @FXML private DatePicker dpFecha;
     @FXML private Button submit;
@@ -89,13 +86,6 @@ public class LeerPresentacion extends GridPane implements Initializable, PopUp.P
         while(iteratorExpositores.hasNext()) {
         	itemsExpositores.add(iteratorExpositores.next());
         }
-        
-        ObservableList<Persona> itemsAsistentes = comboAsistentes.getItems();
-        Iterator<Persona> iteratorAsistentes = registro.getAsistentes();
-        
-        while(iteratorAsistentes.hasNext()) {
-        	itemsAsistentes.add(iteratorAsistentes.next());
-        }
     }
 
     @Override
@@ -111,7 +101,6 @@ public class LeerPresentacion extends GridPane implements Initializable, PopUp.P
         String strDuracion = tfDuracion.getText().trim();
         String descripcion = tfDescripcion.getText().trim();
         Expositor expositor = comboExpositor.getValue();
-        Persona asistente = comboAsistentes.getValue();
         
         if(nombre.isEmpty() || strFecha.isEmpty() || strHora.isEmpty() 
                 || strDuracion.isEmpty() || descripcion.isEmpty()) {
@@ -141,20 +130,10 @@ public class LeerPresentacion extends GridPane implements Initializable, PopUp.P
         	return false;
         }
         
-        if(asistente != null) {
-        	if(asistente.getNombre().isEmpty() || asistente.getCorreo().isEmpty() || 
-        	    Integer.toString(asistente.getEdad()).isEmpty() ||
-        	    Long.toString(asistente.getFono()).isEmpty()) {
-        		Alerta.mostrarAlertaAdvertencia("El asistente no esta bien guardado");
-        		return false;
-        	}
-        }
-        
         int duracion = Integer.parseInt(strDuracion);
         
         try {
 			p = new Presentacion(nombre, expositor, fecha, hora, duracion, descripcion);
-			p.agregarAsistente(asistente);
 			return true;
 		} catch (InvalidNombreException e) {
 			Alerta.mostrarAlertaAdvertencia("El nombre no puede contener caracteres especiales");
