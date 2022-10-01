@@ -3,13 +3,8 @@ package Gui;
 import java.io.IOException;
 
 import Congreso.Registro;
-import Gui.Vistas.Dashboard.Dashboard;
 import javafx.application.Application;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.Alert.AlertType;
-import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
