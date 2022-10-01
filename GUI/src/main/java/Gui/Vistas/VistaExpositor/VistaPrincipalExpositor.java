@@ -6,20 +6,20 @@ import Congreso.excepciones.NullExpositorException;
 import Gui.Alerta;
 import Gui.EventoExpositor;
 import Gui.Vistas.PopUp;
-import Gui.Vistas.Vista;
+import Gui.Vistas.VistaPrincipal;
 import Gui.Vistas.Dashboard.Dashboard;
 import Gui.Vistas.LeerExpositor.LeerExpositor;
 import javafx.fxml.FXML;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-public class VistaExpositor extends Vista implements Vista.Manipulable {
+public class VistaPrincipalExpositor extends VistaPrincipal implements VistaPrincipal.Manipulable {
     @FXML Text txtNombre, txtEdad, txtFono, txtCorreo, txtPais, txtOcupacion;
     
     private Expositor e;
     
-    public VistaExpositor(Expositor e, Registro registro, Stage stage, Dashboard dashboard) {
-        super(registro, stage, dashboard, "/vistas/vExpositor.fxml");
+    public VistaPrincipalExpositor(Expositor e, Registro registro, Stage stage, Dashboard dashboard) {
+        super(registro, stage, dashboard, "/vistas/VistaPrincipalExpositor.fxml");
         this.e = e;
     	
         txtNombre.setText(e.getNombre());

@@ -9,7 +9,7 @@ import Congreso.Presentacion;
 import Congreso.Registro;
 import Congreso.Util;
 import Gui.Alerta;
-import Gui.Vistas.VistaPresentacion.VistaPresentacion;
+import Gui.Vistas.VistaPresentacion.VistaDetallePresentacion;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -59,7 +59,7 @@ public class BusquedaPorFecha extends VBox {
         	Presentacion p = itPresentaciones.next();
         	
             if (p.getFecha().isEqual(fecha) || p.getFecha().isAfter(fecha)) {
-                VistaPresentacion vp = new VistaPresentacion(p);
+                VistaDetallePresentacion vp = new VistaDetallePresentacion(p);
                 scrollBox.getChildren().add(vp);
             }
         }

@@ -5,7 +5,7 @@ import java.util.Iterator;
 import Congreso.Persona;
 import Congreso.Registro;
 import Gui.Alerta;
-import Gui.Vistas.VistaPersona.VistaPersona;
+import Gui.Vistas.VistaPersona.VistaDetallePersona;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -53,7 +53,7 @@ public class BusquedaPorEdad extends VBox {
         while(itAsistentes.hasNext()) {
         	Persona a = itAsistentes.next();
             if (a.getEdad() > edad) {
-                VistaPersona vp = new VistaPersona(a);
+                VistaDetallePersona vp = new VistaDetallePersona(a);
                 scrollBox.getChildren().add(vp);
             }
         }
