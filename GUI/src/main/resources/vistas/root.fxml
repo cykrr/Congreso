@@ -18,11 +18,13 @@
     <MenuBar>
         <!-- TODO : Configurar teclas  -->
         <Menu text="Archivo">
+        	<MenuItem onAction="#exportar" text="Guardar cambios [Ctrl + E]" />
+            <MenuItem onAction="#cerrarAplicacion" text="Salir [Ctrl + Q]" />
+        </Menu>
+        <Menu text="Editar">
             <MenuItem onAction="#crearPresentacion" text="Crear presentación [Ctrl + P]" />
-            <MenuItem onAction="#crearExpositor" text="Crear expositor [Ctrl + X]" />
+            <MenuItem onAction="#crearExpositor" text="Crear expositor [Ctrl + E]" />
             <MenuItem onAction="#crearAsistente" text="Crear asistente [Ctrl + A]" />
-            <SeparatorMenuItem />
-            <MenuItem onAction="#exportar" text="Guardar cambios [Ctrl + E]" />
         </Menu>
     </MenuBar>
     <HBox VBox.vgrow = "ALWAYS">

@@ -9,13 +9,17 @@ import java.util.ResourceBundle;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.TextInputDialog;
 import javafx.scene.control.Tooltip;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyCodeCombination;
+import javafx.scene.input.KeyCombination;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import Gui.Vistas.PopUp;
 import Gui.Vistas.Dashboard.Dashboard;
 import Gui.Vistas.Detalle.BusquedaPorFecha;
@@ -193,7 +197,6 @@ public class Controlador implements Initializable {
 
         System.out.println("Ajustes guardados: "+ ajustes.carpeta);
 
-
         System.out.println("Inicializando registro");
         this.registro = r;
 
@@ -206,6 +209,7 @@ public class Controlador implements Initializable {
         mapaVistaPersonas = new HashMap<Persona, VistaPrincipalPersona>();
         mapaVistaExpositores = new HashMap<Expositor, VistaPrincipalExpositor>();
         this.dashboard = new Dashboard(r);
+        this.stage = s;
     }
 
     /** @brief Método que se ejecuta luego de leer xml */
@@ -215,6 +219,7 @@ public class Controlador implements Initializable {
 
         configurarBarraLateral();
         agregarListeners();
+        agregarShortcuts();
         cargarRegistro();
     }
 
@@ -383,14 +388,42 @@ public class Controlador implements Initializable {
     public void exportar() {
         exportar(ajustes.carpeta);
     }
-
-    // TODO : Añadir más ajustes
-    // TODO : Guardar de manera persistente la carpeta
-    // TODO : Revisar si la carpeta existe antes de guardar
-    public void editarPreferencias() {
-        TextInputDialog dialog = new TextInputDialog("Preferencias");
-        dialog.setTitle("Preferencias");
-        dialog.setContentText("Please enter your name:");
+    
+    public void cerrarAplicacion() {
+    	stage.fireEvent(new WindowEvent(stage, WindowEvent.WINDOW_CLOSE_REQUEST));
+    }
+    
+    public void agregarShortcuts() {
+        stage.addEventFilter(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>() {
+        	
+            KeyCombination keyCrearPresentacion = new KeyCodeCombination(
+            		KeyCode.P, KeyCombination.CONTROL_DOWN);
+            KeyCombination keyCrearExpositor = new KeyCodeCombination(
+            		KeyCode.A, KeyCombination.CONTROL_DOWN);
+            KeyCombination keyCrearAsistente = new KeyCodeCombination(
+            		KeyCode.E, KeyCombination.CONTROL_DOWN);
+            KeyCombination keyCerrarAplicacion = new KeyCodeCombination(
+            		KeyCode.Q, KeyCombination.CONTROL_DOWN);
+            
+            public void handle(KeyEvent ke) {
+                if (keyCrearPresentacion.match(ke)) {
+                    crearPresentacion();
+                    ke.consume();
+                }
+                if (keyCrearExpositor.match(ke)) {
+                    crearExpositor();
+                    ke.consume();
+                }
+                if (keyCrearAsistente.match(ke)) {
+                    crearAsistente();
+                    ke.consume();
+                }
+                if (keyCerrarAplicacion.match(ke)) {
+                    cerrarAplicacion();
+                    ke.consume();
+                }
+            }
+        });  	
     }
 
     public void setDashboard(Dashboard dashboard) {
