@@ -11,9 +11,17 @@ public class Expositor extends Persona {
 	
     public Expositor(String nombre, int edad, long fono, String correo, String pais, String ocupacion) 
     		throws InvalidNombreException, InvalidEdadException, InvalidFonoException, InvalidCorreoException {
-    	super(nombre, edad, fono, correo);
+    	super(nombre, fono, correo);
+    	setEdad(edad);
     	setPais(pais);
     	setOcupacion(ocupacion);
+    }
+    
+    public void setEdad(int edad) throws InvalidEdadException {
+    	if(edad > 100 || edad < 18)
+    		throw new InvalidEdadException(edad, 18, 100);
+    	
+    	super.setEdad(edad);
     }
 
 	public void setPais(String pais) {

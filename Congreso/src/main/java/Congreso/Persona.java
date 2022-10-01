@@ -19,6 +19,13 @@ public class Persona {
     	setCorreo(correo);
     }
     
+    protected Persona(String nombre, long fono, String correo) 
+    		throws InvalidNombreException, InvalidFonoException, InvalidCorreoException {
+    	setNombre(nombre);
+    	setFono(fono);
+    	setCorreo(correo);
+    }
+    
     public void setNombre(String nombre) throws InvalidNombreException {
     	if(!Util.isAlphaOrSpace(nombre))
     		throw new InvalidNombreException(nombre);
@@ -28,7 +35,7 @@ public class Persona {
     
     public void setEdad(int edad) throws InvalidEdadException {
     	if(edad > 100 || edad < 1)
-    		throw new InvalidEdadException(edad);
+    		throw new InvalidEdadException(edad, 1, 100);
     	
     	this.edad = edad;
     }

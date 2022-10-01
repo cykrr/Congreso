@@ -113,7 +113,7 @@ public class LeerExpositor extends GridPane implements Initializable, PopUp.PopA
 		} catch (InvalidNombreException e) {
 			Alerta.mostrarAlertaAdvertencia("El nombre no puede contener caracteres especiales");
 		} catch (InvalidEdadException e) {
-			Alerta.mostrarAlertaAdvertencia("La edad debe estar en el rango de 1 a 100");
+			Alerta.mostrarAlertaAdvertencia("La edad debe estar en el rango de 18 a 100");
 		} catch (InvalidFonoException e) {
 			Alerta.mostrarAlertaAdvertencia("El teléfono debe tener entre 8 y 12 dígitos");
 		} catch (InvalidCorreoException e) {
