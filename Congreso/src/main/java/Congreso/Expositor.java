@@ -31,5 +31,4 @@ public class Expositor extends Persona {
 	public String getOcupacion() {
 		return ocupacion;
 	}
-
 }

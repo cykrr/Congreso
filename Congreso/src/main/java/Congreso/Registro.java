@@ -40,6 +40,12 @@ public class Registro {
         listaExpositores = new LinkedList<Expositor>();
         listaAsistentes = new LinkedList<Persona>();
     }
+    
+    /* Sobrecarga Metodos
+     * insertar()
+     * editar()
+     * eliminar()
+     * */
 
     /** Añade una presentación al registro, se encarga de revisar
      * que la presentación a ser añadida no tenga un nombre
@@ -47,7 +53,7 @@ public class Registro {
      * presentación 
      * @param p presentación a ser añadida
      * */
-    public void insertarPresentacion(Presentacion p) {
+    public void insertar(Presentacion p) {
         Presentacion busqueda = buscarPresentacion(p.getNombre());
         if (busqueda == null) {
             mapaPresentaciones.put(p.getNombre(), p);
@@ -58,7 +64,7 @@ public class Registro {
 	/** Inserta un expositor en la base de datos
 	 *  @param e Expositor a insertar
 	 */
-    public void insertarExpositor(Expositor e) {
+    public void insertar(Expositor e) {
         Expositor busqueda = buscarExpositor(e.getNombre());
         if (busqueda == null) {
             mapaExpositores.put(e.getNombre(), e);
@@ -69,7 +75,7 @@ public class Registro {
 	/** Inserta un asistente en la base de datos
 	 *  @param a Asistente a insertar
 	 */
-    public void insertarAsistente(Persona a) {
+    public void insertar(Persona a) {
         Persona busqueda = buscarAsistente(a.getNombre());
         if (busqueda == null) {
             mapaAsistentes.put(a.getNombre(), a);
@@ -84,7 +90,7 @@ public class Registro {
 	 *  @param p1 Presentación pre-modificación
 	 *  @param p2 Presentación post-modificación
 	 */
-	public void editarPresentacion(Presentacion p1, Presentacion p2) {
+	public void editar(Presentacion p1, Presentacion p2) {
 		LinkedList<Persona> asistentes = p1.getAsistentes();
 
 		if(p2.getAsistentes().size() > 0) {
@@ -96,8 +102,8 @@ public class Registro {
 		// TODO : Podemos pasar colecciones
 		p2.setAsistentes(asistentes);
 		
-		eliminarPresentacion(p1);
-		insertarPresentacion(p2);
+		eliminar(p1);
+		insertar(p2);
 	}
 	
 	/** Edita un asistente en la base de datos.
@@ -108,10 +114,10 @@ public class Registro {
 	 *  @param a1 Asistente pre-modificación
 	 *  @param a2 Asistente post-modificación
 	 */
-	public void editarAsistente(Persona a1, Persona a2) {
+	public void editar(Persona a1, Persona a2) {
 		mapaAsistentes.remove(a1.getNombre());
 		listaAsistentes.remove(a1);
-		insertarAsistente(a2);
+		insertar(a2);
 		
 		for(int i = 0; i < listaPresentaciones.size(); i++) {
 			LinkedList<Persona> asistentes = listaPresentaciones.get(i).getAsistentes();
@@ -130,7 +136,7 @@ public class Registro {
 	 *  @param a2 Asistente post-modificación
 	 * @throws NullExpositorException 
 	 */
-	public void editarExpositor(Expositor e1, Expositor e2) throws NullExpositorException {
+	public void editar(Expositor e1, Expositor e2) throws NullExpositorException {
 		for(int i = 0; i < listaPresentaciones.size(); i++) {
 			if(e1 == listaPresentaciones.get(i).getExpositor()) {
 				listaPresentaciones.get(i).setExpositor(e2);
@@ -140,14 +146,14 @@ public class Registro {
 		
 		mapaExpositores.remove(e1.getNombre());
 		listaExpositores.remove(e1);
-		insertarExpositor(e2);
+		insertar(e2);
 	}
 	
 	/** Elimina una presentación de la base de datos.
 	 * 
 	 * @param p Presentación a eliminar.
 	 */
-	public void eliminarPresentacion(Presentacion p) {
+	public void eliminar(Presentacion p) {
 		mapaPresentaciones.remove(p.getNombre());
 		listaPresentaciones.remove(p);
 	}
@@ -158,7 +164,7 @@ public class Registro {
 	 * 
 	 * @param p Asistente a eliminar.
 	 */
-	public void eliminarAsistente(Persona a) {
+	public void eliminar(Persona a) {
 		mapaAsistentes.remove(a.getNombre());
 		listaAsistentes.remove(a);
 		
@@ -168,10 +174,16 @@ public class Registro {
 	
 	/** Elimina un expositor de la base de datos.
 	 * @param e Expositor a ser eliminado. */
-	public void eliminarExpositor(Expositor e) {
+	public void eliminar(Expositor e) {
 		mapaExpositores.remove(e.getNombre());
 		listaExpositores.remove(e);
 	}
+	
+	/* FIN Sobrecarga Metodos
+     * insertar()
+     * editar()
+     * eliminar()
+     * */
    
 	/** Busca una presentación en la base de datos dado su nombre. */
 	public Presentacion buscarPresentacion(String nombre) {
@@ -233,7 +245,7 @@ public class Registro {
 		    String descripcion = lineArray.get(5);
 		    
 		    Presentacion p = new Presentacion(nombre, expositor, fecha, hora, duracion, descripcion);
-		    insertarPresentacion(p);
+		    insertar(p);
 		    
 		    String asistentes = lineArray.get(6);
 		    asistentes = asistentes.substring(1, asistentes.length() - 1);
@@ -267,7 +279,7 @@ public class Registro {
 		    String ocupacion = lineArray.get(5);
 		    
 		    Expositor expositor = new Expositor(nombre, edad, fono, correo, pais, ocupacion);
-		    insertarExpositor(expositor);
+		    insertar(expositor);
 		}
 	        
 	    br.close();
@@ -290,7 +302,7 @@ public class Registro {
 		    String correo = lineArray.get(3);
 		    
 		    Persona asistente = new Persona(nombre, edad, fono, correo);
-		    insertarAsistente(asistente);
+		    insertar(asistente);
 		}
 	        
 	    br.close();

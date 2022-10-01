@@ -41,7 +41,7 @@ public class VistaPrincipalExpositor extends VistaPrincipal implements VistaPrin
         Expositor retorno = (Expositor)popup.showDialog();
         if (retorno != null) {
         	try {
-				getRegistro().editarExpositor(e, retorno);
+				getRegistro().editar(e, retorno);
 			} catch (NullExpositorException err) {
 				err.printStackTrace();
 			}
@@ -60,7 +60,7 @@ public class VistaPrincipalExpositor extends VistaPrincipal implements VistaPrin
 		
     	boolean opcion = Alerta.mostrarAlertaConfirmacion("¿Desea eliminar al expositor \"" + e.getNombre() + "\"?");
     	if(opcion) {
-    		getRegistro().eliminarExpositor(e);
+    		getRegistro().eliminar(e);
     		getDashboard().fireEvent(new EventoExpositor(EventoExpositor.ELIMINAR_EXPOSITOR, e));
     	}
 	}

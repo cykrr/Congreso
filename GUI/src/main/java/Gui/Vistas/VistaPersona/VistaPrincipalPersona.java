@@ -37,7 +37,7 @@ public class VistaPrincipalPersona extends VistaPrincipal implements VistaPrinci
             
         Persona retorno = (Persona)popup.showDialog();
         if (retorno != null) {
-        	getRegistro().editarAsistente(p, retorno);
+        	getRegistro().editar(p, retorno);
             getDashboard().fireEvent(new EventoPersona(EventoPersona.EDITAR_PERSONA, p, retorno));
         }		
 	}
@@ -46,7 +46,7 @@ public class VistaPrincipalPersona extends VistaPrincipal implements VistaPrinci
 	public void eliminar() {
     	boolean opcion = Alerta.mostrarAlertaConfirmacion("¿Desea eliminar al asistente \"" + p.getNombre() + "\"?");
     	if(opcion) {
-    		getRegistro().eliminarAsistente(p);
+    		getRegistro().eliminar(p);
     		getDashboard().fireEvent(new EventoPersona(EventoPersona.ELIMINAR_PERSONA, p));
     	}
 	}

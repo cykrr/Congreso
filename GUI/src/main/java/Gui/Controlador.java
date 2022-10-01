@@ -82,14 +82,35 @@ public class Controlador implements Initializable {
         this.vistaPrincipal.getChildren().add(busquedaFecha);
     }
     
-    public void enCrearPresentacion(EventoPresentacion ep) {
+    /*
+     * Sobrecarga Metodos 
+     * enCrear()
+     * enEditar()
+     * enEliminar()
+     * */
+    
+    public void enCrear(EventoPresentacion ep) {
         VistaPrincipalPresentacion vp = new VistaPrincipalPresentacion(ep.getPresentacion(), registro, stage, dashboard);
         mapaVistaPresentaciones.put(ep.getPresentacion(), vp);
         dashboard.getScrollBoxPresentaciones().getChildren().add(vp);
         dashboard.actualizarNumeroPresentaciones();
     }
     
-    public void enEditarPresentacion(EventoPresentacion ep) {	
+    public void enCrear(EventoPersona ep) {
+        VistaPrincipalPersona vp = new VistaPrincipalPersona(ep.getPersona(), registro, stage, dashboard);
+        mapaVistaPersonas.put(ep.getPersona(), vp);
+        dashboard.getScrollBoxAsistentes().getChildren().add(vp);
+        dashboard.actualizarNumeroAsistentes();
+    }
+    
+    public void enCrear(EventoExpositor ee) {
+        VistaPrincipalExpositor ve = new VistaPrincipalExpositor(ee.getExpositor(), registro, stage, dashboard);
+        mapaVistaExpositores.put(ee.getExpositor(), ve);
+        dashboard.getScrollBoxExpositores().getChildren().add(ve);
+        dashboard.actualizarNumeroExpositores();
+    }
+    
+    public void enEditar(EventoPresentacion ep) {	
     	VistaPrincipalPresentacion vpAntigua = mapaVistaPresentaciones.remove(ep.getPresentacionAntigua());
     	int index = dashboard.getScrollBoxPresentaciones().getChildren().indexOf(vpAntigua);
     	dashboard.getScrollBoxPresentaciones().getChildren().remove(index);
@@ -103,25 +124,21 @@ public class Controlador implements Initializable {
     	dashboard.getScrollBoxPresentaciones().getChildren().add(index, vpNueva);
     }
     
-    public void enEliminarPresentacion(EventoPresentacion ep) {
-    	VistaPrincipalPresentacion vp = mapaVistaPresentaciones.remove(ep.getPresentacion());
-    	dashboard.getScrollBoxPresentaciones().getChildren().remove(vp);
-    	dashboard.actualizarNumeroPresentaciones();
+    public void enEditar(EventoExpositor ee) {	
+    	VistaPrincipalExpositor veAntigua = mapaVistaExpositores.remove(ee.getExpositorAntiguo());
+    	int index = dashboard.getScrollBoxExpositores().getChildren().indexOf(veAntigua);
+    	dashboard.getScrollBoxExpositores().getChildren().remove(index);
+    	
+        VistaPrincipalExpositor veNueva = new VistaPrincipalExpositor(ee.getExpositorNuevo(), registro, stage, dashboard);
+        if(veAntigua.estaExtendida())
+        	veNueva.alternarVistaExtendida();
+        
+        mapaVistaExpositores.put(ee.getExpositorNuevo(), veNueva);
+    	dashboard.getScrollBoxExpositores().getChildren().add(index, veNueva);
+    	actualizarExpositorEnPresentaciones();
     }
     
-    public void enModificarAsistentes(EventoPresentacion ep) {
-        VistaPrincipalPresentacion vp = mapaVistaPresentaciones.get(ep.getPresentacion());
-        vp.actualizarAsistentes();
-    }
-    
-    public void enCrearPersona(EventoPersona ep) {
-        VistaPrincipalPersona vp = new VistaPrincipalPersona(ep.getPersona(), registro, stage, dashboard);
-        mapaVistaPersonas.put(ep.getPersona(), vp);
-        dashboard.getScrollBoxAsistentes().getChildren().add(vp);
-        dashboard.actualizarNumeroAsistentes();
-    }
-    
-    public void enEditarPersona(EventoPersona ep) {	
+    public void enEditar(EventoPersona ep) {	
     	VistaPrincipalPersona vpAntigua = mapaVistaPersonas.remove(ep.getPersonaAntigua());
     	int index = dashboard.getScrollBoxAsistentes().getChildren().indexOf(vpAntigua);
     	dashboard.getScrollBoxAsistentes().getChildren().remove(index);
@@ -136,38 +153,32 @@ public class Controlador implements Initializable {
     	actualizarAsistentesEnPresentaciones();
     }
     
-    public void enEliminarPersona(EventoPersona ep) {
+    public void enEliminar(EventoPresentacion ep) {
+    	VistaPrincipalPresentacion vp = mapaVistaPresentaciones.remove(ep.getPresentacion());
+    	dashboard.getScrollBoxPresentaciones().getChildren().remove(vp);
+    	dashboard.actualizarNumeroPresentaciones();
+    }
+    
+    public void enEliminar(EventoPersona ep) {
     	VistaPrincipalPersona vp = mapaVistaPersonas.remove(ep.getPersona());
     	dashboard.getScrollBoxAsistentes().getChildren().remove(vp);
     	dashboard.actualizarNumeroAsistentes();
     	actualizarAsistentesEnPresentaciones();
     }
     
-    public void enCrearExpositor(EventoExpositor ee) {
-        VistaPrincipalExpositor ve = new VistaPrincipalExpositor(ee.getExpositor(), registro, stage, dashboard);
-        mapaVistaExpositores.put(ee.getExpositor(), ve);
-        dashboard.getScrollBoxExpositores().getChildren().add(ve);
-        dashboard.actualizarNumeroExpositores();
-    }
-    
-    public void enEditarExpositor(EventoExpositor ee) {	
-    	VistaPrincipalExpositor veAntigua = mapaVistaExpositores.remove(ee.getExpositorAntiguo());
-    	int index = dashboard.getScrollBoxExpositores().getChildren().indexOf(veAntigua);
-    	dashboard.getScrollBoxExpositores().getChildren().remove(index);
-    	
-        VistaPrincipalExpositor veNueva = new VistaPrincipalExpositor(ee.getExpositorNuevo(), registro, stage, dashboard);
-        if(veAntigua.estaExtendida())
-        	veNueva.alternarVistaExtendida();
-        
-        mapaVistaExpositores.put(ee.getExpositorNuevo(), veNueva);
-    	dashboard.getScrollBoxExpositores().getChildren().add(index, veNueva);
-    	actualizarExpositorEnPresentaciones();
-    }
-    
-    public void enEliminarExpositor(EventoExpositor ee) {
+    public void enEliminar(EventoExpositor ee) {
     	VistaPrincipalExpositor ve = mapaVistaExpositores.remove(ee.getExpositor());
     	dashboard.getScrollBoxExpositores().getChildren().remove(ve);
     	dashboard.actualizarNumeroExpositores();
+    }
+    
+    /*
+     * Fin Sobrecarga Metodos
+     * */
+    
+    public void enModificarAsistentes(EventoPresentacion ep) {
+        VistaPrincipalPresentacion vp = mapaVistaPresentaciones.get(ep.getPresentacion());
+        vp.actualizarAsistentes();
     }
     
     public void actualizarAsistentesEnPresentaciones() {
@@ -265,15 +276,15 @@ public class Controlador implements Initializable {
 
     private void agregarListeners() {
         dashboard.addEventFilter(EventoPresentacion.CREAR_PRESENTACION, e-> {
-            enCrearPresentacion(e);
+            enCrear(e);
         });
         
         dashboard.addEventFilter(EventoPresentacion.EDITAR_PRESENTACION, e-> {
-            enEditarPresentacion(e);
+            enEditar(e);
         });
         
         dashboard.addEventFilter(EventoPresentacion.ELIMINAR_PRESENTACION, e-> {
-            enEliminarPresentacion(e);
+            enEliminar(e);
         });
         
         dashboard.addEventFilter(EventoPresentacion.MODIFICAR_ASISTENTES, e-> {
@@ -281,27 +292,27 @@ public class Controlador implements Initializable {
         });
         
         dashboard.addEventFilter(EventoPersona.CREAR_PERSONA, e-> {
-            enCrearPersona(e);
+            enCrear(e);
         });
         
         dashboard.addEventFilter(EventoPersona.EDITAR_PERSONA, e-> {
-            enEditarPersona(e);
+        	enEditar(e);
         });
         
         dashboard.addEventFilter(EventoPersona.ELIMINAR_PERSONA, e-> {
-            enEliminarPersona(e);
+            enEliminar(e);
         });
         
         dashboard.addEventFilter(EventoExpositor.CREAR_EXPOSITOR, e-> {
-            enCrearExpositor(e);
+            enCrear(e);
         });
         
         dashboard.addEventFilter(EventoExpositor.EDITAR_EXPOSITOR, e-> {
-            enEditarExpositor(e);
+        	enEditar(e);
         });
         
         dashboard.addEventFilter(EventoExpositor.ELIMINAR_EXPOSITOR, e-> {
-            enEliminarExpositor(e);
+            enEliminar(e);
         });
     }
 
@@ -323,7 +334,7 @@ public class Controlador implements Initializable {
         
         retorno = (Presentacion)popup.showDialog();
         if (retorno != null) {
-            registro.insertarPresentacion(retorno);
+            registro.insertar(retorno);
             dashboard.fireEvent(new EventoPresentacion(EventoPresentacion.CREAR_PRESENTACION, retorno));
             System.out.println(retorno);
         } else {
@@ -344,7 +355,7 @@ public class Controlador implements Initializable {
         
         expositor = (Expositor) popup.showDialog();
         if(expositor != null) {
-        	registro.insertarExpositor(expositor);
+        	registro.insertar(expositor);
         	dashboard.fireEvent(new EventoExpositor(EventoExpositor.CREAR_EXPOSITOR, expositor));
         }
     }
@@ -362,7 +373,7 @@ public class Controlador implements Initializable {
     	
     	asistente = (Persona) popup.showDialog();
     	if(asistente != null) {
-    		registro.insertarAsistente(asistente);
+    		registro.insertar(asistente);
 
         }
     }

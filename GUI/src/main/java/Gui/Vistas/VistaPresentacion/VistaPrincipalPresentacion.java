@@ -115,7 +115,7 @@ public class VistaPrincipalPresentacion extends VistaPrincipal implements VistaP
         
         Presentacion retorno = (Presentacion)popup.showDialog();
         if (retorno != null) {
-        	getRegistro().editarPresentacion(p, retorno);
+        	getRegistro().editar(p, retorno);
             getDashboard().fireEvent(new EventoPresentacion(EventoPresentacion.EDITAR_PRESENTACION, p, retorno));
         }
     }
@@ -124,7 +124,7 @@ public class VistaPrincipalPresentacion extends VistaPrincipal implements VistaP
     public void eliminar() {
     	boolean opcion = Alerta.mostrarAlertaConfirmacion("¿Desea eliminar la presentación \"" + p.getNombre() + "\"?");
     	if(opcion) {
-    		getRegistro().eliminarPresentacion(p);
+    		getRegistro().eliminar(p);
     		getDashboard().fireEvent(new EventoPresentacion(EventoPresentacion.ELIMINAR_PRESENTACION, p));
     	}
     }

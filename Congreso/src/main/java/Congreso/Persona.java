@@ -64,10 +64,11 @@ public class Persona {
 	public String getCorreo() {
 		return correo;
 	}
-
+	
+	/*
     @Override 
     public String toString() {
         return this.nombre;
-    }
+    }*/
 
 }
