@@ -8,7 +8,7 @@ import Congreso.Registro;
 import Gui.Alerta;
 import Gui.EventoPresentacion;
 import Gui.Vistas.PopUp;
-import Gui.Vistas.Vista;
+import Gui.Vistas.VistaPrincipal;
 import Gui.Vistas.AsistentesPresentacion.AgregarAsistentePresentacion;
 import Gui.Vistas.AsistentesPresentacion.EliminarAsistentePresentacion;
 import Gui.Vistas.Dashboard.Dashboard;
@@ -20,26 +20,17 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-public class VistaPresentacion extends Vista implements Vista.Manipulable {
+public class VistaPrincipalPresentacion extends VistaPrincipal implements VistaPrincipal.Manipulable {
     @FXML Text txtNombre, txtExpositor, txtDescripcion, txtFecha, 
     		   txtHora, txtDuracion, txtTotalAsistentes, txtAsistentes;
     @FXML ImageView imgButtonAgregarAsistente, imgButtonEliminarAsistente;
     
     private Presentacion p;
     
-    public VistaPresentacion(Presentacion p) {
-        super("/vistas/vPresentacion.fxml");
+    public VistaPrincipalPresentacion(Presentacion p, Registro registro, Stage stage, Dashboard dashboard) {
+        super(registro, stage, dashboard, "/vistas/VistaPrincipalPresentacion.fxml");      
         this.p = p;
-        inicializar();
-    }
-    
-    public VistaPresentacion(Presentacion p, Registro registro, Stage stage, Dashboard dashboard) {
-        super(registro, stage, dashboard, "/vistas/vPresentacion.fxml");      
-        this.p = p;  	
-        inicializar();
-    }
-    
-	public void inicializar() {
+        
         txtNombre.setText(p.getNombre());
         txtExpositor.setText(p.getExpositor().getNombre());
         txtDescripcion.setText(p.getDescripcion());
@@ -62,8 +53,8 @@ public class VistaPresentacion extends Vista implements Vista.Manipulable {
                 eliminarAsistente();
                 event.consume();
             }
-        });       
-	}
+        });  
+    }
 	
 	private void agregarAsistente() {
     	AgregarAsistentePresentacion ap = new AgregarAsistentePresentacion(getRegistro(), p);
