@@ -86,7 +86,7 @@ public class Controlador implements Initializable {
      * Sobrecarga Metodos:
      * enCrear()
      * enEditar()
-     * enEliminar
+     * enEliminar()
      * */
     public void enCrear(EventoPresentacion ep) {
         VistaPrincipalPresentacion vp = new VistaPrincipalPresentacion(ep.getPresentacion(), registro, stage, dashboard);
@@ -174,7 +174,7 @@ public class Controlador implements Initializable {
      * FIN Sobrecarga Metodos:
      * enCrear()
      * enEditar()
-     * enEliminar
+     * enEliminar()
      * */
     
     public void enModificarAsistentes(EventoPresentacion ep) {
