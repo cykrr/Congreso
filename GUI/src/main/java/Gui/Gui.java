@@ -68,7 +68,7 @@ public class Gui extends Application {
      *  si presiona no, el programa cierra sin guardar
      * */
     public void cerrar(Stage stage) {
-    	boolean save = Alerta.mostrarAlertaSalirPrograma("¿Deseas guardar los cambios hechos?");
+    	boolean save = Alerta.mostrarAlertaAdvertencia("¿Deseas guardar los cambios hechos?", "Antes de cerrar del programa");
     	if(save) {
     		this.controlador.exportar();
     		System.out.println("\nGuardado Exitosamente");
