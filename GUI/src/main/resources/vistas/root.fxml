@@ -17,7 +17,7 @@
 <VBox style="-fx-background-color: #efefef" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
     <MenuBar>
         <!-- TODO : Configurar teclas  -->
-        <Menu text="Archivo">
+        <Menu text="Agregar">
             <MenuItem onAction="#crearPresentacion" text="Crear presentación" />
             <MenuItem onAction="#crearExpositor" text="Crear expositor" />
             <MenuItem onAction="#crearAsistente" text="Crear asistente" />
