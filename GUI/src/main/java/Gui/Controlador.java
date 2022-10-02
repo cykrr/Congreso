@@ -395,8 +395,8 @@ public class Controlador implements Initializable {
     
     /** Cierra el programa sin guardar los datos */
     public void cerrarAplicacion() {
+    	System.out.println("\nCerrado sin guardar");
     	System.exit(0);
-    	System.out.println("Cerrado sin guardar");
     }
     
     /**

@@ -5,8 +5,6 @@ import javafx.event.Event;
 import javafx.event.EventType;
 
 public class EventoPresentacion extends Event {
-    public static final EventType<EventoPresentacion> ANY = new EventType<>(
-            Event.ANY, "ANY");
 
     public static final EventType<EventoPresentacion> CREAR_PRESENTACION = new EventType<>(
             EventoPresentacion.ANY,

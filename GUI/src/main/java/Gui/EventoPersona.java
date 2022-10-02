@@ -5,7 +5,6 @@ import javafx.event.Event;
 import javafx.event.EventType;
 
 public class EventoPersona extends Event {
-    // public static final EventType<EventoPersona> ANY = new EventType<>(Event.ANY, "ANY");
 
     public static final EventType<EventoPersona> CREAR_PERSONA = 
         new EventType<>(EventoPersona.ANY, "CREAR_PERSONA");
