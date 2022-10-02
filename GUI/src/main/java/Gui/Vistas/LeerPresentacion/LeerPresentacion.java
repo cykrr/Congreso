@@ -21,6 +21,8 @@ import Congreso.excepciones.NullExpositorException;
 import Gui.Alerta;
 import Gui.Vistas.PopUp;
 
+
+/* Clase encargada de mostrar la ventana en caso de crear o editar presentacion */
 public class LeerPresentacion extends PopUp implements PopUp.PopAble {
 	
     // Elementos XML
@@ -36,8 +38,12 @@ public class LeerPresentacion extends PopUp implements PopUp.PopAble {
     private Presentacion presentacion;
     
     private boolean editando = false;
-
-    /* Constructor de la vista
+    
+    
+    /*	@brief Constructor de la vista
+     * 
+     * Carga el archivo fxml que corresponde para
+     * abrirlo como ventana.
      * Requiere el registro para utilizarlo
      * en la inicialización */
     public LeerPresentacion(Registro registro, Stage stage)  {
@@ -45,7 +51,11 @@ public class LeerPresentacion extends PopUp implements PopUp.PopAble {
         this.registro = registro;
         inicializar();
     }
-
+    
+    /*
+     * Constructor que inicia los atributos TextField
+     * que se mostraran en la ventana
+     * */
     public LeerPresentacion(Registro registro, Stage stage, Presentacion presentacion) {
 		this(registro, stage);
 		this.presentacion = presentacion;		
@@ -58,7 +68,12 @@ public class LeerPresentacion extends PopUp implements PopUp.PopAble {
 		tfDescripcion.setText(presentacion.getDescripcion());
 		comboExpositor.setValue(presentacion.getExpositor());
 	}
-
+    
+    /*
+     * Se encarga del inicializar el comboBox iterativo que nos permite junto a
+     * la ventana. De esta forma tenemos permitido escoger entre los expositores 
+     * existentes al abrirse la ventana.
+     * */
     public void inicializar() {
 		ObservableList<Expositor> itemsExpositores = comboExpositor.getItems();
 		Iterator<Expositor> iteratorExpositores = registro.getExpositores();
@@ -69,11 +84,18 @@ public class LeerPresentacion extends PopUp implements PopUp.PopAble {
     }
 
     @Override
+    /* Retorna el atributo presentacion de clase Presentacion casteada en Object */
     public Object getValue() {
         return this.presentacion;
     }
-
+    
     @Override
+    /*
+     * Lee lo ingresado por el usuario para la presentacion, confirma si existe algun 
+     * error o valor no valido ingresado, en caso de haber, se abre una 
+     * ventana de error con un mensaje de lo ingresado erroneamente, si no hay error, 
+     * guarda la informacion agregando o editando una presentacion. 
+     * */
     public boolean guardar() {
         String nombre = tfNombre.getText().trim();
         String strFecha = dpFecha.getEditor().getText().trim();

@@ -15,6 +15,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+/* Clase encargada de mostrar la ventana en caso de crear o editar asistente */
 public class LeerAsistente extends PopUp implements PopUp.PopAble {
 
     // Elementos XML
@@ -26,12 +27,20 @@ public class LeerAsistente extends PopUp implements PopUp.PopAble {
     private Persona asistente = null;
     private Registro registro;
     private boolean editando = false;
-
+    
+    /*	@brief Constructor de la vista
+     * Carga el archivo fxml que corresponde para
+     * abrirlo como ventana.
+     * */
     public LeerAsistente(Registro registro, Stage stage)  {
         super(stage, "/vistas/leerAsistente.fxml");
         this.registro = registro;
     }
     
+    /*
+     * Constructor que inicia los atributos TextField
+     * que se mostraran en la ventana
+     * */
     public LeerAsistente(Registro registro, Stage stage, Persona p) {
     	this(registro, stage);
     	editando = true;
@@ -43,11 +52,18 @@ public class LeerAsistente extends PopUp implements PopUp.PopAble {
     }
 
     @Override
+    /* Retorna el atributo asistente de clase Persona casteada en Object */
     public Object getValue() {
         return asistente;
     }
 
     @Override
+    /*
+     * Lee lo ingresado por el usuario para el asistente, confirma si existe algun 
+     * error o valor no valido ingresado, en caso de haber, se abre una 
+     * ventana de error con un mensaje de lo ingresado erroneamente, si no hay error, 
+     * guarda la informacion agregando o editando un asistente. 
+     * */
     public boolean guardar() {
         String nombre = tfNombre.getText().trim();
         String correo = tfCorreo.getText().trim();
@@ -92,6 +108,7 @@ public class LeerAsistente extends PopUp implements PopUp.PopAble {
         return false;
     }
     
+    /* Recibe un String para utilizar como texto en la ventana. */
     public void setHeader(String text) {
     	txtHeader.setText(text);
     }

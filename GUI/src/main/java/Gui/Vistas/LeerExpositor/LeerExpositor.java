@@ -14,6 +14,7 @@ import Congreso.excepciones.InvalidNombreException;
 import Gui.Alerta;
 import Gui.Vistas.PopUp;
 
+/* Clase encargada de mostrar la ventana en caso de crear o editar expositor */
 public class LeerExpositor extends PopUp implements PopUp.PopAble {
 
     // Elementos XML
@@ -26,10 +27,9 @@ public class LeerExpositor extends PopUp implements PopUp.PopAble {
     private Registro registro;
     private boolean editando = false;
     
-    /*	@brief Escoger fxml usado de ventana
-     * 
+    /*	@brief Constructor de la vista
      * Carga el archivo fxml que corresponde para
-     * abrirlo como ventana
+     * abrirlo como ventana.
      * */
     public LeerExpositor(Registro registro, Stage stage)  {
         super(stage, "/vistas/leerExpositor.fxml");
@@ -54,22 +54,17 @@ public class LeerExpositor extends PopUp implements PopUp.PopAble {
     }
 
     @Override
-    /*
-     * Retorna el atributo clase Expositor como Object
-     * */
+    /* Retorna el atributo expositor de clase Expositor casteada en Object */
     public Object getValue() {
         return expositor;
     }
 
     @Override
     /*
-     * Lee lo ingresado por el usuario para
-     * el expositor, confirma si existe algun 
-     * error o valor no valido ingresado por
-     * el usuario, en caso de haber manda una 
-     * ventana de error, si no hay error, 
-     * guarda la informacion agregando o 
-     * editando un expositor 
+     * Lee lo ingresado por el usuario para el expositor, confirma si existe algun 
+     * error o valor no valido ingresado, en caso de haber, se abre una 
+     * ventana de error con un mensaje de lo ingresado erroneamente, si no hay error, 
+     * guarda la informacion agregando o editando un expositor. 
      * */
     public boolean guardar() {
         String nombre = tfNombre.getText().trim();
@@ -122,10 +117,7 @@ public class LeerExpositor extends PopUp implements PopUp.PopAble {
         return false;
     }
     
-    /*
-     * Recibe un String para utilizar como texto
-     * en la ventana.
-     * */
+    /* Recibe un String para utilizar como texto en la ventana. */
     public void setHeader(String text) {
     	txtHeader.setText(text);
     }
