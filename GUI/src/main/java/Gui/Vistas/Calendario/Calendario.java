@@ -12,10 +12,19 @@ import javafx.scene.layout.Pane;
  */
 public class Calendario extends Pane {
     ControladorCalendario controlador;
+    
+    /** @brief Constructor para el datePicker
+     * 
+     * 	Envia al otro constructor la fecha actual del pc.
+     * */
     public Calendario() {
         this(LocalDate.now());
     }
-
+    
+    /** @brief Constructor para el datePicker
+     * 	Recibe la fecha actual e inicializa el DatePicker con esa fecha.
+     * 	@param date Fecha actual del pc en formato LocalDate
+     * */
     public Calendario(LocalDate date) {
         super();
         controlador = new ControladorCalendario();
