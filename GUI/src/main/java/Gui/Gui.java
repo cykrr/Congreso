@@ -12,22 +12,26 @@ import javafx.fxml.FXMLLoader;
 
 
 public class Gui extends Application {
-    /*! Ventana principal. Almacena la Escena principal (Scene) la cual se
+    /* Ventana principal. Almacena la Escena principal (Scene) la cual se
      * genera en base al nodo raíz root
      */
-    private     Stage       stage;      
+    private Stage stage;      
 
-    /*! Nodo principal. Almacena todos los componentes de la vista principal
+    /* Nodo principal. Almacena todos los componentes de la vista principal
      * @see GUI/src/main/resources/Vistas/root.fxml
      */
-    private     VBox        root;       
+    private VBox root;       
 
-    /*! Carga información del Registro
-     *  @see Congreso.Registro*/
-    private     Controlador controlador;
+    /* Carga información del Registro
+     * @see Congreso.Registro*/
+    private Controlador controlador;
 
-    /*!  Base de datos de la App */
-    private     Registro    registro;   
+    /* Base de datos de la App */
+    private Registro registro;  
+    
+    /* Nombre de la aplicación */
+    public static final String nombreApp = "Congreso";
+    
     
     /** Punto de inicio del GUI. Carga los ajustes del usuario usando la
      * 	clase Ajustes. Crea un controlador que se encargará de configurar la
@@ -88,6 +92,7 @@ public class Gui extends Application {
             stage.setScene(s);
             stage.setWidth(480);
             stage.setHeight(360);
+            stage.setTitle(nombreApp);
             stage.show();
         } catch(IOException e) {
             e.printStackTrace();
