@@ -68,6 +68,9 @@ public class Gui extends Application {
     		this.controlador.exportar();
     		System.out.println("\nGuardado Exitosamente");
     	}
+    	else {
+    		System.out.println("\nCerrado sin guardar");
+    	}
     	stage.close();
     }
 

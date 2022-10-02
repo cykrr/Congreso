@@ -19,7 +19,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
 import Gui.Vistas.PopUp;
 import Gui.Vistas.Dashboard.Dashboard;
 import Gui.Vistas.Detalle.BusquedaPorFecha;
@@ -389,13 +388,19 @@ public class Controlador implements Initializable {
         exportar(ajustes.carpeta);
     }
     
+    
+    /*
+     * Cierra el programa sin guardar los cambios no guardados
+     * */
     public void cerrarAplicacion() {
     	System.exit(0);
+    	System.out.println("Cerrado sin guardar");
     }
     
     /**
-     * Metodo que inicia y ejecuta evento con la lectura de teclado para 
-     * reaccionar a ciertas combinaciones, sin nececidad de hacer
+     * Inicia y ejecuta evento de teclado.
+     * Usa la lectura de teclado para reaccionar a ciertas 
+     * combinaciones de teclas, sin nececidad de hacer
      * click para iniciar ciertas acciones
      *   [Ctrl + S]: Guardar Cambios
      *   [Ctrl + Q]: Salir Sin Guardar

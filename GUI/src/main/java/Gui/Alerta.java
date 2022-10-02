@@ -14,6 +14,12 @@ public class Alerta {
 	/* Sobrecarga Metodos
 	 * mostrarAlertaAdvertencia()
 	 * */
+	
+	/*
+	 * Se encarga de mostrar una ventana de Alert tipo
+	 * WARNING usando el String recibido como encabezado.
+	 * No retorna nada y cierra la ventana con la X o con "OK"
+	 * */
 	public static void mostrarAlertaAdvertencia(String header) {
         Alert alert = new Alert(AlertType.WARNING);
         alert.setTitle("Error");
@@ -21,6 +27,14 @@ public class Alerta {
         alert.showAndWait();		
 	}
 	
+	
+	/*
+	 * Se encarga de mostrar una ventana de Alert tipo
+	 * WARNING usando los String recibidos como encabezado y mensaje.
+	 * La ventana WARNING actua como una de Alert tipo CONFRMATIO, 
+	 * tiene un boton "No", y tambien posee un boton "Si" que al presionar 
+	 * retorna true, en caso de no ser presionado retorna false.
+	 * */
 	public static boolean mostrarAlertaAdvertencia(String header, String headerText) {
 		Alert alert = new Alert(AlertType.WARNING,
 						header,
@@ -39,6 +53,14 @@ public class Alerta {
 	 * mostrarAlertaAdvertencia()
 	 * */
 	
+	
+	/*
+	 * Se encarga de mostrar una ventana de Alert tipo
+	 * CONFIRMATION usando el String recibido como encabezado.
+	 * La ventana CONFIRMATION de este metodo tiene un boton "Cancelar", y tambien
+	 * posee un boton "Aceptar" que al presionar retorna true, en caso de no
+	 * ser presionado retorna false.
+	 * */
 	public static boolean mostrarAlertaConfirmacion(String header) {
 		Alert alert = new Alert(AlertType.CONFIRMATION);
 		alert.setTitle("Confirmar");
@@ -50,6 +72,12 @@ public class Alerta {
 		return false;
 	}
 	
+	
+	/*
+	 * Se encarga de mostrar una ventana de Alert tipo
+	 * ERROR usando los String recibidos como encabezado y mensaje.
+	 * No retorna nada y cierra la ventana con la X o con "OK"
+	 * */
 	public static void mostrarAlertaError(String header, String message) {
 		Alert alert = new Alert(AlertType.ERROR);
 		alert.setTitle("Error");
