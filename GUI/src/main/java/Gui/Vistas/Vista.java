@@ -11,10 +11,17 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 
-public class Vista extends VBox {  
+public class Vista extends VBox {
+	// Elementos XML
     @FXML GridPane paneVistaExtendida;
     @FXML ImageView imgButtonMostrar;
-
+    
+    /** @brief Constructor de la clase Vista.
+     * 
+     * Muestra una clase con su informacion y con iconos habilitados para actuar sobre ella.
+     * Utiliza button para alternar vista extendida.
+     * @param fileName Es el atributo String que contiene el path del FXML que se cargara.
+     * */
     public Vista(String fileName)  {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(fileName));
         fxmlLoader.setController(this);
@@ -39,6 +46,10 @@ public class Vista extends VBox {
         paneVistaExtendida.setVisible(false);
     }
     
+    /** 
+     * Alterna la vista volviendo visible invinsible al panel seleccionado si esta visible. 
+     * Y si no esta Visible, vuelve visible el panel seleccionado
+     *  */
     public void alternarVistaExtendida() {
     	if(paneVistaExtendida.isVisible()) {
             paneVistaExtendida.setManaged(false);
@@ -49,6 +60,9 @@ public class Vista extends VBox {
     	}
     }
     
+    /** 
+     * @return Un boolean que sera true si el panel de la vista extendida esta visible, y false en caso contrario.
+     *  */
     public boolean estaExtendida() {
     	return paneVistaExtendida.isVisible();
     }

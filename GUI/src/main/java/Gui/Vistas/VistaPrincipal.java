@@ -17,11 +17,18 @@ public class VistaPrincipal extends Vista {
     private Stage stage;
     private VBox box;
     
+    /** Inicia los metodos con sus nombres respectivos que usaran todas las sub-clases de esta clase */
     public interface Manipulable {
         public void editar();
         public void eliminar();
     }
     
+    /** @brief Constructor de la clase VistaPrincipal.
+     * 
+     * Muestra una clase con su informacion y con iconos habilitados para actuar sobre ella.
+     * Utiliza button para alternar vista extendida.
+     * @param fileName Es el atributo String que contiene el path del FXML que se cargara.
+     * */
     public VistaPrincipal(Registro registro, Stage stage, Dashboard dashboard, String fileName) {
         super(fileName);
         this.dashboard = dashboard;
@@ -47,14 +54,23 @@ public class VistaPrincipal extends Vista {
         
     }
     
+    /**
+     * @return Retorna el registro de clase Registro.
+     * */
     public Registro getRegistro() {
     	return registro;
     }
     
+    /**
+     * @return Retorna el dashboard de clase Dashboard.
+     * */
     public Dashboard getDashboard() {
     	return dashboard;
     }
     
+    /**
+     * @return Retorna el stage de clase Stage.
+     * */
     public Stage getStage() {
     	return stage;
     }

@@ -29,7 +29,7 @@ public class VistaPrincipalPresentacion extends VistaPrincipal implements VistaP
     private Presentacion p;
     
     /**
-     * Constructor de la clase VistaPrincipaPrecentacion.
+     * Constructor de la clase VistaPrincipalPresentacion.
      * Muestra una presentacion con su informacion y con iconos habilitados para actuar sobre ella.
      * Guarda los datos de la presentacion en atributos Text para mostrar con FXML.
      * @param p Es la presentacion a visualizar con sus datos en los parametros del atributo.

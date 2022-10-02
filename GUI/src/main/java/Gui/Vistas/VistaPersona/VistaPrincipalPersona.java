@@ -19,7 +19,7 @@ public class VistaPrincipalPersona extends VistaPrincipal implements VistaPrinci
     private Persona p;
     
     /**
-     * Constructor de la clase VistaPrincipaPersona.
+     * Constructor de la clase VistaPrincipalPersona.
      * Muestra un asistente con su informacion y con iconos habilitados para actuar sobre dicho asistente.
      * Guarda los datos del asistente en atributos Text para mostrar con FXML.
      * @param p Es la asistente a visualizar con sus datos en los parametros del atributo.

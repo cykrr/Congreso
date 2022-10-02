@@ -20,7 +20,7 @@ public class VistaPrincipalExpositor extends VistaPrincipal implements VistaPrin
     private Expositor e;
     
     /**
-     * Constructor de la clase VistaPrincipaExpositor.
+     * Constructor de la clase VistaPrincipalExpositor.
      * Muestra un asistente con su informacion y con iconos habilitados para actuar sobre dicho asistente.
      * Guarda los datos del asistente en atributos Text para mostrar con FXML.
      * @param p Es la asistente a visualizar con sus datos en los parametros del atributo.
