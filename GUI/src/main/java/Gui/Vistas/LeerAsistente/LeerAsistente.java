@@ -33,7 +33,7 @@ public class LeerAsistente extends PopUp implements PopUp.PopAble {
     /**	@brief Constructor de la vista
      * 
      * Carga el archivo fxml que corresponde para abrirlo como ventana.
-     * @param registro Es el atributo de clase Registro que contiene todas los asistentes.
+     * @param registro Es el atributo de clase Registro que contiene todos los asistentes.
      * @param stage Atributo con el escenario que se muestra en ventana al agregar o editar un asistente.
      * */
     public LeerAsistente(Registro registro, Stage stage)  {

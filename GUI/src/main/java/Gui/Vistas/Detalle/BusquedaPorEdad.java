@@ -14,12 +14,18 @@ import javafx.scene.layout.VBox;
 
 /* Cambia la ventana a una busqueda de asistentes por edad */
 public class BusquedaPorEdad extends VBox {
-
+	// Elementos XML
     @FXML private TextField textBox;
     @FXML private VBox scrollBox;
+    
+    // Referencia al registro principal
     private Registro r;
     
-    /* Recibe y carga el FXML que corresponde y el atributo registro con los asistentes */
+    /**	@brief Constructor de la vista
+     * 
+     * Carga el archivo fxml que corresponde para abrirlo como ventana.
+     * @param registro Es el atributo de clase Registro que contiene todos los asistentes.
+     * */
     public BusquedaPorEdad(Registro r)
     {
         super();
@@ -40,7 +46,7 @@ public class BusquedaPorEdad extends VBox {
         this.getChildren().add(n);
     }
     
-    /* Comrueba si el texto ingresado corresponde a una edad int
+    /** Comrueba si el texto ingresado corresponde a una edad int
      * si lo ingresado no es una edad tirara un error, en caso 
      * de ser una edad ira comprobando y guardando aquellos 
      * asistentes que tengan edad mayor o igual a la ingresada 

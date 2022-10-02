@@ -18,13 +18,18 @@ import javafx.scene.layout.VBox;
 
 /* Cambia la ventana a una busqueda de presentacion por fecha */
 public class BusquedaPorFecha extends VBox {
-	
+	// Elementos XML
     @FXML private VBox scrollBox;
     @FXML private DatePicker dpFecha;
     
+    // Referencia al registro principal
     private Registro r;
     
-    /* Recibe y carga el FXML que corresponde y el atributo registro con las presentaciones */
+    /**	@brief Constructor de la vista
+     * 
+     * Carga el archivo fxml que corresponde para abrirlo como ventana.
+     * @param registro Es el atributo de clase Registro que contiene todas las presentaciones.
+     * */
     public BusquedaPorFecha(Registro r)
     {
         super();
@@ -45,7 +50,8 @@ public class BusquedaPorFecha extends VBox {
         this.getChildren().add(n);
     }
     
-    /* Comrueba si el texto ingresado corresponde a una fecha LocalDate con el formato necesario
+    /** 
+     * Comrueba si el texto ingresado corresponde a una fecha LocalDate con el formato necesario
      * si lo ingresado no es una fecha tirara un error, en caso 
      * de ser una fecha va comprobando guardando aquellas 
      * presentaciones cuaya fecha corresponda a la ingresada o sea
