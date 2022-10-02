@@ -15,17 +15,33 @@ import javafx.stage.Stage;
 
 public class PopUp extends GridPane {
 	
+	/** Interfaz para las subclases de PopUp */
     public interface PopAble {
+    	
+    	/** Guarda el objeto generado por la vista hija */
         boolean guardar();
+        
+        /** Retorna el objeto generado por la vista hija */
         Object getValue();
     }
     
+    /* Encabezado */
     @FXML private Text txtHeader;
 
+    /* Contenedor del Pop-up */
     private VBox root;
+    
+    /* Instancia de ventana Pop-up */
     private Scene dialog;
+    
+    /* Ventana padre del Pop-up */
     private Stage stage;
-
+    
+    /** Constructor principal, genera un Pop-up a partir
+     * del nombre de la vista hija pasada como parámetro
+     * @param stage
+     * @param resourceName
+     */
     public PopUp(Stage stage, String resourceName) {  
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(resourceName));
         fxmlLoader.setController(this);
@@ -59,6 +75,10 @@ public class PopUp extends GridPane {
         VBox.setMargin(b, new Insets(0, 0, 15, 15));
     }
 
+    /** Muestra el Pop-up por pantalla.
+     * Al cerrarse, retorna el objeto
+     * generado por la vista hija.
+     */
     public Object showDialog()  {
         stage.setScene(dialog);
         stage.sizeToScene();
@@ -67,10 +87,12 @@ public class PopUp extends GridPane {
         return ((PopAble)this).getValue();
     }
     
+    /** Establece el título de la ventana */
     public void setTitle(String title) {
     	stage.setTitle(title);
     }
     
+    /** Establece el encabezado de la ventana */
     public void setHeader(String header) {
     	txtHeader.setText(header);
     }
