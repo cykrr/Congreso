@@ -17,7 +17,11 @@ public class Ajustes {
 
     final static String carpetaStringDefault = "../data";
     String carpeta = null;
-
+    
+    /** @brief Constructo de la clase Ajustes.
+     * 	
+     * 	Comprueba que el path dirija a una carpeta y lo guarda.
+     * */
     public Ajustes() {
          prefs = Preferences.userNodeForPackage(getClass());
         carpeta = prefs.get("carpeta_cache", carpetaStringDefault);

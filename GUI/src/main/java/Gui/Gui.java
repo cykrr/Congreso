@@ -29,12 +29,12 @@ public class Gui extends Application {
     /*!  Base de datos de la App */
     private     Registro    registro;   
     
-    /**  Punto de inicio del GUI. Carga los ajustes del usuario usando la
-     * clase Ajustes. Crea un controlador que se encargará de configurar la
-     * ventana con la información correspondiente. Guarda el Stage en el
-     * controlador y carga la raíz.
+    /** Punto de inicio del GUI. Carga los ajustes del usuario usando la
+     * 	clase Ajustes. Crea un controlador que se encargará de configurar la
+     * 	ventana con la información correspondiente. Guarda el Stage en el
+     * 	controlador y carga la raíz.
      *
-     * @see Gui.Ajustes
+     * 	@see Gui.Ajustes
      *
      */
     @Override
@@ -76,7 +76,7 @@ public class Gui extends Application {
 
     /** 
      *  Carga la Vista raíz con los componentes
-     * encontrados en el archivo GUI/src/main/resources/vistas/root.xml
+     * 	encontrados en el archivo GUI/src/main/resources/vistas/root.xml
      */
     private void inflar() {
         FXMLLoader loader = new FXMLLoader();
