@@ -5,7 +5,6 @@ import Congreso.Registro;
 import Congreso.excepciones.NullExpositorException;
 import Gui.Alerta;
 import Gui.EventoExpositor;
-import Gui.Vistas.PopUp;
 import Gui.Vistas.VistaPrincipal;
 import Gui.Vistas.Dashboard.Dashboard;
 import Gui.Vistas.LeerExpositor.LeerExpositor;
@@ -32,13 +31,11 @@ public class VistaPrincipalExpositor extends VistaPrincipal implements VistaPrin
 
 	@Override
 	public void editar() {
-    	LeerExpositor le = new LeerExpositor(getRegistro(), e);
+    	LeerExpositor le = new LeerExpositor(getRegistro(), getStage(), e);
     	le.setHeader("Editando expositor");
-    	
-    	PopUp popup = new PopUp(getStage(), le);
-    	popup.setTitle("Editar expositor");
+    	le.setTitle("Editar expositor");
             
-        Expositor retorno = (Expositor)popup.showDialog();
+        Expositor retorno = (Expositor) le.showDialog();
         if (retorno != null) {
         	try {
 				getRegistro().editarExpositor(e, retorno);

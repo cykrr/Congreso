@@ -4,7 +4,6 @@ import Congreso.Persona;
 import Congreso.Registro;
 import Gui.Alerta;
 import Gui.EventoPersona;
-import Gui.Vistas.PopUp;
 import Gui.Vistas.VistaPrincipal;
 import Gui.Vistas.Dashboard.Dashboard;
 import Gui.Vistas.LeerAsistente.LeerAsistente;
@@ -29,13 +28,11 @@ public class VistaPrincipalPersona extends VistaPrincipal implements VistaPrinci
 
 	@Override
 	public void editar() {
-    	LeerAsistente la = new LeerAsistente(getRegistro(), p);
+    	LeerAsistente la = new LeerAsistente(getRegistro(), getStage(), p);
     	la.setHeader("Editando asistente");
-    	
-    	PopUp popup = new PopUp(getStage(), la);
-    	popup.setTitle("Editar asistente");
+    	la.setTitle("Editar asistente");
             
-        Persona retorno = (Persona)popup.showDialog();
+        Persona retorno = (Persona) la.showDialog();
         if (retorno != null) {
         	getRegistro().editarAsistente(p, retorno);
             getDashboard().fireEvent(new EventoPersona(EventoPersona.EDITAR_PERSONA, p, retorno));

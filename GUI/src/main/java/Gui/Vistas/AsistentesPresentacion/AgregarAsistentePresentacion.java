@@ -6,11 +6,12 @@ import Congreso.Persona;
 import Congreso.Presentacion;
 import Congreso.Registro;
 import javafx.collections.ObservableList;
+import javafx.stage.Stage;
 
 public class AgregarAsistentePresentacion extends ModificarAsistentePresentacion {
 	
-	public AgregarAsistentePresentacion(Registro registro, Presentacion presentacion) {
-		super(registro, presentacion, "/vistas/agregarAsistentePresentacion.fxml");
+	public AgregarAsistentePresentacion(Registro registro, Presentacion presentacion, Stage stage) {
+		super(registro, presentacion, stage, "/vistas/agregarAsistentePresentacion.fxml");
 		inicializar();
 	}
 	

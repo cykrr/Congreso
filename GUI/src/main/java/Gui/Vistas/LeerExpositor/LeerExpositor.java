@@ -1,17 +1,10 @@
 package Gui.Vistas.LeerExpositor;
 
-import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
-
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 import Congreso.Expositor;
 import Congreso.Registro;
 import Congreso.excepciones.InvalidCorreoException;
@@ -21,7 +14,7 @@ import Congreso.excepciones.InvalidNombreException;
 import Gui.Alerta;
 import Gui.Vistas.PopUp;
 
-public class LeerExpositor extends GridPane implements Initializable, PopUp.PopAble {
+public class LeerExpositor extends PopUp implements PopUp.PopAble {
 
     // Elementos XML
     @FXML private TextField tfNombre, tfEdad, tfFono, tfCorreo, tfPais, tfOcupacion;
@@ -38,41 +31,26 @@ public class LeerExpositor extends GridPane implements Initializable, PopUp.PopA
      * Carga el archivo fxml que corresponde para
      * abrirlo como ventana
      * */
-    public LeerExpositor(Registro registro)  {
-        super();
+    public LeerExpositor(Registro registro, Stage stage)  {
+        super(stage, "/vistas/leerExpositor.fxml");
         this.registro = registro;
-        
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/vistas/leerExpositor.fxml"));
-        fxmlLoader.setController(this);
-        Node n = null;
-
-        try {
-            n = fxmlLoader.load();
-        } catch (IOException exception) {
-            throw new RuntimeException(exception);
-        }
-        this.getChildren().add(n);
     }
     
     /*
      * Constructor que inicia los atributos TextField
      * que se mostraran en la ventana
      * */
-    public LeerExpositor(Registro registro, Expositor e) {
-    	this(registro);
+    public LeerExpositor(Registro registro, Stage stage, Expositor expositor) {
+    	this(registro, stage);
+    	this.expositor = expositor;
     	editando = true;
     	
-    	tfNombre.setText(e.getNombre());
-    	tfEdad.setText(Integer.toString(e.getEdad()));
-    	tfFono.setText(Long.toString(e.getFono()));
-    	tfCorreo.setText(e.getCorreo());
-    	tfPais.setText(e.getPais());
-    	tfOcupacion.setText(e.getOcupacion());
-    }
-
-    @Override
-    public void initialize(URL url, ResourceBundle resources) {
-    	
+    	tfNombre.setText(expositor.getNombre());
+    	tfEdad.setText(Integer.toString(expositor.getEdad()));
+    	tfFono.setText(Long.toString(expositor.getFono()));
+    	tfCorreo.setText(expositor.getCorreo());
+    	tfPais.setText(expositor.getPais());
+    	tfOcupacion.setText(expositor.getOcupacion());
     }
 
     @Override

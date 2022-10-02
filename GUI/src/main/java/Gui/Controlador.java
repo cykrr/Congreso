@@ -19,7 +19,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import Gui.Vistas.PopUp;
 import Gui.Vistas.Dashboard.Dashboard;
 import Gui.Vistas.Detalle.BusquedaPorFecha;
 import Gui.Vistas.LeerAsistente.LeerAsistente;
@@ -330,17 +329,13 @@ public class Controlador implements Initializable {
         Presentacion retorno = null;
         // TODO : Proteger expositores y asistentes de modificación
 
-        LeerPresentacion lp = new LeerPresentacion(registro);
-        PopUp popup = new PopUp(stage, lp);
-        popup.setTitle("Crear presentación");
+        LeerPresentacion lp = new LeerPresentacion(registro, stage);
+        lp.setTitle("Crear presentación");
         
-        retorno = (Presentacion)popup.showDialog();
+        retorno = (Presentacion) lp.showDialog();
         if (retorno != null) {
             registro.insertarPresentacion(retorno);
             dashboard.fireEvent(new EventoPresentacion(EventoPresentacion.CREAR_PRESENTACION, retorno));
-            System.out.println(retorno);
-        } else {
-            System.err.println("no hay presentacion");
         }
     }
     
@@ -351,11 +346,10 @@ public class Controlador implements Initializable {
     public void crearExpositor() {
         Expositor expositor = null;
         
-        LeerExpositor le = new LeerExpositor(registro);
-        PopUp popup = new PopUp(stage, le);
-        popup.setTitle("Crear expositor");
+        LeerExpositor le = new LeerExpositor(registro, stage);
+        le.setTitle("Crear expositor");
         
-        expositor = (Expositor) popup.showDialog();
+        expositor = (Expositor) le.showDialog();
         if(expositor != null) {
         	registro.insertarExpositor(expositor);
         	dashboard.fireEvent(new EventoExpositor(EventoExpositor.CREAR_EXPOSITOR, expositor));
@@ -369,14 +363,13 @@ public class Controlador implements Initializable {
     public void crearAsistente() {
     	Persona asistente = null;
     	
-    	LeerAsistente la = new LeerAsistente(registro);
-    	PopUp popup = new PopUp(stage, la);
-    	popup.setTitle("Crear asistente");
+    	LeerAsistente la = new LeerAsistente(registro, stage);
+    	la.setTitle("Crear asistente");
     	
-    	asistente = (Persona) popup.showDialog();
+    	asistente = (Persona) la.showDialog();
     	if(asistente != null) {
     		registro.insertarAsistente(asistente);
-
+    		dashboard.fireEvent(new EventoPersona(EventoPersona.CREAR_PERSONA, asistente));
         }
     }
     

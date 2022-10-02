@@ -1,23 +1,16 @@
 package Gui.Vistas.LeerPresentacion;
 
-import java.io.IOException;
-import java.net.URL;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Iterator;
-import java.util.ResourceBundle;
 
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.GridPane;
-import javafx.scene.text.Text;
+import javafx.stage.Stage;
 import Congreso.Expositor;
 import Congreso.Presentacion;
 import Congreso.Registro;
@@ -28,58 +21,45 @@ import Congreso.excepciones.NullExpositorException;
 import Gui.Alerta;
 import Gui.Vistas.PopUp;
 
-/* (no-Javadoc) La vista presentación depende de la lista de expositores y la lista de asistentes 
- * valores que debería recibir como parámetros. */
-
-public class LeerPresentacion extends GridPane implements Initializable, PopUp.PopAble {
+public class LeerPresentacion extends PopUp implements PopUp.PopAble {
 	
     // Elementos XML
     @FXML private ComboBox<Expositor> comboExpositor;
     @FXML private TextField tfNombre, tfHora, tfDuracion, tfDescripcion, tfAsistentes;
     @FXML private DatePicker dpFecha;
     @FXML private Button submit;
-    @FXML private Text txtHeader;
 
     // Referencia al registro principal
     private Registro registro;
 
     // Valor de retorno
-    private Presentacion p = null;
+    private Presentacion presentacion;
     
     private boolean editando = false;
 
     /* Constructor de la vista
      * Requiere el registro para utilizarlo
      * en la inicialización */
-    public LeerPresentacion(Registro r)  {
-        super();
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/vistas/leerPresentacion.fxml"));
-        fxmlLoader.setController(this);
-        this.registro = r;
-        Node n = null;
-
-        try {
-            n = fxmlLoader.load();
-        } catch (IOException exception) {
-            throw new RuntimeException(exception);
-        }
-        this.getChildren().add(n);
+    public LeerPresentacion(Registro registro, Stage stage)  {
+        super(stage, "/vistas/leerPresentacion.fxml");
+        this.registro = registro;
+        inicializar();
     }
 
-    public LeerPresentacion(Registro r, Presentacion p) {
-		this(r);
+    public LeerPresentacion(Registro registro, Stage stage, Presentacion presentacion) {
+		this(registro, stage);
+		this.presentacion = presentacion;		
 		editando = true;
 		
-		tfNombre.setText(p.getNombre());
-		dpFecha.setValue(p.getFecha());
-		tfHora.setText(p.getStringHora());
-		tfDuracion.setText(Integer.toString(p.getDuracion()));
-		tfDescripcion.setText(p.getDescripcion());
-		comboExpositor.setValue(p.getExpositor());
+		tfNombre.setText(presentacion.getNombre());
+		dpFecha.setValue(presentacion.getFecha());
+		tfHora.setText(presentacion.getStringHora());
+		tfDuracion.setText(Integer.toString(presentacion.getDuracion()));
+		tfDescripcion.setText(presentacion.getDescripcion());
+		comboExpositor.setValue(presentacion.getExpositor());
 	}
 
-	@Override
-    public void initialize(URL url, ResourceBundle resources) {
+    public void inicializar() {
 		ObservableList<Expositor> itemsExpositores = comboExpositor.getItems();
 		Iterator<Expositor> iteratorExpositores = registro.getExpositores();
 		
@@ -90,7 +70,7 @@ public class LeerPresentacion extends GridPane implements Initializable, PopUp.P
 
     @Override
     public Object getValue() {
-        return this.p;
+        return this.presentacion;
     }
 
     @Override
@@ -133,7 +113,7 @@ public class LeerPresentacion extends GridPane implements Initializable, PopUp.P
         int duracion = Integer.parseInt(strDuracion);
         
         try {
-			p = new Presentacion(nombre, expositor, fecha, hora, duracion, descripcion);
+			presentacion = new Presentacion(nombre, expositor, fecha, hora, duracion, descripcion);
 			return true;
 		} catch (InvalidNombreException e) {
 			Alerta.mostrarAlertaAdvertencia("El nombre no puede contener caracteres especiales");
@@ -145,8 +125,5 @@ public class LeerPresentacion extends GridPane implements Initializable, PopUp.P
         
         return false;
     }
-    
-    public void setHeader(String text) {
-    	txtHeader.setText(text);
-    }
+
 }

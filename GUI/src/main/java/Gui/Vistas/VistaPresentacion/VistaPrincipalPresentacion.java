@@ -7,7 +7,6 @@ import Congreso.Presentacion;
 import Congreso.Registro;
 import Gui.Alerta;
 import Gui.EventoPresentacion;
-import Gui.Vistas.PopUp;
 import Gui.Vistas.VistaPrincipal;
 import Gui.Vistas.AsistentesPresentacion.AgregarAsistentePresentacion;
 import Gui.Vistas.AsistentesPresentacion.EliminarAsistentePresentacion;
@@ -57,13 +56,11 @@ public class VistaPrincipalPresentacion extends VistaPrincipal implements VistaP
     }
 	
 	private void agregarAsistente() {
-    	AgregarAsistentePresentacion ap = new AgregarAsistentePresentacion(getRegistro(), p);
-    	ap.setHeader("Agregando asistente a presentación " + p.getNombre());
-    	
-    	PopUp popup = new PopUp(getStage(), ap);
-    	popup.setTitle("Agregar asistente a presentación");
+    	AgregarAsistentePresentacion ap = new AgregarAsistentePresentacion(getRegistro(), p, getStage());
+    	ap.setHeader("Agregando asistente a presentación \"" + p.getNombre() + "\"");
+    	ap.setTitle("Agregar asistente a presentación");
         
-        Persona retorno = (Persona) popup.showDialog();	
+        Persona retorno = (Persona) ap.showDialog();	
         if(retorno != null) {
         	p.agregarAsistente(retorno);
         	getDashboard().fireEvent(new EventoPresentacion(EventoPresentacion.MODIFICAR_ASISTENTES, p));
@@ -71,13 +68,11 @@ public class VistaPrincipalPresentacion extends VistaPrincipal implements VistaP
 	}
 	
 	private void eliminarAsistente() {
-    	EliminarAsistentePresentacion ep = new EliminarAsistentePresentacion(getRegistro(), p);
-    	ep.setHeader("Eliminando asistente de presentación " + p.getNombre());
-    	
-    	PopUp popup = new PopUp(getStage(), ep);
-    	popup.setTitle("Eliminar asistente de presentación");
+    	EliminarAsistentePresentacion ep = new EliminarAsistentePresentacion(getRegistro(), p, getStage());
+    	ep.setHeader("Eliminando asistente de presentación \"" + p.getNombre() + "\"");
+    	ep.setTitle("Eliminar asistente de presentación");
         
-        Persona retorno = (Persona) popup.showDialog();	
+        Persona retorno = (Persona) ep.showDialog();	
         if(retorno != null) {
         	p.eliminarAsistente(retorno);
         	getDashboard().fireEvent(new EventoPresentacion(EventoPresentacion.MODIFICAR_ASISTENTES, p));
@@ -107,13 +102,11 @@ public class VistaPrincipalPresentacion extends VistaPrincipal implements VistaP
     
     @Override
     public void editar() {
-    	LeerPresentacion lp = new LeerPresentacion(getRegistro(), p);
+    	LeerPresentacion lp = new LeerPresentacion(getRegistro(), getStage(), p);
     	lp.setHeader("Editando presentacion");
-    	
-    	PopUp popup = new PopUp(getStage(), lp);
-    	popup.setTitle("Editar presentación");
+    	lp.setTitle("Editar presentación");
         
-        Presentacion retorno = (Presentacion)popup.showDialog();
+        Presentacion retorno = (Presentacion) lp.showDialog();
         if (retorno != null) {
         	getRegistro().editarPresentacion(p, retorno);
             getDashboard().fireEvent(new EventoPresentacion(EventoPresentacion.EDITAR_PRESENTACION, p, retorno));

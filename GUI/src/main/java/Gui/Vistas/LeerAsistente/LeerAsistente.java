@@ -1,9 +1,5 @@
 package Gui.Vistas.LeerAsistente;
 
-import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
-
 import Congreso.Persona;
 import Congreso.Registro;
 import Congreso.Util;
@@ -14,15 +10,12 @@ import Congreso.excepciones.InvalidNombreException;
 import Gui.Alerta;
 import Gui.Vistas.PopUp;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
-public class LeerAsistente extends GridPane implements Initializable, PopUp.PopAble {
+public class LeerAsistente extends PopUp implements PopUp.PopAble {
 
     // Elementos XML
     @FXML private TextField tfNombre, tfEdad, tfFono, tfCorreo;
@@ -34,35 +27,19 @@ public class LeerAsistente extends GridPane implements Initializable, PopUp.PopA
     private Registro registro;
     private boolean editando = false;
 
-    public LeerAsistente(Registro registro)  {
-        super();
+    public LeerAsistente(Registro registro, Stage stage)  {
+        super(stage, "/vistas/leerAsistente.fxml");
         this.registro = registro;
-        
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/vistas/leerAsistente.fxml"));
-        fxmlLoader.setController(this);
-        Node n = null;
-
-        try {
-            n = fxmlLoader.load();
-        } catch (IOException exception) {
-            throw new RuntimeException(exception);
-        }
-        this.getChildren().add(n);
     }
     
-    public LeerAsistente(Registro registro, Persona p) {
-    	this(registro);
+    public LeerAsistente(Registro registro, Stage stage, Persona p) {
+    	this(registro, stage);
     	editando = true;
     	
     	tfNombre.setText(p.getNombre());
     	tfEdad.setText(Integer.toString(p.getEdad()));
     	tfFono.setText(Long.toString(p.getFono()));
     	tfCorreo.setText(p.getCorreo());
-    }
-
-    @Override
-    public void initialize(URL url, ResourceBundle resources) {
-    	
     }
 
     @Override
