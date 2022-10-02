@@ -2,6 +2,7 @@ package Gui.Vistas.LeerPresentacion;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeParseException;
 import java.util.Iterator;
 
 import javafx.collections.ObservableList;
@@ -93,14 +94,19 @@ public class LeerPresentacion extends PopUp implements PopUp.PopAble {
         	return false;
         }
         
-        LocalDate fecha = Util.parseDate(strFecha);
-        if(fecha == null) {
+        LocalDate fecha;
+        LocalTime hora;
+        
+        try {
+        	fecha = Util.parseDate(strFecha);
+        } catch(DateTimeParseException e) {
         	Alerta.mostrarAlertaAdvertencia("La fecha ingresada no es válida");
         	return false;
         }
         
-        LocalTime hora = Util.parseTime(strHora);
-        if(hora == null) {
+        try {
+        	hora = Util.parseTime(strHora);
+        } catch(DateTimeParseException e) {
         	Alerta.mostrarAlertaAdvertencia("La hora ingresada no es válida");
         	return false;
         }
