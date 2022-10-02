@@ -390,20 +390,34 @@ public class Controlador implements Initializable {
     }
     
     public void cerrarAplicacion() {
-    	stage.fireEvent(new WindowEvent(stage, WindowEvent.WINDOW_CLOSE_REQUEST));
+    	System.exit(0);
     }
     
+    /**
+     * Metodo que inicia y ejecuta evento con la lectura de teclado para 
+     * reaccionar a ciertas combinaciones, sin nececidad de hacer
+     * click para iniciar ciertas acciones
+     *   [Ctrl + S]: Guardar Cambios
+     *   [Ctrl + Q]: Salir Sin Guardar
+     *   [Ctrl + P]: Crear Presentacion
+     *   [Ctrl + E]: Crear Expositor
+     *   [Ctrl + A]: Crear Asistente
+     * */
     public void agregarShortcuts() {
         stage.addEventFilter(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>() {
         	
+        	KeyCombination keyGuardarCambios = new KeyCodeCombination(
+            		KeyCode.S, KeyCombination.CONTROL_DOWN);
+        	KeyCombination keyCerrarAplicacion = new KeyCodeCombination(
+            		KeyCode.Q, KeyCombination.CONTROL_DOWN);
+            
             KeyCombination keyCrearPresentacion = new KeyCodeCombination(
             		KeyCode.P, KeyCombination.CONTROL_DOWN);
             KeyCombination keyCrearExpositor = new KeyCodeCombination(
-            		KeyCode.A, KeyCombination.CONTROL_DOWN);
-            KeyCombination keyCrearAsistente = new KeyCodeCombination(
             		KeyCode.E, KeyCombination.CONTROL_DOWN);
-            KeyCombination keyCerrarAplicacion = new KeyCodeCombination(
-            		KeyCode.Q, KeyCombination.CONTROL_DOWN);
+            KeyCombination keyCrearAsistente = new KeyCodeCombination(
+            		KeyCode.A, KeyCombination.CONTROL_DOWN);
+            
             
             public void handle(KeyEvent ke) {
                 if (keyCrearPresentacion.match(ke)) {
@@ -420,6 +434,10 @@ public class Controlador implements Initializable {
                 }
                 if (keyCerrarAplicacion.match(ke)) {
                     cerrarAplicacion();
+                    ke.consume();
+                }
+                if (keyGuardarCambios.match(ke)) {
+                    exportar();
                     ke.consume();
                 }
             }

@@ -18,8 +18,8 @@
     <MenuBar>
         <!-- TODO : Configurar teclas  -->
         <Menu text="Archivo">
-        	<MenuItem onAction="#exportar" text="Guardar cambios  [Ctrl + E]" />
-            <MenuItem onAction="#cerrarAplicacion" text="Salir [Ctrl + Q]" />
+        	<MenuItem onAction="#exportar" text="Guardar cambios  [Ctrl + S]" />
+            <MenuItem onAction="#cerrarAplicacion" text="Salir sin guardar [Ctrl + Q]" />
         </Menu>
         <Menu text="Editar">
             <MenuItem onAction="#crearPresentacion" text="Crear presentación  [Ctrl + P]" />
