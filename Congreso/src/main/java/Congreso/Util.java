@@ -81,4 +81,15 @@ public class Util {
 	    }
 	    return count;
 	}
+	
+	/* Agrega espacios vacíos al comienzo de un string */
+	public static String indent(String str, int n) {
+		return str.indent(n); 
+	}
+
+	/* Repite un string la cantidad de veces indicada por el parámetro n */
+	public static String repeat(String str, int n) {
+		return str.repeat(n);
+	}
+	
 }

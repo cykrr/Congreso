@@ -1,5 +1,6 @@
 package Gui;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -399,11 +400,23 @@ public class Controlador implements Initializable {
     	System.exit(0);
     }
     
+    /** Genera un archivo txt con la información guardada en las colecciones */
+    public void generarReporte() {
+    	try {
+    		registro.generarReporte(ajustes.carpeta + "/reporte.txt");
+    		Alerta.mostrarAlertaInformacion("Reporte generado con exíto");
+    	} catch(IOException e) {
+    		Alerta.mostrarAlertaError("Ocurrió un error al generar el reporte", null);
+    		e.printStackTrace();
+    	}
+    }
+    
     /**
      * Inicia y ejecuta evento de teclado.
      * Usa la lectura de teclado para reaccionar a ciertas 
      * combinaciones de teclas, sin nececidad de hacer
      * click para iniciar ciertas acciones
+     *   [Ctrl + R]: Generar Reporte
      *   [Ctrl + S]: Guardar Cambios
      *   [Ctrl + Q]: Salir Sin Guardar
      *   [Ctrl + P]: Crear Presentacion
@@ -412,6 +425,9 @@ public class Controlador implements Initializable {
      * */
     public void agregarShortcuts() {
         stage.addEventFilter(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>() {
+        	
+        	KeyCombination keyGenerarReporte = new KeyCodeCombination(
+            		KeyCode.R, KeyCombination.CONTROL_DOWN);
         	
         	KeyCombination keyGuardarCambios = new KeyCodeCombination(
             		KeyCode.S, KeyCombination.CONTROL_DOWN);
@@ -427,6 +443,10 @@ public class Controlador implements Initializable {
             
             
             public void handle(KeyEvent ke) {
+                if (keyGenerarReporte.match(ke)) {
+                    generarReporte();
+                    ke.consume();
+                }
                 if (keyCrearPresentacion.match(ke)) {
                     crearPresentacion();
                     ke.consume();

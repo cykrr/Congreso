@@ -77,4 +77,16 @@ public class Alerta {
 		alert.setContentText(mensaje);
 		alert.showAndWait();
 	}
+
+	/*
+	 * Muestra una ventana de alerta de tipo INFORMATION usando
+	 * el mensaje de encabezado recibido como parámetro
+	 */
+	public static void mostrarAlertaInformacion(String encabezado) {
+		Alert alert = new Alert(AlertType.INFORMATION);
+		alert.setTitle("Información");
+		alert.setHeaderText(encabezado);
+		alert.showAndWait();		
+	}
+	
 }

@@ -9,6 +9,7 @@ import java.util.Map;
 import Congreso.excepciones.NullExpositorException;
 
 import java.io.FileReader;
+import java.io.IOException;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileOutputStream;
@@ -372,6 +373,64 @@ public class Registro {
         
         bw.close();
 	}
+	
+	/** Genera un archivo reporte.txt con la información guardada
+	 * en todas las colecciones en un formato legible.
+	 * @param nombreArchivo 
+	 * @throws IOException 
+	 */
+	public void generarReporte(String nombreArchivo) throws IOException {
+    	BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(nombreArchivo), StandardCharsets.UTF_8));
+    	
+    	bw.write(Util.repeat("=", 20) + "\n");
+    	bw.write("Presentaciones:\n");
+    	bw.write(Util.repeat("=", 20) + "\n\n");
+    	
+        for(int i = 0; i < listaPresentaciones.size(); i++) {
+        	Presentacion p = listaPresentaciones.get(i);
+        	bw.write(p.getNombre() + ":\n");
+        	bw.write(Util.indent("Expositor: " + p.getExpositor().getNombre() + "\n", 2));
+        	bw.write(Util.indent("Fecha: " + p.getStringFecha() + "\n", 2));
+        	bw.write(Util.indent("Hora: " + p.getStringHora() + "\n", 2));
+        	bw.write(Util.indent("Duración: " + p.getDuracion() + "\n", 2));
+        	bw.write(Util.indent("Descripción: " + p.getDescripcion() + "\n", 2));
+        	bw.write(Util.indent("Asistentes:\n", 2));
+        	
+        	for(int j = 0; j < p.getAsistentes().size(); j++) {
+        		Persona asistente = p.getAsistentes().get(j);		
+        		bw.write(Util.indent("- " + asistente.getNombre() + "\n", 2));
+        	}
+        	bw.write("\n");
+        }
+        
+    	bw.write(Util.repeat("=", 20) + "\n");
+    	bw.write("Expositores:\n");
+    	bw.write(Util.repeat("=", 20) + "\n\n");
+    	
+        for(int i = 0; i < listaExpositores.size(); i++) {
+        	Expositor e = listaExpositores.get(i);
+        	bw.write(e.getNombre() + ":\n");
+        	bw.write(Util.indent("Edad: " + e.getEdad() + "\n", 2));
+        	bw.write(Util.indent("Teléfono: " + e.getFono() + "\n", 2));
+        	bw.write(Util.indent("Correo: " + e.getCorreo() + "\n", 2));
+        	bw.write(Util.indent("País: " + e.getPais() + "\n", 2));
+        	bw.write(Util.indent("Ocupación: " + e.getOcupacion() + "\n\n", 2));
+        }
+        
+    	bw.write(Util.repeat("=", 20) + "\n");
+    	bw.write("Asistentes:\n");
+    	bw.write(Util.repeat("=", 20) + "\n\n");
+    	
+        for(int i = 0; i < listaAsistentes.size(); i++) {
+        	Persona a = listaAsistentes.get(i);
+        	bw.write(a.getNombre() + ":\n");
+        	bw.write(Util.indent("Edad: " + a.getEdad() + "\n", 2));
+        	bw.write(Util.indent("Teléfono: " + a.getFono() + "\n", 2));
+        	bw.write(Util.indent("Correo: " + a.getCorreo() + "\n\n", 2));
+        }
+        
+        bw.close();
+	}
 
 	// Getters
 	
@@ -416,5 +475,6 @@ public class Registro {
     public Integer getCantidadAsistentes() {
     	return listaAsistentes.size();
     }
+    
 }
 
