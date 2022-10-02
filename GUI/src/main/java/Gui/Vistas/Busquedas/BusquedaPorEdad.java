@@ -1,4 +1,4 @@
-package Gui.Vistas.Detalle;
+package Gui.Vistas.Busquedas;
 import java.io.IOException;
 import java.util.Iterator;
 
