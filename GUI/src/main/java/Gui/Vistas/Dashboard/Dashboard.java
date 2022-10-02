@@ -48,12 +48,16 @@ public class Dashboard extends VBox implements Initializable {
 
     private VBox seleccionBoton;
     private VBox seleccionBox;
-
+    
     @FXML void click(MouseEvent me) {
         System.out.println("beep");
     }
 
-
+    /**	@brief Constructor de la vista
+     * 
+     * Carga el archivo fxml que corresponde para abrirlo como ventana.
+     * @param registro Es el atributo de clase Registro que contiene todas las colecciones con la informacion a mostrar.
+     * */
     public Dashboard(Registro r) {
         super();
         this.registro = r; 
@@ -108,6 +112,11 @@ public class Dashboard extends VBox implements Initializable {
         });
     }
     
+    /**
+     * Alterna la vista camnbiando el boton y el scrollBox
+     * @param boton Se transformaria en el nuevo boton seleccionado en la pantalla.
+     * @param scrollBox Se convierte en la nueva vista de lista en la ventana.
+     * */
     public void alternarVista(VBox boton, VBox scrollBox) {
     	if(seleccionBoton == boton)
     		return;
@@ -123,34 +132,51 @@ public class Dashboard extends VBox implements Initializable {
         seleccionBox.setManaged(true);
     }
     
+    /**
+     * @return Vbox con las presentaciones
+     * */
     public VBox getScrollBoxPresentaciones() {
         return this.boxPresentaciones;
     }
     
+    /**
+     * @return Vbox con los asistentes
+     * */
     public VBox getScrollBoxAsistentes() {
         return this.boxAsistentes;
     }
     
+    /**
+     * @return Vbox con los expositores
+     * */
     public VBox getScrollBoxExpositores() {
         return this.boxExpositores;
     }
-
+    
+    /** Actualiza el titulo de la listaview con un text predeterminado como "Presentaciones". */
     public void actualizarTitulo(){
     	txtTitulo.setText("Presentaciones");
     }
     
+    /**
+     * Actualiza el titulo de la listaview con un text usando el atributo recibido.
+     * @param String que corresponde al texto que actuara como titulo de la listaview.
+     * */
     public void actualizarTitulo(String title){
     	txtTitulo.setText(title);
     }
     
+    /** Actualiza el número que cuenta las presentaciones guardadas.*/
     public void actualizarNumeroPresentaciones() {
     	contadorPresentaciones.setText(this.registro.getCantidadPresentaciones().toString());
     }
     
+    /** Actualiza el número que cuenta los asistentes guardados.*/
     public void actualizarNumeroAsistentes() {
     	contadorAsistentes.setText(this.registro.getCantidadAsistentes().toString());
     }
     
+    /** Actualiza el número que cuenta los asistentes guardados.*/
     public void actualizarNumeroExpositores() {
     	contadorExpositores.setText(this.registro.getCantidadExpositores().toString());
     }
