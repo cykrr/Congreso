@@ -26,6 +26,15 @@ public class VistaPrincipalPresentacion extends VistaPrincipal implements VistaP
     
     private Presentacion p;
     
+    /*
+     * Constructor de la clase VistaPrincipaPrecentacion
+     * Muestra una presentacion con su informacion y con iconos habilitados para actuar sobre ella.
+     * Guarda los datos de la presentacion en atributos Text para mostrar con FXML.
+     * @param p Es la presentacion a visualizar con sus datos
+     * @param registro Es el atributo que posee todas las presentaciones, la coleccion que guarda presentaciones
+     * @param stage Atributo con la escenario que se muestra en ventana con las presentaciones.
+     * @param dashboard Es el atributo con la scena de la ventana donde hay que agregar la vista principal presentacion. 
+     * */
     public VistaPrincipalPresentacion(Presentacion p, Registro registro, Stage stage, Dashboard dashboard) {
         super(registro, stage, dashboard, "/vistas/VistaPrincipalPresentacion.fxml");      
         this.p = p;
@@ -53,8 +62,11 @@ public class VistaPrincipalPresentacion extends VistaPrincipal implements VistaP
                 event.consume();
             }
         });  
-    }
+    }// Cierra constructor
 	
+    /*
+     * Metodo que agrega un nuevo asistente de la presentacion.
+     * */
 	private void agregarAsistente() {
     	AgregarAsistentePresentacion ap = new AgregarAsistentePresentacion(getRegistro(), p, getStage());
     	ap.setHeader("Agregando asistente a presentación \"" + p.getNombre() + "\"");
@@ -67,6 +79,9 @@ public class VistaPrincipalPresentacion extends VistaPrincipal implements VistaP
         }
 	}
 	
+    /*
+     * Metodo que elimina un asistente de la presentacion.
+     * */
 	private void eliminarAsistente() {
     	EliminarAsistentePresentacion ep = new EliminarAsistentePresentacion(getRegistro(), p, getStage());
     	ep.setHeader("Eliminando asistente de presentación \"" + p.getNombre() + "\"");
@@ -78,7 +93,12 @@ public class VistaPrincipalPresentacion extends VistaPrincipal implements VistaP
         	getDashboard().fireEvent(new EventoPresentacion(EventoPresentacion.MODIFICAR_ASISTENTES, p));
         }	
 	}
-    
+	
+	/*
+     * Metodo inicializado en el constructor.
+     * Se encarga de registrar los asistentes que posee la presentacion en un unico texto, para
+     * que se puedan mostrar en pantalla con el formato Text.
+     * */
     public void actualizarAsistentes() {
         LinkedList<Persona> asistentes = p.getAsistentes();
         txtTotalAsistentes.setText(Integer.toString(asistentes.size()));
@@ -96,10 +116,19 @@ public class VistaPrincipalPresentacion extends VistaPrincipal implements VistaP
         }
     }
     
+    /*
+     * Metodo inicializado en el constructor.
+     * Se encarga de registrar el expositor que posee la presentacion en un unico texto, para
+     * que se pueda mostrar en pantalla con el formato Text.
+     * */
     public void actualizarExpositor() {
     	txtExpositor.setText(p.getExpositor().getNombre());
     }
     
+    /*
+     * Recibe nuevos atributos para la presentacion a travez de la clase LeerPresentacion.
+     * Se encarga de reemplazar los atributos de la presentacion con los leidos.
+     * */
     @Override
     public void editar() {
     	LeerPresentacion lp = new LeerPresentacion(getRegistro(), getStage(), p);
@@ -113,6 +142,10 @@ public class VistaPrincipalPresentacion extends VistaPrincipal implements VistaP
         }
     }
     
+    /*
+     * Muestra por pantalla una alerta de confirmacion para confirmar si esta de acuerdo con la accion-
+     * Se encarga de eliminar una presentacion completa del registro.
+     * */
     @Override
     public void eliminar() {
     	boolean opcion = Alerta.mostrarAlertaConfirmacion("¿Desea eliminar la presentación \"" + p.getNombre() + "\"?");
