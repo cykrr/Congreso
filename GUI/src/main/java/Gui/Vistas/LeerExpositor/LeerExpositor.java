@@ -21,24 +21,32 @@ public class LeerExpositor extends PopUp implements PopUp.PopAble {
     @FXML private TextField tfNombre, tfEdad, tfFono, tfCorreo, tfPais, tfOcupacion;
     @FXML private Button submit;
     @FXML private Text txtHeader;
-
+    
+    // Referencia al registro principal
+    private Registro registro;
+    
     // Valor de retorno
     private Expositor expositor = null;
-    private Registro registro;
     private boolean editando = false;
     
-    /*	@brief Constructor de la vista
-     * Carga el archivo fxml que corresponde para
-     * abrirlo como ventana.
+    /**	@brief Constructor de la vista
+     * 
+     * Carga el archivo fxml que corresponde para abrirlo como ventana.
+     * @param registro Es el atributo de clase Registro que contiene todas los expositores.
+     * @param stage Atributo con el escenario que se muestra en ventana al agregar o editar un expositor.
      * */
     public LeerExpositor(Registro registro, Stage stage)  {
         super(stage, "/vistas/leerExpositor.fxml");
         this.registro = registro;
     }
     
-    /*
-     * Constructor que inicia los atributos TextField
-     * que se mostraran en la ventana
+    /**	@brief Constructor de la vista
+     * 
+     * Inicia los atributos de el expositor como TextField para mostrarlos por ventana de no estar vacios.
+     * Carga el archivo fxml que corresponde para abrirlo como ventana.
+     * @param registro Es el atributo de clase Registro que contiene todos los expositores.
+     * @param stage Atributo con el escenario que se muestra en ventana al agregar o editar un asistente.
+     * @param expositor Es el asistente cuya informacion se visualiza.
      * */
     public LeerExpositor(Registro registro, Stage stage, Expositor expositor) {
     	this(registro, stage);
@@ -52,20 +60,23 @@ public class LeerExpositor extends PopUp implements PopUp.PopAble {
     	tfPais.setText(expositor.getPais());
     	tfOcupacion.setText(expositor.getOcupacion());
     }
-
+    
+    /**
+     * @return El expositor casteado como Object
+     * */
     @Override
-    /* Retorna el atributo expositor de clase Expositor casteada en Object */
     public Object getValue() {
         return expositor;
     }
 
-    @Override
-    /*
+    
+    /**
      * Lee lo ingresado por el usuario para el expositor, confirma si existe algun 
      * error o valor no valido ingresado, en caso de haber, se abre una 
      * ventana de error con un mensaje de lo ingresado erroneamente, si no hay error, 
      * guarda la informacion agregando o editando un expositor. 
      * */
+    @Override
     public boolean guardar() {
         String nombre = tfNombre.getText().trim();
         String correo = tfCorreo.getText().trim();
@@ -117,7 +128,10 @@ public class LeerExpositor extends PopUp implements PopUp.PopAble {
         return false;
     }
     
-    /* Recibe un String para utilizar como texto en la ventana. */
+    /**
+     * Muestra comencabezado el texto recibido.
+     * @param texto Es un atributo String con un mensaje que se usara de encabezado en la ventana.
+     * */
     public void setHeader(String text) {
     	txtHeader.setText(text);
     }

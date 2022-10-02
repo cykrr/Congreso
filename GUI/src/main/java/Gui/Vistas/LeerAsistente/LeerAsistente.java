@@ -22,24 +22,32 @@ public class LeerAsistente extends PopUp implements PopUp.PopAble {
     @FXML private TextField tfNombre, tfEdad, tfFono, tfCorreo;
     @FXML private Button submit;
     @FXML private Text txtHeader;
-
+    
+    // Referencia al registro principal
+    private Registro registro;
+    
     // Valor de retorno
     private Persona asistente = null;
-    private Registro registro;
     private boolean editando = false;
     
-    /*	@brief Constructor de la vista
-     * Carga el archivo fxml que corresponde para
-     * abrirlo como ventana.
+    /**	@brief Constructor de la vista
+     * 
+     * Carga el archivo fxml que corresponde para abrirlo como ventana.
+     * @param registro Es el atributo de clase Registro que contiene todas los asistentes.
+     * @param stage Atributo con el escenario que se muestra en ventana al agregar o editar un asistente.
      * */
     public LeerAsistente(Registro registro, Stage stage)  {
         super(stage, "/vistas/leerAsistente.fxml");
         this.registro = registro;
     }
     
-    /*
-     * Constructor que inicia los atributos TextField
-     * que se mostraran en la ventana
+    /**	@brief Constructor de la vista
+     * 
+     * Inicia los atributos de el asistente como TextField para mostrarlos por ventana de no estar vacios.
+     * Carga el archivo fxml que corresponde para abrirlo como ventana.
+     * @param registro Es el atributo de clase Registro que contiene todos los asistentes.
+     * @param stage Atributo con el escenario que se muestra en ventana al agregar o editar un asistente.
+     * @param expositor Es el expositor cuya informacion se visualiza.
      * */
     public LeerAsistente(Registro registro, Stage stage, Persona p) {
     	this(registro, stage);
@@ -50,20 +58,23 @@ public class LeerAsistente extends PopUp implements PopUp.PopAble {
     	tfFono.setText(Long.toString(p.getFono()));
     	tfCorreo.setText(p.getCorreo());
     }
-
+    
+    /**
+     * @return El expositor casteado como Object
+     * */
     @Override
-    /* Retorna el atributo asistente de clase Persona casteada en Object */
     public Object getValue() {
         return asistente;
     }
 
-    @Override
+
     /*
      * Lee lo ingresado por el usuario para el asistente, confirma si existe algun 
      * error o valor no valido ingresado, en caso de haber, se abre una 
      * ventana de error con un mensaje de lo ingresado erroneamente, si no hay error, 
      * guarda la informacion agregando o editando un asistente. 
      * */
+    @Override
     public boolean guardar() {
         String nombre = tfNombre.getText().trim();
         String correo = tfCorreo.getText().trim();
@@ -108,7 +119,10 @@ public class LeerAsistente extends PopUp implements PopUp.PopAble {
         return false;
     }
     
-    /* Recibe un String para utilizar como texto en la ventana. */
+    /**
+     * Muestra comencabezado el texto recibido.
+     * @param texto Es un atributo String con un mensaje que se usara de encabezado en la ventana.
+     * */
     public void setHeader(String text) {
     	txtHeader.setText(text);
     }

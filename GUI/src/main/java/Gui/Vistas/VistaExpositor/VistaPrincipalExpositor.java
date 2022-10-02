@@ -13,10 +13,21 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class VistaPrincipalExpositor extends VistaPrincipal implements VistaPrincipal.Manipulable {
-    @FXML Text txtNombre, txtEdad, txtFono, txtCorreo, txtPais, txtOcupacion;
+	// Elementos XML
+	@FXML Text txtNombre, txtEdad, txtFono, txtCorreo, txtPais, txtOcupacion;
     
+    // Valor de retorno
     private Expositor e;
     
+    /**
+     * Constructor de la clase VistaPrincipaExpositor.
+     * Muestra un asistente con su informacion y con iconos habilitados para actuar sobre dicho asistente.
+     * Guarda los datos del asistente en atributos Text para mostrar con FXML.
+     * @param p Es la asistente a visualizar con sus datos en los parametros del atributo.
+     * @param registro Es el atributo que posee todas las presentaciones, la coleccion que guarda asistentes.
+     * @param stage Atributo con el escenario que se muestra en ventana con los asistentes.
+     * @param dashboard Es el atributo con la escena de la ventana donde hay que agregar la vista principal persona. 
+     * */
     public VistaPrincipalExpositor(Expositor e, Registro registro, Stage stage, Dashboard dashboard) {
         super(registro, stage, dashboard, "/vistas/VistaPrincipalExpositor.fxml");
         this.e = e;
@@ -28,7 +39,11 @@ public class VistaPrincipalExpositor extends VistaPrincipal implements VistaPrin
         txtPais.setText(e.getPais());
         txtOcupacion.setText(e.getOcupacion());
     }
-
+    
+    /**
+     * Recibe nuevos atributos para el expositor a traves de la clase LeerExpositor.
+     * Se encarga de reemplazar los atributos del expositor con los leidos.
+     * */
 	@Override
 	public void editar() {
     	LeerExpositor le = new LeerExpositor(getRegistro(), getStage(), e);
@@ -45,7 +60,11 @@ public class VistaPrincipalExpositor extends VistaPrincipal implements VistaPrin
             getDashboard().fireEvent(new EventoExpositor(EventoExpositor.EDITAR_EXPOSITOR, e, retorno));
         }
 	}
-
+	
+    /**
+     * Muestra por pantalla una alerta de confirmacion para confirmar si esta de acuerdo con la accion.
+     * Se encarga de eliminar un expositor por completo del registro de expositores, ademas de eliminarlo de la pantalla.
+     * */
 	@Override
 	public void eliminar() {
 		if(getRegistro().expositorEnPresentacion(e)) {

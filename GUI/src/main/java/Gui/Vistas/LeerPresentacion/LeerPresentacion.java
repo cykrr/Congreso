@@ -41,21 +41,25 @@ public class LeerPresentacion extends PopUp implements PopUp.PopAble {
     private boolean editando = false;
     
     
-    /*	@brief Constructor de la vista
+    /**	@brief Constructor de la vista
      * 
-     * Carga el archivo fxml que corresponde para
-     * abrirlo como ventana.
-     * Requiere el registro para utilizarlo
-     * en la inicialización */
+     * Carga el archivo fxml que corresponde para abrirlo como ventana.
+     * @param registro Es el atributo de clase Registro que contiene todas las presentaciones.
+     * @param stage Atributo con el escenario que se muestra en ventana al agregar o editar una presentacion.
+     * */
     public LeerPresentacion(Registro registro, Stage stage)  {
         super(stage, "/vistas/leerPresentacion.fxml");
         this.registro = registro;
         inicializar();
     }
     
-    /*
-     * Constructor que inicia los atributos TextField
-     * que se mostraran en la ventana
+    /**	@brief Constructor de la vista
+     * 
+     * Inicia los atributos de la presentacion como TextField para mostrarlos por ventana de no estar vacios.
+     * Carga el archivo fxml que corresponde para abrirlo como ventana.
+     * @param registro Es el atributo de clase Registro que contiene todas las presentaciones.
+     * @param stage Atributo con el escenario que se muestra en ventana al agregar o editar una presentacion.
+     * @param presentacion Es la presentacion cuya informacion se visualiza.
      * */
     public LeerPresentacion(Registro registro, Stage stage, Presentacion presentacion) {
 		this(registro, stage);
@@ -70,7 +74,7 @@ public class LeerPresentacion extends PopUp implements PopUp.PopAble {
 		comboExpositor.setValue(presentacion.getExpositor());
 	}
     
-    /*
+    /**
      * Se encarga del inicializar el comboBox iterativo que nos permite junto a
      * la ventana. De esta forma tenemos permitido escoger entre los expositores 
      * existentes al abrirse la ventana.
@@ -83,20 +87,22 @@ public class LeerPresentacion extends PopUp implements PopUp.PopAble {
         	itemsExpositores.add(iteratorExpositores.next());
         }
     }
-
+    
+    /**
+     * @return La presentacion casteada como Object
+     * */
     @Override
-    /* Retorna el atributo presentacion de clase Presentacion casteada en Object */
     public Object getValue() {
         return this.presentacion;
     }
     
-    @Override
-    /*
+    /**
      * Lee lo ingresado por el usuario para la presentacion, confirma si existe algun 
      * error o valor no valido ingresado, en caso de haber, se abre una 
      * ventana de error con un mensaje de lo ingresado erroneamente, si no hay error, 
      * guarda la informacion agregando o editando una presentacion. 
      * */
+    @Override
     public boolean guardar() {
         String nombre = tfNombre.getText().trim();
         String strFecha = dpFecha.getEditor().getText().trim();

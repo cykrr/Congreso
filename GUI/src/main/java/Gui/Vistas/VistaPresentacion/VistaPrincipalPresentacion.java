@@ -20,19 +20,21 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class VistaPrincipalPresentacion extends VistaPrincipal implements VistaPrincipal.Manipulable {
+	// Elementos XML
     @FXML Text txtNombre, txtExpositor, txtDescripcion, txtFecha, 
     		   txtHora, txtDuracion, txtTotalAsistentes, txtAsistentes;
     @FXML ImageView imgButtonAgregarAsistente, imgButtonEliminarAsistente;
     
+    // Valor de retorno
     private Presentacion p;
     
     /**
-     * Constructor de la clase VistaPrincipaPrecentacion
+     * Constructor de la clase VistaPrincipaPrecentacion.
      * Muestra una presentacion con su informacion y con iconos habilitados para actuar sobre ella.
      * Guarda los datos de la presentacion en atributos Text para mostrar con FXML.
      * @param p Es la presentacion a visualizar con sus datos en los parametros del atributo.
      * @param registro Es el atributo que posee todas las presentaciones, la coleccion que guarda presentaciones.
-     * @param stage Atributo con la escenario que se muestra en ventana con las presentaciones.
+     * @param stage Atributo con el escenario que se muestra en ventana con las presentaciones.
      * @param dashboard Es el atributo con la scena de la ventana donde hay que agregar la vista principal presentacion. 
      * */
     public VistaPrincipalPresentacion(Presentacion p, Registro registro, Stage stage, Dashboard dashboard) {
@@ -143,7 +145,7 @@ public class VistaPrincipalPresentacion extends VistaPrincipal implements VistaP
     }
     
     /**
-     * Muestra por pantalla una alerta de confirmacion para confirmar si esta de acuerdo con la accion-
+     * Muestra por pantalla una alerta de confirmacion para confirmar si esta de acuerdo con la accion.
      * Se encarga de eliminar una presentacion completa del registro, ademas de eliminarlo de la pantalla.
      * */
     @Override
