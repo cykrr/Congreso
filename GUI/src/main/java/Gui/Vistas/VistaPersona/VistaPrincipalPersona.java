@@ -16,6 +16,15 @@ public class VistaPrincipalPersona extends VistaPrincipal implements VistaPrinci
     
     private Persona p;
     
+    /**
+     * Constructor de la clase VistaPrincipaPersona
+     * Muestra un asistente con su informacion y con iconos habilitados para actuar sobre dicho asistente.
+     * Guarda los datos del asistente en atributos Text para mostrar con FXML.
+     * @param p Es la asistente a visualizar con sus datos en los parametros del atributo.
+     * @param registro Es el atributo que posee todas las presentaciones, la coleccion que guarda asistentes.
+     * @param stage Atributo con la escenario que se muestra en ventana con los asistentes.
+     * @param dashboard Es el atributo con la escena de la ventana donde hay que agregar la vista principal persona. 
+     * */
     public VistaPrincipalPersona(Persona p, Registro registro, Stage stage, Dashboard dashboard) {
         super(registro, stage, dashboard, "/vistas/VistaPrincipalPersona.fxml");
         this.p = p;
@@ -25,7 +34,11 @@ public class VistaPrincipalPersona extends VistaPrincipal implements VistaPrinci
         txtFono.setText(Long.toString(p.getFono()));
         txtCorreo.setText(p.getCorreo());
     }
-
+    
+    /**
+     * Recibe nuevos atributos para el asistente a traves de la clase LeerAsistente.
+     * Se encarga de reemplazar los atributos del asistente con los leidos.
+     * */
 	@Override
 	public void editar() {
     	LeerAsistente la = new LeerAsistente(getRegistro(), getStage(), p);
@@ -38,7 +51,11 @@ public class VistaPrincipalPersona extends VistaPrincipal implements VistaPrinci
             getDashboard().fireEvent(new EventoPersona(EventoPersona.EDITAR_PERSONA, p, retorno));
         }		
 	}
-
+	
+    /**
+     * Muestra por pantalla una alerta de confirmacion para confirmar si esta de acuerdo con la accion-
+     * Se encarga de eliminar un asistente por completa del registro de asistentes, ademas de eliminarlo de la pantalla.
+     * */
 	@Override
 	public void eliminar() {
     	boolean opcion = Alerta.mostrarAlertaConfirmacion("¿Desea eliminar al asistente \"" + p.getNombre() + "\"?");

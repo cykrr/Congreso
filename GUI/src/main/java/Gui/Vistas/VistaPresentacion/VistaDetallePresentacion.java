@@ -9,7 +9,7 @@ public class VistaDetallePresentacion extends Vista {
     @FXML Text txtNombre, txtExpositor, txtDescripcion, txtFecha, 
     		   txtHora, txtDuracion, txtTotalAsistentes, txtAsistentes;
     
-    /*
+    /**
      * Constructor de la clase VistaPrincipaPrecentacion
      * Muestra una presentacion con su informacion.
      * Guarda los datos de la presentacion en atributos Text para mostrar con FXML.
