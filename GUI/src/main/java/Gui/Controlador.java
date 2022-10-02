@@ -223,7 +223,9 @@ public class Controlador implements Initializable {
     }
 
     /**
-     * 
+     * Configura la barra lateral de la ventana
+     * para actuar conforme a los click en los 
+     * iconos que presenta.
      */
     private void configurarBarraLateral() {
         agregarTooltips();
@@ -378,14 +380,15 @@ public class Controlador implements Initializable {
         }
     }
     
-    public void exportar(String carpeta) {
-        registro.exportar(carpeta + "/Presentaciones.csv",
-				  		  carpeta + "/Expositores.csv",
-				  		  carpeta + "/Asistentes.csv");
-    }
-    
+    /** @brief Actualiza los csv
+    *
+    * por medio de un exportar de la clase registro
+    * enviando los path que corresponden a los csv 
+    */
     public void exportar() {
-        exportar(ajustes.carpeta);
+    	registro.exportar(ajustes.carpeta + "/Presentaciones.csv",
+    					  ajustes.carpeta + "/Expositores.csv",
+    					  ajustes.carpeta + "/Asistentes.csv");
     }
     
     
@@ -448,7 +451,11 @@ public class Controlador implements Initializable {
             }
         });  	
     }
-
+    
+    /*
+     * Retorna el atributo tipo Dashboard que esta
+     * clase utiliza.
+     * */
     public void setDashboard(Dashboard dashboard) {
         this.dashboard = dashboard;
     }

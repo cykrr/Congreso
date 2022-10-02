@@ -32,7 +32,12 @@ public class LeerExpositor extends GridPane implements Initializable, PopUp.PopA
     private Expositor expositor = null;
     private Registro registro;
     private boolean editando = false;
-
+    
+    /*	@brief Escoger fxml usado de ventana
+     * 
+     * Carga el archivo fxml que corresponde para
+     * abrirlo como ventana
+     * */
     public LeerExpositor(Registro registro)  {
         super();
         this.registro = registro;
@@ -49,6 +54,10 @@ public class LeerExpositor extends GridPane implements Initializable, PopUp.PopA
         this.getChildren().add(n);
     }
     
+    /*
+     * Constructor que inicia los atributos TextField
+     * que se mostraran en la ventana
+     * */
     public LeerExpositor(Registro registro, Expositor e) {
     	this(registro);
     	editando = true;
@@ -67,11 +76,23 @@ public class LeerExpositor extends GridPane implements Initializable, PopUp.PopA
     }
 
     @Override
+    /*
+     * Retorna el atributo clase Expositor como Object
+     * */
     public Object getValue() {
         return expositor;
     }
 
     @Override
+    /*
+     * Lee lo ingresado por el usuario para
+     * el expositor, confirma si existe algun 
+     * error o valor no valido ingresado por
+     * el usuario, en caso de haber manda una 
+     * ventana de error, si no hay error, 
+     * guarda la informacion agregando o 
+     * editando un expositor 
+     * */
     public boolean guardar() {
         String nombre = tfNombre.getText().trim();
         String correo = tfCorreo.getText().trim();
@@ -123,6 +144,10 @@ public class LeerExpositor extends GridPane implements Initializable, PopUp.PopA
         return false;
     }
     
+    /*
+     * Recibe un String para utilizar como texto
+     * en la ventana.
+     * */
     public void setHeader(String text) {
     	txtHeader.setText(text);
     }
