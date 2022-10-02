@@ -11,7 +11,6 @@ import javafx.scene.layout.Pane;
 /* DatePicker pero solo la parte de adentro
  */
 public class Calendario extends Pane {
-    ControladorCalendario controlador;
     
     /** @brief Constructor para el datePicker
      * 
@@ -27,10 +26,8 @@ public class Calendario extends Pane {
      * */
     public Calendario(LocalDate date) {
         super();
-        controlador = new ControladorCalendario();
         FXMLLoader fmxlloader = new FXMLLoader();
             fmxlloader.setRoot(this);
-            fmxlloader.setController(controlador);
         DatePicker dp = new DatePicker(date);
         DatePickerSkin dps = new DatePickerSkin(dp);
         this.getChildren().add(dps.getPopupContent());
