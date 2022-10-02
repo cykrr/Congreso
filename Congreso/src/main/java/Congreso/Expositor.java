@@ -31,6 +31,8 @@ public class Expositor extends Persona {
     	setOcupacion(ocupacion);
     }
     
+    // Setter y Getter
+    
     /**
      * Establece la edad del Expositor validando
      * que se encuentre en el rango establecido.
@@ -53,6 +55,13 @@ public class Expositor extends Persona {
 	}
 	
 	/**
+	 * @return Atributp String con la nacionalidad del expositor
+	 * */
+	public String getPais() {
+		return pais;
+	}
+	
+	/**
 	 * Establece la ocupación del expositor.
 	 * @param ocupacion
 	 */
@@ -60,10 +69,9 @@ public class Expositor extends Persona {
 		this.ocupacion = ocupacion;
 	}
 	
-	public String getPais() {
-		return pais;
-	}
-
+	/**
+	 * @return Atributp String con la ocupacion del expositor
+	 * */
 	public String getOcupacion() {
 		return ocupacion;
 	}

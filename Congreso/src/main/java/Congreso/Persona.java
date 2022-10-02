@@ -46,6 +46,16 @@ public class Persona {
     	setCorreo(correo);
     }
     
+    /** 
+     * @return Un String con el nombre de la persona-
+     */
+    @Override
+    public String toString() {
+        return this.nombre;
+    }
+    
+    // Setter y Getter
+    
     /**
      * Establece el nombre de la persona validando
      * que no contenga caracteres especiales.
@@ -60,6 +70,13 @@ public class Persona {
     }
     
     /**
+     * @return String que contiene el nombre de la persona.
+     * */
+    public String getNombre() {
+    	return this.nombre;
+    }
+    
+    /**
      * Establece la edad de la persona validando
      * que esté en el rango establecido.
      * @param edad
@@ -70,6 +87,13 @@ public class Persona {
     		throw new InvalidEdadException(edad, 1, 100);
     	
     	this.edad = edad;
+    }
+    
+    /**
+     * @return int que contiene la edad de la persona.
+     * */
+    public int getEdad() {
+    	return this.edad;
     }
     
     /**
@@ -88,6 +112,13 @@ public class Persona {
     }
     
     /**
+     * @return int que contiene el número telefonico de la persona.
+     * */
+    public long getFono() {
+    	return this.fono;
+    }
+    
+    /**
      * Establece el correo de la persona validando
      * que tenga un formato correcto.
      * @param correo
@@ -99,27 +130,11 @@ public class Persona {
 		
 		this.correo = correo;
 	}
-	
     
-    public String getNombre() {
-    	return this.nombre;
-    }
-    
-    public int getEdad() {
-    	return this.edad;
-    }
-    
-    public long getFono() {
-    	return this.fono;
-    }
-    
+    /**
+     * @return String que contiene el correo de la persona.
+     * */
 	public String getCorreo() {
 		return correo;
 	}
-
-    @Override 
-    public String toString() {
-        return this.nombre;
-    }
-
 }
