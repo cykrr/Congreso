@@ -128,7 +128,7 @@ public class Registro {
 	 *  modificación
 	 *  @param a1 Asistente pre-modificación
 	 *  @param a2 Asistente post-modificación
-	 * @throws NullExpositorException 
+	 * 	@throws NullExpositorException 
 	 */
 	public void editarExpositor(Expositor e1, Expositor e2) throws NullExpositorException {
 		for(int i = 0; i < listaPresentaciones.size(); i++) {
@@ -145,7 +145,7 @@ public class Registro {
 	
 	/** Elimina una presentación de la base de datos.
 	 * 
-	 * @param p Presentación a eliminar.
+	 * 	@param p Presentación a eliminar.
 	 */
 	public void eliminarPresentacion(Presentacion p) {
 		mapaPresentaciones.remove(p.getNombre());
@@ -156,7 +156,7 @@ public class Registro {
 	 *  Se encarga de eliminar el asistente de todas las presentaciones
 	 *  involucradas.
 	 * 
-	 * @param p Asistente a eliminar.
+	 * 	@param p Asistente a eliminar.
 	 */
 	public void eliminarAsistente(Persona a) {
 		mapaAsistentes.remove(a.getNombre());
@@ -167,7 +167,7 @@ public class Registro {
 	}
 	
 	/** Elimina un expositor de la base de datos.
-	 * @param e Expositor a ser eliminado. */
+	 * 	@param e Expositor a ser eliminado. */
 	public void eliminarExpositor(Expositor e) {
 		mapaExpositores.remove(e.getNombre());
 		listaExpositores.remove(e);
@@ -215,7 +215,7 @@ public class Registro {
 	}
     
 	/** Importa presentaciones dado un nombre de archivo
-	 * @param nombreArchivo nombre del archivo a cargar.
+	 * 	@param nombreArchivo nombre del archivo a cargar.
 	 */
     private void importarPresentaciones(String nombreArchivo) throws Exception {
 		BufferedReader br = new BufferedReader(new FileReader(nombreArchivo));
@@ -249,7 +249,7 @@ public class Registro {
     }
     
 	/** Importa expositores dado un nombre de archivo
-	 * @param nombreArchivo nombre del archivo a cargar.
+	 * 	@param nombreArchivo nombre del archivo a cargar.
 	 */
     private void importarExpositores(String nombreArchivo) throws Exception {
     	BufferedReader br = new BufferedReader(new FileReader(nombreArchivo));
@@ -274,7 +274,7 @@ public class Registro {
     }
     
 	/** Importa asistentes dado un nombre de archivo
-	 * @param nombreArchivo nombre del archivo a cargar.
+	 * 	@param nombreArchivo nombre del archivo a cargar.
 	 */
     private void importarAsistentes(String nombreArchivo) throws Exception {	
 		BufferedReader br = new BufferedReader(new FileReader(nombreArchivo));
@@ -309,7 +309,7 @@ public class Registro {
     }
 
 	/** Exporta presentaciones dado un nombre de archivo.
-	 * @param nombreArchivo nombre del archivo a exportar.
+	 * 	@param nombreArchivo nombre del archivo a exportar.
 	 */
     private void exportarPresentaciones(String nombreArchivo) throws Exception {
     	BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(nombreArchivo), StandardCharsets.UTF_8));
@@ -338,7 +338,7 @@ public class Registro {
 	}
 
 	/** Exporta expositores dado un nombre de archivo.
-	 * @param nombreArchivo nombre del archivo a exportar.
+	 * 	@param nombreArchivo nombre del archivo a exportar.
 	 */
 	private void exportarExpositores(String nombreArchivo) throws Exception {
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(nombreArchivo), StandardCharsets.UTF_8));
@@ -357,7 +357,7 @@ public class Registro {
 	}
 
 	/** Exporta asistentes dado un nombre de archivo.
-	 * @param nombreArchivo nombre del archivo a exportar.
+	 * 	@param nombreArchivo nombre del archivo a exportar.
 	 */
 	private void exportarAsistentes(String nombreArchivo) throws Exception {
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(nombreArchivo), StandardCharsets.UTF_8));
@@ -373,28 +373,46 @@ public class Registro {
         bw.close();
 	}
 
-	// Setters - Getters
-
+	// Getters
+	
+	/**
+	 * @return La lista de presentaciones casteada como Iterator
+	 * */
     public Iterator<Presentacion> getPresentaciones() {
         return listaPresentaciones.iterator();
     }
     
+	/**
+	 * @return La lista de expositores casteada como Iterator
+	 * */
     public Iterator<Expositor> getExpositores() {
         return listaExpositores.iterator();
     }
-
+    
+	/**
+	 * @return La lista de asistentes casteada como Iterator
+	 * */
     public Iterator<Persona> getAsistentes() {
         return listaAsistentes.iterator();
     }
     
+	/**
+	 * @return La cantidad de presentaciones casteada como Integer
+	 * */
     public Integer getCantidadPresentaciones() {
     	return listaPresentaciones.size();
     }
     
+	/**
+	 * @return La cantidad de expositores casteada como Integer
+	 * */
     public Integer getCantidadExpositores() {
     	return listaExpositores.size();
     }
     
+    /**
+	 * @return La cantidad de asistentes casteada como Integer
+	 * */
     public Integer getCantidadAsistentes() {
     	return listaAsistentes.size();
     }
