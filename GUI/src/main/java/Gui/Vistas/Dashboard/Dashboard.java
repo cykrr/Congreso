@@ -49,10 +49,6 @@ public class Dashboard extends VBox implements Initializable {
     private VBox seleccionBoton;
     private VBox seleccionBox;
     
-    @FXML void click(MouseEvent me) {
-        System.out.println("beep");
-    }
-
     /**	@brief Constructor de la vista
      * 
      * Carga el archivo fxml que corresponde para abrirlo como ventana.
@@ -73,6 +69,8 @@ public class Dashboard extends VBox implements Initializable {
         this.getChildren().add(n);
         
     }
+    
+    /** Carga el contenido de la ventana principal para el Dashboard. */
     public void initialize(URL url, ResourceBundle rb) {
     	contadorPresentaciones.setText(this.registro.getCantidadPresentaciones().toString());
     	contadorExpositores.setText(this.registro.getCantidadExpositores().toString());
