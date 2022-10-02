@@ -37,33 +37,39 @@ import Congreso.Registro;
 /** Inicializa la clase raíz de la ventana */
 public class Controlador implements Initializable {
 	
-    private     Registro    registro; // Referencia a la base de datos del programa
-    private     Stage       stage;    // Ventana principal
-    private     Ajustes     ajustes;  // Ajustes del programa
-    private     Dashboard   dashboard;
-    private     BusquedaPorEdad   busquedaEdad;
-    private     BusquedaPorFecha   busquedaFecha;
-    
-    private Map<Presentacion, VistaPrincipalPresentacion> mapaVistaPresentaciones;
-    private Map<Persona, VistaPrincipalPersona> mapaVistaPersonas;
-    private Map<Expositor, VistaPrincipalExpositor> mapaVistaExpositores;
+    private Registro registro;
+    private Stage stage;
+    private Ajustes ajustes;
+    private Dashboard dashboard;
+    private BusquedaPorEdad busquedaEdad;
+    private BusquedaPorFecha busquedaFecha;
     
     @FXML private HBox homeIcon;
     @FXML private HBox addIcon;
     @FXML private HBox buscarEdadIcon;
     @FXML private HBox buscarFechaIcon;
-
-    @FXML private     VBox        vistaPrincipal;
+    @FXML private VBox vistaPrincipal;
+    
+    /** Se utilizan mapas para acceso rápido a las vistas
+     * según el dato que contienen.
+     */
+    private Map<Presentacion, VistaPrincipalPresentacion> mapaVistaPresentaciones;
+    private Map<Persona, VistaPrincipalPersona> mapaVistaPersonas;
+    private Map<Expositor, VistaPrincipalExpositor> mapaVistaExpositores;
 
     public void mostrarVentanaDashboard() {
         this.vistaPrincipal.getChildren().clear();
         this.vistaPrincipal.getChildren().add(dashboard);
     }
 
+    /** Crea una presentación a partir del botón ubicado
+     * en la barra lateral izquierda.
+     */
     public void addAction() {
         crearPresentacion();
     }
 
+    /** Cambia la ventana a BusquedaPorEdad. */
     public void mostrarVentanaBusquedaEdad() {
         this.vistaPrincipal.getChildren().clear();
         if (busquedaEdad == null)
@@ -71,6 +77,7 @@ public class Controlador implements Initializable {
         this.vistaPrincipal.getChildren().add(busquedaEdad);
     }
     
+    /** Cambia la ventana a BusquedaPorFecha. */
     public void mostrarVentanaBusquedaFecha() {
         this.vistaPrincipal.getChildren().clear();
         if (busquedaFecha == null)
@@ -78,12 +85,7 @@ public class Controlador implements Initializable {
         this.vistaPrincipal.getChildren().add(busquedaFecha);
     }
     
-    /**
-     * Sobrecarga Metodos:
-     * enCrear()
-     * enEditar()
-     * enEliminar()
-     * */
+    /** Actualiza las vistas al crear una presentación. */
     public void enCrear(EventoPresentacion ep) {
         VistaPrincipalPresentacion vp = new VistaPrincipalPresentacion(ep.getPresentacion(), registro, stage, dashboard);
         mapaVistaPresentaciones.put(ep.getPresentacion(), vp);
@@ -91,6 +93,7 @@ public class Controlador implements Initializable {
         dashboard.actualizarNumeroPresentaciones();
     }
     
+    /** Actualiza las vistas al crear un asistente. */
     public void enCrear(EventoPersona ep) {
         VistaPrincipalPersona vp = new VistaPrincipalPersona(ep.getPersona(), registro, stage, dashboard);
         mapaVistaPersonas.put(ep.getPersona(), vp);
@@ -98,6 +101,7 @@ public class Controlador implements Initializable {
         dashboard.actualizarNumeroAsistentes();
     }
     
+    /** Actualiza las vistas al crear un expositor. */
     public void enCrear(EventoExpositor ee) {
         VistaPrincipalExpositor ve = new VistaPrincipalExpositor(ee.getExpositor(), registro, stage, dashboard);
         mapaVistaExpositores.put(ee.getExpositor(), ve);
@@ -105,6 +109,7 @@ public class Controlador implements Initializable {
         dashboard.actualizarNumeroExpositores();
     }
     
+    /** Actualiza las vistas al editar una presentación. */
     public void enEditar(EventoPresentacion ep) {	
     	VistaPrincipalPresentacion vpAntigua = mapaVistaPresentaciones.remove(ep.getPresentacionAntigua());
     	int index = dashboard.getScrollBoxPresentaciones().getChildren().indexOf(vpAntigua);
@@ -119,6 +124,7 @@ public class Controlador implements Initializable {
     	dashboard.getScrollBoxPresentaciones().getChildren().add(index, vpNueva);
     }
     
+    /** Actualiza las vistas al editar un asistente. */
     public void enEditar(EventoPersona ep) {	
     	VistaPrincipalPersona vpAntigua = mapaVistaPersonas.remove(ep.getPersonaAntigua());
     	int index = dashboard.getScrollBoxAsistentes().getChildren().indexOf(vpAntigua);
@@ -134,6 +140,7 @@ public class Controlador implements Initializable {
     	actualizarAsistentesEnPresentaciones();
     }
     
+    /** Actualiza las vistas al editar un expositor. */
     public void enEditar(EventoExpositor ee) {	
     	VistaPrincipalExpositor veAntigua = mapaVistaExpositores.remove(ee.getExpositorAntiguo());
     	int index = dashboard.getScrollBoxExpositores().getChildren().indexOf(veAntigua);
@@ -148,12 +155,14 @@ public class Controlador implements Initializable {
     	actualizarExpositorEnPresentaciones();
     }
     
+    /** Actualiza las vistas al eliminar una presentación. */
     public void enEliminar(EventoPresentacion ep) {
     	VistaPrincipalPresentacion vp = mapaVistaPresentaciones.remove(ep.getPresentacion());
     	dashboard.getScrollBoxPresentaciones().getChildren().remove(vp);
     	dashboard.actualizarNumeroPresentaciones();
     }
     
+    /** Actualiza las vistas al eliminar un asistente. */
     public void enEliminar(EventoPersona ep) {
     	VistaPrincipalPersona vp = mapaVistaPersonas.remove(ep.getPersona());
     	dashboard.getScrollBoxAsistentes().getChildren().remove(vp);
@@ -161,42 +170,50 @@ public class Controlador implements Initializable {
     	actualizarAsistentesEnPresentaciones();
     }
     
+    /** Actualiza las vistas al eliminar un expositor. */
     public void enEliminar(EventoExpositor ee) {
     	VistaPrincipalExpositor ve = mapaVistaExpositores.remove(ee.getExpositor());
     	dashboard.getScrollBoxExpositores().getChildren().remove(ve);
     	dashboard.actualizarNumeroExpositores();
     }
-    /**
-     * FIN Sobrecarga Metodos:
-     * enCrear()
-     * enEditar()
-     * enEliminar()
-     * */
     
+    /** Actualiza las vistas al modificar un asistente
+     * de una presentación.
+     */
     public void enModificarAsistentes(EventoPresentacion ep) {
         VistaPrincipalPresentacion vp = mapaVistaPresentaciones.get(ep.getPresentacion());
         vp.actualizarAsistentes();
     }
     
+    /** Actualiza las vistas de presentaciones al modificar
+     * datos de un asistente.
+     */
     public void actualizarAsistentesEnPresentaciones() {
     	for(VistaPrincipalPresentacion vp : mapaVistaPresentaciones.values())
     		vp.actualizarAsistentes();
     }
     
+    /** Actualiza las vistas de presentaciones al modificar
+     * datos de un expositor.
+     */
     public void actualizarExpositorEnPresentaciones() {
     	for(VistaPrincipalPresentacion vp : mapaVistaPresentaciones.values())
     		vp.actualizarExpositor();
     }
 
-    /** @brief Constructor se ejecuta antes de leer xml*/
-    public Controlador(Stage s, Registro r) {
+    /** Constructor principal, inicializa colecciones y atributos
+     * y carga datos con el método importar de Registro.
+     * @param stage
+     * @param registro
+     */
+    public Controlador(Stage stage, Registro registro) {
         System.out.println("Cargando ajustes");
         this.ajustes = new Ajustes(); 
 
         System.out.println("Ajustes guardados: "+ ajustes.carpeta);
 
         System.out.println("Inicializando registro");
-        this.registro = r;
+        this.registro = registro;
 
         System.out.println("Cargando datos: ");
         registro.importar(ajustes.carpeta + "/Presentaciones.csv",
@@ -206,11 +223,13 @@ public class Controlador implements Initializable {
         mapaVistaPresentaciones = new HashMap<Presentacion, VistaPrincipalPresentacion>();
         mapaVistaPersonas = new HashMap<Persona, VistaPrincipalPersona>();
         mapaVistaExpositores = new HashMap<Expositor, VistaPrincipalExpositor>();
-        this.dashboard = new Dashboard(r);
-        this.stage = s;
+        this.dashboard = new Dashboard(registro);
+        this.stage = stage;
     }
 
-    /** @brief Método que se ejecuta luego de leer xml */
+    /** Carga el contenido de la ventana principal
+     * una vez inicializado el Dashboard.
+     */
     public void initialize(URL url, ResourceBundle resources) {
         this.vistaPrincipal.getChildren().add(dashboard);
         VBox.setVgrow(dashboard, Priority.ALWAYS);
@@ -221,8 +240,7 @@ public class Controlador implements Initializable {
         cargarRegistro();
     }
 
-    /**
-     * Configura la barra lateral de la ventana
+    /** Configura la barra lateral de la ventana
      * para actuar conforme a los click en los 
      * iconos que presenta.
      */
@@ -257,6 +275,7 @@ public class Controlador implements Initializable {
         Tooltip.install(this.buscarFechaIcon, new Tooltip("Busqueda presentaciones por fecha"));
     }
 
+    /** Carga los datos del registro para mostrarlos en el Dashboard. */
     private void cargarRegistro() {
     	Iterator<Presentacion> itPresentaciones = registro.getPresentaciones();
     	Iterator<Expositor> itExpositores = registro.getExpositores();
@@ -275,6 +294,7 @@ public class Controlador implements Initializable {
         }
     }
 
+    /** Establece el método a ejecutar luego de gatillar un evento. */
     private void agregarListeners() {
         dashboard.addEventFilter(EventoPresentacion.CREAR_PRESENTACION, e-> {
             enCrear(e);
@@ -317,17 +337,11 @@ public class Controlador implements Initializable {
         });
     }
 
-    /** @brief genera un Popup para crear presentación.
-     *<p>
-     * Crea una nueva presentación por medio
-     * de un PopUp y la añade al registro.
-     * 
-     * Es posible invocar esta función desde la barra menú de la
-     * aplicación
+    /** Crea una presentación por medio de un Pop-up
+     * y lo añade al registro.
      */
     public void crearPresentacion() {
         Presentacion retorno = null;
-        // TODO : Proteger expositores y asistentes de modificación
 
         LeerPresentacion lp = new LeerPresentacion(registro, stage);
         lp.setTitle("Crear presentación");
@@ -339,9 +353,8 @@ public class Controlador implements Initializable {
         }
     }
     
-    /** @brief Crea un nuevo expositor
-     *
-     * por medio de un PopUp y lo añade al registro
+    /** Crea un expositor por medio de un Pop-up
+     * y lo añade al registro.
      */
     public void crearExpositor() {
         Expositor expositor = null;
@@ -356,10 +369,9 @@ public class Controlador implements Initializable {
         }
     }
     
-    /** @brief Crea un nuevo asistente
-    *
-    * por medio de un PopUp y lo añade al registro
-    */
+    /** Crea un asistente por medio de un Pop-up
+     * y lo añade al registro.
+     */
     public void crearAsistente() {
     	Persona asistente = null;
     	
@@ -373,11 +385,7 @@ public class Controlador implements Initializable {
         }
     }
     
-    /** @brief Actualiza los csv
-    *
-    * por medio de un exportar de la clase registro
-    * enviando los path que corresponden a los csv 
-    */
+    /** Exporta datos a los archivos csv correspondientes */
     public void exportar() {
     	registro.exportar(ajustes.carpeta + "/Presentaciones.csv",
     					  ajustes.carpeta + "/Expositores.csv",
@@ -385,9 +393,7 @@ public class Controlador implements Initializable {
     }
     
     
-    /*
-     * Cierra el programa sin guardar los cambios no guardados
-     * */
+    /** Cierra el programa sin guardar los datos */
     public void cerrarAplicacion() {
     	System.exit(0);
     	System.out.println("Cerrado sin guardar");
@@ -445,11 +451,4 @@ public class Controlador implements Initializable {
         });  	
     }
     
-    /*
-     * Retorna el atributo tipo Dashboard que esta
-     * clase utiliza.
-     * */
-    public void setDashboard(Dashboard dashboard) {
-        this.dashboard = dashboard;
-    }
 }
