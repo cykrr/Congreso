@@ -2,9 +2,11 @@
 
 Congreso(GUI) es una herramienta de administración de presentaciones en un congreso internacional.
 
+![pics/demo.jpeg](pics/demo.jpeg)
+
 ## Instalación
 
-Para facilitar el proceso de instalación se provee un ZIP en la pestaña releases del repositorio Github. Este incluye todo lo necesario para ejecutar el proyecto sin necesidad de compilarlo, ni eclipse, ni instalar maven.
+Para facilitar el proceso de instalación se provee un ZIP en la pestaña releases del repositorio Github. Este incluye todo lo necesario para ejecutar el proyecto sin necesidad de compilarlo, ni JavaFX, ni eclipse, ni instalar maven.
 
 [Enlace de descarga](https://github.com/cykrr/Congreso/releases/tag/v1)
 
