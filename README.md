@@ -29,8 +29,12 @@ Si ya tenías un proyecto con el mismo nombre es  necesario eliminarlo.
 2.2.- Selecciona la carpeta donde se clonó el repositorio
 ![asd](pics/img2.png)
 
-2.3.- Ejecuta el runner facilitado
+2.3.- Ejecuta el runner facilitado. Primero es necesario instalar la dependencia Congreso.
+
 ![asd](pics/img3.png)
+
+2.4.- Posteriormente se ejecuta el programa con el siguiente runner: 
+
 ![asd](pics/img4.png)
 
 
